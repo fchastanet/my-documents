@@ -1,0 +1,28 @@
+...
+#5 [2/2] RUN apt-get update     && [ -d badFolder ]     && apt-get install -y apache2     && rm -rf           /var/lib/apt/lists/-         /tmp/-         /var/tmp/-         /usr/share/doc/\*
+#5 3.818 Get:1 http://archive.ubuntu.com/ubuntu focal InRelease [265 kB]
+...
+#5 6.252 Fetched 25.6 MB in 6s (4417 kB/s)
+#5 6.252 Reading package lists...
+#5 ERROR: process "/bin/sh -c apt-get update     && [ -d badFolder ]     && apt-get install -y apache2     && rm -rf           /var/lib/apt/lists/-         /tmp/-         /var/tmp/-         /usr/share/doc/\*" did not complete successfully: exit code: 1
+------
+> [2/2] RUN apt-get update     && [ -d badFolder ]     && apt-get install -y apache2     && rm -rf           /var/lib/apt/lists/-         /tmp/-         /var/tmp/-         /usr/share/doc/\*:
+#5 5.383 Get:10 http://archive.ubuntu.com/ubuntu focal/main amd64 Packages [1275 kB]
+...
+
+------
+Dockerfile1:3
+--------------------
+  2 |
+  3 | >>> RUN apt-get update \
+  4 | >>>     && [ -d badFolder ] \
+  5 | >>>     && apt-get install -y apache2 \
+  6 | >>>     && rm -rf \
+  7 | >>>           /var/lib/apt/lists/\* \
+  8 | >>>           /tmp/\* \
+  9 | >>>           /var/tmp/\* \
+  10 | >>>           /usr/share/doc/\*
+  11 |
+--------------------
+ERROR: failed to solve: process "/bin/sh -c apt-get update     && [ -d badFolder ]     && apt-get install -y apache2     && rm -rf           /var/lib/apt/lists/-         /tmp/\*
+/var/tmp/-         /usr/share/doc/\*" did not complete successfully: exit code: 1

@@ -1,7 +1,19 @@
 {
   "cSpell.words": [
-    "fchastanet",
+    "autoremove",
+    "Buildx",
+    "Dockerfiles",
+    "dpkg",
+    "errexit",
     "Jenkinsfiles",
-    "phpstorm"
+    "noninteractive",
+    "phpstorm",
+    "pipefail",
+    "xdebug",
+    "xtrace"
+  ],
+  "cSpell.ignoreWords": [
+    "fchastanet",
+    "nodoc"
   ]
 }
