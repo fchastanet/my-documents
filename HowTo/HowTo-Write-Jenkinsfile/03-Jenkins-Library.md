@@ -9,15 +9,20 @@
 
 ## 1. What is a jenkins shared library ?
 
-> As Pipeline is adopted for more and more projects in an organization, common patterns are likely to emerge. Oftentimes it is useful to share parts of Pipelines between various projects to reduce redundancies and keep code "DRY" 
+> As Pipeline is adopted for more and more projects in an organization, common
+> patterns are likely to emerge. Oftentimes it is useful to share parts of
+> Pipelines between various projects to reduce redundancies and keep code "DRY"
 
 for more information check [pipeline shared libraries](https://www.jenkins.io/doc/book/pipeline/shared-libraries/)
 
 ## 2. Loading libraries dynamically
 
-As of version 2.7 of the _Pipeline: Shared Groovy Libraries_ plugin, there is a new option for loading (non-implicit) libraries in a script: a `library` step that loads a library _dynamically_, at any time during the build.
+As of version 2.7 of the _Pipeline: Shared Groovy Libraries_ plugin, there is a
+new option for loading (non-implicit) libraries in a script: a `library` step
+that loads a library _dynamically_, at any time during the build.
 
-If you are only interested in using global variables/functions (from the `vars/` directory), the syntax is quite simple:
+If you are only interested in using global variables/functions (from the
+`vars/` directory), the syntax is quite simple:
 
 ```groovy
 library 'my-shared-library'
@@ -72,12 +77,15 @@ def docker = lib.fchastanet.Docker.new(this)
 Then in the library, it is used like this:
 
 ```groovy
-def status = this.jenkinsExecutor.sh(script: "docker pull ${cacheTag}", returnStatus: true)
+def status = this.jenkinsExecutor.sh(
+  script: "docker pull ${cacheTag}", returnStatus: true
+)
 ```
 
 ## 5. Jenkins library structure
 
-I remarked that a lot of code was duplicated between all my Jenkinsfiles so I created this library [https://github.com/fchastanet/jenkins_library](https://github.com/fchastanet/jenkins_library)
+I remarked that a lot of code was duplicated between all my Jenkinsfiles so I
+created this library [https://github.com/fchastanet/jenkins_library](https://github.com/fchastanet/jenkins_library)
 
 ```bash
 (root)
@@ -108,4 +116,5 @@ I remarked that a lot of code was duplicated between all my Jenkinsfiles so I cr
 
 ## 6. external resource usage
 
-If you need you check out how I used this repository <https://github.com/fchastanet/jenkins_library_resources> in jenkins_library (Linter) that hosts some resources to parse result files.
+If you need you check out how I used this repository <https://github.com/fchastanet/jenkins_library_resources>
+in jenkins_library (Linter) that hosts some resources to parse result files.

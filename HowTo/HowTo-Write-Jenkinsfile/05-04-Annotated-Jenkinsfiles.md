@@ -2,7 +2,8 @@
 
 ## introduction
 
-In jenkins library you can create your own directive that allows to generate jenkinsfile code.
+In jenkins library you can create your own directive that allows to generate
+jenkinsfile code.
 Here we will use this feature to generate a complete Jenkinsfile.
 
 ## Annotated Jenkinsfile
@@ -21,7 +22,8 @@ djangoApiPipeline repoUrl: 'git@github.com:fchastanet/django_api_project.git',
 
 ## Annotated library custom directive
 
-In the jenkins library just add a file named `vars/djangoApiPipeline.groovy` with the following content
+In the jenkins library just add a file named `vars/djangoApiPipeline.groovy`
+with the following content
 
 ```groovy
 #!/usr/bin/env groovy
@@ -80,7 +82,9 @@ def call(Map args) {
       string (
         name: 'instance',
         defaultValue: '1',
-        description: 'The instance ID to define which QA instance it should be deployed to (Will only apply if targetEnv is qa). Default is 1 for CK and 01 for Darwin'
+        description: '''The instance ID to define which QA instance it should
+        be deployed to (Will only apply if targetEnv is qa). Default is 1 for
+        CK and 01 for Darwin'''
       )
 
       booleanParam(
@@ -92,7 +96,8 @@ def call(Map args) {
       choice (
         name: 'upStreamImage',
         choices: ['latest', 'beta'],
-        description: 'Select beta to check if your build works with the future version of the upstream image'
+        description: '''Select beta to check if your build works with the
+        future version of the upstream image'''
       )
     }
 
@@ -101,7 +106,12 @@ def call(Map args) {
         steps {
           script {
             echo "Checking out from origin/${BRANCH} branch"
-            gitUtil.branchCheckout('', 'babee6c1-14fe-4d90-9da0-ffa7068c69af', args.repoUrl, '${BRANCH}')
+            gitUtil.branchCheckout(
+              '', 
+              'babee6c1-14fe-4d90-9da0-ffa7068c69af', 
+              args.repoUrl, 
+              '${BRANCH}'
+            )
             wrap([$class: 'BuildUser']) {
               def String displayName = "#${currentBuild.number}_${BRANCH}_${BUILD_USER}_${targetEnv}"
 
@@ -113,7 +123,8 @@ def call(Map args) {
             }
 
             env.imageName = env.BUILD_TAG.toLowerCase()
-            env.buildDirectory = args?.buildDirectory ? args.buildDirectory + "/" : ""
+            env.buildDirectory = args?.buildDirectory ? 
+              args.buildDirectory + "/" : ""
             env.runCoverage = args?.runCoverage
             env.shortSha = gitUtil.getShortCommitSha(env.GIT_BRANCH)
             skipBuild = dockerUtil.checkImage(args.imageName, shortSha)
@@ -127,7 +138,8 @@ def call(Map args) {
         }
         steps {
           script {
-            String registryUrl = 'dockerRegistryId.dkr.ecr.' + awsRegionNonProd + '.amazonaws.com'
+            String registryUrl = 'dockerRegistryId.dkr.ecr.' + 
+              awsRegionNonProd + '.amazonaws.com'
             String buildDirectory = args?.buildDirectory ?: pwd()
 
             if (params.targetEnv == "prod") {
@@ -170,9 +182,11 @@ def call(Map args) {
             Map argsMap = [:]
 
             if (params.targetEnv == "prod") {
-              registryUrl = 'registryIdProd.dkr.ecr.' + awsRegionProd + '.amazonaws.com'
+              registryUrl = 'registryIdProd.dkr.ecr.' + 
+                awsRegionProd + '.amazonaws.com'
             } else {
-              registryUrl = 'registryIdNonProd.dkr.ecr.' + awsRegionNonProd + '.amazonaws.com'
+              registryUrl = 'registryIdNonProd.dkr.ecr.' + 
+                awsRegionNonProd + '.amazonaws.com'
             }
 
             argsMap = [
@@ -205,21 +219,35 @@ def call(Map args) {
         steps {
           script {
             if (params.targetEnv == 'prod') {
-              // not sure it is a good practice as it forces the operator to wait for build to reach this stage
+              // not sure it is a good practice as it forces the operator to 
+              // wait for build to reach this stage
               timeout(time: 300, unit: "SECONDS") {
-                input(message: "Do you want go ahead with ${env.shortSha} image tag for prod helm deploy?", ok: 'Yes')
+                input(
+                  message: """Do you want go ahead with ${env.shortSha} 
+                  image tag for prod helm deploy?""", 
+                  ok: 'Yes'
+                )
               }
             }
-            CHART_NAME = (args.imageName).contains("_") ? (args.imageName).replaceAll("_", "-") : (args.imageName)
+            CHART_NAME = (args.imageName).contains("_") ? 
+              (args.imageName).replaceAll("_", "-") : 
+              (args.imageName)
             if (params.targetEnv == 'qa' || params.targetEnv == 'qe') {
-              helmValueFilePath = "${helmDirectory}" + "/value_files/values-" + params.targetEnv + params.instance + ".yaml"
+              helmValueFilePath = "${helmDirectory}" + 
+                "/value_files/values-" + params.targetEnv + 
+                params.instance + ".yaml"
               NAMESPACE = "${CHART_NAME}-" + params.targetEnv + params.instance
             } else {
-              helmValueFilePath = "${helmDirectory}" + "/value_files/values-" + params.targetEnv + ".yaml"
+              helmValueFilePath = "${helmDirectory}" + 
+                "/value_files/values-" + params.targetEnv + ".yaml"
               NAMESPACE = "${CHART_NAME}-" + params.targetEnv
             }
             ingressUrl = kubernetesUtil.getIngressUrl(helmValueFilePath)
-            echo "Deploying into k8s..\nHelm release: ${CHART_NAME}\nTarget env: ${params.targetEnv}\nUrl: ${ingressUrl}\nK8s namespace: ${NAMESPACE}"
+            echo "Deploying into k8s.."
+            echo "Helm release: ${CHART_NAME}"
+            echo "Target env: ${params.targetEnv}"
+            echo "Url: ${ingressUrl}"
+            echo "K8s namespace: ${NAMESPACE}"
             kubernetesUtil.deployHelmChart(
               chartName: CHART_NAME,
               nameSpace: NAMESPACE,
@@ -258,14 +286,21 @@ over and over the same pipeline. It allows:
 However it has the following drawbacks:
 
 - some projects using this generic pipeline could have specific needs
-  - eg 1: not the same way to run unit tests, to overcome that issue the method `testUtil.execTests` is used
-    allowing to run a specific sh file if it exists
+  - eg 1: not the same way to run unit tests, to overcome that issue the
+    method `testUtil.execTests` is used allowing to run a specific sh file if
+    it exists
   - eg 2: more complex way to launch docker environment
   - ...
-- **be careful**, when you upgrade this jenkinsfile as all the projects using it will be upgraded at once
-  - it could be seen as an advantage, but it is also a big risk as it could impact all the prod environment at once
-  - to overcome that issue I suggest to use library versioning when using the jenkins library in your project pipeline
-    Eg: check [Annotated Jenkinsfile](#annotated-jenkinsfile) `@v1.0` when cloning library project
-- I highly suggest to use a unit test framework of the library to avoid at most bad surprises
+- **be careful**, when you upgrade this jenkinsfile as all the projects using
+  it will be upgraded at once
+  - it could be seen as an advantage, but it is also a big risk as it could
+    impact all the prod environment at once
+  - to overcome that issue I suggest to use library versioning when using the
+    jenkins library in your project pipeline
+    Eg: check [Annotated Jenkinsfile](#annotated-jenkinsfile) `@v1.0` when
+    cloning library project
+- I highly suggest to use a unit test framework of the library to avoid at most
+  bad surprises
 
-In conclusion, I'm still not sure it is a best practice to generate pipelines like this.
+In conclusion, I'm still not sure it is a best practice to generate pipelines
+like this.

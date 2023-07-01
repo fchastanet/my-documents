@@ -25,6 +25,8 @@ Every build contains:
 
 ## Annotated Jenkinsfile
 
+<!-- markdownlint-disable MD013 -->
+
 ```groovy
 // anonymized parameters
 String credentialsId = 'jenkinsCredentialId'
@@ -75,7 +77,8 @@ Map buildInfo = [
 def addBuildInfo(buildInfo) {
   String deployInfo = ''
   if (buildInfo.spaAvailable) {
-    String formatInstanceName = buildInfo.instanceName ? " (${buildInfo.instanceName})" : '';
+    String formatInstanceName = buildInfo.instanceName ? 
+      " (${buildInfo.instanceName})" : '';
     deployInfo += "<a href='${buildInfo.spaUrl}'>SPA${formatInstanceName}</a>"
   }
   if (buildInfo.storyBookAvailable) {
@@ -214,11 +217,24 @@ pipeline {
             $class: 'CloverPublisher',
             cloverReportDir: 'output/coverage',
             cloverReportFileName: 'clover.xml',
-            healthyTarget: [methodCoverage: 70, conditionalCoverage: 70, statementCoverage: 70],
-            // build will not fail but be set as unhealthy if coverage goes below 60%
-            unhealthyTarget: [methodCoverage: 60, conditionalCoverage: 60, statementCoverage: 60],
+            healthyTarget: [
+              methodCoverage: 70, 
+              conditionalCoverage: 70, 
+              statementCoverage: 70
+            ],
+            // build will not fail but be set as unhealthy if coverage goes 
+            // below 60%
+            unhealthyTarget: [
+              methodCoverage: 60, 
+              conditionalCoverage: 60, 
+              statementCoverage: 60
+            ],
             // build will fail if coverage goes below 50%
-            failingTarget: [methodCoverage: 50, conditionalCoverage: 50, statementCoverage: 50]
+            failingTarget: [
+              methodCoverage: 50, 
+              conditionalCoverage: 50, 
+              statementCoverage: 50
+            ]
           ])
         }
       }
@@ -253,7 +269,10 @@ pipeline {
 
     stage('Build Storybook') {
       steps {
-        whenOrSkip(params.targetEnv == 'testing' && params.buildStorybook == true) {
+        whenOrSkip(
+          params.targetEnv == 'testing' 
+          && params.buildStorybook == true
+        ) {
           script {
             sh """
               docker run --rm \
@@ -282,7 +301,8 @@ pipeline {
 
             if (params.targetEnv == 'production') {
               echo 'project SPA packages have been pushed to production bucket.'
-              echo 'You can refresh the production indexes with the CD production pipeline.'
+              echo '''You can refresh the production indexes with the CD 
+              production pipeline.'''
               cloudflare.zonePurge(CLOUDFLARE_ZONE_ID_PROD, [prefixes:[
                 "${S3_PROD_PUBLIC_URL}/project1/"
               ]])
@@ -292,7 +312,9 @@ pipeline {
               ]])
 
               buildInfo.spaAvailable = true
-              publishChecks detailsURL: buildInfo.spaUrl, name: 'projectSpaUrl', title: 'project SPA url'
+              publishChecks detailsURL: buildInfo.spaUrl, 
+                name: 'projectSpaUrl', 
+                title: 'project SPA url'
             }
             addBuildInfo(buildInfo)
           }
@@ -311,3 +333,5 @@ pipeline {
   }
 }
 ```
+
+<!-- markdownlint-enable MD013 -->

@@ -14,6 +14,8 @@ This build allows to:
 
 ## Annotated Jenkinsfile
 
+<!-- markdownlint-disable MD013 -->
+
 ```groovy
 def credentialsId = 'jenkinsSshCredentialsId'
 def lib = library(
@@ -37,7 +39,8 @@ def String PHPSTORM_TAG = 'phpstorm-inspections'
 def String REFERENCE_JOB_NAME = 'Browser_extension_deploy'
 def String FIREFOX_S3_BUCKET = 'browser-extensions'
  
-// it would have been easier to use checkboxes to avoid 'both'/'none' complexity 
+// it would have been easier to use checkboxes to avoid 'both'/'none' 
+// complexity 
 def DEPLOY_CHROME = (params.targetStore == 'both' || params.targetStore == 'chrome')
 def DEPLOY_FIREFOX = (params.targetStore == 'both' || params.targetStore == 'firefox')
  
@@ -148,8 +151,8 @@ pipeline {
               // so firefox stage can be executed
               catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                 script {
-                  // best practice: complex sh files have been created outside of this jenkinsfile
-                  // deploy-chrome-extension.sh
+                  // best practice: complex sh files have been created outside 
+                  // of this jenkinsfile deploy-chrome-extension.sh
                   sh """
                   docker run \
                       -v \$(pwd):/deploy \
@@ -171,8 +174,8 @@ pipeline {
             whenOrSkip(currentBuild.currentResult == "SUCCESS" && DEPLOY_FIREFOX) {
               catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                 script {
-                  // best practice: complex sh files have been created outside of this jenkinsfile
-                  // deploy-firefox-extension.sh
+                  // best practice: complex sh files have been created outside 
+                  // of this jenkinsfile deploy-firefox-extension.sh
                   sh """
                     docker run \
                       -v \$(pwd):/deploy \
@@ -236,3 +239,4 @@ pipeline {
   }
 }
 ```
+<!-- markdownlint-enable MD013 -->
