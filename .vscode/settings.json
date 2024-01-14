@@ -12,8 +12,7 @@
     "xdebug",
     "xtrace"
   ],
-  "cSpell.ignoreWords": [
-    "fchastanet",
-    "nodoc"
-  ]
+  "workbench.editorAssociations": {
+    "*.md": "default"
+  }
 }

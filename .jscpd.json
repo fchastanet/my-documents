@@ -1,0 +1,20 @@
+{
+  "threshold": 0,
+  "reporters": ["html", "markdown"],
+  "ignore": [
+    "**/.git/**",
+    "**/.rbenv/**",
+    "**/.history/**",
+    "**/bin/**",
+    "**/backup/**",
+    "**/logs/**",
+    "**/megalinter-reports/**",
+    "**/testsData/**",
+    "**/.venv/**",
+    "**/*cache*/**",
+    "**/.github/**",
+    "**/.idea/**",
+    "**/report/**",
+    "**/*.svg"
+  ]
+}

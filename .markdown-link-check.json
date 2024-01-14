@@ -1,0 +1,15 @@
+{
+  "retryOn429": true,
+  "retryCount": 5,
+  "ignorePatterns": [
+    {
+      "pattern": "^http://localhost:3000/"
+    },
+    {
+      "pattern": "^https://www.cyberciti.biz/.*$"
+    },
+    {
+      "pattern": "^#.*"
+    }
+  ]
+}
