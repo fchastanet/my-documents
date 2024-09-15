@@ -8,7 +8,7 @@ This build allows to:
 
 - lint the project using megalinter and phpstorm inspection
 - build necessary docker images
-- build firefox and chrome extensions  
+- build firefox and chrome extensions
 - deploy firefox extension on s3 bucket
 - deploy chrome extension on google play store
 
@@ -29,7 +29,7 @@ def lib = library(
 def docker = lib.fchastanet.Docker.new(this)
 def git = lib.fchastanet.Git.new(this)
 def mail = lib.fchastanet.Mail.new(this)
- 
+
 def String deploymentBranchTagCompatible = ''
 def String gitShortSha = ''
 def String REGISTRY_URL = 'dockerRegistryId.dkr.ecr.eu-west-1.amazonaws.com'
@@ -38,12 +38,12 @@ def String BUILD_TAG = 'build'
 def String PHPSTORM_TAG = 'phpstorm-inspections'
 def String REFERENCE_JOB_NAME = 'Browser_extension_deploy'
 def String FIREFOX_S3_BUCKET = 'browser-extensions'
- 
-// it would have been easier to use checkboxes to avoid 'both'/'none' 
-// complexity 
+
+// it would have been easier to use checkboxes to avoid 'both'/'none'
+// complexity
 def DEPLOY_CHROME = (params.targetStore == 'both' || params.targetStore == 'chrome')
 def DEPLOY_FIREFOX = (params.targetStore == 'both' || params.targetStore == 'firefox')
- 
+
 pipeline {
   agent {
     node {
@@ -57,7 +57,7 @@ pipeline {
       sortMode: 'ASCENDING_SMART',
       name: 'BRANCH',
       type: 'PT_BRANCH'
- 
+
     choice (
       name: 'targetStore',
       choices: ['none', 'both', 'chrome', 'firefox'],
@@ -72,9 +72,9 @@ pipeline {
     FIREFOX_CREDS = credentials('MozillaApiFirefoxExtension')
     FIREFOX_APP_ID='{d4ce8a6f-675a-4f74-b2ea-7df130157ff4}'
   }
- 
+
   stages {
- 
+
     stage("Init") {
       steps {
         script {
@@ -87,7 +87,7 @@ pipeline {
         sh 'echo StrictHostKeyChecking=no >> ~/.ssh/config'
       }
     }
- 
+
     stage("Lint") {
       agent {
         docker {
@@ -101,7 +101,7 @@ pipeline {
         sh '/entrypoint.sh'
       }
     }
- 
+
     stage("Build docker images") {
       steps {
         // whenOrSkip directive is defined in https://github.com/fchastanet/jenkins_library/blob/master/vars/whenOrSkip.groovy
@@ -121,7 +121,7 @@ pipeline {
         }
       }
     }
- 
+
     stage("Build firefox/chrome extensions") {
       steps {
         whenOrSkip(currentBuild.currentResult == "SUCCESS") {
@@ -140,9 +140,9 @@ pipeline {
         }
       }
     }
- 
+
     stage("Deploy extensions") {
-      // deploy both extensions in parallel 
+      // deploy both extensions in parallel
       parallel {
         stage("Deploy chrome") {
           steps {
@@ -151,7 +151,7 @@ pipeline {
               // so firefox stage can be executed
               catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                 script {
-                  // best practice: complex sh files have been created outside 
+                  // best practice: complex sh files have been created outside
                   // of this jenkinsfile deploy-chrome-extension.sh
                   sh """
                   docker run \
@@ -174,7 +174,7 @@ pipeline {
             whenOrSkip(currentBuild.currentResult == "SUCCESS" && DEPLOY_FIREFOX) {
               catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                 script {
-                  // best practice: complex sh files have been created outside 
+                  // best practice: complex sh files have been created outside
                   // of this jenkinsfile deploy-firefox-extension.sh
                   sh """
                     docker run \
@@ -190,17 +190,17 @@ pipeline {
                     set -o errexit
                     extensionVersion="\$(jq -r .version < package.json)"
                     extensionFilename="tools-\${extensionVersion}-an+fx.xpi"
- 
+
                     echo "Upload new extension \${extensionFilename} to s3 bucket ${FIREFOX_S3_BUCKET}"
                     aws s3 cp "\$(pwd)/packages/\${extensionFilename}" "s3://${FIREFOX_S3_BUCKET}"
                     aws s3api put-object-acl --bucket "${FIREFOX_S3_BUCKET}" --key "\${extensionFilename}" --acl public-read
                     # url is https://tools.s3.eu-west-1.amazonaws.com/tools-2.5.6-an%2Bfx.xpi
- 
+
                     echo "Upload new version as current version"
                     aws s3 cp "\$(pwd)/packages/\${extensionFilename}" "s3://${FIREFOX_S3_BUCKET}/tools-an+fx.xpi"
                     aws s3api put-object-acl --bucket "${FIREFOX_S3_BUCKET}" --key "tools-an+fx.xpi" --acl public-read
                     # url is https://tools.s3.eu-west-1.amazonaws.com/tools-an%2Bfx.xpi
- 
+
                     echo "Upload updates.json file"
                     aws s3 cp "\$(pwd)/packages/updates.json" "s3://${FIREFOX_S3_BUCKET}"
                     aws s3api put-object-acl --bucket "${FIREFOX_S3_BUCKET}" --key "updates.json" --acl public-read
@@ -230,7 +230,7 @@ pipeline {
     success {
       script {
         if (params.targetStore != 'none' && env.GIT_BRANCH == 'origin/master') {
-          // send an email to a teams channel so every collaborators knows 
+          // send an email to a teams channel so every collaborators knows
           // when a production ready extension has been deployed
           mail.sendSuccessfulEmail('teamsChannelId.onmicrosoft.com@amer.teams.ms')
         }
@@ -239,4 +239,5 @@ pipeline {
   }
 }
 ```
+
 <!-- markdownlint-enable MD013 -->

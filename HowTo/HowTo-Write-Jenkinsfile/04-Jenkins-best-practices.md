@@ -19,7 +19,8 @@ Summary:
     - it is not the case for shell scripts
   - eg1: prefer using **jq** inside shell script instead of groovy JsonSlurper
   - eg2: prefer calling **curl** instead of groovy http request
-- Reducing repetition of similar Pipeline steps (eg: one sh step instead of severals)
+- Reducing repetition of similar Pipeline steps (eg: one sh step instead of
+  severals)
   - group similar steps together to avoid step creation/destruction overhead
 - Avoiding calls to Jenkins.getInstance
 
@@ -36,12 +37,13 @@ Summary:
 And:
 
 - import jenkins library using a tag
-  - like in docker build, npm package with package-lock.json or python pip
-    lock, it's advised to target a given version of the library
+  - like in docker build, npm package with package-lock.json or python pip lock,
+    it's advised to target a given version of the library
     - because some changes could break
 - The missing part: we miss on this library unit tests
   - but each pipeline is a kind of integration test
-- Because a pipeline can be [resumed](https://www.jenkins.io/doc/book/pipeline/pipeline-best-practices/#avoiding-notserializableexception),
+- Because a pipeline can be
+  [resumed](https://www.jenkins.io/doc/book/pipeline/pipeline-best-practices/#avoiding-notserializableexception),
   your library's classes should implement Serializable class and the following
   attribute has to be provided:
 

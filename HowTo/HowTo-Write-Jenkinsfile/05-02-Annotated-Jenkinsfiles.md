@@ -77,7 +77,7 @@ Map buildInfo = [
 def addBuildInfo(buildInfo) {
   String deployInfo = ''
   if (buildInfo.spaAvailable) {
-    String formatInstanceName = buildInfo.instanceName ? 
+    String formatInstanceName = buildInfo.instanceName ?
       " (${buildInfo.instanceName})" : '';
     deployInfo += "<a href='${buildInfo.spaUrl}'>SPA${formatInstanceName}</a>"
   }
@@ -218,21 +218,21 @@ pipeline {
             cloverReportDir: 'output/coverage',
             cloverReportFileName: 'clover.xml',
             healthyTarget: [
-              methodCoverage: 70, 
-              conditionalCoverage: 70, 
+              methodCoverage: 70,
+              conditionalCoverage: 70,
               statementCoverage: 70
             ],
-            // build will not fail but be set as unhealthy if coverage goes 
+            // build will not fail but be set as unhealthy if coverage goes
             // below 60%
             unhealthyTarget: [
-              methodCoverage: 60, 
-              conditionalCoverage: 60, 
+              methodCoverage: 60,
+              conditionalCoverage: 60,
               statementCoverage: 60
             ],
             // build will fail if coverage goes below 50%
             failingTarget: [
-              methodCoverage: 50, 
-              conditionalCoverage: 50, 
+              methodCoverage: 50,
+              conditionalCoverage: 50,
               statementCoverage: 50
             ]
           ])
@@ -256,8 +256,8 @@ pipeline {
     stage('Accessibility tests') {
       steps {
         script {
-          // the pa11y-ci could have been made available in the node image 
-          // to avoid installation each time, the build is launched 
+          // the pa11y-ci could have been made available in the node image
+          // to avoid installation each time, the build is launched
           sh '''
             sudo npm install -g serve pa11y-ci
             serve -s build > /dev/null 2>&1 &
@@ -270,7 +270,7 @@ pipeline {
     stage('Build Storybook') {
       steps {
         whenOrSkip(
-          params.targetEnv == 'testing' 
+          params.targetEnv == 'testing'
           && params.buildStorybook == true
         ) {
           script {
@@ -301,7 +301,7 @@ pipeline {
 
             if (params.targetEnv == 'production') {
               echo 'project SPA packages have been pushed to production bucket.'
-              echo '''You can refresh the production indexes with the CD 
+              echo '''You can refresh the production indexes with the CD
               production pipeline.'''
               cloudflare.zonePurge(CLOUDFLARE_ZONE_ID_PROD, [prefixes:[
                 "${S3_PROD_PUBLIC_URL}/project1/"
@@ -312,8 +312,8 @@ pipeline {
               ]])
 
               buildInfo.spaAvailable = true
-              publishChecks detailsURL: buildInfo.spaUrl, 
-                name: 'projectSpaUrl', 
+              publishChecks detailsURL: buildInfo.spaUrl,
+                name: 'projectSpaUrl',
                 title: 'project SPA url'
             }
             addBuildInfo(buildInfo)

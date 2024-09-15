@@ -8,9 +8,11 @@
   - [1.5. Jobs](#15-jobs)
 - [2. Jenkins dynamic node](#2-jenkins-dynamic-node)
 
-Source: [https://www.jenkins.io/doc/book/managing/nodes/](https://www.jenkins.io/doc/book/managing/nodes/)
+Source:
+[https://www.jenkins.io/doc/book/managing/nodes/](https://www.jenkins.io/doc/book/managing/nodes/)
 
-Source glossary: [https://www.jenkins.io/doc/book/glossary/](https://www.jenkins.io/doc/book/glossary/)
+Source glossary:
+[https://www.jenkins.io/doc/book/glossary/](https://www.jenkins.io/doc/book/glossary/)
 
 ## 1. Jenkins Master Slave Architecture
 
@@ -33,17 +35,17 @@ installed. It is a webserver that also acts as a "brain" for deciding how, when
 and where to run tasks. Management tasks (configuration, authorization, and
 authentication) are executed on the controller, which serves HTTP requests.
 Files written when a Pipeline executes are written to the filesystem on the
-controller unless they are off-loaded to an artifact repository such as Nexus
-or Artifactory.
+controller unless they are off-loaded to an artifact repository such as Nexus or
+Artifactory.
 
 ### 1.2. Nodes
 
 > A machine which is part of the Jenkins environment and capable of executing
-> [Pipelines](https://www.jenkins.io/doc/book/glossary/#pipeline)
-> or [jobs](https://www.jenkins.io/doc/book/glossary/#job). Both the
+> [Pipelines](https://www.jenkins.io/doc/book/glossary/#pipeline) or
+> [jobs](https://www.jenkins.io/doc/book/glossary/#job). Both the
 > [Controller](https://www.jenkins.io/doc/book/glossary/#controller) and
-> [Agents](https://www.jenkins.io/doc/book/glossary/#agent) are considered to
-> be Nodes.
+> [Agents](https://www.jenkins.io/doc/book/glossary/#agent) are considered to be
+> Nodes.
 
 Nodes are the "**machines**" on which build agents run. Jenkins monitors each
 attached node for disk space, free temp space, free swap, clock time/sync and
@@ -74,17 +76,18 @@ process with its own PID (Process Identifier) on the host machine.
 
 ### 1.4. Executors
 
-> A slot for execution of work defined by a [Pipeline](https://www.jenkins.io/doc/book/glossary/#pipeline)
-> or [job](https://www.jenkins.io/doc/book/glossary/#job) on a
+> A slot for execution of work defined by a
+> [Pipeline](https://www.jenkins.io/doc/book/glossary/#pipeline) or
+> [job](https://www.jenkins.io/doc/book/glossary/#job) on a
 > [Node](https://www.jenkins.io/doc/book/glossary/#node). A Node may have zero
 > or more Executors configured which corresponds to how many concurrent Jobs or
 > Pipelines are able to execute on that Node.
 
-An executor is a slot for execution of tasks; effectively, it is a thread in
-the agent. The number of executors on a node defines the number of concurrent
-tasks that can be executed on that node at one time. In other words, this
-determines the number of concurrent Pipeline stages that can execute on that
-node at one time.
+An executor is a slot for execution of tasks; effectively, it is a thread in the
+agent. The number of executors on a node defines the number of concurrent tasks
+that can be executed on that node at one time. In other words, this determines
+the number of concurrent Pipeline stages that can execute on that node at one
+time.
 
 The proper number of executors per build node must be determined based on the
 resources available on the node and the resources required for the workload.
@@ -98,11 +101,12 @@ requirements as well as the amount of I/O and network activity:
 
 ### 1.5. Jobs
 
-> A user-configured description of work which Jenkins should perform,
-> such as building a piece of software, etc.
+> A user-configured description of work which Jenkins should perform, such as
+> building a piece of software, etc.
 
 ## 2. Jenkins dynamic node
 
-Jenkins has static slave nodes and can trigger the generation of dynamic slave nodes
+Jenkins has static slave nodes and can trigger the generation of dynamic slave
+nodes
 
 ![Jenkins Master/slave architecture](images/JenkinsMasterSlave.png)

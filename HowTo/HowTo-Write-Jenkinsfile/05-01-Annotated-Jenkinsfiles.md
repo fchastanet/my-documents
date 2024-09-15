@@ -2,12 +2,13 @@
 
 ## Introduction
 
-This example is missing the use of parameters, jenkins library in order to
-reuse common code
+This example is missing the use of parameters, jenkins library in order to reuse
+common code
 
 This example uses :
 
-- post conditions [https://www.jenkins.io/doc/book/pipeline/syntax/#post](https://www.jenkins.io/doc/book/pipeline/syntax/#post)
+- post conditions
+  [https://www.jenkins.io/doc/book/pipeline/syntax/#post](https://www.jenkins.io/doc/book/pipeline/syntax/#post)
 - github plugin to set commit status indicating the result of the build
 - usage of **several jenkins plugins**, you can check here to get the full list
   installed on your server and even **generate code snippets** by adding
@@ -15,12 +16,14 @@ This example uses :
 
 But it misses:
 
-- usage of [inline parameters](https://www.jenkins.io/doc/book/pipeline/syntax/#parameters)
+- usage of
+  [inline parameters](https://www.jenkins.io/doc/book/pipeline/syntax/#parameters)
 - usage of jenkins library to reuse common code
   - [Git updateConditionalGithubCommitStatus](https://github.com/fchastanet/jenkins_library/blob/master/src/fchastanet/Git.groovy#L156)
   - [Docker pullBuildPushImage](https://github.com/fchastanet/jenkins_library/blob/master/src/fchastanet/Docker.groovy#L46)
 
-check [Pipeline syntax documentation](https://www.jenkins.io/doc/book/pipeline/syntax/)
+check
+[Pipeline syntax documentation](https://www.jenkins.io/doc/book/pipeline/syntax/)
 
 ## Annotated Jenkinsfile
 
@@ -34,7 +37,7 @@ def String image_name = 'project'
 def String image_fqdn_master = registry_url + '/' + image_name + ':master'
 def String image_fqdn_current_branch = image_fqdn_master
 
-// this method is used by several of my pipelines and has been added 
+// this method is used by several of my pipelines and has been added
 // to jenkins_library <https://github.com/fchastanet/jenkins_library/blob/master/src/fchastanet/Git.groovy#L156>
 void publishStatusToGithub(String status) {
   step([
@@ -53,8 +56,8 @@ void publishStatusToGithub(String status) {
 pipeline {
   agent {
     node {
-      // bad practice: try to indicate in your node labels, which feature it 
-      // includes for example, here we need docker, label could have been 
+      // bad practice: try to indicate in your node labels, which feature it
+      // includes for example, here we need docker, label could have been
       // 'eks-nonprod-docker'
       label 'eks-nonprod'
     }
@@ -66,18 +69,18 @@ pipeline {
         checkout scm
 
         script {
-          // 'wrap' allows to inject some useful variables like BUILD_USER, 
-          // BUILD_USER_FIRST_NAME 
+          // 'wrap' allows to inject some useful variables like BUILD_USER,
+          // BUILD_USER_FIRST_NAME
           // see https://www.jenkins.io/doc/pipeline/steps/build-user-vars-plugin/
           wrap([$class: 'BuildUser']) {
             def String displayName = "#${currentBuild.number}_${BRANCH}_${BUILD_USER}_${DEPLOYMENT}"
 
-            // params could have been defined inside the pipeline directly 
+            // params could have been defined inside the pipeline directly
             // instead of defining them in jenkins build configuration
             if (params.DEPLOYMENT == 'staging') {
               displayName = "${displayName}_${INSTANCE}"
             }
-            // next line allows to change the build name, check addHtmlBadge 
+            // next line allows to change the build name, check addHtmlBadge
             // plugin function for more advanced usage of this feature, you
             // check this jenkinsfile 05-02-Annotated-Jenkinsfiles.md
             currentBuild.displayName = displayName
@@ -92,22 +95,22 @@ pipeline {
         // as it is simpler to read and to eventually test separately
         sh 'docker build -t project-test "$PWD"/docker/test'
         sh 'cp "$PWD"/app/config/parameters.yml.dist "$PWD"/app/config/parameters.yml'
-        // for better readability and if separated script is not possible, use 
+        // for better readability and if separated script is not possible, use
         // continuation line for better readability
         sh 'docker run -i --rm -v "$PWD":/var/www/html/ -w /var/www/html/ project-test  /bin/bash -c "composer install -a && ./bin/phpunit -c /var/www/html/app/phpunit.xml --coverage-html /var/www/html/var/logs/coverage/ --log-junit /var/www/html/var/logs/phpunit.xml  --coverage-clover /var/www/html/var/logs/clover_coverage.xml"'
       }
-      // Run the steps in the post section regardless of the completion status 
+      // Run the steps in the post section regardless of the completion status
       // of the Pipeline’s or stage’s run.
       // see https://www.jenkins.io/doc/book/pipeline/syntax/#post
       post {
         always {
-          // report unit test reports (unit test should generate result using 
+          // report unit test reports (unit test should generate result using
           // using junit format)
           junit 'var/logs/phpunit.xml'
           // generate coverage page from test results
           step([
-            $class: 'CloverPublisher', 
-            cloverReportDir: 'var/logs/', 
+            $class: 'CloverPublisher',
+            cloverReportDir: 'var/logs/',
             cloverReportFileName: 'clover_coverage.xml'
           ])
           // publish html page with the result of the coverage
@@ -128,18 +131,18 @@ pipeline {
     stage('Build image') {
       when {
         // this stage is executed only if these conditions returns true
-        expression { 
-          return 
-            params.DEPLOYMENT == "staging" 
+        expression {
+          return
+            params.DEPLOYMENT == "staging"
             || (
-              params.DEPLOYMENT == "prod" 
+              params.DEPLOYMENT == "prod"
               && env.GIT_BRANCH == 'origin/master'
-            ) 
+            )
         }
       }
       steps {
         script {
-          // this code is used in most of the pipeline and has been centralized 
+          // this code is used in most of the pipeline and has been centralized
           // in https://github.com/fchastanet/jenkins_library/blob/master/src/fchastanet/Git.groovy#L39
           env.IMAGE_TAG = env.GIT_COMMIT.substring(0, 7)
           // Update variable for production environment
@@ -151,19 +154,19 @@ pipeline {
 
           image_fqdn_current_branch = registry_url + '/' + image_name + ':' + env.IMAGE_TAG
         }
-        
-        // As jenkins slave machine can be constructed on demand, 
+
+        // As jenkins slave machine can be constructed on demand,
         // it doesn't always contains all docker image cache
-        // here to avoid building docker image from scratch, we are trying to 
+        // here to avoid building docker image from scratch, we are trying to
         // pull an existing version of the docker image on docker registry
-        // and then build using this image as cache, so all layers not updated 
+        // and then build using this image as cache, so all layers not updated
         // in Dockerfile will not be built again (gain of time)
-        // It is again a recurrent usage in most of the pipelines 
-        // so the next 8 lines could be replaced by the call to this method 
-        // Docker 
+        // It is again a recurrent usage in most of the pipelines
+        // so the next 8 lines could be replaced by the call to this method
+        // Docker
         // pullBuildPushImage https://github.com/fchastanet/jenkins_library/blob/master/src/fchastanet/Docker.groovy#L46
-        
-        // Pull the master from repository (|| true avoids errors if the image 
+
+        // Pull the master from repository (|| true avoids errors if the image
         // hasn't been pushed before)
         sh "docker pull ${image_fqdn_master} || true"
 
@@ -184,18 +187,18 @@ pipeline {
 
       steps {
         script {
-          // Actually we should always push the image in order to be able to 
+          // Actually we should always push the image in order to be able to
           // feed the docker cache for next builds
           // Again the method Docker pullBuildPushImage https://github.com/fchastanet/jenkins_library/blob/master/src/fchastanet/Docker.groovy#L46
-          // solves this issue and could be used instead of the next 6 lines 
+          // solves this issue and could be used instead of the next 6 lines
           // and "Push image (Prod)" stage
-  
-          // If building master, we should push the image with the tag master 
+
+          // If building master, we should push the image with the tag master
           // to benefit from docker cache
           if ( env.GIT_BRANCH == 'origin/master' ) {
-              sh label:"Tag the image as master", 
+              sh label:"Tag the image as master",
                  script:"docker tag ${image_name} ${image_fqdn_master}"
-              sh label:"Push the image as master", 
+              sh label:"Push the image as master",
                  script:"docker push ${image_fqdn_master}"
           }
         }
@@ -220,7 +223,7 @@ pipeline {
         expression { return params.DEPLOYMENT == "prod" && env.GIT_BRANCH == 'origin/master'}
       }
       // The method Docker pullBuildPushImage https://github.com/fchastanet/jenkins_library/blob/master/src/fchastanet/Docker.groovy#L46
-      // provides a generic way of managing the pull, build, push of the docker 
+      // provides a generic way of managing the pull, build, push of the docker
       // images, by managing also a common way of tagging docker images
       steps {
         sh label:"Tag the image as master", script:"docker tag ${image_name} ${image_fqdn_current_branch}"
@@ -236,6 +239,7 @@ pipeline {
   }
 }
 ```
+
 <!-- markdownlint-enable MD013 -->
 
 This directive is really difficult to read and eventually debug it
@@ -278,9 +282,9 @@ sh ''''
 '''
 ```
 
-Note however it is best to use a separated sh file(s) that could take some parameters
-as it is simpler to read and to eventually test separately.
-Here a refactoring using a separated sh file:
+Note however it is best to use a separated sh file(s) that could take some
+parameters as it is simpler to read and to eventually test separately. Here a
+refactoring using a separated sh file:
 
 ```bash runTests.sh
 #!/bin/bash

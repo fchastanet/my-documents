@@ -3,8 +3,8 @@
 ## introduction
 
 In jenkins library you can create your own directive that allows to generate
-jenkinsfile code.
-Here we will use this feature to generate a complete Jenkinsfile.
+jenkinsfile code. Here we will use this feature to generate a complete
+Jenkinsfile.
 
 ## Annotated Jenkinsfile
 
@@ -107,9 +107,9 @@ def call(Map args) {
           script {
             echo "Checking out from origin/${BRANCH} branch"
             gitUtil.branchCheckout(
-              '', 
-              'babee6c1-14fe-4d90-9da0-ffa7068c69af', 
-              args.repoUrl, 
+              '',
+              'babee6c1-14fe-4d90-9da0-ffa7068c69af',
+              args.repoUrl,
               '${BRANCH}'
             )
             wrap([$class: 'BuildUser']) {
@@ -123,7 +123,7 @@ def call(Map args) {
             }
 
             env.imageName = env.BUILD_TAG.toLowerCase()
-            env.buildDirectory = args?.buildDirectory ? 
+            env.buildDirectory = args?.buildDirectory ?
               args.buildDirectory + "/" : ""
             env.runCoverage = args?.runCoverage
             env.shortSha = gitUtil.getShortCommitSha(env.GIT_BRANCH)
@@ -138,7 +138,7 @@ def call(Map args) {
         }
         steps {
           script {
-            String registryUrl = 'dockerRegistryId.dkr.ecr.' + 
+            String registryUrl = 'dockerRegistryId.dkr.ecr.' +
               awsRegionNonProd + '.amazonaws.com'
             String buildDirectory = args?.buildDirectory ?: pwd()
 
@@ -182,10 +182,10 @@ def call(Map args) {
             Map argsMap = [:]
 
             if (params.targetEnv == "prod") {
-              registryUrl = 'registryIdProd.dkr.ecr.' + 
+              registryUrl = 'registryIdProd.dkr.ecr.' +
                 awsRegionProd + '.amazonaws.com'
             } else {
-              registryUrl = 'registryIdNonProd.dkr.ecr.' + 
+              registryUrl = 'registryIdNonProd.dkr.ecr.' +
                 awsRegionNonProd + '.amazonaws.com'
             }
 
@@ -219,26 +219,26 @@ def call(Map args) {
         steps {
           script {
             if (params.targetEnv == 'prod') {
-              // not sure it is a good practice as it forces the operator to 
+              // not sure it is a good practice as it forces the operator to
               // wait for build to reach this stage
               timeout(time: 300, unit: "SECONDS") {
                 input(
-                  message: """Do you want go ahead with ${env.shortSha} 
-                  image tag for prod helm deploy?""", 
+                  message: """Do you want go ahead with ${env.shortSha}
+                  image tag for prod helm deploy?""",
                   ok: 'Yes'
                 )
               }
             }
-            CHART_NAME = (args.imageName).contains("_") ? 
-              (args.imageName).replaceAll("_", "-") : 
+            CHART_NAME = (args.imageName).contains("_") ?
+              (args.imageName).replaceAll("_", "-") :
               (args.imageName)
             if (params.targetEnv == 'qa' || params.targetEnv == 'qe') {
-              helmValueFilePath = "${helmDirectory}" + 
-                "/value_files/values-" + params.targetEnv + 
+              helmValueFilePath = "${helmDirectory}" +
+                "/value_files/values-" + params.targetEnv +
                 params.instance + ".yaml"
               NAMESPACE = "${CHART_NAME}-" + params.targetEnv + params.instance
             } else {
-              helmValueFilePath = "${helmDirectory}" + 
+              helmValueFilePath = "${helmDirectory}" +
                 "/value_files/values-" + params.targetEnv + ".yaml"
               NAMESPACE = "${CHART_NAME}-" + params.targetEnv
             }
@@ -286,19 +286,18 @@ over and over the same pipeline. It allows:
 However it has the following drawbacks:
 
 - some projects using this generic pipeline could have specific needs
-  - eg 1: not the same way to run unit tests, to overcome that issue the
-    method `testUtil.execTests` is used allowing to run a specific sh file if
-    it exists
+  - eg 1: not the same way to run unit tests, to overcome that issue the method
+    `testUtil.execTests` is used allowing to run a specific sh file if it exists
   - eg 2: more complex way to launch docker environment
   - ...
-- **be careful**, when you upgrade this jenkinsfile as all the projects using
-  it will be upgraded at once
+- **be careful**, when you upgrade this jenkinsfile as all the projects using it
+  will be upgraded at once
   - it could be seen as an advantage, but it is also a big risk as it could
     impact all the prod environment at once
   - to overcome that issue I suggest to use library versioning when using the
-    jenkins library in your project pipeline
-    Eg: check [Annotated Jenkinsfile](#annotated-jenkinsfile) `@v1.0` when
-    cloning library project
+    jenkins library in your project pipeline Eg: check
+    [Annotated Jenkinsfile](#annotated-jenkinsfile) `@v1.0` when cloning library
+    project
 - I highly suggest to use a unit test framework of the library to avoid at most
   bad surprises
 

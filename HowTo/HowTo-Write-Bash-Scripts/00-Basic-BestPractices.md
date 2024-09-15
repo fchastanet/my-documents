@@ -21,6 +21,7 @@
   - [9.1. Variable declaration](#91-variable-declaration)
   - [9.2. variable naming convention](#92-variable-naming-convention)
   - [9.3. Variable expansion](#93-variable-expansion)
+    - [9.3.1. Examples](#931-examples)
   - [9.4. Check if a variable is defined](#94-check-if-a-variable-is-defined)
   - [9.5. Variable default value](#95-variable-default-value)
   - [9.6. Passing variable by reference to function](#96-passing-variable-by-reference-to-function)
@@ -31,10 +32,11 @@
   - [10.2. Capture output and retrieve status code](#102-capture-output-and-retrieve-status-code)
 - [11. Array](#11-array)
 - [12. Temporary directory](#12-temporary-directory)
-- [13. Deal with SIGPIPE - exit code 141](#13-deal-with-sigpipe---exit-code-141)
-- [14. Performances analysis](#14-performances-analysis)
-- [15. Bash Performance tips](#15-bash-performance-tips)
-  - [15.1. Array::wrap2 performance improvement](#151-arraywrap2-performance-improvement)
+- [13. Traps](#13-traps)
+- [14. Deal with SIGPIPE - exit code 141](#14-deal-with-sigpipe---exit-code-141)
+- [15. Performances analysis](#15-performances-analysis)
+- [16. Bash Performance tips](#16-bash-performance-tips)
+  - [16.1. Array::wrap2 performance improvement](#161-arraywrap2-performance-improvement)
 
 ## 1. External references
 
@@ -90,8 +92,10 @@ Check official doc but it can be summarized like this:
 
 > Exit immediately command returns a non-zero status.
 
-This mode is a best practice because every non controlled command failure will
-stop your program. But sometimes you need or expect a command to fail
+I was considering this as a best practice because every non controlled command
+failure will stop your program. But actually
+
+- sometimes you need or expect a command to fail
 
 **Eg1**: delete a folder that actually doesn't exists. Use `|| true` to ignore
 the error.
@@ -112,6 +116,17 @@ else
   Log::displayWarning "Pulling git repository '${dir}' avoided as changes detected"
 fi
 ```
+
+- actually this feature is not well implemented everywhere
+
+  - sometimes some commands that should fail doesn't fail
+  - the feature is not homogeneous across implementations
+  - some commands expects to have non zero exit code
+  - some commands exits with non zero error code but does not necessarily needs
+    the program to exit
+
+- Finally it is preferable to check every command status code manually instead
+  of relying to an automatic management.
 
 #### 4.1.1. Caveats with command substitution
 
@@ -397,6 +412,10 @@ BASH_SOURCE=".$0"
   replacing argX with the real argument name. Eg:
   `Filters::directive "${FILTER_DIRECTIVE_REMOVE_HEADERS}"` You have to prefix
   all your constants to avoid conflicts.
+- instead of adding a new arg to the function with a default value, consider
+  using an env variable that can be easily overridden before calling the
+  function. Eg: `SUDO=sudo Github::upgradeRelease ...` It avoids to have to pass
+  previous arguments that were potentially defaulted.
 
 ## 7. some commands default options to use
 
@@ -437,6 +456,8 @@ BASH_SOURCE=".$0"
 
 ### 9.3. Variable expansion
 
+[Shell Parameter Expansion](https://www.gnu.org/software/bash/manual/html_node/Shell-Parameter-Expansion.html)
+
 `${PARAMETER:-WORD}` vs `${PARAMETER-WORD}`:
 
 If the parameter PARAMETER is unset (was never defined) or null (empty),
@@ -449,6 +470,12 @@ only used when the parameter is unset, not when it was empty.
 > :warning: use this latter syntax when using function arguments in order to be
 > able to reset a value to empty string, otherwise default value would be
 > applied.
+
+#### 9.3.1. Examples
+
+Extract directory from full file path: `directory="${REAL_SCRIPT_FILE%/*}"`
+
+Extract file name from full file path: `fileName="${REAL_SCRIPT_FILE##*/}"`
 
 ### 9.4. Check if a variable is defined
 
@@ -612,7 +639,28 @@ available, use `dirname $(mktemp -u --tmpdir)`
 The variable TMPDIR is initialized in `src/_includes/_commonHeader.sh` used by
 all the binaries used in this framework.
 
-## 13. Deal with SIGPIPE - exit code 141
+## 13. Traps
+
+when trapping EXIT do not forget to throw back same exit code otherwise exit
+code of last command executed in the trap is thrown
+
+In this example rc variable contains the original exit code
+
+```bash
+cleanOnExit() {
+  local rc=$?
+  if [[ "${KEEP_TEMP_FILES:-0}" = "1" ]]; then
+    Log::displayInfo "KEEP_TEMP_FILES=1 temp files kept here '${TMPDIR}'"
+  elif [[ -n "${TMPDIR+xxx}" ]]; then
+    Log::displayDebug "KEEP_TEMP_FILES=0 removing temp files '${TMPDIR}'"
+    rm -Rf "${TMPDIR:-/tmp/fake}" >/dev/null 2>&1
+  fi
+  exit "${rc}"
+}
+trap cleanOnExit EXIT HUP QUIT ABRT TERM
+```
+
+## 14. Deal with SIGPIPE - exit code 141
 
 [related stackoverflow post](https://stackoverflow.com/questions/19120263/why-exit-code-141-with-grep-q)
 
@@ -655,7 +703,7 @@ echo "ec=$?"
 I added `handle_pipefails` as `Bash::handlePipelineFailure` in
 bash-tools-framework.
 
-## 14. Performances analysis
+## 15. Performances analysis
 
 generate a csv file with milliseconds measures
 
@@ -665,9 +713,9 @@ codeToMeasureStart=$(date +%s%3N)
 echo >&2 "printCurrentLine;$(($(date +%s%3N)-codeToMeasureStart))"
 ```
 
-## 15. Bash Performance tips
+## 16. Bash Performance tips
 
-### 15.1. Array::wrap2 performance improvement
+### 16.1. Array::wrap2 performance improvement
 
 [Commit with performance improvement](https://github.com/fchastanet/bash-tools-framework/commit/2f52d3af27170b7fff5284b5ad2793ae58af21e1)
 

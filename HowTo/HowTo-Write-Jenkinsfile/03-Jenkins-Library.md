@@ -13,7 +13,8 @@
 > patterns are likely to emerge. Oftentimes it is useful to share parts of
 > Pipelines between various projects to reduce redundancies and keep code "DRY"
 
-for more information check [pipeline shared libraries](https://www.jenkins.io/doc/book/pipeline/shared-libraries/)
+for more information check
+[pipeline shared libraries](https://www.jenkins.io/doc/book/pipeline/shared-libraries/)
 
 ## 2. Loading libraries dynamically
 
@@ -21,14 +22,15 @@ As of version 2.7 of the _Pipeline: Shared Groovy Libraries_ plugin, there is a
 new option for loading (non-implicit) libraries in a script: a `library` step
 that loads a library _dynamically_, at any time during the build.
 
-If you are only interested in using global variables/functions (from the
-`vars/` directory), the syntax is quite simple:
+If you are only interested in using global variables/functions (from the `vars/`
+directory), the syntax is quite simple:
 
 ```groovy
 library 'my-shared-library'
 ```
 
-Thereafter, any global variables from that library will be accessible to the script.
+Thereafter, any global variables from that library will be accessible to the
+script.
 
 ## 3. jenkins library directory structure
 
@@ -41,14 +43,14 @@ The directory structure of a Shared Library repository is as follows:
 |       +- foo
 |           +- Bar.groovy  # for org.foo.Bar class
 |
-+- vars       # The vars directory hosts script 
++- vars       # The vars directory hosts script
               # files that are exposed as a variable in Pipelines
-|   +- foo.groovy          # for global 'foo' variable 
-|   +- foo.txt             # help for 'foo' variable 
+|   +- foo.groovy          # for global 'foo' variable
+|   +- foo.txt             # help for 'foo' variable
 |
-+- resources  # resource files (external libraries only) 
-|   +- org 
-|      +- foo 
++- resources  # resource files (external libraries only)
+|   +- org
+|      +- foo
 |         +- bar.json      # static helper data for org.foo.Bar
 ```
 
@@ -71,7 +73,7 @@ def lib = library(
     ])
 )
 // this is the jenkinsExecutor instance
-def docker = lib.fchastanet.Docker.new(this) 
+def docker = lib.fchastanet.Docker.new(this)
 ```
 
 Then in the library, it is used like this:
@@ -85,36 +87,38 @@ def status = this.jenkinsExecutor.sh(
 ## 5. Jenkins library structure
 
 I remarked that a lot of code was duplicated between all my Jenkinsfiles so I
-created this library [https://github.com/fchastanet/jenkins_library](https://github.com/fchastanet/jenkins_library)
+created this library
+[https://github.com/fchastanet/jenkins_library](https://github.com/fchastanet/jenkins_library)
 
 ```bash
 (root)
-+- doc    # markdown files automatically generated 
++- doc    # markdown files automatically generated
           # from groovy files by generateDoc.sh
 +- src    # Groovy source files
 |   +- fchastanet
 |       +- Cloudflare.groovy     # zonePurge
-|       +- Docker.groovy         # getTagCompatibleFromBranch 
+|       +- Docker.groovy         # getTagCompatibleFromBranch
                                  # pullBuildPushImage, ...
-|       +- Git.groovy            # getRepoURL, getCommitSha, 
-                                 # getLastPusherEmail, 
+|       +- Git.groovy            # getRepoURL, getCommitSha,
+                                 # getLastPusherEmail,
                                  # updateConditionalGithubCommitStatus
 |       +- Kubernetes.groovy     # deployHelmChart, ...
-|       +- Lint.groovy           # dockerLint, 
-                                 # transform lighthouse report 
+|       +- Lint.groovy           # dockerLint,
+                                 # transform lighthouse report
                                  # to Warnings NG issues format
 |       +- Mail.groovy           # sendTeamsNotification,
                                  # sendConditionalEmail, ...
 |       +- Utils.groovy          # deepMerge, isCollectionOrArray,
-                                 # deleteDirAsRoot, 
+                                 # deleteDirAsRoot,
                                  # initAws (could be moved to Aws class)
-+- vars   # The vars directory hosts script files that 
++- vars   # The vars directory hosts script files that
           # are exposed as a variable in Pipelines
-|   +- dockerPullBuildPush.groovy # 
+|   +- dockerPullBuildPush.groovy #
 |   +- whenOrSkip.groovy          #
 ```
 
 ## 6. external resource usage
 
-If you need you check out how I used this repository <https://github.com/fchastanet/jenkins_library_resources>
-in jenkins_library (Linter) that hosts some resources to parse result files.
+If you need you check out how I used this repository
+<https://github.com/fchastanet/jenkins_library_resources> in jenkins_library
+(Linter) that hosts some resources to parse result files.

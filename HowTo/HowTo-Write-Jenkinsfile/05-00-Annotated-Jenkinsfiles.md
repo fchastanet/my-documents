@@ -5,8 +5,8 @@
 ## Simple one
 
 This build is used to generate docker images used to build production code and
-launch phpunit tests.
-This pipeline is parameterized in the Jenkins UI directly with the parameters:
+launch phpunit tests. This pipeline is parameterized in the Jenkins UI directly
+with the parameters:
 
 - branch (git branch to use)
 - environment(select with 3 options: build, phpunit or all)
@@ -34,7 +34,7 @@ def String deploymentBranchTagCompatible = ''
 pipeline {
     agent {
         node {
-            // the pipeline is executed on a machine with docker daemon 
+            // the pipeline is executed on a machine with docker daemon
             // available
             label 'docker-ubuntu'
         }
@@ -43,14 +43,14 @@ pipeline {
     stages {
         stage ('checkout') {
             steps {
-                // this command is actually not necessary because checkout is 
+                // this command is actually not necessary because checkout is
                 // done automatically when using declarative pipeline
                 sh 'echo "pulling ... ${GIT_BRANCH#origin/}"'
                 checkout scm
 
-                // this particular build needs to access to some private github 
+                // this particular build needs to access to some private github
                 // repositories, so here we are copying the ssh key
-                // it would be better to use new way of injecting ssh key 
+                // it would be better to use new way of injecting ssh key
                 // inside docker using sshagent
                 // check https://stackoverflow.com/a/66897280
                 withCredentials([
@@ -59,34 +59,34 @@ pipeline {
                       keyFileVariable: 'sshKeyFile'
                    )
                 ]) {
-                    // best practice similar steps should be merged into one 
+                    // best practice similar steps should be merged into one
                     sh 'rm -f ./phpunit/id_rsa'
                     sh 'rm -f ./build/id_rsa'
-                    // here we are escaping '$' so the variable will be 
-                    // interpolated on the jenkins slave and not the jenkins 
-                    // master node instead of escaping, we could have used 
+                    // here we are escaping '$' so the variable will be
+                    // interpolated on the jenkins slave and not the jenkins
+                    // master node instead of escaping, we could have used
                     // single quotes
                     sh "cp \$sshKeyFile ./phpunit/id_rsa"
                     sh "cp \$sshKeyFile ./build/id_rsa"
                 }
                 script {
-                    // as actually scm is already done before executing the 
-                    // first step, this call could have been done during 
-                    // declaration of this variable 
+                    // as actually scm is already done before executing the
+                    // first step, this call could have been done during
+                    // declaration of this variable
                     deploymentBranchTagCompatible = getTagCompatibleFromBranch(GIT_BRANCH)
                 }
             }
         }
         stage("build Build env") {
             when {
-                // the build can be launched with the parameter environment 
-                // defined in the configuration of the jenkins job, these 
+                // the build can be launched with the parameter environment
+                // defined in the configuration of the jenkins job, these
                 // parameters could have been defined directly in the pipeline
                 // see https://www.jenkins.io/doc/book/pipeline/syntax/#parameters
                 expression { return params.environment != "phpunit"}
             }
             steps {
-                // here we could have launched all this commands in the same sh 
+                // here we could have launched all this commands in the same sh
                 // directive
                 sh "docker build --build-arg BRANCH=${params.project_branch} -t build build"
                 // use a constant for dockerRegistryId.dkr.ecr.eu-west-1.amazonaws.com
@@ -109,6 +109,7 @@ pipeline {
     }
 }
 ```
+
 <!-- markdownlint-enable MD013 -->
 
 without seeing the Dockerfile files, we can advise :
@@ -126,7 +127,8 @@ without seeing the Dockerfile files, we can advise :
   - one stage to generate production image
   - one stage that inherits production stage, used to execute phpunit
   - it has the following advantages :
-    - reduce the total image size because of the reuse different docker image layers
+    - reduce the total image size because of the reuse different docker image
+      layers
     - only one Dockerfile to maintain
 
 ## More advanced and annotated jenkinsfiles
