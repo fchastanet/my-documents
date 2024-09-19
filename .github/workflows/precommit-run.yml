@@ -8,9 +8,6 @@ on: # yamllint disable-line rule:truthy
 jobs:
   run:
     runs-on: ubuntu-22.04
-    permissions:
-      # needed by ouzi-dev/commit-status-updater@v2
-      statuses: write
     strategy:
       fail-fast: true
     steps:
@@ -22,11 +19,6 @@ jobs:
 
       - name: Install pre-commit
         run: pip install pre-commit
-
-      - uses: ouzi-dev/commit-status-updater@v2
-        with:
-          name: lint
-          status: pending
 
       - name: Run pre-commit
         run: pre-commit run -a --hook-stage manual
@@ -50,9 +42,3 @@ jobs:
           body: |
             some auto fixes have been generated during pre-commit run
           labels: updates
-
-      - uses: ouzi-dev/commit-status-updater@v2
-        if: always()
-        with:
-          name: lint
-          status: ${{ job.status }}
