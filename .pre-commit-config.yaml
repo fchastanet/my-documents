@@ -45,7 +45,7 @@ repos:
 
   # manual stage used to select github action with megalinter full config
   - repo: https://github.com/fchastanet/bash-tools-framework
-    rev: v5.1.3
+    rev: 6.0.0
     hooks:
       - id: plantuml
       - id: megalinterCheckVersion
