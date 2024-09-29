@@ -61,10 +61,14 @@
 
 - prefer to use printf vs echo
 
-- check that every lowercase variable is used as local in functions
-  - <https://github.com/bats-core/bats-core/issues/726>
-  - <https://github.com/koalaman/shellcheck/issues/1395>
-  - <https://github.com/koalaman/shellcheck/issues/468>
+- avoid global variables whenever possible, prefer using local
+
+  - check that every lowercase variable is used as local in functions
+    - <https://github.com/bats-core/bats-core/issues/726>
+    - <https://github.com/koalaman/shellcheck/issues/1395>
+    - <https://github.com/koalaman/shellcheck/issues/468>
+
+- avoid to export variables whenever possible
 
 ## 3. escape quotes
 
