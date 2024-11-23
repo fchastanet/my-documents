@@ -4,7 +4,7 @@ default_stages: [pre-commit, manual]
 minimum_pre_commit_version: 3.5.0
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.6.0
+    rev: v5.0.0
     hooks:
       - id: check-ast
       - id: mixed-line-ending
@@ -29,7 +29,7 @@ repos:
       - id: git-check
 
   - repo: https://github.com/igorshubovych/markdownlint-cli
-    rev: v0.41.0
+    rev: v0.43.0
     hooks:
       - id: markdownlint
         args: [--fix]
