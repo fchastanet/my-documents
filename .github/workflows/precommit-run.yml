@@ -1,10 +1,15 @@
 ---
 name: Pre-commit run
 on: # yamllint disable-line rule:truthy
+  push:
+    # execute when pushing only branches, not tags
+    branches:
+      - '**'
+      # avoid infinite loop for auto created PRs
+      - '!update/pre-commit-*'
+    tags:
+      - '*'
   workflow_dispatch:
-  schedule:
-    # https://crontab.cronhub.io/
-    - cron: '30 10 * * *'
 jobs:
   run:
     runs-on: ubuntu-22.04
