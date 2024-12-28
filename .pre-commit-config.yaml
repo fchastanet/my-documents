@@ -3,6 +3,16 @@ default_install_hook_types: [pre-commit, pre-push]
 default_stages: [pre-commit, manual]
 minimum_pre_commit_version: 3.5.0
 repos:
+  # enables pre-commit to install the hooks using pipx
+  - repo: https://github.com/pypa/pipx
+    rev: 1.7.1
+    hooks:
+      - id: pipx
+        alias: yapf
+        name: yapf
+        args: ['yapf', '-i']
+        types: ['python']
+
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v5.0.0
     hooks:
@@ -45,7 +55,7 @@ repos:
 
   # manual stage used to select github action with megalinter full config
   - repo: https://github.com/fchastanet/bash-tools-framework
-    rev: 6.0.0
+    rev: 6.1.4
     hooks:
       - id: plantuml
       - id: megalinterCheckVersion
