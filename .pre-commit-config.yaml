@@ -3,15 +3,22 @@ default_install_hook_types: [pre-commit, pre-push]
 default_stages: [pre-commit, manual]
 minimum_pre_commit_version: 3.5.0
 repos:
-  # enables pre-commit to install the hooks using pipx
-  - repo: https://github.com/pypa/pipx
-    rev: 1.7.1
+  - repo: https://github.com/executablebooks/mdformat
+    # Do this before other tools "fixing" the line endings
+    rev: 0.7.21
     hooks:
-      - id: pipx
-        alias: yapf
-        name: yapf
-        args: ['yapf', '-i']
-        types: ['python']
+      - id: mdformat
+        name: Format Markdown
+        entry: mdformat # Executable to run, with fixed options
+        language: python
+        types: [markdown]
+        args: [--wrap, '80', --number]
+        additional_dependencies:
+          - mdformat-toc
+          - mdformat-tables
+          - mdformat-config
+          - mdformat-web
+          - mdformat-gfm
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v5.0.0
@@ -19,6 +26,7 @@ repos:
       - id: check-ast
       - id: mixed-line-ending
         args: [--fix=lf]
+      - id: fix-byte-order-marker
       - id: detect-private-key
       - id: end-of-file-fixer
         exclude: ^.idea/.*$
@@ -26,9 +34,38 @@ repos:
       - id: check-shebang-scripts-are-executable
       - id: check-xml
       - id: check-yaml
+      - id: check-added-large-files
       - id: forbid-new-submodules
       - id: check-json
         exclude: ^.vscode/.*$
+      - id: file-contents-sorter
+        files: .cspell/.*\.txt
+        args: [--ignore-case]
+        stages: [pre-commit, pre-push, manual]
+      - id: trailing-whitespace
+
+  - repo: https://github.com/codespell-project/codespell
+    rev: v2.3.0
+    hooks:
+      - id: codespell
+        args:
+          - --dictionary
+          - '-'
+          - --dictionary
+          - .cspell/codespellrc-dic.txt
+          - --ignore-words
+          - .cspell/codespellrc-ignore.txt
+          - --quiet-level
+          - '2'
+          - --interactive
+          - '0'
+          - --check-filenames
+          - --check-hidden
+          - --write-changes
+        exclude: >
+          (?x)(
+            ^.cspell/codespellrc-.*.txt$
+          )
 
   - repo: https://github.com/fchastanet/jumanjihouse-pre-commit-hooks
     rev: 3.0.2
@@ -44,12 +81,14 @@ repos:
       - id: markdownlint
         args: [--fix]
 
-  - repo: https://github.com/pre-commit/mirrors-prettier
-    rev: v4.0.0-alpha.8
+  - repo: https://github.com/ComPWA/prettier-pre-commit
+    rev: v3.4.2
     hooks:
       - id: prettier
+        args: [--cache]
         exclude: |
           (?x)(
+            \.md$|
             ^\.vscode/.*\.code-snippets$
           )
 
@@ -59,4 +98,3 @@ repos:
     hooks:
       - id: plantuml
       - id: megalinterCheckVersion
-      - id: megalinterGithubAction

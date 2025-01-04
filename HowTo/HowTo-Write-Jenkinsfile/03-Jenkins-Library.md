@@ -36,7 +36,7 @@ script.
 
 The directory structure of a Shared Library repository is as follows:
 
-```bash
+```text
 (root)
 +- src        # Groovy source files
 |   +- org
@@ -68,7 +68,7 @@ def lib = library(
     identifier: 'jenkins_library@v1.0',
     retriever: modernSCM([
         $class: 'GitSCMSource',
-        remote: 'git@github.com:fchastanet/jenkins_library.git',
+        remote: 'git@github.com:fchastanet/jenkins-library.git',
         credentialsId: credentialsId
     ])
 )
@@ -88,9 +88,9 @@ def status = this.jenkinsExecutor.sh(
 
 I remarked that a lot of code was duplicated between all my Jenkinsfiles so I
 created this library
-[https://github.com/fchastanet/jenkins_library](https://github.com/fchastanet/jenkins_library)
+[https://github.com/fchastanet/jenkins-library](https://github.com/fchastanet/jenkins-library)
 
-```bash
+```text
 (root)
 +- doc    # markdown files automatically generated
           # from groovy files by generateDoc.sh
@@ -120,5 +120,5 @@ created this library
 ## 6. external resource usage
 
 If you need you check out how I used this repository
-<https://github.com/fchastanet/jenkins_library_resources> in jenkins_library
+<https://github.com/fchastanet/jenkins-library-resources> in jenkins_library
 (Linter) that hosts some resources to parse result files.

@@ -4,18 +4,18 @@ Configure saml2aws accounts
 
 ```bash
 saml2aws configure \
- --idp-account='<account_alias>' \
- --idp-provider='AzureAD' \
- --mfa='Auto' \
- --profile='<profile>' \
- --url='https://account.activedirectory.windowsazure.com' \
- --username='<username>@microsoft.com' \
- --app-id='<app_id>' \
- --skip-prompt
+  --idp-account='<account_alias>' \
+  --idp-provider='AzureAD' \
+  --mfa='Auto' \
+  --profile='<profile>' \
+  --url='https://account.activedirectory.windowsazure.com' \
+  --username='<username>@microsoft.com' \
+  --app-id='<app_id>' \
+  --skip-prompt
 ```
 
-- `<app_id>` is a unique identifier for the application we want credentials
-  for - in this case an AWS environment.
+- `<app_id>` is a unique identifier for the application we want credentials for
+  (in this case an AWS environment).
 - `<account_alias>` serves as a name to identify the saml2aws configuration (see
   your ~/.saml2aws file
 - `<profile>` serves as the name of the aws cli profile that will be created
@@ -30,7 +30,7 @@ created in ~/.saml2aws
 Run saml2aws login to add or refresh your profile for the aws cli.
 
 ```bash
-saml2aws login -a <account_alias>
+saml2aws login -a ${account_alias}
 ```
 
 Follow the prompts to enter your SSO credentials and complete the multi-factor

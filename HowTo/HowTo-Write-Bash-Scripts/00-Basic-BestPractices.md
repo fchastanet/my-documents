@@ -16,27 +16,26 @@
 - [5. Main function](#5-main-function)
 - [6. Arguments](#6-arguments)
 - [7. some commands default options to use](#7-some-commands-default-options-to-use)
-- [8. Bash and grep regular expressions](#8-bash-and-grep-regular-expressions)
-- [9. Variables](#9-variables)
-  - [9.1. Variable declaration](#91-variable-declaration)
-  - [9.2. variable naming convention](#92-variable-naming-convention)
-  - [9.3. Variable expansion](#93-variable-expansion)
-    - [9.3.1. Examples](#931-examples)
-  - [9.4. Check if a variable is defined](#94-check-if-a-variable-is-defined)
-  - [9.5. Variable default value](#95-variable-default-value)
-  - [9.6. Passing variable by reference to function](#96-passing-variable-by-reference-to-function)
-    - [9.6.1. Example 1](#961-example-1)
-    - [9.6.2. Example 2](#962-example-2)
-- [10. Capture output](#10-capture-output)
-  - [10.1. Capture output and test result](#101-capture-output-and-test-result)
-  - [10.2. Capture output and retrieve status code](#102-capture-output-and-retrieve-status-code)
-- [11. Array](#11-array)
-- [12. Temporary directory](#12-temporary-directory)
-- [13. Traps](#13-traps)
-- [14. Deal with SIGPIPE - exit code 141](#14-deal-with-sigpipe---exit-code-141)
-- [15. Performances analysis](#15-performances-analysis)
-- [16. Bash Performance tips](#16-bash-performance-tips)
-  - [16.1. Array::wrap2 performance improvement](#161-arraywrap2-performance-improvement)
+- [8. Variables](#8-variables)
+  - [8.1. Variable declaration](#81-variable-declaration)
+  - [8.2. variable naming convention](#82-variable-naming-convention)
+  - [8.3. Variable expansion](#83-variable-expansion)
+    - [8.3.1. Examples](#831-examples)
+  - [8.4. Check if a variable is defined](#84-check-if-a-variable-is-defined)
+  - [8.5. Variable default value](#85-variable-default-value)
+  - [8.6. Passing variable by reference to function](#86-passing-variable-by-reference-to-function)
+    - [8.6.1. Example 1](#861-example-1)
+    - [8.6.2. Example 2](#862-example-2)
+- [9. Capture output](#9-capture-output)
+  - [9.1. Capture output and test result](#91-capture-output-and-test-result)
+  - [9.2. Capture output and retrieve status code](#92-capture-output-and-retrieve-status-code)
+- [10. Array](#10-array)
+- [11. Temporary directory](#11-temporary-directory)
+- [12. Traps](#12-traps)
+- [13. Deal with SIGPIPE - exit code 141](#13-deal-with-sigpipe---exit-code-141)
+- [14. Performances analysis](#14-performances-analysis)
+- [15. Bash Performance tips](#15-bash-performance-tips)
+  - [15.1. Array::wrap2 performance improvement](#151-arraywrap2-performance-improvement)
 
 ## 1. External references
 
@@ -137,14 +136,13 @@ fi
 ```bash
 #!/bin/bash
 set -o errexit
-echo `exit 1`
+echo $(exit 1)
 echo $?
 ```
 
 Output:
 
 ```bash
-
 0
 ```
 
@@ -157,7 +155,7 @@ The **best practice** is to always assign command substitution to variable:
 #!/bin/bash
 set -o errexit
 declare cmdOut
-cmdOut=`exit 1`
+cmdOut=$(exit 1)
 echo "${cmdOut}"
 echo $?
 ```
@@ -205,7 +203,7 @@ But how to use readarray without using process substitution. Old code was:
 declare -a interfacesFunctions
 readarray -t interfacesFunctions < <(Compiler::Implement::mergeInterfacesFunctions "${COMPILED_FILE2}")
 Compiler::Implement::validateInterfaceFunctions \
-    "${COMPILED_FILE2}" "${INPUT_FILE}" "${interfacesFunctions[@]}"
+  "${COMPILED_FILE2}" "${INPUT_FILE}" "${interfacesFunctions[@]}"
 ```
 
 I first think about doing this
@@ -240,7 +238,7 @@ readarray -t interfacesFunctions <<<"$(
   Compiler::Implement::mergeInterfacesFunctions "${COMPILED_FILE2}"
 )"
 Compiler::Implement::validateInterfaceFunctions \
-    "${COMPILED_FILE2}" "${INPUT_FILE}" "${interfacesFunctions[@]}"
+  "${COMPILED_FILE2}" "${INPUT_FILE}" "${interfacesFunctions[@]}"
 ```
 
 #### 4.1.3. Process substitution is asynchronous
@@ -251,13 +249,25 @@ process to finish
 ```bash
 while read -r line; do
   echo "$line" &
-done < <(echo 1; sleep 1; echo 2; sleep 1; exit 77)
+done < <(
+  echo 1
+  sleep 1
+  echo 2
+  sleep 1
+  exit 77
+)
 ```
 
 could be rewritten in
 
 ```bash
-mapfile -t lines < <(echo 1; sleep 1; echo 2; sleep 1; exit 77)
+mapfile -t lines < <(
+  echo 1
+  sleep 1
+  echo 2
+  sleep 1
+  exit 77
+)
 wait $!
 
 for line in "${lines[@]}"; do
@@ -285,7 +295,7 @@ in pipe could hide the error.
 #!/bin/bash
 set -o errexit
 set +o pipefail # deactivate pipefail mode
-foo | echo "a" # 'foo' is a non-existing command
+foo | echo "a"  # 'foo' is a non-existing command
 # Output:
 # a
 # bash: foo: command not found
@@ -330,7 +340,11 @@ INVALID_COMMAND.
 #!/bin/bash
 # command-substitution.sh
 set -e
-MY_VAR=$(echo -n Start; INVALID_COMMAND; echo -n End)
+MY_VAR=$(
+  echo -n Start
+  INVALID_COMMAND
+  echo -n End
+)
 echo "MY_VAR is $MY_VAR"
 ```
 
@@ -357,7 +371,11 @@ So, modifying command-substitution.sh above, we get:
 # command-substitution-inherit_errexit.sh
 set -e
 shopt -s inherit_errexit
-MY_VAR=$(echo -n Start; INVALID_COMMAND; echo -n End)
+MY_VAR=$(
+  echo -n Start
+  INVALID_COMMAND
+  echo -n End
+)
 echo "MY_VAR is $MY_VAR"
 ```
 
@@ -423,27 +441,11 @@ BASH_SOURCE=".$0"
 
 ## 7. some commands default options to use
 
-- <https://dougrichardson.us/notes/fail-fast-bash-scripting.html> but set -o
-  nounset is not usable because empty array are considered unset
-- always use `sed -E`
-- avoid using grep -P as it is not supported on alpine, prefer using -E
+[Check out 10-LinuxCommands-BestPractices.md](/HowTo/HowTo-Write-Bash-Scripts/10-LinuxCommands-BestPractices.md)
 
-<!-- markdownlint-capture -->
-<!-- markdownlint-disable MD033 -->
+## 8. Variables
 
-## 8. <a name="regularExpressions"></a>Bash and grep regular expressions
-
-<!-- markdownlint-restore -->
-
-- grep regular expression [A-Za-z] matches by default accentuated character, it
-  you don't want to match them, use the environment variable `LC_ALL=POSIX`,
-  - Eg: `LC_ALL=POSIX grep -E -q '^[A-Za-z_0-9:]+$'`
-  - I added `export LC_ALL=POSIX` in all my headers, it can be overridden using
-    a subShell
-
-## 9. Variables
-
-### 9.1. Variable declaration
+### 8.1. Variable declaration
 
 - ensure we don't have any globals, all variables should be passed to the
   functions
@@ -453,12 +455,12 @@ BASH_SOURCE=".$0"
 - avoid using export most of the times, export is needed only when variables has
   to be passed to child process.
 
-### 9.2. variable naming convention
+### 8.2. variable naming convention
 
 - env variable that aims to be exported should be capitalized with underscore
 - local variables should conform to camelCase
 
-### 9.3. Variable expansion
+### 8.3. Variable expansion
 
 [Shell Parameter Expansion](https://www.gnu.org/software/bash/manual/html_node/Shell-Parameter-Expansion.html)
 
@@ -475,13 +477,13 @@ only used when the parameter is unset, not when it was empty.
 > able to reset a value to empty string, otherwise default value would be
 > applied.
 
-#### 9.3.1. Examples
+#### 8.3.1. Examples
 
 Extract directory from full file path: `directory="${REAL_SCRIPT_FILE%/*}"`
 
 Extract file name from full file path: `fileName="${REAL_SCRIPT_FILE##*/}"`
 
-### 9.4. Check if a variable is defined
+### 8.4. Check if a variable is defined
 
 ```bash
 if [[ -z ${varName+xxx} ]]; then
@@ -491,7 +493,7 @@ fi
 
 Alternatively you can use this framework function `Assert::varExistsAndNotEmpty`
 
-### 9.5. Variable default value
+### 8.5. Variable default value
 
 Always consider to set a default value to the variable that you are using.
 
@@ -511,13 +513,13 @@ Instead you can do that
 rm -Rf "${TMPDIR:-/tmp}/etc" || true
 ```
 
-### 9.6. Passing variable by reference to function
+### 8.6. Passing variable by reference to function
 
 Always "scope" variables passed by reference. Scoping in bash means to find a
 name that is a low probability that the caller of the method names the parameter
 with the same name as in the function.
 
-#### 9.6.1. Example 1
+#### 8.6.1. Example 1
 
 ```bash
 Array::setArray() {
@@ -557,7 +559,7 @@ Array::setArray arr , "1,2,3,"
 #       # output: declare -a arr=([0]="1" [1]="2" [2]="3")
 ```
 
-#### 9.6.2. Example 2
+#### 8.6.2. Example 2
 
 A more tricky example, here the references array is affected to local array,
 this local array has a conflicting name. This example does not produce any error
@@ -598,7 +600,7 @@ Postman::Model::getValidCollectionRefs "file" refs a b c
 declare -p refs # => declare -a refs=([0]="a" [1]="b" [2]="c")
 ```
 
-## 10. Capture output
+## 9. Capture output
 
 You can use
 [command substitution](https://www.gnu.org/savannah-checkouts/gnu/bash/manual/bash.html#Command-Substitution).
@@ -610,7 +612,7 @@ local output
 output="$(functionThatOutputSomething "${arg1}")"
 ```
 
-### 10.1. Capture output and test result
+### 9.1. Capture output and test result
 
 ```bash
 local output
@@ -620,22 +622,19 @@ output="$(functionThatOutputSomething "${arg1}")" || {
 }
 ```
 
-### 10.2. Capture output and retrieve status code
+### 9.2. Capture output and retrieve status code
 
 It's advised to put it on the same line using `;`. If it was on 2 lines, other
 commands could be put between the command and the status code retrieval, the
 status would not be the same command status.
 
-```bash
-local output
-output="$(functionThatOutputSomething "${arg1}")"; status=$?
-```
+![Capture output and retrieve status code example](example1.sh)
 
-## 11. Array
+## 10. Array
 
 - read each line of a file to an array `readarray -t var < /path/to/filename`
 
-## 12. Temporary directory
+## 11. Temporary directory
 
 use `${TMPDIR:-/tmp}`, TMPDIR variable does not always exist. or when mktemp is
 available, use `dirname $(mktemp -u --tmpdir)`
@@ -643,7 +642,7 @@ available, use `dirname $(mktemp -u --tmpdir)`
 The variable TMPDIR is initialized in `src/_includes/_commonHeader.sh` used by
 all the binaries used in this framework.
 
-## 13. Traps
+## 12. Traps
 
 when trapping EXIT do not forget to throw back same exit code otherwise exit
 code of last command executed in the trap is thrown
@@ -664,7 +663,7 @@ cleanOnExit() {
 trap cleanOnExit EXIT HUP QUIT ABRT TERM
 ```
 
-## 14. Deal with SIGPIPE - exit code 141
+## 13. Deal with SIGPIPE - exit code 141
 
 [related stackoverflow post](https://stackoverflow.com/questions/19120263/why-exit-code-141-with-grep-q)
 
@@ -693,10 +692,10 @@ Finally I found this elegant
 
 ```bash
 handle_pipefails() {
-    # ignore exit code 141 from simple command pipes
-    # - use with: cmd1 | cmd2 || handle_pipefails $?
-    (( $1 == 141 )) && return 0
-    return $1
+  # ignore exit code 141 from simple command pipes
+  # - use with: cmd1 | cmd2 || handle_pipefails $?
+  (($1 == 141)) && return 0
+  return $1
 }
 
 # then use it or test it as:
@@ -707,26 +706,26 @@ echo "ec=$?"
 I added `handle_pipefails` as `Bash::handlePipelineFailure` in
 bash-tools-framework.
 
-## 15. Performances analysis
+## 14. Performances analysis
 
 generate a csv file with milliseconds measures
 
 ```bash
 codeToMeasureStart=$(date +%s%3N)
 # ... the code to measure
-echo >&2 "printCurrentLine;$(($(date +%s%3N)-codeToMeasureStart))"
+echo >&2 "printCurrentLine;$(($(date +%s%3N) - codeToMeasureStart))"
 ```
 
-## 16. Bash Performance tips
+## 15. Bash Performance tips
 
-### 16.1. Array::wrap2 performance improvement
+### 15.1. Array::wrap2 performance improvement
 
 [Commit with performance improvement](https://github.com/fchastanet/bash-tools-framework/commit/2f52d3af27170b7fff5284b5ad2793ae58af21e1)
 
 manualTests/Array::wrap2Perf.sh:
 
 - displaying 12 lines (558 characters) 100 times
-- passed from ~10s to <1s (improved by 90%)
+- passed from ~10s to \<1s (improved by 90%)
 
 performance improvement using:
 

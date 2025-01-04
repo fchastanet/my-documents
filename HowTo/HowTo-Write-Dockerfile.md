@@ -32,19 +32,27 @@ Follow
 and you can follow these specific best practices
 
 - But
-  [The worst so-called “best practice” for Docker](https://pythonspeed.com/articles/zecurity-updates-in-docker/),
-  explains why you should actually use `apt-get upgrade`
+  [The worst so-called “best practice” for Docker](https://pythonspeed.com/articles/security-updates-in-docker/)
+
+  [Backup](/archives/TheWorstSoCalledBestPracticeForDocker.pdf), explains why
+  you should actually also use `apt-get upgrade`
+
 - Use `hadolint`
+
 - Use `;\` to separate each command line
+
   - some Dockerfiles are using `&&` to separate commands in the same RUN
     instruction (I was doing it too ;-), but I strongly discourage it because it
     breaks the checks done by `set -o errexit`
   - `set -o errexit` makes the whole RUN instruction to fail if one of the
     commands has failed, but it is not the same when using `&&`
+
 - One package by line, packages sorted alphabetically to ease readability and
   merges
+
 - Always specify the most exact version possible of your packages (to avoid to
   get major version that would break your build or software)
+
 - do not usage docker image with latest tag, always specify the right version to
   use
 

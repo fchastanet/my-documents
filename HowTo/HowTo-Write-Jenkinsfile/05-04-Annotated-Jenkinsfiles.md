@@ -12,7 +12,7 @@ Jenkinsfile.
 library identifier: 'jenkins_library@v1.0',
   retriever: modernSCM([
       $class: 'GitSCMSource',
-      remote: 'git@github.com:fchastanet/jenkins_library.git',
+      remote: 'git@github.com:fchastanet/jenkins-library.git',
       credentialsId: 'jenkinsCredentialsId'
   ])
 

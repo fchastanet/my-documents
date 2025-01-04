@@ -39,7 +39,7 @@ And makes several variables available:
 - FRAMEWORK_ROOT_DIR (same as BASH_TOOLS_ROOT_DIR but used by some bash
   framework functions)
 - LC_ALL=POSIX see
-  [Bash and grep regular expressions best practices](BestPractices.md#regularExpressions)
+  [Bash and grep regular expressions best practices](/HowTo/HowTo-Write-Bash-Scripts/10-LinuxCommands-BestPractices.md#regularExpressions)
 
 ## 3. Override an environment variable when using bats run
 
