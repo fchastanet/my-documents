@@ -11,14 +11,15 @@
 - avoid using grep -P as it is not supported on alpine, prefer using -E
 
 <!-- markdownlint-capture -->
+
 <!-- markdownlint-disable MD033 -->
 
 ## 2. <a name="regularExpressions"></a>Bash and grep regular expressions
 
 <!-- markdownlint-restore -->
 
-- grep regular expression [A-Za-z] matches by default accentuated character, it
-  you don't want to match them, use the environment variable `LC_ALL=POSIX`,
+- grep regular expression `[A-Za-z]` matches by default accentuated character,
+  if you don't want to match them, use the environment variable `LC_ALL=POSIX`,
   - Eg: `LC_ALL=POSIX grep -E -q '^[A-Za-z_0-9:]+$'`
   - I added `export LC_ALL=POSIX` in all my headers, it can be overridden using
     a subShell

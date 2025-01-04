@@ -6,6 +6,9 @@
       "pattern": "^http://localhost:3000/"
     },
     {
+      "pattern": "^/HowTo/.*$"
+    },
+    {
       "pattern": "^https://www.cyberciti.biz/.*$"
     },
     {

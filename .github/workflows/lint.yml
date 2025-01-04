@@ -1,0 +1,138 @@
+---
+name: Pre-commit run
+on: # yamllint disable-line rule:truthy
+  push:
+    # execute when pushing only branches, not tags
+    branches:
+      - '**'
+      # avoid infinite loop for auto created PRs
+      - '!update/pre-commit-*'
+    tags:
+      - '*'
+  workflow_dispatch:
+
+# cancel previous build if several pushes
+concurrency:
+  group: >-
+    ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+env:
+  # Apply linter fixes configuration
+  # When active, APPLY_FIXES must also be defined as
+  # environment variable (in github/workflows/mega-linter.yml
+  # or other CI tool)
+  APPLY_FIXES: all
+  # Decide which event triggers application of fixes in a
+  # commit or a PR (pull_request, push, all)
+  APPLY_FIXES_EVENT: all
+  # If APPLY_FIXES is used, defines if the fixes are
+  # directly committed (commit) or posted in a PR (pull_request)
+  APPLY_FIXES_MODE: pull_request
+  # variables to compute complex conditions
+  COND_UPDATED_SOURCES: false
+  COND_APPLY_FIXES_NEEDED: false
+
+jobs:
+  run:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.9
+
+      - uses: crazy-max/ghaction-import-gpg@v6
+        if: ${{ success() }}
+        with:
+          gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
+          passphrase: ${{ secrets.GPG_PASSPHRASE }}
+          git_user_signingkey: true
+          git_commit_gpgsign: true
+
+      - uses: tibdex/github-app-token@v2
+        if: ${{ success() }}
+        id: generate-token
+        with:
+          app_id: ${{ secrets.APP_ID }}
+          private_key: ${{ secrets.APP_PRIVATE_KEY }}
+
+      - name: Run pre-commit
+        uses: pre-commit/action@v3.0.1
+        id: preCommit
+        with:
+          extra_args: >-
+            -c .pre-commit-config.yaml -a
+
+      - name: MegaLinter
+        id: ml
+        if: ${{ always() }}
+        # You can override MegaLinter flavor used to have faster performances
+        # More info at https://megalinter.io/flavors/
+        uses: oxsecurity/megalinter/flavors/documentation@v8.3.0
+        # All available variables are described in documentation
+        # https://megalinter.io/configuration/
+        env:
+          # Validates all source when push on master,
+          # else just the git diff with master.
+          # Override with true if you always want to lint all sources
+          VALIDATE_ALL_CODEBASE: true
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MEGALINTER_CONFIG: .mega-linter-githubAction.yml
+          CI_MODE: 1
+
+      - name: Upload MegaLinter artifacts
+        if: success() || failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: MegaLinter reports
+          path: |
+            megalinter-reports
+            mega-linter.log
+
+      - name: MegaLinter/Precommit has updated sources
+        if: >
+          steps.preCommit.conclusion == 'failure' || (
+            steps.ml.outputs.has_updated_sources == 1 && (
+              env.APPLY_FIXES_EVENT == 'all' ||
+              env.APPLY_FIXES_EVENT == github.event_name
+            )
+          )
+        run: |
+          echo "COND_UPDATED_SOURCES=true" >> "${GITHUB_ENV}"
+
+      - name: is apply fixes needed ?
+        if: >
+          env.APPLY_FIXES_MODE == 'pull_request' && (
+            github.event_name == 'push' ||
+            github.event.pull_request.head.repo.full_name ==
+            github.repository
+          )
+        run: |
+          echo "COND_APPLY_FIXES_NEEDED=true" >> "${GITHUB_ENV}"
+
+      - name: Create Pull Request
+        id: cpr
+        if: >
+          env.COND_UPDATED_SOURCES == 'true' && env.COND_APPLY_FIXES_NEEDED ==
+          'true' && !contains(github.event.head_commit.message, 'skip fix')
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ steps.generate-token.outputs.token }}
+          committer: fchastanet <fchastanet@gmail.com>
+          branch: update/pre-commit-fixes-${{ env.branch_name }}
+          delete-branch: true
+          title: lint fixes
+          commit-message: Auto-update lint fixes
+          body: |
+            some auto fixes have been generated during pre-commit run
+          labels: pre-commit-fixes
+
+      - name: Print Pull request created
+        if: |
+          steps.cpr.outputs.pull-request-number &&
+          steps.cpr.conclusion == 'success'
+        run: |
+          echo "Pull Request Number - ${{ steps.cpr.outputs.pull-request-number }}"
+          echo "Pull Request URL - ${{ steps.cpr.outputs.pull-request-url }}"

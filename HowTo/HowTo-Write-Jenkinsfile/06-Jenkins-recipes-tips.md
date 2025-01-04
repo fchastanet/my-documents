@@ -27,7 +27,7 @@ pipeline, easier debugging ! ![replay a pipeline](images/replayPipeline.png)
 ## 4. VS code Jenkinsfile validation
 
 Please follow this documentation
-[enable jenkins pipeline linter in vscode](https://github.com/fchastanet/coding_dojo_jenkins/blob/master/Exercise03.md#step-01b---enable-jenkins-pipeline-linter-in-vscode)
+[enable jenkins pipeline linter in vscode](https://github.com/fchastanet/coding_dojo_jenkins/blob/master/Exercise03%20-%20Full%20pipeline.md#step-01b---enable-jenkins-pipeline-linter-in-vscode)
 
 ## 5. How to chain pipelines ?
 

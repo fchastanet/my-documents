@@ -19,8 +19,8 @@ But it misses:
 - usage of
   [inline parameters](https://www.jenkins.io/doc/book/pipeline/syntax/#parameters)
 - usage of jenkins library to reuse common code
-  - [Git updateConditionalGithubCommitStatus](https://github.com/fchastanet/jenkins_library/blob/master/src/fchastanet/Git.groovy#L156)
-  - [Docker pullBuildPushImage](https://github.com/fchastanet/jenkins_library/blob/master/src/fchastanet/Docker.groovy#L46)
+  - [Git updateConditionalGithubCommitStatus](https://github.com/fchastanet/jenkins-library/blob/master/src/fchastanet/Git.groovy#L156)
+  - [Docker pullBuildPushImage](https://github.com/fchastanet/jenkins-library/blob/master/src/fchastanet/Docker.groovy#L46)
 
 check
 [Pipeline syntax documentation](https://www.jenkins.io/doc/book/pipeline/syntax/)
@@ -38,7 +38,7 @@ def String image_fqdn_master = registry_url + '/' + image_name + ':master'
 def String image_fqdn_current_branch = image_fqdn_master
 
 // this method is used by several of my pipelines and has been added
-// to jenkins_library <https://github.com/fchastanet/jenkins_library/blob/master/src/fchastanet/Git.groovy#L156>
+// to jenkins_library <https://github.com/fchastanet/jenkins-library/blob/master/src/fchastanet/Git.groovy#L156>
 void publishStatusToGithub(String status) {
   step([
     $class: "GitHubCommitStatusSetter",
@@ -143,7 +143,7 @@ pipeline {
       steps {
         script {
           // this code is used in most of the pipeline and has been centralized
-          // in https://github.com/fchastanet/jenkins_library/blob/master/src/fchastanet/Git.groovy#L39
+          // in https://github.com/fchastanet/jenkins-library/blob/master/src/fchastanet/Git.groovy#L39
           env.IMAGE_TAG = env.GIT_COMMIT.substring(0, 7)
           // Update variable for production environment
           if ( params.DEPLOYMENT == 'prod' ) {
@@ -164,7 +164,7 @@ pipeline {
         // It is again a recurrent usage in most of the pipelines
         // so the next 8 lines could be replaced by the call to this method
         // Docker
-        // pullBuildPushImage https://github.com/fchastanet/jenkins_library/blob/master/src/fchastanet/Docker.groovy#L46
+        // pullBuildPushImage https://github.com/fchastanet/jenkins-library/blob/master/src/fchastanet/Docker.groovy#L46
 
         // Pull the master from repository (|| true avoids errors if the image
         // hasn't been pushed before)
@@ -189,7 +189,7 @@ pipeline {
         script {
           // Actually we should always push the image in order to be able to
           // feed the docker cache for next builds
-          // Again the method Docker pullBuildPushImage https://github.com/fchastanet/jenkins_library/blob/master/src/fchastanet/Docker.groovy#L46
+          // Again the method Docker pullBuildPushImage https://github.com/fchastanet/jenkins-library/blob/master/src/fchastanet/Docker.groovy#L46
           // solves this issue and could be used instead of the next 6 lines
           // and "Push image (Prod)" stage
 
@@ -222,7 +222,7 @@ pipeline {
       when {
         expression { return params.DEPLOYMENT == "prod" && env.GIT_BRANCH == 'origin/master'}
       }
-      // The method Docker pullBuildPushImage https://github.com/fchastanet/jenkins_library/blob/master/src/fchastanet/Docker.groovy#L46
+      // The method Docker pullBuildPushImage https://github.com/fchastanet/jenkins-library/blob/master/src/fchastanet/Docker.groovy#L46
       // provides a generic way of managing the pull, build, push of the docker
       // images, by managing also a common way of tagging docker images
       steps {
@@ -286,7 +286,9 @@ Note however it is best to use a separated sh file(s) that could take some
 parameters as it is simpler to read and to eventually test separately. Here a
 refactoring using a separated sh file:
 
-```bash runTests.sh
+runTests.sh
+
+```bash
 #!/bin/bash
 set -x -o errexit -o pipefail
 
@@ -295,11 +297,13 @@ composer install -a
 ./bin/phpunit \
   -c /var/www/html/app/phpunit.xml \
   --coverage-html /var/www/html/var/logs/coverage/ \
-  --log-junit /var/www/html/var/logs/phpunit.xml  \
+  --log-junit /var/www/html/var/logs/phpunit.xml \
   --coverage-clover /var/www/html/var/logs/clover_coverage.xml
 ```
 
-```bash jenkinsRunTests.sh
+jenkinsRunTests.sh
+
+```bash
 #!/bin/bash
 set -x -o errexit -o pipefail
 
@@ -310,7 +314,6 @@ docker run -i --rm \
   -w /var/www/html/ \
   project-test \
   runTests.sh
-'''
 ```
 
 Then the sh directive becomes simply

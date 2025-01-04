@@ -22,7 +22,7 @@ def lib = library(
     identifier: 'jenkins_library',
     retriever: modernSCM([
         $class: 'GitSCMSource',
-        remote: 'git@github.com:fchastanet/jenkins_library.git',
+        remote: 'git@github.com:fchastanet/jenkins-library.git',
         credentialsId: credentialsId
     ])
 )
@@ -104,7 +104,7 @@ pipeline {
 
     stage("Build docker images") {
       steps {
-        // whenOrSkip directive is defined in https://github.com/fchastanet/jenkins_library/blob/master/vars/whenOrSkip.groovy
+        // whenOrSkip directive is defined in https://github.com/fchastanet/jenkins-library/blob/master/vars/whenOrSkip.groovy
         whenOrSkip(currentBuild.currentResult == "SUCCESS") {
           script {
             docker.pullBuildPushImage(

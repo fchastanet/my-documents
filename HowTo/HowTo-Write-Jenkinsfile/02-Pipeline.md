@@ -27,12 +27,12 @@
 > Pipeline provides an extensible set of tools for modeling simple-to-complex
 > delivery pipelines "as code" via the
 > [Pipeline domain-specific language (DSL) syntax](https://www.jenkins.io/doc/book/pipeline/syntax).
-> [1](https://www.jenkins.io/doc/book/pipeline/#_footnotedef_1 'View footnote.')
+> [View footnote 1](https://www.jenkins.io/doc/book/pipeline/#_footnotedef_1 "View footnote.")
 >
 > The definition of a Jenkins Pipeline is written into a text file (called a
 > [`Jenkinsfile`](https://www.jenkins.io/doc/book/pipeline/jenkinsfile)) which
 > in turn can be committed to a project’s source control repository.
-> [2](https://www.jenkins.io/doc/book/pipeline/#_footnotedef_2 'View footnote.')
+> [View footnote 2](https://www.jenkins.io/doc/book/pipeline/#_footnotedef_2 "View footnote.")
 > This is the foundation of "Pipeline-as-code"; treating the CD pipeline a part
 > of the application to be versioned and reviewed like any other code.
 
@@ -51,45 +51,8 @@ Scripted and declarative pipelines are using groovy language.
 
 Checkout
 [https://www.guru99.com/groovy-tutorial.html](https://www.guru99.com/groovy-tutorial.html)
-to have a quick overview of this derived language.
-
-From [Wikipedia](https://en.wikipedia.org/wiki/Apache_Groovy)
-
-<!-- markdownlint-disable MD013 -->
-
-> **Apache Groovy** is a
-> [Java](<https://en.wikipedia.org/wiki/Java_(programming_language)> 'Java (programming language)')
-> syntax-compatible
-> [object-oriented](https://en.wikipedia.org/wiki/Object-oriented_programming 'Object-oriented programming') >
-> [programming language](https://en.wikipedia.org/wiki/Programming_language 'Programming language')
-> for the
-> [Java platform](<https://en.wikipedia.org/wiki/Java_(software_platform)> 'Java (software platform)').
-> It is both a static and
-> [dynamic](https://en.wikipedia.org/wiki/Dynamic_programming_language 'Dynamic programming language')
-> language with features similar to those of
-> [Python](<https://en.wikipedia.org/wiki/Python_(programming_language)> 'Python (programming language)'),
-> [Ruby](<https://en.wikipedia.org/wiki/Ruby_(programming_language)> 'Ruby (programming language)'),
-> and [Smalltalk](https://en.wikipedia.org/wiki/Smalltalk 'Smalltalk'). It can
-> be used as both a
-> [programming language](https://en.wikipedia.org/wiki/Programming_language 'Programming language')
-> and a
-> [scripting language](https://en.wikipedia.org/wiki/Scripting_language 'Scripting language')
-> for the Java Platform, is compiled to
-> [Java virtual machine](https://en.wikipedia.org/wiki/Java_virtual_machine 'Java virtual machine')
-> (JVM) [bytecode](https://en.wikipedia.org/wiki/Bytecode 'Bytecode'), and
-> interoperates seamlessly with other Java code and
-> [libraries](<https://en.wikipedia.org/wiki/Library_(computing)> 'Library (computing)').
-> Groovy uses a
-> [curly-bracket syntax](https://en.wikipedia.org/wiki/Curly_bracket_programming_language 'Curly bracket programming language')
-> similar to Java's. Groovy supports
-> [closures](<https://en.wikipedia.org/wiki/Closure_(computer_programming)> 'Closure (computer programming)'),
-> multiline strings, and
-> [expressions embedded in strings](https://en.wikipedia.org/wiki/String_interpolation 'String interpolation').
-> Much of Groovy's power lies in its
-> [AST](https://en.wikipedia.org/wiki/Abstract_syntax_tree 'Abstract syntax tree')
-> transformations, triggered through annotations.
-
-<!-- markdownlint-enable MD013 -->
+to have a quick overview of this derived language check
+[Wikipedia](https://en.wikipedia.org/wiki/Apache_Groovy)
 
 ## 4. Difference between scripted pipeline (freestyle) and declarative pipeline syntax
 

@@ -21,7 +21,7 @@ Here the source code with inline comments:
 
 ```groovy
 // This method allows to convert the branch name to a docker image tag.
-// This method is generally used by most of my jenkins pipelines, it's why it has been added to https://github.com/fchastanet/jenkins_library/blob/master/src/fchastanet/Docker.groovy#L31
+// This method is generally used by most of my jenkins pipelines, it's why it has been added to https://github.com/fchastanet/jenkins-library/blob/master/src/fchastanet/Docker.groovy#L31
 def getTagCompatibleFromBranch(String branchName) {
     def String tag = branchName.toLowerCase()
     tag = tag.replaceAll("^origin/", "")
