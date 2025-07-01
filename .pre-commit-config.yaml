@@ -5,7 +5,7 @@ minimum_pre_commit_version: 3.5.0
 repos:
   - repo: https://github.com/executablebooks/mdformat
     # Do this before other tools "fixing" the line endings
-    rev: 0.7.21
+    rev: 0.7.22
     hooks:
       - id: mdformat
         name: Format Markdown
@@ -45,7 +45,7 @@ repos:
       - id: trailing-whitespace
 
   - repo: https://github.com/codespell-project/codespell
-    rev: v2.3.0
+    rev: v2.4.1
     hooks:
       - id: codespell
         args:
@@ -76,7 +76,7 @@ repos:
       - id: git-check
 
   - repo: https://github.com/igorshubovych/markdownlint-cli
-    rev: v0.43.0
+    rev: v0.45.0
     hooks:
       - id: markdownlint
         args: [--fix]
@@ -94,7 +94,7 @@ repos:
 
   # manual stage used to select github action with megalinter full config
   - repo: https://github.com/fchastanet/bash-tools-framework
-    rev: 6.1.4
+    rev: 6.2.2
     hooks:
       - id: plantuml
       - id: megalinterCheckVersion
