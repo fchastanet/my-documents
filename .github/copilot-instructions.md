@@ -92,8 +92,8 @@ contents.
 ### Content Guidelines
 
 - Keep content focused and well-organized
-- Use code blocks with language specification:
-  ` ```bash`, ` ```yaml`, ` ```dockerfile`
+- Use code blocks with language specification: ````  ```bash ````,
+  ````  ```yaml ````, ````  ```dockerfile ````
 - Add internal links using relative paths: `[text](/HowTo/guide.md)`
 - External links should use full URLs
 
@@ -155,14 +155,14 @@ pre-commit run -a
 
 ### Common Linting Issues and Solutions
 
-| Issue | Solution |
-| ----- | -------- |
-| Line too long (MD013) | Let mdformat auto-wrap at 80 chars |
-| Trailing whitespace | Pre-commit hook removes automatically |
-| Wrong line endings | Pre-commit fixes to LF |
-| Spelling errors | Add to `.cspell/*.txt` dictionaries |
-| Markdown formatting | Run `pre-commit run mdformat -a` |
-| Link check failures | Verify URLs or add to ignore list |
+| Issue                 | Solution                              |
+| --------------------- | ------------------------------------- |
+| Line too long (MD013) | Let mdformat auto-wrap at 80 chars    |
+| Trailing whitespace   | Pre-commit hook removes automatically |
+| Wrong line endings    | Pre-commit fixes to LF                |
+| Spelling errors       | Add to `.cspell/*.txt` dictionaries   |
+| Markdown formatting   | Run `pre-commit run mdformat -a`      |
+| Link check failures   | Verify URLs or add to ignore list     |
 
 ## CI/CD Workflows
 
@@ -199,6 +199,7 @@ pre-commit run -a
    `Lists/`, etc.)
 
 2. **Update navigation if needed:**
+
    - Edit `_sidebar.md` to add new pages to sidebar
    - Edit `_navbar.md` for top navigation changes
 
@@ -229,6 +230,7 @@ pre-commit run -a
    ```
 
 6. **Review CI results:**
+
    - Check GitHub Actions for lint workflow status
    - If auto-fixes are needed, a PR will be created automatically
    - Merge the auto-fix PR if appropriate
@@ -358,8 +360,11 @@ git commit -m "Add 'newword' to spell check dictionary"
 ### Adding a New HowTo Guide
 
 1. Create file: `HowTo/HowTo-New-Topic.md`
+
 2. Add header and table of contents
+
 3. Write content following Markdown standards
+
 4. Update `_sidebar.md`:
 
    ```markdown
@@ -367,6 +372,7 @@ git commit -m "Add 'newword' to spell check dictionary"
    ```
 
 5. Add any new technical terms to `.cspell/bash.txt`
+
 6. Commit and push
 
 ### Adding Code Examples
@@ -385,6 +391,7 @@ echo "Hello, World!"
 ### Adding Images
 
 1. Place image in `/images/` directory
+
 2. Reference in Markdown:
 
    ```markdown
@@ -403,18 +410,18 @@ See also: [Docker Best Practices](/HowTo/HowTo-Write-Dockerfile.md)
 
 ## Configuration Files Reference
 
-| File | Purpose |
-| ---- | ------- |
-| `.editorconfig` | Editor configuration (indentation, line endings) |
-| `.eslintrc.js` | ESLint configuration for JavaScript files |
-| `.gitignore` | Files to exclude from version control |
-| `.markdownlint.json` | Markdown linting rules |
-| `.mega-linter.yml` | MegaLinter configuration |
-| `.pre-commit-config.yaml` | Pre-commit hooks configuration |
-| `.prettierrc.yaml` | Prettier formatting rules |
-| `cspell.yaml` | Spell check configuration |
-| `.gitleaks.toml` | Secret detection configuration |
-| `.secretlintrc.yml` | Secret pattern detection |
+| File                      | Purpose                                          |
+| ------------------------- | ------------------------------------------------ |
+| `.editorconfig`           | Editor configuration (indentation, line endings) |
+| `.eslintrc.js`            | ESLint configuration for JavaScript files        |
+| `.gitignore`              | Files to exclude from version control            |
+| `.markdownlint.json`      | Markdown linting rules                           |
+| `.mega-linter.yml`        | MegaLinter configuration                         |
+| `.pre-commit-config.yaml` | Pre-commit hooks configuration                   |
+| `.prettierrc.yaml`        | Prettier formatting rules                        |
+| `cspell.yaml`             | Spell check configuration                        |
+| `.gitleaks.toml`          | Secret detection configuration                   |
+| `.secretlintrc.yml`       | Secret pattern detection                         |
 
 ## Tools and Dependencies
 
