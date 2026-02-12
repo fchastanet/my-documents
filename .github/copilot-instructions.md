@@ -92,8 +92,8 @@ contents.
 ### Content Guidelines
 
 - Keep content focused and well-organized
-- Use code blocks with language specification: ````  ```bash ````,
-  ````  ```yaml ````, ````  ```dockerfile ````
+- Use code blocks with language specification: ```` ```bash ````,
+  ```` ```yaml ````, ```` ```dockerfile ````
 - Add internal links using relative paths: `[text](/HowTo/guide.md)`
 - External links should use full URLs
 
