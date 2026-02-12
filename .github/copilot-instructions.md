@@ -428,7 +428,7 @@ See also: [Docker Best Practices](/HowTo/HowTo-Write-Dockerfile.md)
 ### Required Tools (for local development)
 
 - Git
-- Python 3.9+ (for pre-commit)
+- Python 3.10+ (for pre-commit)
 - Node.js (optional, for local Docsify preview)
 
 ### Optional Tools
