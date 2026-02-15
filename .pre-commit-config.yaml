@@ -68,7 +68,8 @@ repos:
           - --write-changes
         exclude: >
           (?x)(
-            ^.cspell/codespellrc-.*.txt$
+            ^.cspell/codespellrc-.*.txt$|
+            ^package-lock\.json$
           )
 
   - repo: https://github.com/fchastanet/jumanjihouse-pre-commit-hooks
@@ -102,3 +103,7 @@ repos:
     hooks:
       - id: plantuml
       - id: megalinterCheckVersion
+        args:
+          - --image
+          - 'oxsecurity/megalinter-terraform:v9.3.0'
+          - --check-megalinter-version

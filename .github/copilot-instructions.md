@@ -323,14 +323,14 @@ git commit -m "Your message"
 
 ```bash
 # For technical terms, add to bash dictionary
-echo "newword" >> .cspell/bash.txt
+echo "newWord" >> .cspell/bash.txt
 
 # Sort the dictionary (pre-commit will do this)
 pre-commit run file-contents-sorter
 
 # Commit the updated dictionary
 git add .cspell/bash.txt
-git commit -m "Add 'newword' to spell check dictionary"
+git commit -m "Add 'newWord' to spell check dictionary"
 ```
 
 ### GitHub Pages Not Updating
