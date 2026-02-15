@@ -19,6 +19,10 @@ repos:
           - mdformat-config
           - mdformat-web
           - mdformat-gfm
+        exclude: |
+          (?x)(
+            ^\.github/
+          )
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v5.0.0
