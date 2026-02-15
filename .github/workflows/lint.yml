@@ -42,10 +42,6 @@ jobs:
           app_id: ${{ secrets.APP_ID }}
           private_key: ${{ secrets.APP_PRIVATE_KEY }}
 
-      # install npm dependencies for pre-commit hooks
-      - name: Install npm dependencies for pre-commit hooks
-        run: npm ci --no-audit --no-fund
-
       - name: Run pre-commit
         uses: pre-commit/action@v3.0.1
         id: preCommit

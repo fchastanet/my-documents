@@ -16,10 +16,6 @@ cacheTtl: 86400
 # - default = false
 ignoreErrors: true
 
-plugins:
-  # Plugins installed from NPM (or JSR) must be prefixed by "package:"
-  - 'package:v8r-plugin-emoji-output'
-
 customCatalog:
   schemas:
     - name: prettier
