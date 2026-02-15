@@ -1,31 +1,27 @@
 # Annotated Jenkinsfile - php project with helm push
 
-## Introduction
+## 1. Introduction
 
-This example is missing the use of parameters, jenkins library in order to reuse
-common code
+This example is missing the use of parameters, jenkins library in order to reuse common code
 
 This example uses :
 
 - post conditions
   [https://www.jenkins.io/doc/book/pipeline/syntax/#post](https://www.jenkins.io/doc/book/pipeline/syntax/#post)
 - github plugin to set commit status indicating the result of the build
-- usage of **several jenkins plugins**, you can check here to get the full list
-  installed on your server and even **generate code snippets** by adding
-  **pipeline-syntax/** to your jenkins server url
+- usage of **several jenkins plugins**, you can check here to get the full list installed on your server and even
+  **generate code snippets** by adding **pipeline-syntax/** to your jenkins server url
 
 But it misses:
 
-- usage of
-  [inline parameters](https://www.jenkins.io/doc/book/pipeline/syntax/#parameters)
+- usage of [inline parameters](https://www.jenkins.io/doc/book/pipeline/syntax/#parameters)
 - usage of jenkins library to reuse common code
   - [Git updateConditionalGithubCommitStatus](https://github.com/fchastanet/jenkins-library/blob/master/src/fchastanet/Git.groovy#L156)
   - [Docker pullBuildPushImage](https://github.com/fchastanet/jenkins-library/blob/master/src/fchastanet/Docker.groovy#L46)
 
-check
-[Pipeline syntax documentation](https://www.jenkins.io/doc/book/pipeline/syntax/)
+check [Pipeline syntax documentation](https://www.jenkins.io/doc/book/pipeline/syntax/)
 
-## Annotated Jenkinsfile
+## 2. Annotated Jenkinsfile
 
 <!-- markdownlint-disable MD013 -->
 
@@ -282,9 +278,8 @@ sh ''''
 '''
 ```
 
-Note however it is best to use a separated sh file(s) that could take some
-parameters as it is simpler to read and to eventually test separately. Here a
-refactoring using a separated sh file:
+Note however it is best to use a separated sh file(s) that could take some parameters as it is simpler to read and to
+eventually test separately. Here a refactoring using a separated sh file:
 
 runTests.sh
 

@@ -33,7 +33,7 @@ Use `git diff` output to understand the changes made.
 - Reference issue numbers with #123 if applicable.
 - Make the message clear, concise, and easy to understand.
 - Adjust the length of the description to fit the changes made.
-- Limit lines in the body to 72-80 characters for readability.
+- Limit lines in the body to 72-120 characters for readability.
 - Never use "WIP", "temp", or similar placeholders in commit messages.
 - Clearly mark breaking changes with a section (e.g., ## 💥 Breaking Changes) and describe the impact.
 - Reference related documentation, specs, or design docs if relevant.
@@ -53,7 +53,7 @@ Use `git diff` output to understand the changes made.
 
 Follow the formatting, emoji usage, and scope tagging shown in the example below:
 
-```markdown
+````markdown
 ✨🔧(patient): Patient Management Service Refactor (Domain Layer)
 
 Refactor patient management logic in the domain and application layers for improved testability and maintainability.
@@ -124,6 +124,6 @@ Update related tests and documentation.
 
 - [ ] Migration steps documented
 - [ ] New patterns reviewed
-```
+````
 
 Do not include any explanations or additional text.

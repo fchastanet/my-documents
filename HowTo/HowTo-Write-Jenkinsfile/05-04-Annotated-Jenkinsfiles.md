@@ -1,12 +1,11 @@
 # Annotated Jenkinsfile - jenkins library - reusable pipeline generation
 
-## introduction
+## 1. introduction
 
-In jenkins library you can create your own directive that allows to generate
-jenkinsfile code. Here we will use this feature to generate a complete
-Jenkinsfile.
+In jenkins library you can create your own directive that allows to generate jenkinsfile code. Here we will use this
+feature to generate a complete Jenkinsfile.
 
-## Annotated Jenkinsfile
+## 2. Annotated Jenkinsfile
 
 ```groovy
 library identifier: 'jenkins_library@v1.0',
@@ -20,10 +19,9 @@ djangoApiPipeline repoUrl: 'git@github.com:fchastanet/django_api_project.git',
                   imageName: 'django_api'
 ```
 
-## Annotated library custom directive
+## 3. Annotated library custom directive
 
-In the jenkins library just add a file named `vars/djangoApiPipeline.groovy`
-with the following content
+In the jenkins library just add a file named `vars/djangoApiPipeline.groovy` with the following content
 
 ```groovy
 #!/usr/bin/env groovy
@@ -33,7 +31,7 @@ def call(Map args) {
 }
 ```
 
-## Annotated library custom directive djangoApiPipeline.groovy
+## 4. Annotated library custom directive djangoApiPipeline.groovy
 
 ```groovy
 #!/usr/bin/env groovy
@@ -274,10 +272,10 @@ def call(Map args) {
 }
 ```
 
-## Final thoughts about this technique
+## 5. Final thoughts about this technique
 
-This technique is really useful when you have a lot of similar projects reusing
-over and over the same pipeline. It allows:
+This technique is really useful when you have a lot of similar projects reusing over and over the same pipeline. It
+allows:
 
 - code reuse
 - avoid duplicated code
@@ -286,20 +284,14 @@ over and over the same pipeline. It allows:
 However it has the following drawbacks:
 
 - some projects using this generic pipeline could have specific needs
-  - eg 1: not the same way to run unit tests, to overcome that issue the method
-    `testUtil.execTests` is used allowing to run a specific sh file if it exists
+  - eg 1: not the same way to run unit tests, to overcome that issue the method `testUtil.execTests` is used allowing to
+    run a specific sh file if it exists
   - eg 2: more complex way to launch docker environment
   - ...
-- **be careful**, when you upgrade this jenkinsfile as all the projects using it
-  will be upgraded at once
-  - it could be seen as an advantage, but it is also a big risk as it could
-    impact all the prod environment at once
-  - to overcome that issue I suggest to use library versioning when using the
-    jenkins library in your project pipeline Eg: check
-    [Annotated Jenkinsfile](#annotated-jenkinsfile) `@v1.0` when cloning library
-    project
-- I highly suggest to use a unit test framework of the library to avoid at most
-  bad surprises
+- **be careful**, when you upgrade this jenkinsfile as all the projects using it will be upgraded at once
+  - it could be seen as an advantage, but it is also a big risk as it could impact all the prod environment at once
+  - to overcome that issue I suggest to use library versioning when using the jenkins library in your project pipeline
+    Eg: check [Annotated Jenkinsfile](#2-annotated-jenkinsfile) `@v1.0` when cloning library project
+- I highly suggest to use a unit test framework of the library to avoid at most bad surprises
 
-In conclusion, I'm still not sure it is a best practice to generate pipelines
-like this.
+In conclusion, I'm still not sure it is a best practice to generate pipelines like this.

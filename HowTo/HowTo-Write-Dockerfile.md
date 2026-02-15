@@ -27,34 +27,29 @@
 
 ## 1. Dockerfile best practices
 
-Follow
-[official best practices](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/)
-and you can follow these specific best practices
+Follow [official best practices](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/) and you can
+follow these specific best practices
 
-- But
-  [The worst so-called “best practice” for Docker](https://pythonspeed.com/articles/security-updates-in-docker/)
+- But [The worst so-called “best practice” for Docker](https://pythonspeed.com/articles/security-updates-in-docker/)
 
-  [Backup](/archives/TheWorstSoCalledBestPracticeForDocker.pdf), explains why
-  you should actually also use `apt-get upgrade`
+  [Backup](/archives/TheWorstSoCalledBestPracticeForDocker.pdf), explains why you should actually also use
+  `apt-get upgrade`
 
 - Use `hadolint`
 
 - Use `;\` to separate each command line
 
-  - some Dockerfiles are using `&&` to separate commands in the same RUN
-    instruction (I was doing it too ;-), but I strongly discourage it because it
-    breaks the checks done by `set -o errexit`
-  - `set -o errexit` makes the whole RUN instruction to fail if one of the
-    commands has failed, but it is not the same when using `&&`
+  - some Dockerfiles are using `&&` to separate commands in the same RUN instruction (I was doing it too ;-), but I
+    strongly discourage it because it breaks the checks done by `set -o errexit`
+  - `set -o errexit` makes the whole RUN instruction to fail if one of the commands has failed, but it is not the same
+    when using `&&`
 
-- One package by line, packages sorted alphabetically to ease readability and
-  merges
+- One package by line, packages sorted alphabetically to ease readability and merges
 
-- Always specify the most exact version possible of your packages (to avoid to
-  get major version that would break your build or software)
+- Always specify the most exact version possible of your packages (to avoid to get major version that would break your
+  build or software)
 
-- do not usage docker image with latest tag, always specify the right version to
-  use
+- do not usage docker image with latest tag, always specify the right version to use
 
 ## 2. Basic best practices
 
@@ -70,8 +65,7 @@ Here a bad practice that you shouldn't follow
 
 #### 2.1.2. Best practice #1
 
-**Best practice #1** merge the RUN layers to avoid cache issue and gain on total
-image size
+**Best practice #1** merge the RUN layers to avoid cache issue and gain on total image size
 
 ```Dockerfile
 FROM ubuntu:20.04
@@ -91,8 +85,7 @@ from previous example we want to trace each command that is executed
 
 #### 2.2.1. Bad practice #2
 
-when building complex layer and one of the command fails, it's interesting to
-know which command makes the build to fail
+when building complex layer and one of the command fails, it's interesting to know which command makes the build to fail
 
 ```Dockerfile
 FROM ubuntu:20.04
@@ -110,8 +103,7 @@ RUN apt-get update \
 `docker build .`  gives the following
 [log output(partly truncated)](HowTo-Write-Dockerfile-DockerCompose/badPractice2.log)
 
-Not easy here to know that the command `[ -d badFolder ]` makes the build
-failing
+Not easy here to know that the command `[ -d badFolder ]` makes the build failing
 
 Without the best practice #2, the following code build successfully
 
@@ -126,35 +118,30 @@ RUN set -x ;\
 
 #### 2.2.2. Best Practice #2
 
-**Best Practice #2**: Override SHELL options of the RUN command and use `;\`
-instead of `&&`
+**Best Practice #2**: Override SHELL options of the RUN command and use `;\` instead of `&&`
 
 The following options are set on the shell to override the default behavior:
 
-- `set -o pipefail`: The return status of a pipeline is the exit status of the
-  last command, unless the pipefail option is enabled.
-  - If pipefail is enabled, the pipeline's return status is the value of the
-    last (rightmost) command to exit with a non-zero status, or zero if all
-    commands exit successfully.
+- `set -o pipefail`: The return status of a pipeline is the exit status of the last command, unless the pipefail option
+  is enabled.
+  - If pipefail is enabled, the pipeline's return status is the value of the last (rightmost) command to exit with a
+    non-zero status, or zero if all commands exit successfully.
   - without it, a command failure could be masked by the command piped after it
-- `set -o errexit` (same as `set -e`): Exit immediately if a pipeline (which may
-  consist of a single simple command), a list, or a compound command (see SHELL
-  GRAMMAR above), exits with a non-zero status.
-- `set -o xtrace`(same as `set -x`):  After  expanding  each  simple  command,
-  for command, case command, select command, or arithmetic for command, display
-  the expanded value of PS4, followed by the command and its expanded arguments
-  or associated word list.
+- `set -o errexit` (same as `set -e`): Exit immediately if a pipeline (which may consist of a single simple command), a
+  list, or a compound command (see SHELL GRAMMAR above), exits with a non-zero status.
+- `set -o xtrace`(same as `set -x`):  After  expanding  each  simple  command, for command, case command, select
+  command, or arithmetic for command, display the expanded value of PS4, followed by the command and its expanded
+  arguments or associated word list.
 
-Those options are not mandatory but are strongly advised. Although there are
-some workaround to know:
+Those options are not mandatory but are strongly advised. Although there are some workaround to know:
 
 - if a command can fail and you want to ignore it, you can use
   - commandThatCanFail || true
 
 **These options can be used with /bin/sh as well.**
 
-Also it is strongly advised to use `;\` to separate commands because it could
-happen that some errors are ignored when `&&` is used in conjunction with `||`
+Also it is strongly advised to use `;\` to separate commands because it could happen that some errors are ignored when
+`&&` is used in conjunction with `||`
 
 ```Dockerfile
 FROM ubuntu:20.04
@@ -174,8 +161,7 @@ RUN apt-get update ;\
 `docker build .`  gives the following
 [log output(partly truncated)](HowTo-Write-Dockerfile-DockerCompose/bestPractice2.log)
 
-Here the command line displayed just above the error indicates **clearly** from
-where the error comes from:
+Here the command line displayed just above the error indicates **clearly** from where the error comes from:
 
 ```log
 #5 6.172 + '[' -d badFolder ']'
@@ -183,8 +169,7 @@ where the error comes from:
 
 ### 2.3. Best practice #3: packages ordering and versions
 
-**Best Practice #3**: order packages alphabetically, always specify packages
-versions, ensure non interactive
+**Best Practice #3**: order packages alphabetically, always specify packages versions, ensure non interactive
 
 From previous example we want to install several packages
 
@@ -196,9 +181,8 @@ The following docker has the following issues:
 
 - it doesn't set the package versions
 - the installation will install also the recommended packages
-- it's using apt instead of apt-get (hadolint warning
-  [DL3027](https://github.com/hadolint/hadolint/wiki/DL3027) Do not use apt as
-  it is meant to be a end-user tool, use `apt-get` or `apt-cache` instead)
+- it's using apt instead of apt-get (hadolint warning [DL3027](https://github.com/hadolint/hadolint/wiki/DL3027) Do not
+  use apt as it is meant to be a end-user tool, use `apt-get` or `apt-cache` instead)
 - the packages are not ordered alphabetically
 
 ```Dockerfile
@@ -216,8 +200,7 @@ RUN apt update ;\
 
 #### 2.3.2. Best Practice #3
 
-**Best Practice #3**: order packages alphabetically, always specify packages
-versions, ensure non interactive
+**Best Practice #3**: order packages alphabetically, always specify packages versions, ensure non interactive
 
 ##### 2.3.2.1. Order packages alphabetically and one package by line
 
@@ -231,24 +214,20 @@ one package by line and ordering alphabetically allows :
 
 ##### 2.3.2.2. Always specify packages versions
 
-over the time your build's dependencies could be updated on the remote
-repositories and your packages be unattended upgraded to the latest version
-making your software breaks because it doesn't manage the changes of the new
-package.
+over the time your build's dependencies could be updated on the remote repositories and your packages be unattended
+upgraded to the latest version making your software breaks because it doesn't manage the changes of the new package.
 
-It happens several times for me, for example, in 2021, xdebug has been
-automatically upgraded on one of my docker image from version 2.8 to 3.0 making
-all the dev environments broken. It happens also on a build pipeline with a
-version of npm gulp that has been upgraded to latest version. In both cases we
-resolved the issue by downgrading the version to the one we were using.
+It happens several times for me, for example, in 2021, xdebug has been automatically upgraded on one of my docker image
+from version 2.8 to 3.0 making all the dev environments broken. It happens also on a build pipeline with a version of
+npm gulp that has been upgraded to latest version. In both cases we resolved the issue by downgrading the version to the
+one we were using.
 
 ##### 2.3.2.3. Ensure non interactive
 
-some apt-get packages could ask for interactive questions, you can avoid this
-using the env variable `DEBIAN_FRONTEND=noninteractive`
+some apt-get packages could ask for interactive questions, you can avoid this using the env variable
+`DEBIAN_FRONTEND=noninteractive`
 
-**Note:** ARG instruction allows to set env variable available only during build
-time
+**Note:** ARG instruction allows to set env variable available only during build time
 
 ```Dockerfile
 FROM ubuntu:20.04
@@ -278,10 +257,10 @@ RUN apt-get update ;\
 # using another RUN instead of using previous one will avoid the whole
 # previous layer to be rebuilt
 # RUN apt-cache policy \
-#         apache2 \
-#         php7.4 \
-#         php7.4-curl \
-#         redis-tools
+# apache2 \
+# php7.4 \
+# php7.4-curl \
+# redis-tools
 # Gives the following output
 #6 0.387 + apt-cache policy apache2
 #6 0.399 apache2:
@@ -315,13 +294,11 @@ RUN apt-get update ;\
 
 ### 2.4. Best practice #4: ensure image receives latest security updates
 
-from previous example we want to ensure the image receives the latest security
-updates
+from previous example we want to ensure the image receives the latest security updates
 
 #### 2.4.1. Bad practice #4
 
-registry image are not always updated and latest apt security updates are not
-installed
+registry image are not always updated and latest apt security updates are not installed
 
 ```Dockerfile
 FROM ubuntu:20.04
@@ -348,10 +325,8 @@ RUN apt-get update ;\
 
 #### 2.4.2. Best Practice #4
 
-be sure to
-[apply latest security updates](https://pythonspeed.com/articles/security-updates-in-docker/),
-to install the latest security updates in the image, keep sure to call
-`apt-get upgrade -y`
+be sure to [apply latest security updates](https://pythonspeed.com/articles/security-updates-in-docker/), to install the
+latest security updates in the image, keep sure to call `apt-get upgrade -y`
 
 Here the updated Dockerfile:
 
@@ -383,8 +358,7 @@ RUN apt-get update ;\
 
 ### 2.5. Conclusion: image size comparison
 
-from previous example we want to ensure the image receives the latest security
-updates
+from previous example we want to ensure the image receives the latest security updates
 
 #### 2.5.1. Dockerfile without best practices
 
@@ -461,8 +435,7 @@ RUN \
     echo "DEBIAN_FRONTEND=${DEBIAN_FRONTEND}"
 ```
 
-Now let's build and check the image size, the best way to do this is to export
-the image to a file
+Now let's build and check the image size, the best way to do this is to export the image to a file
 
 **docker build and save**:
 
@@ -471,8 +444,7 @@ docker build -f Dockerfile1 -t test1 .
 docker save test1 -o test1.tar
 ```
 
-Now we will optimize this image by removing man pages (you can still find man
-pages on the web) and removing apt cache
+Now we will optimize this image by removing man pages (you can still find man pages on the web) and removing apt cache
 
 #### 3.1.2. Dockerfile optimized
 
@@ -505,8 +477,7 @@ RUN \
     echo "DEBIAN_FRONTEND=${DEBIAN_FRONTEND}"
 ```
 
-Here the content of `/etc/dpkg/dpkg.cfg.d/01-noDoc`, it will tell apt to not
-install man docs and translations
+Here the content of `/etc/dpkg/dpkg.cfg.d/01-noDoc`, it will tell apt to not install man docs and translations
 
 ```cfg
 # /etc/dpkg/dpkg.cfg.d/01_nodoc
@@ -522,17 +493,15 @@ path-exclude=/usr/share/doc/*
 path-include=/usr/share/doc/*/copyright
 ```
 
-Here the content of `/etc/apt/apt.conf.d/02-aptNoCache`, it will instruct apt to
-not store any cache (note that apt-get clean will not work after that change but
-you don't need to use it anymore)
+Here the content of `/etc/apt/apt.conf.d/02-aptNoCache`, it will instruct apt to not store any cache (note that apt-get
+clean will not work after that change but you don't need to use it anymore)
 
 ```cfg
 Dir::Cache "";
 Dir::Cache::archives "";
 ```
 
-Now let's build and check the image size, the best way to do this is to export
-the image to a file
+Now let's build and check the image size, the best way to do this is to export the image to a file
 
 **docker build and save**:
 
@@ -548,6 +517,5 @@ test1.tar 117 020 672 bytes
 test2.tar  76 560 896 bytes
 ```
 
-We passed from ~117MB to ~76MB so we gain ~41MB Please note also that we used
-`--no-install-recommends` option in both example that allows us to save some
-other MB
+We passed from ~117MB to ~76MB so we gain ~41MB Please note also that we used `--no-install-recommends` option in both
+example that allows us to save some other MB

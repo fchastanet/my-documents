@@ -2,11 +2,10 @@
 
 [Pipeline example](https://www.jenkins.io/doc/book/pipeline/#pipeline-example)
 
-## Simple one
+## 1. Simple one
 
-This build is used to generate docker images used to build production code and
-launch phpunit tests. This pipeline is parameterized in the Jenkins UI directly
-with the parameters:
+This build is used to generate docker images used to build production code and launch phpunit tests. This pipeline is
+parameterized in the Jenkins UI directly with the parameters:
 
 - branch (git branch to use)
 - environment(select with 3 options: build, phpunit or all)
@@ -115,23 +114,19 @@ pipeline {
 without seeing the Dockerfile files, we can advise :
 
 - to build these images in the same pipeline where build and phpunit are run
-  - the images are built at the same time so we are sure that we are using the
-    right version
-- apparently the docker build depend on the branch of the project, this should
-  be avoided
-- ssh key is used in docker image, that could lead to a **security issue** as
-  ssh key is still in the history of images layers even if it has been removed
-  in subsequent layers, check <https://stackoverflow.com/a/66897280> for
-  information on how to use ssh-agent instead
+  - the images are built at the same time so we are sure that we are using the right version
+- apparently the docker build depend on the branch of the project, this should be avoided
+- ssh key is used in docker image, that could lead to a **security issue** as ssh key is still in the history of images
+  layers even if it has been removed in subsequent layers, check <https://stackoverflow.com/a/66897280> for information
+  on how to use ssh-agent instead
 - we could use a single Dockerfile with 2 stages:
   - one stage to generate production image
   - one stage that inherits production stage, used to execute phpunit
   - it has the following advantages :
-    - reduce the total image size because of the reuse different docker image
-      layers
+    - reduce the total image size because of the reuse different docker image layers
     - only one Dockerfile to maintain
 
-## More advanced and annotated jenkinsfiles
+## 2. More advanced and annotated jenkinsfiles
 
 - [php project with helm push](05-01-Annotated-Jenkinsfiles.md)
 - [javascript project with docker build and S3 push](05-02-Annotated-Jenkinsfiles.md)

@@ -43,29 +43,8 @@ various development topics.
 - Always work on the `master` branch unless explicitly instructed otherwise
 - Auto-fixup branches (`update/pre-commit-*`) are created by CI for linting
   fixes
-
-### Commit Messages
-
-Commit messages must follow these standards:
-
-- **Format:** Markdown format
-- **Structure:**
-  - Title line summarizing the changes
-  - Detailed description containing every relevant change (not just a summary)
-  - For GitHub workflows: split lines longer than 120 characters
-
-**Example:**
-
-```markdown
-# Add new section on Docker networking
-
-## Changes
-
-- Added comprehensive guide on Docker networking modes
-- Updated sidebar navigation to include new section
-- Fixed typos in existing Docker documentation
-- Added diagrams for bridge and host networking
-```
+- **Commit Messages**: See
+  [Commit Message Instructions](.github/commit-message.instructions.md)
 
 ### Important Note
 
@@ -78,7 +57,7 @@ contents.
 
 - **Line length:**
   - MegaLinter enforces 120 characters maximum
-  - mdformat wraps at 80 characters (applied via pre-commit)
+  - mdformat wraps at 120 characters (applied via pre-commit)
 - **Indentation:** 2 spaces
 - **Line endings:** LF only (enforced by EditorConfig and pre-commit)
 - **Headers:** Use ATX-style headers (`#`, `##`, etc.)
@@ -103,7 +82,7 @@ contents.
 
 Pre-commit hooks run automatically on every commit. They will:
 
-- Format Markdown files (wrap at 80 chars)
+- Format Markdown files (wrap at 120 chars)
 - Fix line endings (force LF)
 - Remove trailing whitespace
 - Format code with Prettier
@@ -155,14 +134,16 @@ pre-commit run -a
 
 ### Common Linting Issues and Solutions
 
-| Issue                 | Solution                              |
-| --------------------- | ------------------------------------- |
-| Line too long (MD013) | Let mdformat auto-wrap at 80 chars    |
-| Trailing whitespace   | Pre-commit hook removes automatically |
-| Wrong line endings    | Pre-commit fixes to LF                |
-| Spelling errors       | Add to `.cspell/*.txt` dictionaries   |
-| Markdown formatting   | Run `pre-commit run mdformat -a`      |
-| Link check failures   | Verify URLs or add to ignore list     |
+| Issue                       | Solution                                           |
+| --------------------------- | -------------------------------------------------- |
+| Line too long (MD013)       | Let mdformat auto-wrap at 120 chars                |
+| Trailing whitespace         | Pre-commit hook removes automatically              |
+| Wrong line endings          | Pre-commit fixes to LF                             |
+| Spelling errors             | Add to `.cspell/*.txt` dictionaries                |
+| Markdown formatting         | Run `pre-commit run mdformat -a`                   |
+| Link check failures         | Verify URLs or add to ignore list                  |
+| Heading levels inconsistent | Run `pre-commit run markdown-heading-numbering -a` |
+| Toc missing or outdated     | Run `pre-commit run mdformat-toc -a`               |
 
 ## CI/CD Workflows
 
@@ -256,11 +237,18 @@ pre-commit run -a
 
 **Linter configuration:**
 
-- `.mega-linter.yml` - MegaLinter settings
-- `.pre-commit-config.yaml` - Pre-commit hooks
-- `.markdownlint.json` - Markdown linting rules
-- `.prettierrc.yaml` - Prettier formatting rules
-- `cspell.yaml` - Spell check configuration
+| File                      | Purpose                                          |
+| ------------------------- | ------------------------------------------------ |
+| `.editorconfig`           | Editor configuration (indentation, line endings) |
+| `.eslintrc.js`            | ESLint configuration for JavaScript files        |
+| `.gitignore`              | Files to exclude from version control            |
+| `.markdownlint.json`      | Markdown linting rules                           |
+| `.mega-linter.yml`        | MegaLinter configuration                         |
+| `.pre-commit-config.yaml` | Pre-commit hooks configuration                   |
+| `.prettierrc.yaml`        | Prettier formatting rules                        |
+| `cspell.yaml`             | Spell check configuration                        |
+| `.gitleaks.toml`          | Secret detection configuration                   |
+| `.secretlintrc.yml`       | Secret pattern detection                         |
 
 ## Testing Changes
 
@@ -408,21 +396,6 @@ Use relative links for internal references:
 See also: [Docker Best Practices](/HowTo/HowTo-Write-Dockerfile.md)
 ```
 
-## Configuration Files Reference
-
-| File                      | Purpose                                          |
-| ------------------------- | ------------------------------------------------ |
-| `.editorconfig`           | Editor configuration (indentation, line endings) |
-| `.eslintrc.js`            | ESLint configuration for JavaScript files        |
-| `.gitignore`              | Files to exclude from version control            |
-| `.markdownlint.json`      | Markdown linting rules                           |
-| `.mega-linter.yml`        | MegaLinter configuration                         |
-| `.pre-commit-config.yaml` | Pre-commit hooks configuration                   |
-| `.prettierrc.yaml`        | Prettier formatting rules                        |
-| `cspell.yaml`             | Spell check configuration                        |
-| `.gitleaks.toml`          | Secret detection configuration                   |
-| `.secretlintrc.yml`       | Secret pattern detection                         |
-
 ## Tools and Dependencies
 
 ### Required Tools (for local development)
@@ -484,7 +457,7 @@ When working on this repository:
 1. **Branch:** Always use `master`
 2. **Commit messages:** Detailed Markdown format with title and changes list
 3. **Linting:** Pre-commit hooks auto-fix most issues
-4. **Line length:** 80-character wrapping for Markdown
+4. **Line length:** 120-character wrapping for Markdown
 5. **Spell checking:** Add technical terms to `.cspell/bash.txt`
 6. **Navigation:** Update `_sidebar.md` when adding new pages
 7. **Testing:** Verify links and rendering locally or via GitHub Pages
