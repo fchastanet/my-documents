@@ -22,9 +22,8 @@
       a {
         color: var(--theme-color);
       }
-      a[href^="http"]::after,
-      a[href^="https://"]::after
-      {
+      a[href^='http']::after,
+      a[href^='https://']::after {
         content: '';
         width: 11px;
         height: 11px;
@@ -36,12 +35,11 @@
         display: inline-block;
       }
 
-      a[href^="https://fchastanet.github.io/my-documents/"]::after,
-      a[href^="https://github.com/fchastanet/my-documents/"]::after,
-      a[href^="http://opensource.box.com"]::after,
-      a[href^="https://deepsource.io"]::after,
-      a[href^="http://isitmaintained.com"]::after
-      {
+      a[href^='https://fchastanet.github.io/my-documents/']::after,
+      a[href^='https://github.com/fchastanet/my-documents/']::after,
+      a[href^='http://opensource.box.com']::after,
+      a[href^='https://deepsource.io']::after,
+      a[href^='http://isitmaintained.com']::after {
         display: none !important;
       }
       a:visited {

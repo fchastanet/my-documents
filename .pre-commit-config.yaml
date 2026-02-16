@@ -69,7 +69,7 @@ repos:
           )
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v5.0.0
+    rev: v6.0.0
     hooks:
       - id: check-ast
       - id: mixed-line-ending
@@ -93,7 +93,7 @@ repos:
       - id: trailing-whitespace
 
   - repo: https://github.com/codespell-project/codespell
-    rev: v2.3.0
+    rev: v2.4.1
     hooks:
       - id: codespell
         args:
@@ -125,7 +125,7 @@ repos:
       - id: git-check
 
   - repo: https://github.com/ComPWA/prettier-pre-commit
-    rev: v3.4.2
+    rev: v3.8.1
     hooks:
       - id: prettier
         args: [--cache]
@@ -137,7 +137,7 @@ repos:
 
   # manual stage used to select github action with megalinter full config
   - repo: https://github.com/fchastanet/bash-tools-framework
-    rev: 6.1.4
+    rev: 6.2.4
     hooks:
       - id: plantuml
       - id: megalinterCheckVersion
