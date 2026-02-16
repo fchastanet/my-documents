@@ -46,17 +46,15 @@
 
 - `cat << 'EOF'` avoid to interpolate variables
 
-- use `builtin cd` instead of `cd`, `builtin pwd` instead of `pwd`, ... to avoid
-  using customized aliased commands by the user In this framework, I added the
-  command `unalias -a || true` to remove all eventual aliases and also ensure to
-  disable aliases expansion by using `shopt -u expand_aliases`. Because aliases
-  have a very special way to load. In a script file changing an alias doesn't
-  occur immediately, it depends if script evaluated has been parsed yet or not.
-  And alias changed in a function, will be applied outside of the function. But
-  I experienced some trouble with this last rule, so I give up using aliases.
+- use `builtin cd` instead of `cd`, `builtin pwd` instead of `pwd`, ... to avoid using customized aliased commands by
+  the user In this framework, I added the command `unalias -a || true` to remove all eventual aliases and also ensure to
+  disable aliases expansion by using `shopt -u expand_aliases`. Because aliases have a very special way to load. In a
+  script file changing an alias doesn't occur immediately, it depends if script evaluated has been parsed yet or not.
+  And alias changed in a function, will be applied outside of the function. But I experienced some trouble with this
+  last rule, so I give up using aliases.
 
-- use the right shebang, avoid `#!/bin/bash` as bash binary could be in another
-  folder (especially on alpine), use this instead `#!/usr/bin/env bash`
+- use the right shebang, avoid `#!/bin/bash` as bash binary could be in another folder (especially on alpine), use this
+  instead `#!/usr/bin/env bash`
 
 - prefer to use printf vs echo
 
@@ -80,8 +78,7 @@ help="quiet mode, doesn't display any output"
 
 ## 4. Bash environment options
 
-See
-[Set bash builtin documentation](https://www.gnu.org/software/bash/manual/html_node/The-Set-Builtin.html)
+See [Set bash builtin documentation](https://www.gnu.org/software/bash/manual/html_node/The-Set-Builtin.html)
 
 This framework uses these mode by default:
 
@@ -95,20 +92,19 @@ Check official doc but it can be summarized like this:
 
 > Exit immediately command returns a non-zero status.
 
-I was considering this as a best practice because every non controlled command
-failure will stop your program. But actually
+I was considering this as a best practice because every non controlled command failure will stop your program. But
+actually
 
 - sometimes you need or expect a command to fail
 
-**Eg1**: delete a folder that actually doesn't exists. Use `|| true` to ignore
-the error.
+**Eg1**: delete a folder that actually doesn't exists. Use `|| true` to ignore the error.
 
 ```bash
 rm -Rf folder || true
 ```
 
-**Eg2**: a command that expects to fail if conditions are not met. Using `if`
-will not stop the program on non-zero exit code.
+**Eg2**: a command that expects to fail if conditions are not met. Using `if` will not stop the program on non-zero exit
+code.
 
 ```bash
 if git diff-index --quiet HEAD --; then
@@ -125,11 +121,9 @@ fi
   - sometimes some commands that should fail doesn't fail
   - the feature is not homogeneous across implementations
   - some commands expects to have non zero exit code
-  - some commands exits with non zero error code but does not necessarily needs
-    the program to exit
+  - some commands exits with non zero error code but does not necessarily needs the program to exit
 
-- Finally it is preferable to check every command status code manually instead
-  of relying to an automatic management.
+- Finally it is preferable to check every command status code manually instead of relying to an automatic management.
 
 #### 4.1.1. Caveats with command substitution
 
@@ -146,8 +140,7 @@ Output:
 0
 ```
 
-it is because echo has succeeded. the same result occurs even with
-`shopt -s inherit_errexit` (see below).
+it is because echo has succeeded. the same result occurs even with `shopt -s inherit_errexit` (see below).
 
 The **best practice** is to always assign command substitution to variable:
 
@@ -160,13 +153,11 @@ echo "${cmdOut}"
 echo $?
 ```
 
-Outputs nothing because the script stopped before variable affectation, return
-code is 1.
+Outputs nothing because the script stopped before variable affectation, return code is 1.
 
 #### 4.1.2. Caveats with process substitution
 
-Consider this example that reads each line of the output of the command passed
-using process substitution in `<(...)`
+Consider this example that reads each line of the output of the command passed using process substitution in `<(...)`
 
 ```bash
 parse() {
@@ -178,12 +169,11 @@ parse() {
 }
 ```
 
-If we execute this command with a non existent file, even if errexit, pipefail
-and inherit_errexit are set, the command will actually succeed.
+If we execute this command with a non existent file, even if errexit, pipefail and inherit_errexit are set, the command
+will actually succeed.
 
-It is because process substitution launch the command as as separated process. I
-didn't find any clean way to manage this using process substitution (only
-workaround I found was to pass by file to pass the exit code to parent process).
+It is because process substitution launch the command as as separated process. I didn't find any clean way to manage
+this using process substitution (only workaround I found was to pass by file to pass the exit code to parent process).
 
 So here the solution removing process substitution
 
@@ -213,8 +203,8 @@ declare -a interfacesFunctions
 Compiler::Implement::mergeInterfacesFunctions "${COMPILED_FILE2}" | readarray -t interfacesFunctions
 ```
 
-But interfacesFunctions was empty because readarray is run in another process,
-to avoid this issue, I could have used `shopt -s lastpipe`
+But interfacesFunctions was empty because readarray is run in another process, to avoid this issue, I could have used
+`shopt -s lastpipe`
 
 But I finally transformed it to (the array in the same subshell so no issue):
 
@@ -227,8 +217,8 @@ Compiler::Implement::mergeInterfacesFunctions "${COMPILED_FILE2}" | {
 }
 ```
 
-The issue with this previous solution is that commands runs in a subshell but
-using `shopt -s lastpipe` could solve this issue.
+The issue with this previous solution is that commands runs in a subshell but using `shopt -s lastpipe` could solve this
+issue.
 
 Another solution would be to simply read the array from stdin:
 
@@ -243,8 +233,7 @@ Compiler::Implement::validateInterfaceFunctions \
 
 #### 4.1.3. Process substitution is asynchronous
 
-it is why you cannot retrieve the status code, a way to do that is to wait the
-process to finish
+it is why you cannot retrieve the status code, a way to do that is to wait the process to finish
 
 ```bash
 while read -r line; do
@@ -282,12 +271,10 @@ echo done
 
 <https://dougrichardson.us/notes/fail-fast-bash-scripting.html>
 
-> If set, the return value of a pipeline is the value of the last (rightmost)
-> command to exit with a non-zero status, or zero if all commands in the
-> pipeline exit successfully. This option is disabled by default.
+> If set, the return value of a pipeline is the value of the last (rightmost) command to exit with a non-zero status, or
+> zero if all commands in the pipeline exit successfully. This option is disabled by default.
 
-It is complementary with errexit, as if it not activated, the failure of command
-in pipe could hide the error.
+It is complementary with errexit, as if it not activated, the failure of command in pipe could hide the error.
 
 **Eg**: without `pipefail` this command succeed
 
@@ -307,18 +294,16 @@ foo | echo "a"  # 'foo' is a non-existing command
 
 <https://dougrichardson.us/notes/fail-fast-bash-scripting.html>
 
-> If set, any trap on ERR is inherited by shell functions, command
-> substitutions, and commands executed in a subShell environment. The ERR trap
-> is normally not inherited in such cases.
+> If set, any trap on ERR is inherited by shell functions, command substitutions, and commands executed in a subShell
+> environment. The ERR trap is normally not inherited in such cases.
 
 ### 4.4. nounset (set -u | set -o nounset)
 
 <https://dougrichardson.us/notes/fail-fast-bash-scripting.html>
 
-> Treat unset variables and parameters other than the special parameters ‘@’ or
-> ‘_’, or array variables subscripted with ‘@’ or ‘_’, as an error when
-> performing parameter expansion. An error message will be written to the
-> standard error, and a non-interactive shell will exit.
+> Treat unset variables and parameters other than the special parameters ‘@’ or ‘_’, or array variables subscripted with
+> ‘@’ or ‘_’, as an error when performing parameter expansion. An error message will be written to the standard error,
+> and a non-interactive shell will exit.
 
 ### 4.5. inherit error exit code in sub shells
 
@@ -326,15 +311,12 @@ foo | echo "a"  # 'foo' is a non-existing command
 
 let's see why using `shopt -s inherit_errexit` ?
 
-set -e does not affect subShells created by Command Substitution. This rule is
-stated in Command Execution Environment:
+set -e does not affect subShells created by Command Substitution. This rule is stated in Command Execution Environment:
 
-> subShells spawned to execute command substitutions inherit the value of the -e
-> option from the parent shell. When not in POSIX mode, Bash clears the -e
-> option in such subShells.
+> subShells spawned to execute command substitutions inherit the value of the -e option from the parent shell. When not
+> in POSIX mode, Bash clears the -e option in such subShells.
 
-This rule means that the following script will run to completion, in spite of
-INVALID_COMMAND.
+This rule means that the following script will run to completion, in spite of INVALID_COMMAND.
 
 ```bash
 #!/bin/bash
@@ -355,14 +337,13 @@ Output:
 MY_VAR is StartEnd
 ```
 
-`shopt -s inherit_errexit`, added in Bash 4.4 allows you to have command
-substitution parameters inherit your set -e from the parent script.
+`shopt -s inherit_errexit`, added in Bash 4.4 allows you to have command substitution parameters inherit your set -e
+from the parent script.
 
 From the Shopt Builtin documentation:
 
-> If set, command substitution inherits the value of the errexit option, instead
-> of unsetting it in the subShell environment. This option is enabled when POSIX
-> mode is enabled.
+> If set, command substitution inherits the value of the errexit option, instead of unsetting it in the subShell
+> environment. This option is enabled when POSIX mode is enabled.
 
 So, modifying command-substitution.sh above, we get:
 
@@ -387,28 +368,23 @@ Output:
 
 ### 4.6. posix (set -o posix)
 
-> Change the behavior of Bash where the default operation differs from the POSIX
-> standard to match the standard (see
-> [Bash POSIX Mode](https://www.gnu.org/software/bash/manual/html_node/Bash-POSIX-Mode.html)).
-> This is intended to make Bash behave as a strict superset of that standard.
+> Change the behavior of Bash where the default operation differs from the POSIX standard to match the standard (see
+> [Bash POSIX Mode](https://www.gnu.org/software/bash/manual/html_node/Bash-POSIX-Mode.html)). This is intended to make
+> Bash behave as a strict superset of that standard.
 
 ## 5. Main function
 
-An important best practice is to always encapsulate all your script inside a
-main function. One reason for this technique is to make sure the script does not
-accidentally do anything nasty in the case where the script is truncated. I
-often had this issue because when I change some of my bash framework functions,
-the pre-commit runs buildBinFiles command that can be recompiled itself. In this
-case the script fails.
+An important best practice is to always encapsulate all your script inside a main function. One reason for this
+technique is to make sure the script does not accidentally do anything nasty in the case where the script is truncated.
+I often had this issue because when I change some of my bash framework functions, the pre-commit runs buildBinFiles
+command that can be recompiled itself. In this case the script fails.
 
-[another reason for doing this](https://unix.stackexchange.com/a/537397) is to
-not execute the file at all if there is a syntax error.
+[another reason for doing this](https://unix.stackexchange.com/a/537397) is to not execute the file at all if there is a
+syntax error.
 
-Additionally you can add a snippet in order to avoid your function to be
-executed in the case where it is being source. The following code will execute
-main function if called as a script passing arguments, or will just import the
-main function if the script is sourced. See
-[this stack overflow for more details](https://stackoverflow.com/a/47613477)
+Additionally you can add a snippet in order to avoid your function to be executed in the case where it is being source.
+The following code will execute main function if called as a script passing arguments, or will just import the main
+function if the script is sourced. See [this stack overflow for more details](https://stackoverflow.com/a/47613477)
 
 ```bash
 #!/usr/bin/env bash
@@ -428,16 +404,13 @@ BASH_SOURCE=".$0"
   - `declare -a cmd=(git push origin :${branch})`
   - then you can display the result using echo `"${cmd[*]}"`
   - you can execute the command using `"${cmd[@]}"`
-- boolean arguments, to avoid seeing some calls like this `myFunction 0 1 0`
-  with 3 boolean values. prefer to provide constants(using readonly) to make the
-  call more clear like `myFunction arg1False arg2True arg3False` of course
-  replacing argX with the real argument name. Eg:
-  `Filters::directive "${FILTER_DIRECTIVE_REMOVE_HEADERS}"` You have to prefix
-  all your constants to avoid conflicts.
-- instead of adding a new arg to the function with a default value, consider
-  using an env variable that can be easily overridden before calling the
-  function. Eg: `SUDO=sudo Github::upgradeRelease ...` It avoids to have to pass
-  previous arguments that were potentially defaulted.
+- boolean arguments, to avoid seeing some calls like this `myFunction 0 1 0` with 3 boolean values. prefer to provide
+  constants(using readonly) to make the call more clear like `myFunction arg1False arg2True arg3False` of course
+  replacing argX with the real argument name. Eg: `Filters::directive "${FILTER_DIRECTIVE_REMOVE_HEADERS}"` You have to
+  prefix all your constants to avoid conflicts.
+- instead of adding a new arg to the function with a default value, consider using an env variable that can be easily
+  overridden before calling the function. Eg: `SUDO=sudo Github::upgradeRelease ...` It avoids to have to pass previous
+  arguments that were potentially defaulted.
 
 ## 7. some commands default options to use
 
@@ -447,13 +420,11 @@ BASH_SOURCE=".$0"
 
 ### 8.1. Variable declaration
 
-- ensure we don't have any globals, all variables should be passed to the
-  functions
+- ensure we don't have any globals, all variables should be passed to the functions
 - declare all variables as local in functions to avoid making them global
 - local or declare multiple local a z
 - `export readonly` does not work, first `readonly` then `export`
-- avoid using export most of the times, export is needed only when variables has
-  to be passed to child process.
+- avoid using export most of the times, export is needed only when variables has to be passed to child process.
 
 ### 8.2. variable naming convention
 
@@ -466,16 +437,14 @@ BASH_SOURCE=".$0"
 
 `${PARAMETER:-WORD}` vs `${PARAMETER-WORD}`:
 
-If the parameter PARAMETER is unset (was never defined) or null (empty),
-`${PARAMETER:-WORD}` expands to WORD, otherwise it expands to the value of
-PARAMETER, as if it just was ${PARAMETER}.
+If the parameter PARAMETER is unset (was never defined) or null (empty), `${PARAMETER:-WORD}` expands to WORD, otherwise
+it expands to the value of PARAMETER, as if it just was ${PARAMETER}.
 
-If you omit the `:`(colon) like in `${PARAMETER-WORD}`, the default value is
-only used when the parameter is unset, not when it was empty.
+If you omit the `:`(colon) like in `${PARAMETER-WORD}`, the default value is only used when the parameter is unset, not
+when it was empty.
 
-> :warning: use this latter syntax when using function arguments in order to be
-> able to reset a value to empty string, otherwise default value would be
-> applied.
+> :warning: use this latter syntax when using function arguments in order to be able to reset a value to empty string,
+> otherwise default value would be applied.
 
 #### 8.3.1. Examples
 
@@ -504,8 +473,8 @@ Always consider to set a default value to the variable that you are using.
 rm -Rf "${TMPDIR}/etc" || true
 ```
 
-This could end very badly if your script runs as root and if `${TMPDIR}` is not
-set, this script will result to do a `rm -Rf /etc`
+This could end very badly if your script runs as root and if `${TMPDIR}` is not set, this script will result to do a
+`rm -Rf /etc`
 
 Instead you can do that
 
@@ -515,9 +484,8 @@ rm -Rf "${TMPDIR:-/tmp}/etc" || true
 
 ### 8.6. Passing variable by reference to function
 
-Always "scope" variables passed by reference. Scoping in bash means to find a
-name that is a low probability that the caller of the method names the parameter
-with the same name as in the function.
+Always "scope" variables passed by reference. Scoping in bash means to find a name that is a low probability that the
+caller of the method names the parameter with the same name as in the function.
 
 #### 8.6.1. Example 1
 
@@ -556,14 +524,13 @@ Array::setArray() {
 
 Array::setArray arr , "1,2,3,"
 # declare -p arr
-#       # output: declare -a arr=([0]="1" [1]="2" [2]="3")
+# # output: declare -a arr=([0]="1" [1]="2" [2]="3")
 ```
 
 #### 8.6.2. Example 2
 
-A more tricky example, here the references array is affected to local array,
-this local array has a conflicting name. This example does not produce any error
-messages.
+A more tricky example, here the references array is affected to local array, this local array has a conflicting name.
+This example does not produce any error messages.
 
 ```bash
 Postman::Model::getValidCollectionRefs() {
@@ -580,9 +547,8 @@ Postman::Model::getValidCollectionRefs "file" refs a b c
 declare -p refs # => declare -a refs
 ```
 
-In Previous example, getValidCollectionRefs is well "scoped" but there is a
-conflict with the local refs array inside the function resulting in affectation
-not working. The correct way to do it is to scope also the variables affected to
+In Previous example, getValidCollectionRefs is well "scoped" but there is a conflict with the local refs array inside
+the function resulting in affectation not working. The correct way to do it is to scope also the variables affected to
 referenced variables
 
 ```bash
@@ -624,9 +590,8 @@ output="$(functionThatOutputSomething "${arg1}")" || {
 
 ### 9.2. Capture output and retrieve status code
 
-It's advised to put it on the same line using `;`. If it was on 2 lines, other
-commands could be put between the command and the status code retrieval, the
-status would not be the same command status.
+It's advised to put it on the same line using `;`. If it was on 2 lines, other commands could be put between the command
+and the status code retrieval, the status would not be the same command status.
 
 ![Capture output and retrieve status code example](example1.sh)
 
@@ -636,16 +601,15 @@ status would not be the same command status.
 
 ## 11. Temporary directory
 
-use `${TMPDIR:-/tmp}`, TMPDIR variable does not always exist. or when mktemp is
-available, use `dirname $(mktemp -u --tmpdir)`
+use `${TMPDIR:-/tmp}`, TMPDIR variable does not always exist. or when mktemp is available, use
+`dirname $(mktemp -u --tmpdir)`
 
-The variable TMPDIR is initialized in `src/_includes/_commonHeader.sh` used by
-all the binaries used in this framework.
+The variable TMPDIR is initialized in `src/_includes/_commonHeader.sh` used by all the binaries used in this framework.
 
 ## 12. Traps
 
-when trapping EXIT do not forget to throw back same exit code otherwise exit
-code of last command executed in the trap is thrown
+when trapping EXIT do not forget to throw back same exit code otherwise exit code of last command executed in the trap
+is thrown
 
 In this example rc variable contains the original exit code
 
@@ -676,10 +640,9 @@ bin/postmanCli --help | grep -q DESCRIPTION
 echo "$? ${PIPESTATUS[@]}"
 ```
 
-This is because grep -q exits immediately with a zero status as soon as a match
-is found. The zfs command is still writing to the pipe, but there is no reader
-(because grep has exited), so it is sent a SIGPIPE signal from the kernel and it
-exits with a status of 141.
+This is because grep -q exits immediately with a zero status as soon as a match is found. The zfs command is still
+writing to the pipe, but there is no reader (because grep has exited), so it is sent a SIGPIPE signal from the kernel
+and it exits with a status of 141.
 
 Eg: or with head
 
@@ -687,8 +650,7 @@ Eg: or with head
 echo "${longMultilineString}" | head -n 1
 ```
 
-Finally I found this elegant
-[stackoverflow solution](https://unix.stackexchange.com/a/709880/582856):
+Finally I found this elegant [stackoverflow solution](https://unix.stackexchange.com/a/709880/582856):
 
 ```bash
 handle_pipefails() {
@@ -703,8 +665,7 @@ yes | head -n 1 || handle_pipefails $?
 echo "ec=$?"
 ```
 
-I added `handle_pipefails` as `Bash::handlePipelineFailure` in
-bash-tools-framework.
+I added `handle_pipefails` as `Bash::handlePipelineFailure` in bash-tools-framework.
 
 ## 14. Performances analysis
 
@@ -731,5 +692,4 @@ performance improvement using:
 
 - echo instead of string concatenation
 - string substitution instead of calling sed on each element
-- echo -e removed the need to do a loop on each character to parse ansi code and
-  the need of Filters::removeAnsiCodes
+- echo -e removed the need to do a loop on each character to parse ansi code and the need of Filters::removeAnsiCodes

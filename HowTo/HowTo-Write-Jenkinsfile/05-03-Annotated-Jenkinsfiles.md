@@ -1,6 +1,6 @@
 # Annotated Jenkinsfile - browser extension build and deployment
 
-## introduction
+## 1. introduction
 
 The project aim is to create a browser extension available on chrome and firefox
 
@@ -12,7 +12,7 @@ This build allows to:
 - deploy firefox extension on s3 bucket
 - deploy chrome extension on google play store
 
-## Annotated Jenkinsfile
+## 2. Annotated Jenkinsfile
 
 <!-- markdownlint-disable MD013 -->
 

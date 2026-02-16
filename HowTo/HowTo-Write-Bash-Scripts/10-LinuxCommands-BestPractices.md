@@ -5,8 +5,8 @@
 
 ## 1. some commands default options to use
 
-- <https://dougrichardson.us/notes/fail-fast-bash-scripting.html> but set -o
-  nounset is not usable because empty array are considered unset
+- <https://dougrichardson.us/notes/fail-fast-bash-scripting.html> but set -o nounset is not usable because empty array
+  are considered unset
 - always use `sed -E`
 - avoid using grep -P as it is not supported on alpine, prefer using -E
 
@@ -18,8 +18,7 @@
 
 <!-- markdownlint-restore -->
 
-- grep regular expression `[A-Za-z]` matches by default accentuated character,
-  if you don't want to match them, use the environment variable `LC_ALL=POSIX`,
+- grep regular expression `[A-Za-z]` matches by default accentuated character, if you don't want to match them, use the
+  environment variable `LC_ALL=POSIX`,
   - Eg: `LC_ALL=POSIX grep -E -q '^[A-Za-z_0-9:]+$'`
-  - I added `export LC_ALL=POSIX` in all my headers, it can be overridden using
-    a subShell
+  - I added `export LC_ALL=POSIX` in all my headers, it can be overridden using a subShell

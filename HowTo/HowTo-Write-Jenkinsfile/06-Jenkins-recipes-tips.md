@@ -9,9 +9,8 @@
 
 ## 1. Jenkins snippet generator
 
-Use jenkins snippet generator by adding `/pipeline-syntax/` to your jenkins
-pipeline. to allow you to generate jenkins pipeline code easily with inline doc.
-It also list the available variables.
+Use jenkins snippet generator by adding `/pipeline-syntax/` to your jenkins pipeline. to allow you to generate jenkins
+pipeline code easily with inline doc. It also list the available variables.
 
 ![jenkins snippet generator](images/snippetGenerator.png)
 
@@ -21,8 +20,8 @@ It also list the available variables.
 
 ## 3. Replay a pipeline
 
-Replaying a pipeline allows you to update your jenkinsfile before replaying the
-pipeline, easier debugging ! ![replay a pipeline](images/replayPipeline.png)
+Replaying a pipeline allows you to update your jenkinsfile before replaying the pipeline, easier debugging !
+![replay a pipeline](images/replayPipeline.png)
 
 ## 4. VS code Jenkinsfile validation
 
@@ -39,8 +38,7 @@ build 'OtherBuild'
 
 ## 6. Viewing pipelines hierarchy
 
-The
-[downstream-buildview plugin](https://plugins.jenkins.io/downstream-buildview/)
-allows to view the full chain of dependent builds.
+The [downstream-buildview plugin](https://plugins.jenkins.io/downstream-buildview/) allows to view the full chain of
+dependent builds.
 
 ![Jenkins Downstream Build Pipeline Visualization](https://raw.githubusercontent.com/jenkins-infra/plugins-wiki-docs/master/downstream-buildview/docs/images/downstream-buildview_screen1.JPG)

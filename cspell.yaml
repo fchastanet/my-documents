@@ -18,6 +18,7 @@ ignorePaths:
   - '**/*megalinter_file_names_cspell.txt'
   - '**/.history/**'
   - .cspell/**
+  - package-lock.json
   - .vscode
   - megalinter
   - package-lock.json

@@ -3,6 +3,7 @@ Aftertabs
 ansi
 autoremove
 autoupdate
+backquotes
 buildview
 cloudflare
 codespell
@@ -23,6 +24,7 @@ errtrace
 fchastanet
 firefox
 friday
+frontmatter
 github
 gitleaks
 gpgsign
@@ -32,6 +34,7 @@ jenkins
 jenkinsfile
 Jenkinsfiles
 jenkinsfiles
+jsonlint
 kubeconfig
 kubernetes
 lastpipe

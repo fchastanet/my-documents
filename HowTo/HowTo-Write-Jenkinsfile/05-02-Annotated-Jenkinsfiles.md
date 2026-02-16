@@ -1,6 +1,6 @@
 # Annotated Jenkinsfile - javascript project with docker build and S3 push
 
-## Introduction
+## 1. Introduction
 
 This build will:
 
@@ -12,8 +12,7 @@ This build will:
 - build story book and deploy it
 - deploy spa on s3 bucket and refresh cloudflare cache
 
-It allows to build for production and qa stages allowing different instances.
-Every build contains:
+It allows to build for production and qa stages allowing different instances. Every build contains:
 
 - a summary of the build
   - git branch
@@ -23,7 +22,7 @@ Every build contains:
   - spa url
   - storybook url
 
-## Annotated Jenkinsfile
+## 2. Annotated Jenkinsfile
 
 <!-- markdownlint-disable MD013 -->
 
