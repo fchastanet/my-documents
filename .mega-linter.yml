@@ -147,3 +147,8 @@ SPELL_FILTER_REGEX_EXCLUDE: |
     ^bin/bash-tpl|
     \.svg
   )
+
+HTML_HTMLHINT_FILTER_REGEX_EXCLUDE: |
+  (?x)(
+    ^content/_index.html$
+  )

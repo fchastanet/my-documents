@@ -29,15 +29,15 @@
 
 ### 1.1. Bash scripts
 
-- [Basic best practices](/docs/bash-scripts/00-basic-bestpractices/)
-- [Linux best practices](/docs/bash-scripts/10-linuxcommands-bestpractices/)
-- [Bats best practices](/docs/bash-scripts/20-bats-bestpractices/)
+- [Basic best practices](/docs/bash-scripts/00-basic-best-practices/)
+- [Linux best practices](/docs/bash-scripts/10-linux-commands-best-practices/)
+- [Bats best practices](/docs/bash-scripts/20-bats-best-practices/)
 
 ### 1.2. HowTos
 
 - [How to write a Jenkinsfile](/docs/howtos/howto-write-jenkinsfile/)
 - [How to write a Dockerfile](/docs/howtos/howto-write-dockerfile/)
-- [How to write a docker-compose.yml file](/docs/howtos/howto-write-dockercompose/)
+- [How to write a docker-compose.yml file](/docs/howtos/howto-write-docker-compose/)
 - [Saml2Aws](/docs/howtos/saml2aws/)
 
 ### 1.3. Lists

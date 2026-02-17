@@ -188,7 +188,7 @@ hugo --minify
 Add technical terms to `.cspell/bash.txt`:
 
 ```bash
-echo "newword" >> .cspell/bash.txt
+echo "newWord" >> .cspell/bash.txt
 pre-commit run file-contents-sorter    # auto-sorts
 ```
 

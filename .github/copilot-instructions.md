@@ -199,17 +199,11 @@ pre-commit run -a
 1. **Install Hugo Extended:**
 
    ```bash
-   # macOS
-   brew install hugo
-
    # Linux
-   sudo apt-get install hugo
-
-   # Windows
-   choco install hugo-extended
+   CGO_ENABLED=1 go install -tags extended github.com/gohugoio/hugo@latest
    ```
 
-   Verify: `hugo version` (should show 0.110+)
+   Verify: `hugo version` (should show 0.155+)
 
 2. **Clone repository and setup:**
 
@@ -541,7 +535,7 @@ This is a warning message.
 Use relative paths for internal links (Hugo will resolve them):
 
 ```markdown
-See also: [Bash Best Practices](/docs/bash-scripts/basic-bestpractices/)
+See also: [Bash Best Practices](/docs/bash-scripts/basic-best-practices/)
 
 Or with descriptive text:
 [Learn more about Docker](/docs/howtos/howto-write-dockerfile/)
@@ -555,9 +549,9 @@ Place related content in subdirectories:
 content/en/docs/
 ├── bash-scripts/
 │   ├── _index.md
-│   ├── basic-bestpractices.md
-│   ├── linuxcommands-bestpractices.md
-│   └── bats-bestpractices.md
+│   ├── basic-best-practices.md
+│   ├── linux-commands-best-practices.md
+│   └── bats-best-practices.md
 ├── howtos/
 │   ├── _index.md
 │   ├── howto-write-jenkinsfile/

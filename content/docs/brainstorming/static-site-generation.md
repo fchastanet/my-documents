@@ -1,3 +1,10 @@
+---
+title: Static Site Generation Migration Analysis
+description: Analysis of migrating from Docsify to an SEO-optimized static site generator
+creationDate: "2026-02-17"
+categories: [Brainstorming]
+tags: development, documentation, seo]
+---
 # Static Site Generator Migration Analysis
 
 **Date:** 2026-02-17

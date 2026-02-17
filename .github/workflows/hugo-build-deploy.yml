@@ -27,6 +27,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+    env:
+      HUGO_VERSION: 0.155.3
     steps:
       - name: Checkout
         uses: actions/checkout@v6
