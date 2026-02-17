@@ -21,7 +21,7 @@ pygmentsStyle: tango
 imaging:
   resampleFilter: CatmullRom
   quality: 75
-  anchor: smart
+  anchor: Smart
 
 # Markup and syntax highlighting
 markup:
@@ -35,7 +35,7 @@ markup:
     anchorLineNos: false
     codeFences: true
     guessSyntax: false
-    hl_Lines: ''
+    hl_Lines: '1'
     hl_inline: false
     lineAnchors: ''
     lineNoStart: 1
