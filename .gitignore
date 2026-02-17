@@ -10,5 +10,7 @@ node_modules
 megalinter-reports/
 *megalinter_file_names_cspell.txt
 
+# Hugo files
 /public
+resources/
 .hugo_build.lock

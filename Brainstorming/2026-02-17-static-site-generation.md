@@ -1,11 +1,11 @@
 # Static Site Generator Migration Analysis
 
-**Date:** 2026-02-17  
-**Project:** my-documents repository migration and multi-site consolidation  
+**Date:** 2026-02-17
+**Project:** my-documents repository migration and multi-site consolidation
 **Goal:** Migrate from Docsify to an SEO-optimized static site generator while maintaining simplicity
 and GitHub CI compatibility
 
-## Executive Summary
+## 1. Executive Summary
 
 This document evaluates the current Docsify setup and recommends alternative static site generators
 that provide superior SEO performance while maintaining the simplicity and ease of deployment that
@@ -14,9 +14,9 @@ made Docsify attractive.
 **Current Challenge:** Docsify renders content client-side, which severely limits SEO capabilities
 and page load performance. This is critical for a documentation site seeking organic search visibility.
 
-## Current Solution Analysis: Docsify
+## 2. Current Solution Analysis: Docsify
 
-### Current Configuration
+### 2.1. Current Configuration
 
 - **Type:** Client-side SPA (Single Page Application)
 - **Deployment:** Direct to GitHub Pages (no build step)
@@ -25,7 +25,7 @@ and page load performance. This is critical for a documentation site seeking org
 - **Search:** Built-in search plugin
 - **Navigation:** Manual sidebar and navbar configuration
 
-### Docsify Pros ✅
+### 2.2. Docsify Pros ✅
 
 | Advantage | Impact |
 | --------- | ------ |
@@ -37,7 +37,7 @@ and page load performance. This is critical for a documentation site seeking org
 | Good for technical audience | Fast navigation for users familiar with SPAs |
 | Markdown-first | Natural for technical documentation |
 
-### Docsify Cons ❌
+### 2.3. Docsify Cons ❌
 
 | Limitation | Impact |
 | ---------- | ------ |
@@ -52,7 +52,7 @@ and page load performance. This is critical for a documentation site seeking org
 | No static asset optimization | All images referenced as relative paths |
 | Outdated dependency stack | Uses Vue 2 (Vue 3 available), jQuery, legacy patterns |
 
-### Docsify SEO Score
+### 2.4. Docsify SEO Score
 
 **Current Estimate: 2/10** ⛔
 
@@ -64,41 +64,41 @@ and page load performance. This is critical for a documentation site seeking org
 - ⚠️ Possible crawl budget waste
 - ⚠️ Delayed indexing (content hidden until JS loads)
 
-## Recommended Migration Path
+## 3. Recommended Migration Path
 
-### Phase 1: Evaluation (This Phase)
+### 3.1. Phase 1: Evaluation (This Phase)
 
 - Compare alternatives against criteria
 - Identify best fit for multi-site architecture
 - Plan migration strategy
 
-### Phase 2: Pilot
+### 3.2. Phase 2: Pilot
 
 - Set up new solution with one repository
 - Migrate content and test
 - Validate SEO improvements
 
-### Phase 3: Full Migration
+### 3.3. Phase 3: Full Migration
 
 - Migrate remaining repositories
 - Set up CI/CD pipeline
 - Monitor performance metrics
 
-### Phase 4: Optimization
+### 3.4. Phase 4: Optimization
 
 - Fine-tune SEO settings
 - Implement analytics
 - Monitor search engine indexing
 
-## Alternative Solutions Comparison
+## 4. Alternative Solutions Comparison
 
-### Option 1: Hugo ⭐⭐⭐⭐⭐ (RECOMMENDED)
+### 4.1. Option 1: Hugo ⭐⭐⭐⭐⭐ (RECOMMENDED)
 
-**Type:** Go-based static site generator  
-**Build Time:** <1s for most sites  
+**Type:** Go-based static site generator
+**Build Time:** <1s for most sites
 **Theme System:** Flexible with 500+ themes
 
-#### Pros ✅
+#### 4.1.1. Pros ✅
 
 - **Extremely fast compilation** - Processes 1000+ pages in milliseconds
 - **Excellent for documentation** - Purpose-built with documentation sites in mind
@@ -114,14 +114,14 @@ and page load performance. This is critical for a documentation site seeking org
 - **Active community** - Large ecosystem, frequent updates
 - **Multi-language support** - Built-in i18n capability
 
-#### Cons ❌
+#### 4.1.2. Cons ❌
 
 - Learning curve for Go templating (shortcodes, partials)
 - Theme customization requires understanding Hugo's page model
 - Configuration in TOML/YAML (minor, but different from Docsify)
 - Less visual for live preview compared to Docsify
 
-#### SEO Score: 9/10 ✅
+#### 4.1.3. SEO Score: 9/10 ✅
 
 - ✅ Static HTML pre-rendering
 - ✅ Automatic sitemap generation
@@ -132,7 +132,7 @@ and page load performance. This is critical for a documentation site seeking org
 - ✅ Performance optimizations (minification, compression)
 - ⚠️ JSON-LD not automated (requires theme customization)
 
-#### GitHub CI/CD Integration
+#### 4.1.4. GitHub CI/CD Integration
 
 ```yaml
 # .github/workflows/deploy.yml example
@@ -151,37 +151,37 @@ and page load performance. This is critical for a documentation site seeking org
     publish_dir: ./public
 ```
 
-#### Migration Effort
+#### 4.1.5. Migration Effort
 
 - **Content:** Minimal - Markdown stays same, just add frontmatter
 - **Structure:** Organize into content sections (easy mapping from Docsify)
 - **Navigation:** Automatic from directory structure or config
 - **Customization:** Moderate - Theme customization required
 
-#### Recommended Themes
+#### 4.1.6. Recommended Themes
 
 1. **Docsy** - Google-created, excellent documentation theme, built-in search
 2. **Relearn** - MkDocs-inspired, sidebar navigation like Docsify
 3. **Book** - Clean, minimal, perfect for tutorials
 4. **Geek Docs** - Modern, fast, developer-friendly
 
-#### Best For
+#### 4.1.7. Best For
 
-✅ Technical documentation  
-✅ Multi-site architecture  
-✅ SEO-critical sites  
-✅ GitHub Pages deployment  
+✅ Technical documentation
+✅ Multi-site architecture
+✅ SEO-critical sites
+✅ GitHub Pages deployment
 ✅ Content-heavy sites (1000+ pages)
 
 ---
 
-### Option 2: Astro ⭐⭐⭐⭐
+### 4.2. Option 2: Astro ⭐⭐⭐⭐
 
-**Type:** JavaScript/TypeScript-based, island architecture  
-**Build Time:** <2s typical  
+**Type:** JavaScript/TypeScript-based, island architecture
+**Build Time:** <2s typical
 **Theme System:** Component-based
 
-#### Pros ✅
+#### 4.2.1. Pros ✅
 
 - **Outstanding SEO support** - Static HTML generation, built-in meta tag management
 - **Zero JavaScript by default** - Only JS needed for interactive components
@@ -196,7 +196,7 @@ and page load performance. This is critical for a documentation site seeking org
 - **TypeScript first** - Better tooling and IDE support
 - **Vite-based** - Fast HMR and builds
 
-#### Cons ❌
+#### 4.2.2. Cons ❌
 
 - Newer ecosystem (less battle-tested than Hugo)
 - Small learning curve with Astro-specific patterns
@@ -204,7 +204,7 @@ and page load performance. This is critical for a documentation site seeking org
 - Theme ecosystem smaller than Hugo
 - MDX adds complexity if not needed
 
-#### SEO Score: 9/10 ✅
+#### 4.2.3. SEO Score: 9/10 ✅
 
 - ✅ Static HTML pre-rendering
 - ✅ Fine-grained meta tag control
@@ -215,7 +215,7 @@ and page load performance. This is critical for a documentation site seeking org
 - ✅ Open Graph and Twitter cards
 - ✅ Performance metrics built-in
 
-#### GitHub CI/CD Integration
+#### 4.2.4. GitHub CI/CD Integration
 
 ```yaml
 # .github/workflows/deploy.yml example
@@ -232,36 +232,36 @@ and page load performance. This is critical for a documentation site seeking org
     publish_dir: ./dist
 ```
 
-#### Migration Effort
+#### 4.2.5. Migration Effort
 
 - **Content:** Minimal - Markdown compatible with optional frontmatter
 - **Structure:** Convert to Astro collections (straightforward)
 - **Navigation:** Can use auto-generated from file structure
 - **Customization:** Moderate - Components offer more flexibility than Hugo
 
-#### Recommended Themes/Templates
+#### 4.2.6. Recommended Themes/Templates
 
 1. **Starlight** - Official Astro docs template, excellent for documentation
 2. **Docs Kit** - Tailored for technical documentation
 3. **Astro Paper** - Blog-focused, highly customizable
 
-#### Best For
+#### 4.2.7. Best For
 
-✅ Modern tech stack preference  
-✅ Need for interactive components  
-✅ TypeScript-heavy teams  
-✅ Blogs + Documentation hybrid  
+✅ Modern tech stack preference
+✅ Need for interactive components
+✅ TypeScript-heavy teams
+✅ Blogs + Documentation hybrid
 ✅ SEO + Performance critical
 
 ---
 
-### Option 3: 11ty (Eleventy) ⭐⭐⭐⭐
+### 4.3. Option 3: 11ty (Eleventy) ⭐⭐⭐⭐
 
-**Type:** JavaScript template engine  
-**Build Time:** <1s typical  
+**Type:** JavaScript template engine
+**Build Time:** <1s typical
 **Theme System:** Template-based
 
-#### Pros ✅
+#### 4.3.1. Pros ✅
 
 - **Incredibly flexible** - Supports multiple template languages (Markdown, Nunjucks, Liquid, etc.)
 - **Lightweight** - Minimal opinion on structure, you decide
@@ -276,7 +276,7 @@ and page load performance. This is critical for a documentation site seeking org
 - **GitHub Pages friendly** - Easy integration with GitHub Actions
 - **Low barrier to entry** - Understand JavaScript, you understand Eleventy
 
-#### Cons ❌
+#### 4.3.2. Cons ❌
 
 - Less opinionated (requires more configuration)
 - Smaller pre-built theme ecosystem
@@ -284,7 +284,7 @@ and page load performance. This is critical for a documentation site seeking org
 - No built-in search (needs separate solution)
 - Learning curve steeper if unfamiliar with template languages
 
-#### SEO Score: 8/10 ✅
+#### 4.3.3. SEO Score: 8/10 ✅
 
 - ✅ Static HTML generation
 - ✅ Manual sitemap generation (simple plugin)
@@ -293,7 +293,7 @@ and page load performance. This is critical for a documentation site seeking org
 - ✅ Image optimization (via plugins)
 - ⚠️ Schema/JSON-LD (requires custom implementation)
 
-#### GitHub CI/CD Integration
+#### 4.3.4. GitHub CI/CD Integration
 
 ```yaml
 # .github/workflows/deploy.yml example
@@ -310,36 +310,36 @@ and page load performance. This is critical for a documentation site seeking org
     publish_dir: ./_site
 ```
 
-#### Migration Effort
+#### 4.3.5. Migration Effort
 
 - **Content:** Minimal - Markdown files work as-is
 - **Structure:** Very flexible, custom folder organization
 - **Navigation:** Can auto-generate from structure or manually configure
 - **Customization:** High - Maximum control but more work
 
-#### Recommended Starters
+#### 4.3.6. Recommended Starters
 
 1. **11ty Base Blog** - Simple starting point
 2. **Eleventy High Performance Blog** - Performance-focused
 3. **Slinkity** - Hybrid with component support
 
-#### Best For
+#### 4.3.7. Best For
 
-✅ Developers who want full control  
-✅ Simple, focused documentation  
-✅ JavaScript/Node.js teams  
-✅ Performance optimization focus  
+✅ Developers who want full control
+✅ Simple, focused documentation
+✅ JavaScript/Node.js teams
+✅ Performance optimization focus
 ✅ Unique design requirements
 
 ---
 
-### Option 4: VuePress 2 ⭐⭐⭐
+### 4.4. Option 4: VuePress 2 ⭐⭐⭐
 
-**Type:** Vue 3-based static site generator  
-**Build Time:** 1-2s typical  
+**Type:** Vue 3-based static site generator
+**Build Time:** 1-2s typical
 **Theme System:** Vue components
 
-#### Pros ✅
+#### 4.4.1. Pros ✅
 
 - **Vue ecosystem** - Use Vue components directly in Markdown
 - **Documentation-first** - Built specifically for docs
@@ -352,7 +352,7 @@ and page load performance. This is critical for a documentation site seeking org
 - **i18n built-in** - Multi-language support
 - **Flexible routing** - Customizable URL structure
 
-#### Cons ❌
+#### 4.4.2. Cons ❌
 
 - Vue knowledge required
 - Smaller ecosystem than Hugo
@@ -361,7 +361,7 @@ and page load performance. This is critical for a documentation site seeking org
 - Configuration can be verbose
 - Search indexing still client-side primarily
 
-#### SEO Score: 6/10 ⚠️
+#### 4.4.3. SEO Score: 6/10 ⚠️
 
 - ✅ Static HTML generation
 - ✅ Per-page meta tags
@@ -370,7 +370,7 @@ and page load performance. This is critical for a documentation site seeking org
 - ⚠️ Performance not optimized (Vue overhead)
 - ⚠️ JSON-LD requires manual setup
 
-#### GitHub CI/CD Integration
+#### 4.4.4. GitHub CI/CD Integration
 
 ```yaml
 - name: Install dependencies
@@ -386,30 +386,30 @@ and page load performance. This is critical for a documentation site seeking org
     publish_dir: ./dist
 ```
 
-#### Migration Effort
+#### 4.4.5. Migration Effort
 
 - **Content:** Minimal - Markdown compatible
 - **Structure:** Organized in `.vuepress/config.js`
 - **Navigation:** Configured in sidebar/navbar config
 - **Customization:** Moderate - Vue components for complex needs
 
-#### Best For
+#### 4.4.6. Best For
 
-✅ Vue-centric teams  
-✅ Need interactive components  
-✅ Plugin-heavy customization  
-✅ Smaller documentation sites  
+✅ Vue-centric teams
+✅ Need interactive components
+✅ Plugin-heavy customization
+✅ Smaller documentation sites
 ✅ Already using Vue ecosystem
 
 ---
 
-### Option 5: MkDocs ⭐⭐⭐
+### 4.5. Option 5: MkDocs ⭐⭐⭐
 
-**Type:** Python-based documentation generator  
-**Build Time:** <1s typical  
+**Type:** Python-based documentation generator
+**Build Time:** <1s typical
 **Theme System:** Python template-based
 
-#### Pros ✅
+#### 4.5.1. Pros ✅
 
 - **Documentation-optimized** - Built by documentation enthusiasts
 - **Simple configuration** - `mkdocs.yml` is straightforward
@@ -422,7 +422,7 @@ and page load performance. This is critical for a documentation site seeking org
 - **Git integration** - Edit on GitHub features
 - **Active community** - Good documentation and examples
 
-#### Cons ❌
+#### 4.5.2. Cons ❌
 
 - Python dependency management
 - Smaller ecosystem than Hugo
@@ -430,7 +430,7 @@ and page load performance. This is critical for a documentation site seeking org
 - Less flexibility than some alternatives
 - Setup requires Python environment
 
-#### SEO Score: 7/10 ✅
+#### 4.5.3. SEO Score: 7/10 ✅
 
 - ✅ Static HTML generation
 - ✅ Per-page meta tags
@@ -438,7 +438,7 @@ and page load performance. This is critical for a documentation site seeking org
 - ⚠️ Schema/JSON-LD minimal
 - ⚠️ Image optimization requires external tools
 
-#### GitHub CI/CD Integration
+#### 4.5.4. GitHub CI/CD Integration
 
 ```yaml
 - name: Set up Python
@@ -459,30 +459,30 @@ and page load performance. This is critical for a documentation site seeking org
     publish_dir: ./site
 ```
 
-#### Migration Effort
+#### 4.5.5. Migration Effort
 
 - **Content:** Minimal - Markdown files work directly
 - **Structure:** Configured in `mkdocs.yml`
 - **Navigation:** Simple hierarchical structure
 - **Customization:** Easy for theming, harder for core customization
 
-#### Best For
+#### 4.5.6. Best For
 
-✅ Documentation-only focus  
-✅ Python-familiar teams  
-✅ Minimal configuration needed  
-✅ Material design preference  
+✅ Documentation-only focus
+✅ Python-familiar teams
+✅ Minimal configuration needed
+✅ Material design preference
 ✅ Rapid setup priority
 
 ---
 
-### Option 6: Next.js / Vercel ⭐⭐
+### 4.6. Option 6: Next.js / Vercel ⭐⭐
 
-**Type:** React meta-framework  
-**Build Time:** 5-10s typical  
+**Type:** React meta-framework
+**Build Time:** 5-10s typical
 **Theme System:** React components
 
-#### Pros ✅
+#### 4.6.1. Pros ✅
 
 - **Powerful frameworks** - React + Node.js backend possibility
 - **Vercel optimization** - Vercel specialist optimization
@@ -494,7 +494,7 @@ and page load performance. This is critical for a documentation site seeking org
 - **TypeScript native** - First-class TypeScript support
 - **Performance monitoring** - Web vitals built-in
 
-#### Cons ❌
+#### 4.6.2. Cons ❌
 
 - **Overkill for static docs** - Too much complexity
 - **Learning curve steep** - React + Next.js knowledge required
@@ -503,7 +503,7 @@ and page load performance. This is critical for a documentation site seeking org
 - **GitHub Pages less ideal** - Optimized for Vercel deployment
 - **Maintenance burden** - React team required to maintain
 
-#### SEO Score: 8/10 ✅
+#### 4.6.3. SEO Score: 8/10 ✅
 
 - ✅ Static generation capability
 - ✅ Per-page meta tags via next/head
@@ -512,7 +512,7 @@ and page load performance. This is critical for a documentation site seeking org
 - ⚠️ Requires more configuration
 - ⚠️ Slower builds than dedicated SSGs
 
-#### GitHub CI/CD Integration (Docsify level: Complex)
+#### 4.6.4. GitHub CI/CD Integration (Docsify level: Complex)
 
 ```yaml
 - name: Install dependencies
@@ -528,30 +528,30 @@ and page load performance. This is critical for a documentation site seeking org
   uses: peaceiris/actions-gh-pages@v3
 ```
 
-#### Migration Effort
+#### 4.6.5. Migration Effort
 
 - **Content:** Moderate - Convert to Next.js structure
 - **Structure:** Pages directory structure required
 - **Navigation:** Custom component creation
 - **Customization:** High complexity
 
-#### Best For
+#### 4.6.6. Best For
 
-✅ React-centric teams  
-✅ Need dynamic functionality  
-✅ Willing to deploy on Vercel  
-✅ Complex sites with interactive elements  
+✅ React-centric teams
+✅ Need dynamic functionality
+✅ Willing to deploy on Vercel
+✅ Complex sites with interactive elements
 ❌ **NOT recommended for pure documentation**
 
 ---
 
-### Option 7: Gatsby ⭐⭐
+### 4.7. Option 7: Gatsby ⭐⭐
 
-**Type:** React-based static site generator  
-**Build Time:** 10-30s typical  
+**Type:** React-based static site generator
+**Build Time:** 10-30s typical
 **Theme System:** React components + theme shadowing
 
-#### Pros ✅
+#### 4.7.1. Pros ✅
 
 - **Powerful plugin system** - Huge ecosystem
 - **GraphQL querying** - Flexible content queries
@@ -559,7 +559,7 @@ and page load performance. This is critical for a documentation site seeking org
 - **React components** - Full React power available
 - **CMS integration** - Works with many headless CMS
 
-#### Cons ❌
+#### 4.7.2. Cons ❌
 
 - **Heavy and slow** - Longest build times of alternatives
 - **High complexity** - Steep learning curve
@@ -568,20 +568,20 @@ and page load performance. This is critical for a documentation site seeking org
 - **GitHub Pages unfriendly** - Best with Netlify
 - **Overkill** - Too much power for static docs
 
-#### SEO Score: 7/10 ✅
+#### 4.7.3. SEO Score: 7/10 ✅
 
 - ✅ Static generation
 - ✅ Good plugin ecosystem for SEO
 - ⚠️ Heavy JavaScript overhead
 - ⚠️ Slower builds
 
-#### Best For
+#### 4.7.4. Best For
 
 ❌ **NOT recommended for documentation migration**
 
 ---
 
-## Comparison Matrix
+## 5. Comparison Matrix
 
 | Criteria | Hugo | Astro | 11ty | VuePress | MkDocs | Next.js | Gatsby |
 | -------- | ---- | ----- | ---- | -------- | ------ | ------- | ------ |
@@ -597,11 +597,11 @@ and page load performance. This is critical for a documentation site seeking org
 | **GitHub Pages Native** | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️ | ❌ |
 | **Multiple Sites** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐ | ⭐ |
 
-## Improvements for New Solutions
+## 6. Improvements for New Solutions
 
 Regardless of which SSG is chosen, implement these SEO improvements:
 
-### 1. Technical SEO Baseline
+### 6.1. Technical SEO Baseline
 
 - [ ] Generate `robots.txt` automatically
 - [ ] Generate XML sitemap automatically
@@ -614,7 +614,7 @@ Regardless of which SSG is chosen, implement these SEO improvements:
 - [ ] Image optimization and lazy loading
 - [ ] Minify and compress assets
 
-### 2. Content Structure
+### 6.2. Content Structure
 
 - [ ] Implement breadcrumb navigation (visual + schema)
 - [ ] Hierarchical heading structure (H1, H2, H3)
@@ -624,7 +624,7 @@ Regardless of which SSG is chosen, implement these SEO improvements:
 - [ ] Reading time estimates
 - [ ] Last updated timestamps
 
-### 3. Performance Optimizations
+### 6.3. Performance Optimizations
 
 - [ ] Code splitting and lazy loading
 - [ ] Image optimization (WebP, AVIF formats)
@@ -635,7 +635,7 @@ Regardless of which SSG is chosen, implement these SEO improvements:
 - [ ] Compression (gzip/brotli)
 - [ ] CDN integration
 
-### 4. Search and Indexing
+### 6.4. Search and Indexing
 
 - [ ] Submit sitemap to Google Search Console
 - [ ] Monitor indexing status
@@ -644,7 +644,7 @@ Regardless of which SSG is chosen, implement these SEO improvements:
 - [ ] Monitor search appearance (ratings, rich results)
 - [ ] Use Google Search Console to identify improvements
 
-### 5. Advanced SEO
+### 6.5. Advanced SEO
 
 - [ ] Implement full-text search with ranking
 - [ ] Add RSS/Atom feeds for content discovery
@@ -654,7 +654,7 @@ Regardless of which SSG is chosen, implement these SEO improvements:
 - [ ] Organization/website schema
 - [ ] Add "edit on GitHub" links for engagement signals
 
-### 6. Analytics and Monitoring
+### 6.6. Analytics and Monitoring
 
 - [ ] Google Analytics 4 integration
 - [ ] Search Console monitoring
@@ -664,7 +664,7 @@ Regardless of which SSG is chosen, implement these SEO improvements:
 - [ ] Keyword ranking tracking
 - [ ] Traffic Analysis
 
-### 7. GitHub CI/CD Improvements
+### 6.7. GitHub CI/CD Improvements
 
 - [ ] Semantic versioning for releases
 - [ ] Link checker in CI pipeline
@@ -676,7 +676,7 @@ Regardless of which SSG is chosen, implement these SEO improvements:
 - [ ] Build time monitoring
 - [ ] Automated lighthouse reports
 
-## Hugo-Specific Recommendations
+## 7. Hugo-Specific Recommendations
 
 If Hugo is chosen (recommended), implement:
 
@@ -691,7 +691,7 @@ params:
     enabled: true
   jsonLD:
     enabled: true
-    
+
 outputs:
   home:
     - HTML
@@ -717,7 +717,7 @@ outputFormats:
     mediaType: application/json
 ```
 
-## Astro-Specific Recommendations
+## 8. Astro-Specific Recommendations
 
 If Astro is chosen, implement:
 
@@ -730,11 +730,11 @@ export default defineConfig({
     react(),
     vue(),
   ],
-  
+
   image: {
     remotePatterns: [{ protocol: "https" }],
   },
-  
+
   vite: {
     plugins: [
       sitemap(),
@@ -743,9 +743,9 @@ export default defineConfig({
 });
 ```
 
-## Migration Strategy for Multiple Sites
+## 9. Migration Strategy for Multiple Sites
 
-### With Hugo (Recommended Approach)
+### 9.1. With Hugo (Recommended Approach)
 
 ```
 github-sites-monorepo/
@@ -768,13 +768,14 @@ github-sites-monorepo/
 ```
 
 **CI/CD Strategy:**
+
 - Single workflow builds all sites
 - Each site has separate output directory
 - Deploy to respective GitHub Pages branches
 - Shared theme for consistency (git submodule or package)
 - Single dependency management file
 
-## Risk Assessment and Mitigation
+## 10. Risk Assessment and Mitigation
 
 | Risk | Hugo | Astro | 11ty | MkDocs | VuePress |
 | ---- | ---- | ----- | ---- | ------ | -------- |
@@ -785,9 +786,9 @@ github-sites-monorepo/
 | **Team skills** | ⚠️ Go required | ⚠️ JS required | ✅ JS (low level) | ✅ Python/Markdown | ⚠️ Vue required |
 | **Maintenance burden** | ✅ Low | ⚠️ Medium | ⚠️ Medium | ✅ Low | ⚠️ Medium |
 
-## Final Recommendation: Hugo
+## 11. Final Recommendation: Hugo
 
-### Justification
+### 11.1. Justification
 
 1. **SEO Excellence** - 9/10 score meets all objectives
 2. **Simplicity** - Single Go binary, no dependency management
@@ -800,9 +801,10 @@ github-sites-monorepo/
 9. **Themes** - Docsy, Relearn excellent for technical docs
 10. **Future-Proof** - Stable, active development
 
-### Hugo Implementation Plan
+### 11.2. Hugo Implementation Plan
 
 **Phase 1: Setup (1-2 weeks)**
+
 - Install Hugo and select Docsy or Relearn theme
 - Create content structure
 - Configure SEO baseline
@@ -810,6 +812,7 @@ github-sites-monorepo/
 - Test locally
 
 **Phase 2: Migration (2-3 weeks)**
+
 - Convert Markdown files (minimal changes)
 - Migrate sidebar structure to Hugo config
 - Update internal links
@@ -817,6 +820,7 @@ github-sites-monorepo/
 - Performance testing
 
 **Phase 3: SEO Optimization (1-2 weeks)**
+
 - Implement schema markup
 - Configure sitemaps and feeds
 - Submit to Google Search Console
@@ -824,12 +828,13 @@ github-sites-monorepo/
 - Optimize Core Web Vitals
 
 **Phase 4: Deployment (1 week)**
+
 - Validate all tests pass
 - Deploy to production
 - Monitor indexing and performance
 - Gather feedback
 
-## Alternative: Astro for Modern Setup
+## 12. Alternative: Astro for Modern Setup
 
 If your team prefers JavaScript/TypeScript and wants maximum flexibility with modern tooling,
 **Astro with Starlight** is the secondary recommendation:
@@ -841,13 +846,13 @@ If your team prefers JavaScript/TypeScript and wants maximum flexibility with mo
 - Slightly longer build times acceptable
 - GitHub Pages deployment straightforward
 
-## NOT Recommended
+## 13. NOT Recommended
 
 - ❌ **Docsify** - Keep for simple internal documentation only, not public sites
 - ❌ **Next.js** - Overcomplicated for documentation, not ideal for GitHub Pages
 - ❌ **Gatsby** - Slow builds, high complexity, deprecated
 
-## Conclusion
+## 14. Conclusion
 
 Migrate to **Hugo with Docsy theme** for optimal balance of simplicity, SEO performance, and
 documentation focus. This will:

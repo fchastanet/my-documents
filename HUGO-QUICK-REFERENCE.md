@@ -1,12 +1,12 @@
 # Quick Reference: Hugo Site Development
 
-**Repository:** my-documents  
-**Theme:** Docsy  
+**Repository:** my-documents
+**Theme:** Docsy
 **Hugo Version:** 0.110+
 
-## Local Development
+## 1. Local Development
 
-### Start
+### 1.1. Start
 
 ```bash
 # Download dependencies (first time only)
@@ -19,20 +19,22 @@ hugo server -D
 # http://localhost:1313/my-documents/
 ```
 
-### Auto-reload
+### 1.2. Auto-reload
+
 - Edit markdown files
 - Browser auto-refreshes
 - Press `Ctrl+C` to stop
 
-## Adding Content
+## 2. Adding Content
 
-### New Page in Existing Section
+### 2.1. New Page in Existing Section
 
 ```bash
 hugo new docs/bash-scripts/my-page.md
 ```
 
 Edit the file with frontmatter:
+
 ```yaml
 ---
 title: My New Page
@@ -45,15 +47,16 @@ tags: [bash, example]
 Your content here...
 ```
 
-### New Section
+### 2.2. New Section
 
 Create directory in `content/en/docs/` and `_index.md`:
+
 ```bash
 mkdir -p content/en/docs/new-section
 touch content/en/docs/new-section/_index.md
 ```
 
-### Frontmatter Fields
+### 2.3. Frontmatter Fields
 
 ```yaml
 ---
@@ -65,7 +68,7 @@ tags: [tag1, tag2]             # Optional, for tagging
 ---
 ```
 
-## Content Organization
+## 3. Content Organization
 
 ```
 content/en/docs/
@@ -78,7 +81,7 @@ content/en/docs/
 
 **Navigation:** Automatic based on directory structure + `weight` frontmatter
 
-## Images and Assets
+## 4. Images and Assets
 
 Place in `static/` directory:
 
@@ -90,27 +93,31 @@ static/
 ```
 
 Reference in markdown:
+
 ```markdown
 ![Alt text](/howto-write-dockerfile/image-name.png)
 ```
 
-## Common Docsy Shortcodes
+## 5. Common Docsy Shortcodes
 
-### Info Box
+### 5.1. Info Box
+
 ```markdown
 {{% pageinfo color="primary" %}}
 This is an informational box.
 {{% /pageinfo %}}
 ```
 
-### Alert
+### 5.2. Alert
+
 ```markdown
 {{% alert title="Warning" color="warning" %}}
 This is a warning message.
 {{% /alert %}}
 ```
 
-### Tabbed Content
+### 5.3. Tabbed Content
+
 ```markdown
 {{% tabpane %}}
 {{% tab header="Tab 1" %}}
@@ -122,9 +129,9 @@ Content for tab 2
 {{% /tabpane %}}
 ```
 
-See full list: https://www.docsy.dev/docs/reference/shortcodes/
+See full list: <https://www.docsy.dev/docs/reference/shortcodes/>
 
-## Code Blocks
+## 6. Code Blocks
 
 Specify language for syntax highlighting:
 
@@ -146,9 +153,10 @@ def hello():
 ```
 ````
 
-## Internal Links
+## 7. Internal Links
 
 Use relative paths:
+
 ```markdown
 [Link text](/docs/bash-scripts/page-name/)
 [Link text](/docs/section/_index/)
@@ -156,7 +164,7 @@ Use relative paths:
 
 Hugo resolves these automatically.
 
-## Building for Production
+## 8. Building for Production
 
 ```bash
 # Build minified site
@@ -166,7 +174,7 @@ hugo --minify
 # GitHub Actions handles deployment automatically
 ```
 
-## Content Guidelines
+## 9. Content Guidelines
 
 - **Line length:** 120 characters max (enforced by mdformat)
 - **Headers:** Use ATX style (#, ##, ###)
@@ -175,15 +183,16 @@ hugo --minify
 - **Images:** Include alt text
 - **Links:** Use relative paths for internal, full URLs for external
 
-## Spell Checking
+## 10. Spell Checking
 
 Add technical terms to `.cspell/bash.txt`:
+
 ```bash
 echo "newword" >> .cspell/bash.txt
 pre-commit run file-contents-sorter    # auto-sorts
 ```
 
-## Git Workflow
+## 11. Git Workflow
 
 1. **Branch:** Always use `master`
 2. **Commit:** Detailed message with changes
@@ -196,9 +205,10 @@ git commit -m "Add new documentation on topic"
 git push origin master
 ```
 
-## Troubleshooting
+## 12. Troubleshooting
 
-### Hugo server won't start
+### 12.1. Hugo server won't start
+
 ```bash
 rm go.sum
 hugo mod clean
@@ -206,24 +216,27 @@ hugo mod get -u
 hugo server -D
 ```
 
-### Module not found errors
+### 12.2. Module not found errors
+
 ```bash
 hugo version  # Check it says "extended"
 hugo mod get -u
 ```
 
-### Build artifacts in way
+### 12.3. Build artifacts in way
+
 ```bash
 rm -rf resources/ public/
 hugo --minify
 ```
 
-### Link errors
+### 12.4. Link errors
+
 - Check relative path is correct
 - Verify file exists in expected location
 - Internal links should start with `/docs/`
 
-## File Locations
+## 13. File Locations
 
 | Item | Path |
 | ---- | ---- |
@@ -237,7 +250,7 @@ hugo --minify
 | Archetypes | `archetypes/*.md` |
 | Theme config | `hugo.yaml` params section |
 
-## SEO Best Practices
+## 14. SEO Best Practices
 
 - ✅ Use descriptive titles and descriptions
 - ✅ Add `weight` to control ordering
@@ -247,16 +260,16 @@ hugo --minify
 - ✅ Use clear heading hierarchy
 - ✅ Keep page descriptions under 160 chars
 
-## Submitting to Search Engines
+## 15. Submitting to Search Engines
 
 1. Build site: `hugo --minify` (GitHub Actions does this)
 2. GitHub Actions deploys to GitHub Pages
 3. Submit sitemap to search console:
-   - https://search.google.com/search-console
+   - <https://search.google.com/search-console>
    - Add property
    - Submit `/sitemap.xml`
 
-## Useful Commands
+## 16. Useful Commands
 
 ```bash
 hugo server -D                          # Run dev server
@@ -267,18 +280,20 @@ hugo --printUnusedTemplates             # Check unused templates
 pre-commit run -a                       # Run all linters
 ```
 
-## Theme Customization
+## 17. Theme Customization
 
 To override Docsy styles:
+
 1. Create `/assets/scss/_custom.scss`
 2. Add custom CSS
 3. Rebuild with `hugo server`
 
-For more details: https://www.docsy.dev/docs/
+For more details: <https://www.docsy.dev/docs/>
 
 ---
 
 **Quick Links:**
+
 - [Hugo Docs](https://gohugo.io/documentation/)
 - [Docsy Theme](https://www.docsy.dev/)
 - [GitHub Repo](https://github.com/fchastanet/my-documents)
