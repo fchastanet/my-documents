@@ -70,7 +70,7 @@ tags: [tag1, tag2]             # Optional, for tagging
 
 ## 3. Content Organization
 
-```
+```text
 content/en/docs/
 ├── bash-scripts/          # Weight: 10 (first)
 ├── howtos/               # Weight: 20
@@ -85,7 +85,7 @@ content/en/docs/
 
 Place in `static/` directory:
 
-```
+```text
 static/
 ├── howto-write-dockerfile/    # For Dockerfile guide images
 ├── howto-write-jenkinsfile/   # For Jenkins guide images

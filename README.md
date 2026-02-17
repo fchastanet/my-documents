@@ -25,43 +25,43 @@
 [![DeepSource](https://deepsource.io/gh/fchastanet/my-documents.svg/?label=active+issues&show_trend=true)](https://deepsource.io/gh/fchastanet/my-documents/?ref=repository-badge "DeepSource active issues")
 [![DeepSource](https://deepsource.io/gh/fchastanet/my-documents.svg/?label=resolved+issues&show_trend=true)](https://deepsource.io/gh/fchastanet/my-documents/?ref=repository-badge "DeepSource resolved issues")
 
-## Documentation Content
+## 1. Documentation Content
 
-### 1. Bash scripts
+### 1.1. Bash scripts
 
 - [Basic best practices](/docs/bash-scripts/00-basic-bestpractices/)
 - [Linux best practices](/docs/bash-scripts/10-linuxcommands-bestpractices/)
 - [Bats best practices](/docs/bash-scripts/20-bats-bestpractices/)
 
-### 2. HowTos
+### 1.2. HowTos
 
 - [How to write a Jenkinsfile](/docs/howtos/howto-write-jenkinsfile/)
 - [How to write a Dockerfile](/docs/howtos/howto-write-dockerfile/)
 - [How to write a docker-compose.yml file](/docs/howtos/howto-write-dockercompose/)
 - [Saml2Aws](/docs/howtos/saml2aws/)
 
-### 3. Lists
+### 1.3. Lists
 
 - [Test](/docs/lists/test/)
 - [Web](/docs/lists/web/)
 
-## Documentation Site Built with Hugo
+## 2. Documentation Site Built with Hugo
 
 This repository contains documentation built with
 [Hugo](https://gohugo.io/) static site generator and the
 [Docsy](https://www.docsy.dev/) theme. All content is in Markdown format and
 automatically published to GitHub Pages.
 
-## Building Locally
+## 3. Building Locally
 
-### Prerequisites
+### 3.1. Prerequisites
 
 - [Hugo Extended](https://gohugo.io/installation/) version 0.110+
 - [Go](https://golang.org/doc/install) version 1.18+
 
-### Quick Start
+### 3.2. Quick Start
 
-#### 1. Install Hugo
+#### 3.2.1. Install Hugo
 
 **Linux:**
 
@@ -71,7 +71,7 @@ CGO_ENABLED=1 go install -tags extended github.com/gohugoio/hugo@latest
 
 **Or download from [Hugo "extended" releases](https://github.com/gohugoio/hugo/releases)**
 
-#### 2. Clone and Setup
+#### 3.2.2. Clone and Setup
 
 ```bash
 git clone https://github.com/fchastanet/my-documents.git
@@ -81,7 +81,7 @@ cd my-documents
 hugo mod get -u
 ```
 
-#### 3. Run Local Server
+#### 3.2.3. Run Local Server
 
 ```bash
 hugo server -D
@@ -93,7 +93,7 @@ The site will be available at `http://localhost:1313/my-documents/`
 - Site auto-reloads on file changes
 - Press `Ctrl+C` to stop the server
 
-### Building for Production
+### 3.3. Building for Production
 
 ```bash
 hugo --minify
@@ -101,17 +101,17 @@ hugo --minify
 
 Output is generated in the `public/` directory.
 
-### Checking Site Statistics
+### 3.4. Checking Site Statistics
 
 ```bash
 hugo --printI18nWarnings --printPathWarnings --printUnusedTemplates
 ```
 
-## Documentation Structure
+## 4. Documentation Structure
 
 The documentation is organized as follows:
 
-```
+```text
 content/en/
 ├── _index.html              # Homepage
 └── docs/
@@ -122,7 +122,7 @@ content/en/
     └── other-projects/      # Links to related projects
 ```
 
-### Adding New Documentation
+### 4.1. Adding New Documentation
 
 1. Create a Markdown file in the appropriate `content/en/docs/` subdirectory
 2. Add frontmatter with title, description, and weight (for ordering)
@@ -140,16 +140,16 @@ weight: 10
 Your content here...
 ```
 
-## Content Guidelines
+## 5. Content Guidelines
 
 - Keep Markdown files focused and well-organized
 - Use ATX-style headers (`#`, `##`, etc.)
 - Line length: 120 characters maximum (enforced by mdformat)
 - Line endings: LF only
 - Use relative links for internal navigation
-- Code blocks should specify language: `` ```bash ```, `` ```yaml ```, etc.
+- Code blocks should specify language: `` ```bash ```, `` ```yaml```, etc.
 
-## SEO Features
+## 6. SEO Features
 
 This site includes the following SEO optimizations:
 
@@ -163,15 +163,15 @@ This site includes the following SEO optimizations:
 - Open Graph and Twitter card support
 - Breadcrumb navigation with schema markup
 
-## CI/CD Pipelines
+## 7. CI/CD Pipelines
 
-### Hugo Build & Deploy (`hugo-build-deploy.yml`)
+### 7.1. Hugo Build & Deploy (`hugo-build-deploy.yml`)
 
 - Builds on push to `master` branch
 - Validates build output
 - Deploys to GitHub Pages automatically
 
-### Pre-commit Linting (`lint.yml`)
+### 7.2. Pre-commit Linting (`lint.yml`)
 
 - Runs Markdown and code quality checks
 - Auto-fixes formatting/linting issues

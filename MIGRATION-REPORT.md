@@ -48,7 +48,7 @@ site maintainability.
 
 **Directory Structure Created:**
 
-```
+```text
 content/en/
 ├── _index.html           # Homepage with Docsy blocks
 └── docs/
@@ -121,7 +121,7 @@ static/                   # Static assets
 
 **Old Navigation (Docsify):**
 
-```
+```text
 _navbar.md (top menu)    → Integrated into hugo.yaml menu.main
 _sidebar.md (sidebar)    → Automatic from content structure + weight frontmatter
 ```

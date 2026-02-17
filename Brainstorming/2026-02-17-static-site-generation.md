@@ -747,7 +747,7 @@ export default defineConfig({
 
 ### 9.1. With Hugo (Recommended Approach)
 
-```
+```text
 github-sites-monorepo/
 ├── myDocuments/
 │   ├── content/
