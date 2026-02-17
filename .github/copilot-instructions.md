@@ -545,7 +545,7 @@ Or with descriptive text:
 
 Place related content in subdirectories:
 
-```
+```text
 content/en/docs/
 ├── bash-scripts/
 │   ├── _index.md
