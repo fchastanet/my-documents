@@ -1,4 +1,9 @@
 ---
+###############################################################################
+# AUTOMATICALLY GENERATED
+# DO NOT EDIT IT
+# @generated
+###############################################################################
 default_install_hook_types: [pre-commit, pre-push]
 default_stages: [pre-commit, manual]
 minimum_pre_commit_version: 3.5.0
