@@ -2,37 +2,53 @@
 
 ## Repository Overview
 
-This is a **documentation repository** built with **Docsify** and published to
-GitHub Pages at <https://fchastanet.github.io/my-documents/>. It contains
-technical documentation and HowTo guides on Bash scripting, Docker, Jenkins, and
-various development topics.
+This is a **documentation repository** built with **Hugo** static site generator
+and the **Docsy** theme. It is published to GitHub Pages at
+<https://fchastanet.github.io/my-documents/>. It contains technical
+documentation and HowTo guides on Bash scripting, Docker, Jenkins, and various
+development topics.
 
 **Key characteristics:**
 
-- Static documentation site using Docsify (no build step required)
-- All content in Markdown files
+- Static documentation site built with Hugo (fast, SEO-optimized)
+- Docsy theme for professional, responsive documentation design
+- All content in Markdown files with optional YAML frontmatter
 - Extensive linting and formatting automation
-- GitHub Pages deployment on push to master
+- Automatic GitHub Pages deployment on push to master
+- Optimized for search engine indexing (SEO)
+- Static HTML output (no JavaScript required for functionality)
 
 ## Repository Structure
 
 ```text
 /
-├── HowTo/                  # Tutorial articles (Bash, Docker, Jenkins, etc.)
-│   ├── HowTo-Write-Bash-Scripts/
-│   ├── HowTo-Write-Dockerfile/
-│   └── HowTo-Write-Jenkinsfile/
-├── Lists/                  # Reference lists (Test, Web)
-├── images/                 # Static assets
-├── archives/               # Archived content
+├── content/                     # All Markdown content
+│   └── en/                      # English language content
+│       ├── _index.html          # Home page
+│       ├── docs/                # Documentation sections
+│       │   ├── _index.md        # Docs landing page
+│       │   ├── bash-scripts/    # Bash scripting guides
+│       │   ├── howtos/          # How-to guides
+│       │   ├── lists/           # Reference lists
+│       │   └── other-projects/  # Links to related projects
+├── HowTo/                       # Legacy content (to be migrated)
+├── Lists/                       # Legacy content (to be migrated)
+├── static/                      # Static assets (images, downloads, etc.)
+├── archetypes/                  # Content templates
+│   ├── default.md               # Default page archetype
+│   └── docs.md                  # Docs page archetype
+├── assets/                      # CSS/SCSS overrides
+├── images/                      # Legacy images directory
 ├── .github/
-│   ├── workflows/          # CI/CD automation
+│   ├── workflows/               # CI/CD automation
+│   │   ├── lint.yml             # Pre-commit linting
+│   │   └── hugo-build-deploy.yml # Hugo build & deploy
 │   └── copilot-instructions.md  # This file
-├── .cspell/                # Custom spell-check dictionaries
-├── index.html              # Docsify configuration
-├── _sidebar.md             # Navigation sidebar
-├── _navbar.md              # Top navigation bar
-└── README.md               # Repository landing page
+├── .cspell/                     # Custom spell-check dictionaries
+├── hugo.yaml                    # Hugo configuration
+├── go.mod                       # Go modules (Docsy theme)
+├── go.sum                       # Go modules checksums
+└── README.md                    # Repository landing page
 ```
 
 ## Git Conventions
@@ -158,13 +174,17 @@ pre-commit run -a
 - **Concurrency:** Cancels previous builds on new push
 - **Artifacts:** MegaLinter reports and logs
 
-### docsify-gh-pages.yml (Deploy Docsify)
+### hugo-build-deploy.yml (Hugo Build & Deploy)
 
 - **Triggers:** Push to master, manual dispatch
 - **What it does:**
-  - Builds Docsify site
+  - Builds static site using Hugo with Docsy theme
+  - Downloads Hugo modules (Docsy and dependencies)
+  - Minifies output for optimal performance
+  - Validates build output
   - Deploys to GitHub Pages
-- **No build step required:** Docsify renders Markdown client-side
+- **Cache:** Caches Hugo modules for faster builds
+- **Prerequisites:** Uses Hugo extended with Go support
 
 ### Other Workflows
 
@@ -174,32 +194,61 @@ pre-commit run -a
 
 ## Development Workflow
 
-### Making Content Changes
+### Local Setup
 
-1. **Edit or create Markdown files** in appropriate directories (`HowTo/`,
-   `Lists/`, etc.)
-
-2. **Update navigation if needed:**
-
-   - Edit `_sidebar.md` to add new pages to sidebar
-   - Edit `_navbar.md` for top navigation changes
-
-3. **Local preview (optional):**
+1. **Install Hugo Extended:**
 
    ```bash
-   # Install docsify-cli
-   npm i -g docsify-cli
+   # Linux
+   CGO_ENABLED=1 go install -tags extended github.com/gohugoio/hugo@latest
+   ```
 
-   # Serve locally
-   docsify serve .
-   # Visit http://localhost:3000
+   Verify: `hugo version` (should show 0.155+)
+
+2. **Clone repository and setup:**
+
+   ```bash
+   git clone https://github.com/fchastanet/my-documents.git
+   cd my-documents
+   hugo mod get -u
+   ```
+
+3. **Run local server:**
+
+   ```bash
+   hugo server -D
+   ```
+
+   Open <http://localhost:1313/my-documents/> in browser (auto-reloads on file changes)
+
+### Making Content Changes
+
+1. **Edit or create Markdown files** in `content/en/docs/` subdirectories
+
+2. **Add frontmatter to new pages:**
+
+   ```yaml
+   ---
+   title: Page Title
+   description: Brief description
+   weight: 10
+   ---
+
+   Your content here...
+   ```
+
+3. **Local preview:**
+
+   ```bash
+   hugo server -D
+   # Site auto-reloads at http://localhost:1313/my-documents/
    ```
 
 4. **Commit changes:**
 
    ```bash
    git add .
-   git commit -m "Your detailed commit message"
+   git commit -m "Add/update documentation"
    ```
 
    Note: Pre-commit hooks will auto-format your changes
@@ -213,27 +262,45 @@ pre-commit run -a
 6. **Review CI results:**
 
    - Check GitHub Actions for lint workflow status
+   - Check GitHub Actions for hugo-build-deploy status
    - If auto-fixes are needed, a PR will be created automatically
    - Merge the auto-fix PR if appropriate
 
 ### Adding New Documentation
 
-1. **Create new Markdown file** in appropriate directory
-2. **Follow naming convention:** `HowTo-Topic-Name.md`
-3. **Add to sidebar navigation** in `_sidebar.md`
-4. **Include frontmatter if needed** (though Docsify doesn't require YAML
-   frontmatter)
-5. **Test links** - all internal links should be relative paths
-6. **Commit with descriptive message**
+1. **Create new Markdown file** in appropriate `content/en/docs/` subdirectory
+
+   ```bash
+   hugo new docs/section/page-name.md
+   ```
+
+2. **Add frontmatter:**
+
+   ```yaml
+   ---
+   title: My New Page
+   description: Brief description of the page
+   weight: 10
+   categories: [documentation]
+   tags: [example]
+   ---
+   ```
+
+3. **Write content** using Markdown with optional Docsy shortcodes
+
+4. **Test locally:** `hugo server -D` and verify at http://localhost:1313/my-documents/
+
+5. **Commit and push**
 
 ### Updating Configuration
 
-**Docsify configuration** (`index.html`):
+**Hugo configuration** (`hugo.yaml`):
 
-- Theme settings
-- Search configuration
-- Navigation settings
-- External link behavior
+- Site title, description, keywords
+- Menu structure (main menu and footer)
+- Theme parameters and Docsy settings
+- Output formats (HTML, JSON, RSS)
+- SEO parameters
 
 **Linter configuration:**
 
@@ -254,24 +321,72 @@ pre-commit run -a
 
 ### Local Testing Checklist
 
-- [ ] Markdown files render correctly in Docsify
+- [ ] Run `hugo server -D` without errors
+- [ ] All pages render correctly locally
 - [ ] All internal links work
 - [ ] Code blocks have proper syntax highlighting
-- [ ] Navigation (sidebar and navbar) updated if needed
+- [ ] Images display correctly
+- [ ] Menu navigation works as expected
+- [ ] Mobile responsiveness looks good
 - [ ] Spell check passes (or new words added to dictionary)
 - [ ] No trailing whitespace or wrong line endings
 - [ ] Pre-commit hooks pass
+
+### Build Validation
+
+```bash
+# Build site and check for errors
+hugo --minify
+
+# Verify public directory was created
+ls -la public/
+
+# Check for common issues
+hugo --printI18nWarnings --printPathWarnings --printUnusedTemplates
+```
 
 ### CI Testing
 
 After pushing, verify:
 
-- [ ] Pre-commit workflow passes
+- [ ] Pre-commit workflow passes (lint.yml)
+- [ ] Hugo build & deploy workflow passes (hugo-build-deploy.yml)
 - [ ] MegaLinter checks pass
 - [ ] GitHub Pages deployment succeeds (for master branch)
 - [ ] Live site renders correctly: <https://fchastanet.github.io/my-documents/>
 
 ## Troubleshooting
+
+### Hugo Server Won't Start
+
+**Symptom:** `hugo server -D` fails with module errors
+
+**Solution:**
+
+```bash
+# Clear Hugo module cache and re-download
+rm go.sum
+hugo mod clean
+hugo mod get -u
+hugo server -D
+```
+
+### Build Fails with Missing Modules
+
+**Symptom:** Build error about missing `github.com/google/docsy`
+
+**Solution:**
+
+```bash
+# Ensure Hugo extended is installed
+hugo version  # Should show "extended"
+
+# Download modules
+hugo mod get -u
+
+# Try building again
+hugo --minify
+```
 
 ### Pre-commit Hook Failures
 
@@ -327,10 +442,11 @@ git commit -m "Add 'newWord' to spell check dictionary"
 
 **Solution:**
 
-1. Check `docsify-gh-pages` workflow status in Actions
+1. Check `hugo-build-deploy` workflow status in Actions
 2. Verify changes were pushed to `master` branch
-3. Clear browser cache and retry
-4. Check GitHub Pages settings in repository settings
+3. Check that workflow completed successfully
+4. Clear browser cache and retry
+5. Check GitHub Pages settings in repository settings (should deploy from "gh-pages" branch)
 
 ### Auto-fix PR Created Unexpectedly
 
@@ -345,23 +461,35 @@ git commit -m "Add 'newWord' to spell check dictionary"
 
 ## Common Patterns
 
-### Adding a New HowTo Guide
+### Adding a New Documentation Page
 
-1. Create file: `HowTo/HowTo-New-Topic.md`
+1. Create file in appropriate section:
 
-2. Add header and table of contents
-
-3. Write content following Markdown standards
-
-4. Update `_sidebar.md`:
-
-   ```markdown
-   - [New Topic](/HowTo/HowTo-New-Topic.md)
+   ```bash
+   hugo new docs/bash-scripts/my-new-page.md
+   # or
+   hugo new docs/howtos/my-guide.md
    ```
 
-5. Add any new technical terms to `.cspell/bash.txt`
+2. Edit the file with frontmatter and content:
 
-6. Commit and push
+   ```yaml
+   ---
+   title: My New Page
+   description: Brief description for SEO
+   weight: 10
+   categories: [bash-scripting]
+   tags: [bash, scripts]
+   ---
+
+   Your Markdown content...
+   ```
+
+3. Navigation is automatic based on directory structure and weight
+
+4. Test locally: `hugo server -D`
+
+5. Commit and push
 
 ### Adding Code Examples
 
@@ -376,39 +504,82 @@ echo "Hello, World!"
 ```
 ````
 
+### Using Docsy Shortcodes
+
+Hugo/Docsy provides helpful shortcodes for structured content:
+
+```markdown
+{{% pageinfo color="primary" %}}
+This is a highlighted info box.
+{{% /pageinfo %}}
+
+{{% alert title="Warning" color="warning" %}}
+This is a warning message.
+{{% /alert %}}
+```
+
 ### Adding Images
 
-1. Place image in `/images/` directory
+1. Place image in `static/` directory (or appropriate subdirectory)
 
 2. Reference in Markdown:
 
    ```markdown
-   ![Alt text](images/diagram.png)
+   ![Alt text](/images/diagram.png)
    ```
 
-3. Ensure image is optimized (not too large)
+3. Ensure image is optimized (Hugo processes images)
 
 ### Creating Cross-References
 
-Use relative links for internal references:
+Use relative paths for internal links (Hugo will resolve them):
 
 ```markdown
-See also: [Docker Best Practices](/HowTo/HowTo-Write-Dockerfile.md)
+See also: [Bash Best Practices](/docs/bash-scripts/basic-best-practices/)
+
+Or with descriptive text:
+[Learn more about Docker](/docs/howtos/howto-write-dockerfile/)
 ```
+
+### Organizing Content
+
+Place related content in subdirectories:
+
+```text
+content/en/docs/
+├── bash-scripts/
+│   ├── _index.md
+│   ├── basic-best-practices.md
+│   ├── linux-commands-best-practices.md
+│   └── bats-best-practices.md
+├── howtos/
+│   ├── _index.md
+│   ├── howto-write-jenkinsfile/
+│   │   ├── _index.md
+│   │   └── related-content.md
+│   └── howto-write-dockerfile.md
+```
+
+Use `weight` in frontmatter to control ordering within sections.
 
 ## Tools and Dependencies
 
 ### Required Tools (for local development)
 
 - Git
+- Hugo Extended v0.110+ (with Go support)
+- Go 1.18+
 - Python 3.10+ (for pre-commit)
-- Node.js (optional, for local Docsify preview)
 
 ### Optional Tools
 
-- `docsify-cli` - Local development server
 - `pre-commit` - Git hook framework
 - Docker (for MegaLinter local runs)
+
+### Hugo Modules
+
+- `github.com/google/docsy` - Docsy theme
+- `github.com/google/docsy/dependencies` - Docsy dependencies
 
 ## Best Practices
 
@@ -445,7 +616,8 @@ See also: [Docker Best Practices](/HowTo/HowTo-Write-Dockerfile.md)
 
 ## Additional Resources
 
-- [Docsify Documentation](https://docsify.js.org/)
+- [Hugo Documentation](https://gohugo.io/documentation/)
+- [Docsy Theme Documentation](https://www.docsy.dev/)
 - [MegaLinter Documentation](https://megalinter.io/)
 - [Pre-commit Documentation](https://pre-commit.com/)
 - [Markdown Guide](https://www.markdownguide.org/)
@@ -459,7 +631,9 @@ When working on this repository:
 3. **Linting:** Pre-commit hooks auto-fix most issues
 4. **Line length:** 120-character wrapping for Markdown
 5. **Spell checking:** Add technical terms to `.cspell/bash.txt`
-6. **Navigation:** Update `_sidebar.md` when adding new pages
-7. **Testing:** Verify links and rendering locally or via GitHub Pages
-8. **CI/CD:** Workflows handle linting and deployment automatically
-9. **On chat:** Only provide relevant changes, not entire files
+6. **Navigation:** Automatic from directory structure and frontmatter weight
+7. **Testing:** Build locally with `hugo server -D` and verify at <http://localhost:1313/my-documents/>
+8. **Content location:** Place all content in `content/en/docs/` subdirectories
+9. **Frontmatter:** Always include title, description, and weight
+10. **CI/CD:** Workflows handle linting and deployment automatically
+11. **On chat:** Only provide relevant changes, not entire files

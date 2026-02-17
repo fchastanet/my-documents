@@ -57,6 +57,7 @@ REPOSITORY_SECRETLINT_CONFIG_FILE: .secretlintrc.yml
 EDITORCONFIG_EDITORCONFIG_CHECKER_FILTER_REGEX_EXCLUDE: |
   (?x)(
     \.git/|
+    Makefile|
     /testsData/.*\.(txt|help)|
     ^manualTests/data/|
     ^src/Log/testsData|
@@ -146,4 +147,9 @@ SPELL_FILTER_REGEX_EXCLUDE: |
     IDE/.*/\.idea|
     ^bin/bash-tpl|
     \.svg
+  )
+
+HTML_HTMLHINT_FILTER_REGEX_EXCLUDE: |
+  (?x)(
+    ^content/_index.html$
   )

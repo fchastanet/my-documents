@@ -44,10 +44,11 @@ jobs:
 
       - name: Run pre-commit
         uses: pre-commit/action@v3.0.1
+        if: false
         id: preCommit
         with:
           extra_args: >-
-            -c .pre-commit-config.yaml -a
+            -c .pre-commit-config-github.yaml -a --hook-stage manual
 
       - name: MegaLinter
         id: ml

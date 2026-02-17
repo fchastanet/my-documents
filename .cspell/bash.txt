@@ -5,6 +5,11 @@ autoremove
 autoupdate
 backquotes
 buildview
+Buildx
+CACHEDIR
+Catmull
+changefreq
+Chastanet
 cloudflare
 codespell
 cpes
@@ -15,6 +20,8 @@ django
 Dockerfile
 Dockerfiles
 docsify
+Docsy
+docsy
 doesn
 dotnet
 dpkg
@@ -27,9 +34,14 @@ friday
 frontmatter
 github
 gitleaks
+goldmark
 gpgsign
 GRYPE
 hadolint
+howto
+howtos
+hsts
+hugo
 jenkins
 jenkinsfile
 Jenkinsfiles
@@ -44,6 +56,7 @@ mapfile
 markdownlint
 mdformat
 megalinter
+mkdocs
 mktemp
 multifactor
 mypy
@@ -53,6 +66,7 @@ nonprod
 nounset
 oidc
 oxsecurity
+pageinfo
 pendo
 phpstorm
 phpunit
@@ -64,7 +78,9 @@ plantuml
 podman
 posix
 precommit
+pygments
 readarray
+readingtime
 redis
 sbom
 shellcheck
@@ -72,12 +88,15 @@ shfmt
 shopt
 signingkey
 SIGPIPE
+Slinkity
 Slurper
 sshagent
 stackoverflow
 subshell
+tabpane
 tabwidth
 tagname
+theming
 tmpdir
 unalias
 unindexed

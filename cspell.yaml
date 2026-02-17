@@ -8,6 +8,8 @@ enableGlobDot: true
 enableFiletypes:
   - shellscript
 ignorePaths:
+  - 'go.mod'
+  - 'go.sum'
   - '**/node_modules/**'
   - '**/vscode-extension/**'
   - '**/vendor/**'

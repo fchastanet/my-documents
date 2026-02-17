@@ -1,0 +1,180 @@
+# Hugo configuration
+# Theme: Docsy
+
+baseURL: https://fchastanet.github.io/my-documents/
+title: My Documents
+
+# Language settings
+languageCode: en-us
+defaultContentLanguage: en
+defaultContentLanguageInSubdir: false
+enableRobotsTXT: true
+enableGitInfo: true
+
+# Syntax highlighting
+pygmentsCodeFences: true
+pygmentsUseClasses: false
+pygmentsUseClassic: false
+pygmentsStyle: tango
+
+# Image processing configuration
+imaging:
+  resampleFilter: CatmullRom
+  quality: 75
+  anchor: Smart
+
+# Markup and syntax highlighting
+markup:
+  goldmark:
+    parser:
+      attribute:
+        block: true
+    renderer:
+      unsafe: true
+  highlight:
+    anchorLineNos: false
+    codeFences: true
+    guessSyntax: false
+    hl_Lines: '1'
+    hl_inline: false
+    lineAnchors: ''
+    lineNoStart: 1
+    lineNos: false
+    lineNumbersInTable: true
+    noClasses: true
+    noHl: false
+    style: tango
+    tabWidth: 4
+
+# Outputs configuration for SEO
+outputs:
+  home:
+    - HTML
+    - RSS
+    - print
+  section:
+    - HTML
+    - RSS
+    - print
+
+# Taxonomies for better content organization
+taxonomies:
+  tag: tags
+  category: categories
+
+# Privacy parameters
+privacy:
+  hsts:
+    includeSubDomains: true
+    preload: true
+
+# Params for SEO and site configuration
+params:
+  # SEO
+  description: Collection of my documents on various subjects.
+  keywords: [bash, best practices, learn, docker, jenkins, documentation]
+  copyright: Francois Chastanet
+  privacy_policy: https://github.com/fchastanet/my-documents/blob/master/LICENSE
+
+  # Repository configuration
+  github_repo: https://github.com/fchastanet/my-documents
+  github_project_repo: https://github.com/fchastanet/my-documents
+  github_subdir: content
+  github_branch: master
+
+  # Enable Lunr.js offline search
+  offlineSearch: true
+  offlineSearchSummaryLength: 70
+  offlineSearchMaxResults: 10
+
+  # Enable local search
+  prism_syntax_highlighting: false
+
+  # UI Configuration
+  ui:
+    # Set to true to show the light/dark mode toggle in the top nav bar
+    showLightDarkModeMenu: true
+    # Enable to show the side bar menu in its compact state.
+    sidebar_menu_compact: false
+    sidebar_menu_foldable: true
+    # Set to true to disable breadcrumb navigation.
+    breadcrumb_disable: false
+    # Set to true to hide the sidebar search box (the top nav search box will still be displayed if search is enabled)
+    sidebar_search_disable: false
+    # Set to false if you don't want to display a logo (/assets/icons/logo.svg) in the top nav bar
+    navbar_logo: true
+    # Set to true to enable the About link in the site footer
+    footer_about_enable: true
+    # Adds a H2 section titled "Feedback" to the bottom of each doc. The responses are sent to Google Analytics as events.
+    # This feature depends on [services.googleAnalytics] and will be disabled if "services.googleAnalytics.id" is not set.
+    # If you want this feature, but occasionally need to remove the "Feedback" section from a single page,
+    # add "hide_feedback: true" to the page's front matter.
+    feedback:
+      enable: false
+    # Adds a reading time to the top of each doc.
+    # If you want this feature, but occasionally need to remove the Reading time from a single page,
+    # add "hide_readingtime: true" to the page's front matter
+    readingtime:
+      enable: false
+
+  # Links for the user menu (top right)
+  links:
+    user:
+      - name: GitHub
+        url: https://github.com/fchastanet
+        icon: fab fa-github
+        desc: My GitHub profile
+    developer:
+      - name: GitHub
+        url: https://github.com/fchastanet/my-documents
+        icon: fab fa-github
+        desc: Development repository
+      - name: Bash Tools Framework
+        url: https://fchastanet.github.io/bash-tools-framework/
+        icon: fas fa-toolbox
+        desc: Bash Tools Framework documentation
+      - name: Bash Tools
+        url: https://fchastanet.github.io/bash-tools/
+        icon: fas fa-tools
+        desc: Bash Tools documentation
+
+# Menu configuration
+menu:
+  main:
+    - name: GitHub
+      url: https://github.com/fchastanet/my-documents
+      weight: 10
+      post: <sup><i class="ps-1 fa-solid fa-up-right-from-square fa-xs" aria-hidden="true"></i></sup>
+    - name: Bash Tools Framework
+      url: https://fchastanet.github.io/bash-tools-framework/
+      weight: 20
+      post: <sup><i class="ps-1 fa-solid fa-up-right-from-square fa-xs" aria-hidden="true"></i></sup>
+    - name: Bash Tools
+      url: https://fchastanet.github.io/bash-tools/
+      weight: 30
+      post: <sup><i class="ps-1 fa-solid fa-up-right-from-square fa-xs" aria-hidden="true"></i></sup>
+    - name: Bash Dev Env
+      url: https://fchastanet.github.io/bash-dev-env/
+      weight: 40
+      post: <sup><i class="ps-1 fa-solid fa-up-right-from-square fa-xs" aria-hidden="true"></i></sup>
+    - name: Bash Compiler
+      url: https://fchastanet.github.io/bash-compiler/
+      weight: 50
+      post: <sup><i class="ps-1 fa-solid fa-up-right-from-square fa-xs" aria-hidden="true"></i></sup>
+
+# Sitemap configuration
+sitemap:
+  changefreq: weekly
+  filename: sitemap.xml
+  priority: 0.5
+
+# Module configuration for Docsy theme
+module:
+  hugoVersion:
+    extended: true
+    min: 0.110.0
+  imports:
+    - path: github.com/google/docsy
+      disable: false
+    - path: github.com/google/docsy/dependencies
+      disable: false
