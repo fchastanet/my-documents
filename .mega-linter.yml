@@ -57,6 +57,7 @@ REPOSITORY_SECRETLINT_CONFIG_FILE: .secretlintrc.yml
 EDITORCONFIG_EDITORCONFIG_CHECKER_FILTER_REGEX_EXCLUDE: |
   (?x)(
     \.git/|
+    Makefile|
     /testsData/.*\.(txt|help)|
     ^manualTests/data/|
     ^src/Log/testsData|
