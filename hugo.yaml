@@ -1,0 +1,145 @@
+# Hugo configuration
+# Theme: Docsy
+
+baseURL: https://fchastanet.github.io/my-documents/
+title: My Documents
+description: Collection of my documents on various subjects.
+defaultContentLanguage: en
+defaultContentLanguageInSubdir: false
+languageCode: en-US
+
+# Markup and syntax highlighting
+markup:
+  goldmark:
+    extensions:
+      footnote: true
+      strikethrough: true
+      table: true
+      typographer: true
+    parser:
+      attribute: true
+      autoHeadingID: true
+    renderer:
+      hardWraps: false
+      unsafe: true
+  highlight:
+    style: github-light
+    lineNos: true
+
+# Outputs configuration for SEO
+outputs:
+  home:
+    - HTML
+    - JSON
+    - RSS
+  section:
+    - HTML
+    - JSON
+  page:
+    - HTML
+
+# Taxonomies for better content organization
+taxonomies:
+  tag: tags
+  category: categories
+
+# Privacy parameters
+privacy:
+  hsts:
+    includeSubDomains: true
+    preload: true
+
+# Params for SEO and site configuration
+params:
+  # SEO
+  description: Collection of my documents on various subjects.
+  keywords: [bash, best practices, learn, docker, jenkins, documentation]
+  author:
+    name: Francois Chastanet
+  github_repo: https://github.com/fchastanet/my-documents
+  github_subdir: content/en
+  
+  # Docsy theme parameters
+  docsy_version: v0.10.0
+  version_menu: Versions
+  archived_version: false
+  version: 0.0.1
+  url_latest_version: https://fchastanet.github.io/my-documents
+
+  # UI Configuration
+  ui:
+    navbar_logo: true
+    sidebar_menu_compact: false
+    sidebar_menu_foldable: true
+    ul_show: 2
+    breadcrumb_disable: false
+
+  # Algolia configuration (optional - comment out if not using)
+  # algolia_docsearch: false
+
+  # Google Analytics
+  # analytics:
+  #   google_analytics_id: YOUR_ID_HERE
+
+  # Open Graph and Twitter Cards
+  social:
+    twitter: fchastanet
+    github: fchastanet
+
+  # Footer
+  footer:
+    copy_notice: >
+      Except where otherwise noted, content on this site is licensed under a
+      [Creative Commons Attribution 4.0 International license](https://creativecommons.org/licenses/by/4.0/).
+
+  # Compliance
+  compliance:
+    privacy: https://github.com/fchastanet/my-documents/blob/master/LICENSE
+    cookie: true
+
+# Menu configuration
+menu:
+  main:
+    - name: Home
+      url: /
+      weight: 10
+    - name: Bash Scripts
+      url: /docs/bash-scripts/
+      weight: 20
+      post: Learn best practices for writing Bash scripts
+    - name: HowTos
+      url: /docs/howtos/
+      weight: 30
+      post: Step-by-step guides for various technologies
+    - name: Lists
+      url: /docs/lists/
+      weight: 40
+      post: Reference lists and collections
+    - name: Other Projects
+      url: /docs/other-projects/
+      weight: 50
+      post: Related projects and tools
+  
+  # Footer menu
+  footer:
+    - name: GitHub
+      url: https://github.com/fchastanet/my-documents
+      weight: 10
+    - name: Bash Tools Framework
+      url: https://fchastanet.github.io/bash-tools-framework/
+      weight: 20
+    - name: Bash Tools
+      url: https://fchastanet.github.io/bash-tools/
+      weight: 30
+
+# Sitemap configuration
+sitemap:
+  changefreq: weekly
+  filename: sitemap.xml
+  priority: 0.5
+
+# Module configuration for Docsy theme
+module:
+  imports:
+    - path: github.com/google/docsy
+    - path: github.com/google/docsy/dependencies
