@@ -1,0 +1,64 @@
+---
+# Reusable workflow for triggering my-documents centralized build
+# This workflow should be copied to dependent repositories (bash-compiler, bash-tools, etc.)
+#
+# Usage in dependent repo:
+#   Copy this file to .github/workflows/trigger-docs.yml
+#   Add secret DOCS_BUILD_TOKEN with PAT having repo scope
+#
+name: Trigger Documentation Build
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - 'content/**'
+      - 'static/**'
+      - 'go.mod'
+      - 'go.sum'
+  workflow_dispatch:
+
+jobs:
+  trigger:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger my-documents build
+        run: |
+          echo "🔔 Triggering documentation build in fchastanet/my-documents..."
+
+          RESPONSE=$(curl -s -w "\n%{http_code}" -X POST \
+            -H "Authorization: token ${{ secrets.DOCS_BUILD_TOKEN }}" \
+            -H "Accept: application/vnd.github.v3+json" \
+            "https://api.github.com/repos/fchastanet/my-documents/dispatches" \
+            -d '{
+              "event_type": "trigger-docs-rebuild",
+              "client_payload": {
+                "repo": "${{ github.repository }}",
+                "ref": "${{ github.ref }}",
+                "sha": "${{ github.sha }}",
+                "triggered_by": "${{ github.actor }}"
+              }
+            }')
+
+          HTTP_CODE=$(echo "$RESPONSE" | tail -n1)
+
+          if [ "$HTTP_CODE" = "204" ]; then
+            echo "✅ Successfully triggered docs build in fchastanet/my-documents"
+            echo "📖 Documentation will be updated at: https://fchastanet.github.io/${GITHUB_REPOSITORY#*/}/"
+            echo ""
+            echo "### ✅ Documentation build triggered" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "Repository: \`${{ github.repository }}\`" >> $GITHUB_STEP_SUMMARY
+            echo "Commit: \`${{ github.sha }}\`" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "🔗 [View build status](https://github.com/fchastanet/my-documents/actions/workflows/build-all-sites.yml)" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "❌ Failed to trigger docs build. HTTP code: $HTTP_CODE"
+            echo "$RESPONSE" | head -n-1
+            exit 1
+          fi
+
+      - name: Note about deployment delay
+        run: |
+          echo "ℹ️  Note: Documentation deployment may take 2-5 minutes"
+          echo "   Check the build status at: https://github.com/fchastanet/my-documents/actions"

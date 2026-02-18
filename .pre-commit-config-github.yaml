@@ -76,6 +76,19 @@ repos:
             AGENTS\.md
           )
 
+  - repo: https://github.com/ComPWA/prettier-pre-commit
+    rev: v3.8.1
+    hooks:
+      - id: prettier
+        args: [--cache]
+        exclude: |
+          (?x)(
+            \.md$|
+            ^\.vscode/.*\.code-snippets$|
+            ^content/_index.html$|
+            ^shared/layouts/partials/
+          )
+
   - repo: https://github.com/igorshubovych/markdownlint-cli
     rev: v0.47.0
     hooks:
@@ -142,18 +155,6 @@ repos:
       # markers and whitespace errors according to core.whitespace
       # and conflict-marker-size configuration in a git repo.
       - id: git-check
-
-  - repo: https://github.com/ComPWA/prettier-pre-commit
-    rev: v3.8.1
-    hooks:
-      - id: prettier
-        args: [--cache]
-        exclude: |
-          (?x)(
-            \.md$|
-            ^\.vscode/.*\.code-snippets$|
-            ^content/_index.html$
-          )
 
   - repo: local
     hooks:

@@ -1,0 +1,109 @@
+---
+# Decentralized Hugo Build & Deploy (REFERENCE ONLY)
+#
+# This is an ALTERNATIVE approach where each repository builds independently
+# using Hugo modules to import shared resources from my-documents.
+#
+# NOT CURRENTLY USED - The centralized orchestrator (build-all-sites.yml) is preferred.
+#
+# To use this approach in a different repository:
+# 1. Copy this file to that repo's .github/workflows/hugo-build-deploy.yml
+# 2. Update the baseURL in the hugo config
+# 3. Add my-documents as a Hugo module dependency
+# 4. Run independently without coordination
+#
+name: Hugo Build & Deploy (Decentralized)
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - 'content/**'
+      - 'static/**'
+      - 'layouts/**'
+      - 'assets/**'
+      - 'hugo.yaml'
+      - 'go.mod'
+      - 'go.sum'
+  workflow_dispatch:
+
+concurrency:
+  group: 'pages'
+  cancel-in-progress: true
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+
+    env:
+      HUGO_VERSION: 0.155.3
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: ${{ env.HUGO_VERSION }}
+          extended: true
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.24'
+
+      - name: Download Hugo modules
+        run: |
+          echo "📦 Downloading Hugo modules..."
+
+          # Initialize go.mod if needed
+          [ -f go.mod ] || go mod init github.com/${{ github.repository }}
+
+          # Download dependencies
+          go get -u ./...
+          go mod tidy
+
+          echo "✅ Modules ready"
+
+      - name: Build with Hugo
+        env:
+          HUGO_ENVIRONMENT: production
+          HUGO_CACHEDIR: ${{ runner.temp }}/hugo_cache
+        run: |
+          echo "🔨 Building site..."
+
+          hugo --minify \
+            --printI18nWarnings \
+            --printPathWarnings \
+            --printUnusedTemplates \
+            --logLevel info
+
+          echo "✅ Build complete"
+          echo "📊 Public directory size:"
+          du -sh public/
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
+          publish_branch: gh-pages
+          force_orphan: true
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
+          commit_message: 'Deploy documentation'
+
+      - name: Deployment summary
+        run: |
+          echo "### ✅ Site deployed successfully" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "🔗 **URL:** https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/" >> $GITHUB_STEP_SUMMARY
+          echo "📦 **Pages:** $(find public -name '*.html' | wc -l)" >> $GITHUB_STEP_SUMMARY
+          echo "📄 **Size:** $(du -sh public | cut -f1)" >> $GITHUB_STEP_SUMMARY

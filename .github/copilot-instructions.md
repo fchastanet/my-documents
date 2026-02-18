@@ -288,7 +288,7 @@ pre-commit run -a
 
 3. **Write content** using Markdown with optional Docsy shortcodes
 
-4. **Test locally:** `hugo server -D` and verify at http://localhost:1313/my-documents/
+4. **Test locally:** `hugo server -D` and verify at <http://localhost:1313/my-documents/>
 
 5. **Commit and push**
 

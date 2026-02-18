@@ -4,6 +4,11 @@
     "public": true
   },
   "workbench.editorAssociations": {
-    "*.md": "default"
+    "*.md": "default",
+    "*.puml": "default",
+    "*.html": "default"
+  },
+  "[gohtml]": {
+    "editor.defaultFormatter": "golang.go"
   }
 }

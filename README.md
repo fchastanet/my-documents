@@ -107,7 +107,106 @@ Output is generated in the `public/` directory.
 hugo --printI18nWarnings --printPathWarnings --printUnusedTemplates
 ```
 
-## 4. Documentation Structure
+## 4. Multi-Site Orchestrator
+
+This repository serves as a **centralized orchestrator** for building multiple documentation sites:
+
+- `my-documents` (this repository)
+- `bash-compiler`
+- `bash-tools`
+- `bash-tools-framework`
+- `bash-dev-env`
+
+All sites share:
+
+- Common Hugo theme and layouts (`shared/`)
+- Base configuration (`configs/_base.yaml`)
+- SEO enhancements and structured data
+- Build workflows and CI/CD automation
+
+Each site has its own:
+
+- Content (`content/`)
+- Site-specific configuration (`configs/[site].yaml`)
+- Branding (colors, links, metadata)
+
+### 4.1. Testing Multi-Site Locally
+
+To test multiple sites locally using symlinks:
+
+**Step 1: Clone related repositories**
+
+```bash
+cd /path/to/your/workspace
+git clone https://github.com/fchastanet/my-documents.git
+git clone https://github.com/fchastanet/bash-compiler.git
+git clone https://github.com/fchastanet/bash-tools.git
+git clone https://github.com/fchastanet/bash-tools-framework.git
+git clone https://github.com/fchastanet/bash-dev-env.git
+```
+
+**Step 2: Install dependencies**
+
+```bash
+cd my-documents
+make install  # Installs Hugo, yq, npm packages, Go modules
+```
+
+**Step 3: Link repositories**
+
+```bash
+make link-repos  # Creates symlinks in sites/ directory
+```
+
+This creates:
+
+```text
+my-documents/sites/
+├── bash-compiler -> ../../bash-compiler
+├── bash-tools -> ../../bash-tools
+├── bash-tools-framework -> ../../bash-tools-framework
+└── bash-dev-env -> ../../bash-dev-env
+```
+
+**Step 4: Build and test**
+
+```bash
+# Build all sites
+make build-all
+
+# Test all sites with curl
+make test-all
+
+# Build a specific site
+make build-site SITE=bash-compiler
+```
+
+**Step 5: Clean up**
+
+```bash
+# Remove symlinks
+make unlink-repos
+
+# Clean build artifacts
+make clean
+```
+
+### 4.2. Makefile Commands
+
+```bash
+make help           # Show all available commands
+make install        # Install all dependencies
+make link-repos     # Create symlinks to other repos
+make unlink-repos   # Remove symlinks
+make build-all      # Build all sites locally
+make build-site     # Build specific site (SITE=name)
+make test-all       # Build and test all sites with curl
+make start          # Start Hugo dev server (my-documents)
+make build          # Build my-documents only
+make clean          # Remove build artifacts
+```
+
+## 5. Documentation Structure
 
 The documentation is organized as follows:
 
@@ -122,7 +221,7 @@ content/en/
     └── other-projects/      # Links to related projects
 ```
 
-### 4.1. Adding New Documentation
+### 5.1. Adding New Documentation
 
 1. Create a Markdown file in the appropriate `content/en/docs/` subdirectory
 2. Add frontmatter with title, description, and weight (for ordering)
@@ -140,7 +239,7 @@ weight: 10
 Your content here...
 ```
 
-## 5. Content Guidelines
+## 6. Content Guidelines
 
 - Keep Markdown files focused and well-organized
 - Use ATX-style headers (`#`, `##`, etc.)
@@ -149,7 +248,7 @@ Your content here...
 - Use relative links for internal navigation
 - Code blocks should specify language: `` ```bash ```, `` ```yaml```, etc.
 
-## 6. SEO Features
+## 7. SEO Features
 
 This site includes the following SEO optimizations:
 
@@ -163,15 +262,24 @@ This site includes the following SEO optimizations:
 - Open Graph and Twitter card support
 - Breadcrumb navigation with schema markup
 
-## 7. CI/CD Pipelines
+## 8. CI/CD Pipelines
 
-### 7.1. Hugo Build & Deploy (`hugo-build-deploy.yml`)
+### 8.1. Build All Sites (`build-all-sites.yml`)
 
-- Builds on push to `master` branch
+Centralized orchestrator that:
+
+- Builds all documentation sites in parallel
+- Merges base + site-specific configs using `yq`
+- Deploys each site to its own GitHub Pages
+- Triggers on push to `master` or via `repository_dispatch`
+
+### 8.2. Hugo Build & Deploy (`hugo-build-deploy.yml`)
+
+- Builds my-documents site only
 - Validates build output
 - Deploys to GitHub Pages automatically
 
-### 7.2. Pre-commit Linting (`lint.yml`)
+### 8.3. Pre-commit Linting (`lint.yml`)
 
 - Runs Markdown and code quality checks
 - Auto-fixes formatting/linting issues
