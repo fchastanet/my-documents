@@ -167,13 +167,20 @@ jobs:
         env:
           HUGO_ENVIRONMENT: production
 
+      - name: Generate GitHub App token for ${{ matrix.site.name }}
+        if: ${{ !matrix.site.self }}
+        id: app-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.DOC_APP_ID }}
+          private-key: ${{ secrets.DOC_APP_PRIVATE_KEY }}
+          owner: fchastanet
+          repositories: ${{ matrix.site.name }}
+
       - name: Deploy ${{ matrix.site.name }} to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
-          github_token: ${{ matrix.site.self && secrets.GITHUB_TOKEN || '' }}
-          deploy_key:
-            ${{ !matrix.site.self && secrets[format('DEPLOY_KEY_{0}', matrix.site.name | upper | replace('-', '_'))] ||
-            '' }}
+          github_token: ${{ matrix.site.self && secrets.GITHUB_TOKEN || steps.app-token.outputs.token }}
           external_repository: ${{ !matrix.site.self && matrix.site.repo || '' }}
           publish_dir: ${{ env.BUILD_DIR }}/public
           publish_branch: gh-pages
