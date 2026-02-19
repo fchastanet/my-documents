@@ -26,6 +26,7 @@ on:
       - 'go.mod'
       - 'go.sum'
   workflow_dispatch:
+  pull_request:
 
 concurrency:
   group: 'pages'
