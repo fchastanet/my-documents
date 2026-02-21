@@ -37,7 +37,9 @@ cp -r shared/* "${BUILD_DIR}/${SITE}/" 2>/dev/null || true
 
 # Copy site content
 cp -r "${SITES_DIR}/${SITE}/content" "${BUILD_DIR}/${SITE}/"
-[ -d "${SITES_DIR}/${SITE}/static" ] && cp -r "${SITES_DIR}/${SITE}/static" "${BUILD_DIR}/${SITE}/" || true
+if [ -d "${SITES_DIR}/${SITE}/static" ]; then
+  cp -r "${SITES_DIR}/${SITE}/static" "${BUILD_DIR}/${SITE}/"
+fi
 
 # Merge configurations
 yq eval-all 'select(fileIndex == 0) * select(fileIndex == 1)' \

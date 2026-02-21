@@ -83,7 +83,7 @@ jobs:
 
       - name: Install Node.js dependencies
         run: |
-          [[ -f package-lock.json || -f npm-shrinkwrap.json ]] && npm ci
+          npm ci
 
       - name: Install yq for YAML merging
         run: |
@@ -110,22 +110,37 @@ jobs:
 
             # Copy shared resources from orchestrator
             echo "  Copying shared layouts..."
-            [ -d "orchestrator/shared/layouts" ] && cp -r orchestrator/shared/layouts "$BUILD_DIR/" || true
+            if [ -d "orchestrator/shared/layouts" ]; then
+              mkdir -p "$BUILD_DIR/layouts"
+              cp -r orchestrator/shared/layouts/* "$BUILD_DIR/layouts/"
+            fi
             echo "  Copying shared assets..."
-            [ -d "orchestrator/shared/assets" ] && cp -r orchestrator/shared/assets "$BUILD_DIR/" || true
+            if [ -d "orchestrator/shared/assets" ]; then
+              mkdir -p "$BUILD_DIR/assets"
+              cp -r orchestrator/shared/assets/* "$BUILD_DIR/assets/"
+            fi
             echo "  Copying shared archetypes..."
-            [ -d "orchestrator/shared/archetypes" ] && cp -r orchestrator/shared/archetypes "$BUILD_DIR/" || true
+            if [ -d "orchestrator/shared/archetypes" ]; then
+              mkdir -p "$BUILD_DIR/archetypes"
+              cp -r orchestrator/shared/archetypes/* "$BUILD_DIR/archetypes/"
+            fi
 
             # Copy site content
             echo "  Copying content..."
             cp -r sites/${{ matrix.site.name }}/content "$BUILD_DIR/"
 
             echo "  Copying static files..."
-            [ -d "sites/${{ matrix.site.name }}/static" ] && cp -r sites/${{ matrix.site.name }}/static "$BUILD_DIR/" || true
+            if [ -d "sites/${{ matrix.site.name }}/static" ]; then
+              cp -r sites/${{ matrix.site.name }}/static "$BUILD_DIR/"
+            fi
 
             # Copy go.mod and go.sum if they exist
-            [ -f "sites/${{ matrix.site.name }}/go.mod" ] && cp sites/${{ matrix.site.name }}/go.mod "$BUILD_DIR/" || true
-            [ -f "sites/${{ matrix.site.name }}/go.sum" ] && cp sites/${{ matrix.site.name }}/go.sum "$BUILD_DIR/" || true
+            if [ -f "sites/${{ matrix.site.name }}/go.mod" ]; then
+              cp sites/${{ matrix.site.name }}/go.mod "$BUILD_DIR/"
+            fi
+            if [ -f "sites/${{ matrix.site.name }}/go.sum" ]; then
+              cp sites/${{ matrix.site.name }}/go.sum "$BUILD_DIR/"
+            fi
 
             # Merge configs using yq (proper YAML deep merge)
             echo "  Merging configurations..."
@@ -137,8 +152,12 @@ jobs:
             yq eval -i ".baseURL = \"${{ matrix.site.baseURL }}/\"" "$BUILD_DIR/hugo.yaml"
 
             # Copy go.mod and go.sum from orchestrator if not present in site
-            [ -f "orchestrator/go.mod" ] && [ ! -f "$BUILD_DIR/go.mod" ] && cp orchestrator/go.mod "$BUILD_DIR/"
-            [ -f "orchestrator/go.sum" ] && [ ! -f "$BUILD_DIR/go.sum" ] && cp orchestrator/go.sum "$BUILD_DIR/"
+            if [[ -f "orchestrator/go.mod" && ! -f "$BUILD_DIR/go.mod" ]]; then
+              cp orchestrator/go.mod "$BUILD_DIR/"
+            fi
+            if [[ -f "orchestrator/go.sum" && ! -f "$BUILD_DIR/go.sum" ]]; then
+              cp orchestrator/go.sum "$BUILD_DIR/"
+            fi
 
             echo "✅ Build directory prepared for ${{ matrix.site.name }}"
           fi

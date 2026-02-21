@@ -42,9 +42,9 @@ for repo in "${REPOS[@]}"; do
   if [ -d "${BUILD_DIR}/${repo}/public" ]; then
     (
       echo "  Testing ${repo}..."
-      trap '(kill $SERVER_PID 2>/dev/null; sleep 1) || true' EXIT
+      trap '(kill $SITE_SERVER_PID 2>/dev/null; sleep 1) || true' EXIT
       hugo server -D --source "${SITES_DIR}/${repo}" --port 1314 > /dev/null 2>&1 &
-      SERVER_PID=$!
+      SITE_SERVER_PID=$!
       sleep 2
 
       if curl -s -o /dev/null -w "%{http_code}" "http://localhost:1314/${repo}/" | grep -q "200"; then

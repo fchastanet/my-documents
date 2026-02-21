@@ -27,7 +27,8 @@ done
 
 # Remove sites directory if empty
 if [ -d "$SITES_DIR" ]; then
-  rmdir "$SITES_DIR" 2>/dev/null && echo -e "${GREEN}✓${NC} Removed empty ${SITES_DIR}" || true
+  rmdir "$SITES_DIR" 2>/dev/null || true
+  echo -e "${GREEN}✓${NC} Removed empty ${SITES_DIR}"
 fi
 
 echo -e "${GREEN}✅ Symlinks removed${NC}"
