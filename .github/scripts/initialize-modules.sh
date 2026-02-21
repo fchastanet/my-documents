@@ -3,7 +3,7 @@
 # Usage: ./initialize-modules.sh BUILD_DIR [SITE_NAME]
 # Example: ./initialize-modules.sh orchestrator
 
-set -euo pipefail
+# shellcheck source=.github/scripts/common.sh
 source "$(dirname "$0")/common.sh"
 
 BUILD_DIR="${1:?Error: BUILD_DIR argument required}"

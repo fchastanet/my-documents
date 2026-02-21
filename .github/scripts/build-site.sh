@@ -3,7 +3,9 @@
 # Usage: ./build-site.sh SITE SITE_NAME [BUILD_DIR]
 # Example: ./build-site.sh sites/bash-compiler bash-compiler build
 
+# shellcheck source=.github/scripts/common.sh
 source "$(dirname "$0")/common.sh"
+
 if (( $# < 2 )); then
   echo -e "${YELLOW}Usage: $0 SITE SITE_NAME [BUILD_DIR]${NC}"
   echo -e "${YELLOW}Example: $0 sites/bash-compiler bash-compiler build${NC}"

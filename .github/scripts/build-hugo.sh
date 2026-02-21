@@ -3,7 +3,7 @@
 # Usage: ./build-hugo.sh BUILD_DIR [SITE_NAME] [BASE_URL]
 # Example: ./build-hugo.sh orchestrator my-documents "https://fchastanet.github.io/my-documents"
 
-set -euo pipefail
+# shellcheck source=.github/scripts/common.sh
 source "$(dirname "$0")/common.sh"
 
 BUILD_DIR="${1:?Error: BUILD_DIR argument required}"

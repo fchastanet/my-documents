@@ -2,6 +2,7 @@
 # Install Hugo extended build
 # Usage: ./install-hugo.sh [VERSION]
 
+# shellcheck source=.github/scripts/common.sh
 source "$(dirname "$0")/common.sh"
 
 HUGO_VERSION="${1:-0.155.3}"

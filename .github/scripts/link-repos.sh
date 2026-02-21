@@ -3,6 +3,7 @@
 # Usage: ./link-repos.sh [SITES_DIR] [REPOS...]
 # Example: ./link-repos.sh sites bash-compiler bash-tools bash-tools-framework bash-dev-env
 
+# shellcheck source=.github/scripts/common.sh
 source "$(dirname "$0")/common.sh"
 
 PARENT_DIR=$(cd "$(dirname "$0")/../.." && pwd)

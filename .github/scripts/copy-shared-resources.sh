@@ -3,8 +3,7 @@
 # Usage: ./copy-shared-resources.sh SOURCE_DIR TARGET_DIR
 # Example: ./copy-shared-resources.sh orchestrator/shared build/bash-compiler
 
-set -euo pipefail
-
+# shellcheck source=.github/scripts/common.sh
 source "$(dirname "$0")/common.sh"
 
 SOURCE_DIR="${1:?Error: SOURCE_DIR argument required}"

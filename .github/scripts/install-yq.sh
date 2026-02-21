@@ -2,6 +2,7 @@
 # Install yq YAML processor
 # Usage: ./install-yq.sh
 
+# shellcheck source=.github/scripts/common.sh
 source "$(dirname "$0")/common.sh"
 
 if command -v yq >/dev/null 2>&1; then

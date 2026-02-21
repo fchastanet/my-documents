@@ -3,8 +3,7 @@
 # Usage: ./merge-configs.sh BASE_CONFIG SITE_CONFIG OUTPUT_FILE [BASE_URL]
 # Example: ./merge-configs.sh configs/_base.yaml configs/bash-compiler.yaml build/bash-compiler/hugo.yaml
 
-set -euo pipefail
-
+# shellcheck source=.github/scripts/common.sh
 source "$(dirname "$0")/common.sh"
 
 BASE_CONFIG="${1:?Error: BASE_CONFIG argument required}"

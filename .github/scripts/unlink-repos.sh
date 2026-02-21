@@ -3,6 +3,7 @@
 # Usage: ./unlink-repos.sh [SITES_DIR] [REPOS...]
 # Example: ./unlink-repos.sh sites bash-compiler bash-tools bash-tools-framework bash-dev-env
 
+# shellcheck source=.github/scripts/common.sh
 source "$(dirname "$0")/common.sh"
 
 SITES_DIR="${1:-.}"

@@ -5,8 +5,7 @@
 # Example: ./prepare-build.sh my-documents orchestrator . . "https://fchastanet.github.io/my-documents"
 # Example: ./prepare-build.sh bash-compiler orchestrator sites/bash-compiler build/bash-compiler "https://fchastanet.github.io/bash-compiler"
 
-set -euo pipefail
-
+# shellcheck source=.github/scripts/common.sh
 source "$(dirname "$0")/common.sh"
 
 SITE_NAME="${1:?Error: SITE_NAME argument required}"

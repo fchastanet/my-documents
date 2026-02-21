@@ -4,8 +4,7 @@
 # Example: ./deploy-site.sh bash-compiler build/bash-compiler/public fchastanet/bash-compiler
 # If EXTERNAL_REPO is empty, uses default GITHUB_TOKEN environment variable
 
-set -euo pipefail
-
+# shellcheck source=.github/scripts/common.sh
 source "$(dirname "$0")/common.sh"
 
 SITE_NAME="${1:?Error: SITE_NAME argument required}"

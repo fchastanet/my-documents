@@ -3,6 +3,7 @@
 # Usage: ./test-all.sh [BUILD_DIR] [SITES_DIR] [REPOS...]
 # Example: ./test-all.sh build sites bash-compiler bash-tools bash-tools-framework bash-dev-env
 
+# shellcheck source=.github/scripts/common.sh
 source "$(dirname "$0")/common.sh"
 
 BUILD_DIR="${1:-build}"
