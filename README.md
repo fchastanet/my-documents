@@ -25,6 +25,19 @@
 [![DeepSource](https://deepsource.io/gh/fchastanet/my-documents.svg/?label=active+issues&show_trend=true)](https://deepsource.io/gh/fchastanet/my-documents/?ref=repository-badge "DeepSource active issues")
 [![DeepSource](https://deepsource.io/gh/fchastanet/my-documents.svg/?label=resolved+issues&show_trend=true)](https://deepsource.io/gh/fchastanet/my-documents/?ref=repository-badge "DeepSource resolved issues")
 
+<!--TOC-->
+
+- [1. Documentation Content](#1-documentation-content)
+  - [1.1. Bash scripts](#11-bash-scripts)
+  - [1.2. HowTos](#12-howtos)
+  - [1.3. Lists](#13-lists)
+- [2. Technical Architecture Summary](#2-technical-architecture-summary)
+- [3. Reusable Workflow for Dependent Repositories](#3-reusable-workflow-for-dependent-repositories)
+  - [3.1. Quick Start](#31-quick-start)
+  - [3.2. Full Documentation](#32-full-documentation)
+
+<!--TOC-->
+
 ## 1. Documentation Content
 
 ### 1.1. Bash scripts
@@ -47,7 +60,7 @@
 
 ## 2. Technical Architecture Summary
 
-This section summarizes the orchestrator's technical architecture. For full details, see [Technical-Architecture.md](/docs/my-documents/Technical-Architecture.md).
+This section summarizes the orchestrator's technical architecture. For full details, see [Technical-Architecture.md](/content/docs/my-documents/Technical-Architecture.md).
 
 - Centralized orchestrator builds and deploys five documentation sites using Hugo and Docsy.
 - Sites managed: my-documents, bash-compiler, bash-tools, bash-tools-framework, bash-dev-env.
@@ -68,3 +81,51 @@ This section summarizes the orchestrator's technical architecture. For full deta
 - CI/CD: lint, build, and deploy workflows run on master branch.
 - Custom dictionaries for Bash terms; auto-sorted and enforced.
 - Robust, scalable, and secure multi-site documentation platform.
+
+## 3. Reusable Workflow for Dependent Repositories
+
+The `trigger-docs-reusable.yml` workflow enables dependent repositories to trigger documentation builds in my-documents
+without managing secrets or authentication.
+
+### 3.1. Quick Start
+
+Add this to `.github/workflows/trigger-docs.yml` in your dependent repository:
+
+```yaml
+---
+name: Trigger Documentation Build
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - 'content/**'
+      - 'static/**'
+
+jobs:
+  trigger-docs:
+    uses: fchastanet/my-documents/.github/workflows/trigger-docs-reusable.yml@master
+    secrets: inherit
+```
+
+**That's it!** No secrets configuration needed. The workflow automatically:
+
+- ✅ Uses GitHub App authentication (no PAT tokens required)
+- ✅ Triggers centralized build in my-documents
+- ✅ Provides detailed build status and links
+- ✅ Handles all authentication securely
+
+### 3.2. Full Documentation
+
+For detailed documentation including advanced usage, troubleshooting, and migration guide:
+
+**📖 [Trigger My-Documents Workflow Documentation](content/docs/my-documents/trigger-my-documents-workflow.md)**
+
+Topics covered:
+
+- Architecture and authentication flow
+- Configuration options and input parameters
+- Advanced usage examples
+- Troubleshooting guide
+- Migration from PAT-based approach
+- Best practices and FAQ

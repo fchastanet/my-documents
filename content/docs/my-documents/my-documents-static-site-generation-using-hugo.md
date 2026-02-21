@@ -5,7 +5,7 @@ creationDate: "2026-02-18"
 lastUpdated: "2026-02-18"
 version: "1.0"
 categories: [Brainstorming]
-tags: [hugo, docsy, multi-site, documentation, static-site-generator, github-actions]
+tags: [hugo, docsy, multi-site, documentation, static-site-generator, github-actions, ai-generated]
 ---
 # My Documents - Static Site Generation Using Hugo - Migration Analysis and Implementation
 

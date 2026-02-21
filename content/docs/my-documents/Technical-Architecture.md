@@ -2,7 +2,7 @@
 title: My Documents - Technical Architecture and Documentation Site Implementation
 description: Overview of the technical architecture and implementation details of the My Documents documentation site built with Hugo
 categories: [Documentation]
-tags: [hugo, docsy, multi-site, documentation, static-site-generator, github-actions]
+tags: [hugo, docsy, multi-site, documentation, static-site-generator, github-actions, ai-generated]
 creationDate: "2026-02-18"
 lastUpdated: "2026-02-18"
 version: "1.0"
