@@ -132,7 +132,7 @@ without seeing the Dockerfile files, we can advise :
     - reduce the total image size because of the reuse different docker image layers
     - only one Dockerfile to maintain
 
-## 2. More advanced and annotated jenkinsfiles
+## 2. More advanced and annotated Jenkinsfiles
 
 - [php project with helm push](05-01-Annotated-Jenkinsfiles.md)
 - [javascript project with docker build and S3 push](05-02-Annotated-Jenkinsfiles.md)

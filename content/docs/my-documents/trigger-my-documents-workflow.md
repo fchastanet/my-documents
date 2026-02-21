@@ -209,7 +209,7 @@ jobs:
   trigger-docs:
     uses: fchastanet/my-documents/.github/workflows/trigger-docs-reusable.yml@master
     with:
-      target_org: 'myorg'
+      target_org: 'myOrg'
       target_repo: 'my-docs'
       workflow_filename: 'build-docs.yml'
     secrets: inherit

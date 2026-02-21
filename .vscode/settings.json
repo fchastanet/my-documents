@@ -3,6 +3,13 @@
     "**/.git": true,
     "public": true
   },
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/bower_components": true,
+    "**/*.code-search": true,
+    "build/**": true,
+    "sites/**": true
+  },
   "workbench.editorAssociations": {
     "*.md": "default",
     "*.puml": "default",
