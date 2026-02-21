@@ -43,13 +43,20 @@ cp -r "${SITES_DIR}/${SITE}/content" "${BUILD_DIR}/${SITE}/"
 yq eval-all 'select(fileIndex == 0) * select(fileIndex == 1)' \
   configs/_base.yaml "configs/${SITE}.yaml" > "${BUILD_DIR}/${SITE}/hugo.yaml"
 
-# Build site
-cd "${BUILD_DIR}/${SITE}"
-go mod init "github.com/fchastanet/${SITE}" 2>/dev/null || true
-go get -u github.com/google/docsy@v0.14.2
-go get -u github.com/google/docsy/dependencies@v0.7.2
-go mod tidy
-hugo --minify
+# Copy go.mod if exists
+if [ -f "${SITES_DIR}/${SITE}/go.mod" ]; then
+  cp "${SITES_DIR}/${SITE}/go.mod" "${SITES_DIR}/${SITE}/go.sum" "${BUILD_DIR}/${SITE}/"
+else
+  # copy my-documents go.mod as a template if it exists
+  cp "go.mod" "go.sum" "${BUILD_DIR}/${SITE}/"
+fi
 
+# Build site
+(
+  cd "${BUILD_DIR}/${SITE}"
+  go get -u ./...
+  go mod tidy
+  hugo --minify
+)
 echo -e "${GREEN}✅ ${SITE} built successfully${NC}"
 echo -e "  Output: ${BUILD_DIR}/${SITE}/public/"

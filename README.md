@@ -60,7 +60,7 @@
 
 ## 2. Technical Architecture Summary
 
-This section summarizes the orchestrator's technical architecture. For full details, see [Technical-Architecture.md](/content/docs/my-documents/Technical-Architecture.md).
+This section summarizes the orchestrator's technical architecture. For full details, see [Technical Architecture](/content/docs/my-documents/technical-architecture.md).
 
 - Centralized orchestrator builds and deploys five documentation sites using Hugo and Docsy.
 - Sites managed: my-documents, bash-compiler, bash-tools, bash-tools-framework, bash-dev-env.
