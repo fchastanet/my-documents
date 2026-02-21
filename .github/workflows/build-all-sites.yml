@@ -53,7 +53,7 @@ jobs:
 
     steps:
       - name: Checkout my-documents (orchestrator)
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           repository: fchastanet/my-documents
           path: orchestrator
@@ -61,12 +61,17 @@ jobs:
 
       - name: Checkout ${{ matrix.site.name }} content
         if: ${{ !matrix.site.self }}
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           repository: ${{ matrix.site.repo }}
           path: sites/${{ matrix.site.name }}
           ref: master
           fetch-depth: 0
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.24'
 
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v3
@@ -74,10 +79,12 @@ jobs:
           hugo-version: '0.155.3'
           extended: true
 
-      - name: Setup Go
-        uses: actions/setup-go@v5
-        with:
-          go-version: '1.24'
+      - name: Install Dart Sass
+        run: sudo snap install dart-sass
+
+      - name: Install Node.js dependencies
+        run: |
+          [[ -f package-lock.json || -f npm-shrinkwrap.json ]] && npm ci
 
       - name: Install yq for YAML merging
         run: |
@@ -130,6 +137,10 @@ jobs:
             # Override baseURL (ensure trailing slash)
             yq eval -i ".baseURL = \"${{ matrix.site.baseURL }}/\"" "$BUILD_DIR/hugo.yaml"
 
+            # Copy go.mod and go.sum from orchestrator if not present in site
+            [ -f "orchestrator/go.mod" ] && [ ! -f "$BUILD_DIR/go.mod" ] && cp orchestrator/go.mod "$BUILD_DIR/"
+            [ -f "orchestrator/go.sum" ] && [ ! -f "$BUILD_DIR/go.sum" ] && cp orchestrator/go.sum "$BUILD_DIR/"
+
             echo "✅ Build directory prepared for ${{ matrix.site.name }}"
           fi
           echo "BUILD_DIR=$BUILD_DIR" >> $GITHUB_ENV
@@ -137,22 +148,18 @@ jobs:
       - name: Initialize Go modules for ${{ matrix.site.name }}
         working-directory: ${{ env.BUILD_DIR }}
         run: |
-          # Initialize go.mod if it doesn't exist
-          if [ ! -f go.mod ]; then
-            echo "Initializing Go module..."
-            go mod init github.com/${{ matrix.site.repo }}
-          fi
-
           # Download Hugo modules using Go
           echo "Downloading Hugo modules..."
-          go get -u github.com/google/docsy@v0.14.2
-          go get -u github.com/google/docsy/dependencies@v0.7.2
+          go get -u ./...
           go mod tidy
 
           echo "✅ Go modules ready"
 
       - name: Build ${{ matrix.site.name }}
         working-directory: ${{ env.BUILD_DIR }}
+        env:
+          HUGO_CACHEDIR: ${{ runner.temp }}/hugo_cache
+          HUGO_ENVIRONMENT: production
         run: |
           echo "🔨 Building ${{ matrix.site.name }}..."
           hugo --minify \
@@ -165,13 +172,11 @@ jobs:
           echo "✅ Build complete for ${{ matrix.site.name }}"
           echo "📊 Public directory size:"
           du -sh public/
-        env:
-          HUGO_ENVIRONMENT: production
 
       - name: Generate GitHub App token for ${{ matrix.site.name }}
         if: ${{ !matrix.site.self }}
         id: app-token
-        uses: actions/create-github-app-token@v1
+        uses: actions/create-github-app-token@v2
         with:
           app-id: ${{ secrets.DOC_APP_ID }}
           private-key: ${{ secrets.DOC_APP_PRIVATE_KEY }}
