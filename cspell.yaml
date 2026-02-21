@@ -30,6 +30,7 @@ ignorePaths:
   - .env
   - '**/*/svg'
   - TODO.md
+  - 'doc/ai/**'
 ignoreRegExpList:
   - urls
   - packages
@@ -45,5 +46,27 @@ dictionaryDefinitions:
   - name: myBash
     path: '.cspell/bash.txt'
     addWords: true
+  - name: documentation
+    path: '.cspell/documentation.txt'
+    addWords: true
+  - name: generic
+    path: '.cspell/generic.txt'
+    addWords: true
+  - name: softwares
+    path: '.cspell/softwares.txt'
+    addWords: true
 dictionaries:
-  - 'myBash'
+  - 'generic'
+  - 'softwares'
+overrides:
+  - filename:
+      - '**/*.md'
+      - 'content/**'
+    dictionaries:
+      - 'documentation'
+      - 'myBash'
+    replace: true
+  - filename:
+      - '**/*.sh'
+    dictionaries:
+      - 'myBash'

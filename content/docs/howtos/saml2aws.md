@@ -52,7 +52,7 @@ aws eks update-kubeconfig --name $clusterName --region us-east-1
 
 ## 3. Common issues
 
-### 3.1. Error - error authenticating to IdP: unable to locate IDP oidc form submit URL
+### 3.1. Error - error authenticating to IdP: unable to locate IDP OIDC form submit URL
 
 This is very likely because you changed your account password. Reenter your password when prompted at saml2aws login
 

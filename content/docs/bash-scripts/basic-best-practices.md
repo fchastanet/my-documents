@@ -212,7 +212,7 @@ Compiler::Implement::mergeInterfacesFunctions "${COMPILED_FILE2}" | readarray -t
 But interfacesFunctions was empty because readarray is run in another process, to avoid this issue, I could have used
 `shopt -s lastpipe`
 
-But I finally transformed it to (the array in the same subshell so no issue):
+But I finally transformed it to (the array in the same sub-shell so no issue):
 
 ```bash
 Compiler::Implement::mergeInterfacesFunctions "${COMPILED_FILE2}" | {
@@ -223,7 +223,7 @@ Compiler::Implement::mergeInterfacesFunctions "${COMPILED_FILE2}" | {
 }
 ```
 
-The issue with this previous solution is that commands runs in a subshell but using `shopt -s lastpipe` could solve this
+The issue with this previous solution is that commands runs in a sub-shell but using `shopt -s lastpipe` could solve this
 issue.
 
 Another solution would be to simply read the array from stdin:
@@ -659,19 +659,19 @@ echo "${longMultilineString}" | head -n 1
 Finally I found this elegant [stackoverflow solution](https://unix.stackexchange.com/a/709880/582856):
 
 ```bash
-handle_pipefails() {
+handle_pipefail() {
   # ignore exit code 141 from simple command pipes
-  # - use with: cmd1 | cmd2 || handle_pipefails $?
+  # - use with: cmd1 | cmd2 || handle_pipefail $?
   (($1 == 141)) && return 0
   return $1
 }
 
 # then use it or test it as:
-yes | head -n 1 || handle_pipefails $?
+yes | head -n 1 || handle_pipefail $?
 echo "ec=$?"
 ```
 
-I added `handle_pipefails` as `Bash::handlePipelineFailure` in bash-tools-framework.
+I added `handle_pipefail` as `Bash::handlePipelineFailure` in bash-tools-framework.
 
 ## 14. Performances analysis
 

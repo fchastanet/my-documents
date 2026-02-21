@@ -44,7 +44,6 @@ jobs:
 
       - name: Run pre-commit
         uses: pre-commit/action@v3.0.1
-        if: false
         id: preCommit
         with:
           extra_args: >-
