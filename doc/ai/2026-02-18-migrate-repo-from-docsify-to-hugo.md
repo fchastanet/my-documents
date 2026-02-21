@@ -40,8 +40,9 @@ Before starting, ensure:
 
 - [ ] You have access to the repository to migrate
 - [ ] The repository name is one of: `bash-compiler`, `bash-tools`, `bash-tools-framework`, `bash-dev-env`
-- [ ] You have admin access to create secrets and deploy keys
+- [ ] You have admin access to create secrets and configure GitHub Apps
 - [ ] The `fchastanet/my-documents` orchestrator is already set up with configuration for this site
+- [ ] GitHub App "My Documents Site Deployer" exists and is accessible (or you can create it)
 
 ## Migration Steps
 
@@ -187,17 +188,45 @@ Before starting, ensure:
    hugo.yaml.tmp
    ```
 
-### Step 6: Setup GitHub Secrets
+### Step 6: Verify GitHub App Setup
 
 1. **In fchastanet/my-documents repository:**
    - Go to Settings → Secrets and variables → Actions
-   - Verify secret exists: `DEPLOY_KEY_[REPO_NAME]` (e.g., `DEPLOY_KEY_BASH_COMPILER`)
-   - Secret should contain the private SSH deploy key
+   - Verify secrets exist:
+     - `DOC_APP_ID` (GitHub App ID)
+     - `DOC_APP_PRIVATE_KEY` (GitHub App private key in PEM format)
 
-2. **In this repository (the one being migrated):**
+   - If secrets don't exist, see "Setup GitHub App" section below
+
+2. **Verify GitHub App installation:**
+   - Go to https://github.com/settings/installations
+   - Find "My Documents Site Deployer" (or your app name)
+   - Click "Configure"
+   - Ensure this repository is in the "Repository access" list
+   - If not, add it to the selection
+
+3. **In this repository (the one being migrated):**
    - Go to Settings → Secrets and variables → Actions
    - Add new secret: `DOCS_BUILD_TOKEN`
    - Value: Personal Access Token with `repo` scope
+
+**If GitHub App doesn't exist yet, create it:**
+
+```bash
+# Go to https://github.com/settings/apps/new
+# Fill in:
+#   - Name: "My Documents Site Deployer"
+#   - Description: "Deploys documentation sites to GitHub Pages"
+#   - Homepage: https://github.com/fchastanet/my-documents
+#   - Webhook: Uncheck "Active"
+#   - Repository permissions:
+#     * Contents: Read and write
+#     * Pages: Read and write
+#   - Where can install: Only on this account
+# Create app, generate private key, note App ID
+# Install on this repository
+# Add DOC_APP_ID and DOC_APP_PRIVATE_KEY to my-documents secrets
+```
 
 **How to create PAT:**
 
@@ -381,6 +410,37 @@ find content -name "*.md" -exec grep -H "!\[.*\](.*)" {} \;
 1. Move images to static/ directory
 2. Reference as `/images/file.png` (relative to static/)
 3. Verify image file extensions are lowercase
+
+### GitHub App Authentication Fails
+
+**Symptom:** Build fails with "Resource not accessible by integration" or "Not Found"
+
+**Solutions:**
+
+1. **Verify GitHub App is installed on this repository:**
+   - Go to https://github.com/settings/installations
+   - Find "My Documents Site Deployer"
+   - Click "Configure"
+   - Ensure this repository is in the "Repository access" list
+   - Add it if missing
+
+2. **Check app permissions:**
+   - GitHub App settings → Permissions & events
+   - Verify: Contents (Read and write), Pages (Read and write)
+   - Save changes if modified (may require re-approval)
+
+3. **Verify secrets in my-documents:**
+   - Settings → Secrets → Check `DOC_APP_ID` and `DOC_APP_PRIVATE_KEY` exist
+   - Private key should start with `-----BEGIN RSA PRIVATE KEY-----`
+   - If missing, regenerate in GitHub App settings
+
+4. **Check App ID is correct:**
+   - App settings page shows App ID at the top
+   - Must match `DOC_APP_ID` secret exactly
+
+5. **Wait a few minutes:**
+   - After installing app or changing permissions, wait 2-3 minutes
+   - GitHub needs time to propagate changes
 
 ### Trigger Workflow Not Running
 

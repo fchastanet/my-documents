@@ -1,0 +1,8 @@
+fileignoreconfig:
+- filename: doc/ai/2026-02-18-migrate-repo-from-docsify-to-hugo.md
+  checksum: fda4ec09cccab14a8e848d1edc045949d82410dd8bea993c35082c8d34dad992
+- filename: doc/ai/2026-02-21-reusable-trigger-workflow.md
+  checksum: 8f5223c7df8359628ece203785d0f65ddd87df49d4ea3dfa2091ebf668b6a977
+- filename: doc/ai/2026-02-18-github-app-migration.md
+  checksum: b98aa38403b66e78f84d2e207e246adfa991c3b4a57528b02543f14695367d84
+version: "1.0"

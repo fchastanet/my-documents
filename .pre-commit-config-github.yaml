@@ -107,7 +107,6 @@ repos:
       - id: mixed-line-ending
         args: [--fix=lf]
       - id: fix-byte-order-marker
-      - id: detect-private-key
       - id: end-of-file-fixer
         exclude: ^.idea/.*$
       - id: check-executables-have-shebangs
@@ -123,6 +122,12 @@ repos:
         args: [--ignore-case]
         stages: [pre-commit, pre-push, manual]
       - id: trailing-whitespace
+
+  - repo: https://github.com/thoughtworks/talisman
+    rev: 'v1.37.0'
+    hooks:
+      - id: talisman-push
+      - id: talisman-commit
 
   - repo: https://github.com/codespell-project/codespell
     rev: v2.4.1
