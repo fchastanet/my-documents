@@ -66,7 +66,7 @@ build-site:
 	  echo "$(YELLOW)Usage: make build-site SITE=bash-compiler$(NC)"; \
 	  exit 1; \
 	fi
-	@$(SCRIPT_DIR)/build-site.sh $(SITE) $(BUILD_DIR) $(SITES_DIR)
+	@$(SCRIPT_DIR)/build-site.sh $(SITES_DIR)/$(SITE) $(SITE) $(BUILD_DIR)
 
 # Build all sites
 build-all: link-repos
@@ -78,12 +78,7 @@ test-all: build-all
 
 # Build my-documents only
 build:
-	@echo "$(BLUE)Building my-documents...$(NC)"
-	@yq eval-all 'select(fileIndex == 0) * select(fileIndex == 1)' \
-	  configs/_base.yaml configs/my-documents.yaml > hugo.yaml.tmp && \
-	  mv hugo.yaml.tmp hugo.yaml
-	@hugo --printI18nWarnings --printPathWarnings --printUnusedTemplates --minify
-	@echo "$(GREEN)✅ Build complete$(NC)"
+	@$(SCRIPT_DIR)/build-site.sh . my-documents build
 
 # Start Hugo dev server
 start:

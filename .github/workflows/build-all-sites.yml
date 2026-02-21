@@ -26,22 +26,27 @@ jobs:
         site:
           - name: my-documents
             repo: fchastanet/my-documents
+            repoRoot: orchestrator
             baseURL: 'https://fchastanet.github.io/my-documents'
             self: true
           - name: bash-compiler
             repo: fchastanet/bash-compiler
+            repoRoot: sites/bash-compiler
             baseURL: 'https://fchastanet.github.io/bash-compiler'
             self: false
           - name: bash-tools
             repo: fchastanet/bash-tools
+            repoRoot: sites/bash-tools
             baseURL: 'https://fchastanet.github.io/bash-tools'
             self: false
           - name: bash-tools-framework
             repo: fchastanet/bash-tools-framework
+            rpoRoot: sites/bash-tools-framework
             baseURL: 'https://fchastanet.github.io/bash-tools-framework'
             self: false
           - name: bash-dev-env
             repo: fchastanet/bash-dev-env
+            repoRoot: sites/bash-dev-env
             baseURL: 'https://fchastanet.github.io/bash-dev-env'
             self: false
 
@@ -93,103 +98,10 @@ jobs:
 
       - name: Prepare build for ${{ matrix.site.name }}
         run: |
-          if [ "${{ matrix.site.self }}" = "true" ]; then
-            BUILD_DIR="orchestrator"
-
-            # For my-documents, merge its own config
-            cd "$BUILD_DIR"
-            yq eval-all 'select(fileIndex == 0) * select(fileIndex == 1)' \
-              configs/_base.yaml \
-              configs/my-documents.yaml > hugo.yaml
-            echo "✅ Merged config for my-documents"
-          else
-            BUILD_DIR="build-${{ matrix.site.name }}"
-            mkdir -p "$BUILD_DIR"
-
-            echo "📦 Setting up ${{ matrix.site.name }}..."
-
-            # Copy shared resources from orchestrator
-            echo "  Copying shared layouts..."
-            if [ -d "orchestrator/shared/layouts" ]; then
-              mkdir -p "$BUILD_DIR/layouts"
-              cp -r orchestrator/shared/layouts/* "$BUILD_DIR/layouts/"
-            fi
-            echo "  Copying shared assets..."
-            if [ -d "orchestrator/shared/assets" ]; then
-              mkdir -p "$BUILD_DIR/assets"
-              cp -r orchestrator/shared/assets/* "$BUILD_DIR/assets/"
-            fi
-            echo "  Copying shared archetypes..."
-            if [ -d "orchestrator/shared/archetypes" ]; then
-              mkdir -p "$BUILD_DIR/archetypes"
-              cp -r orchestrator/shared/archetypes/* "$BUILD_DIR/archetypes/"
-            fi
-
-            # Copy site content
-            echo "  Copying content..."
-            cp -r sites/${{ matrix.site.name }}/content "$BUILD_DIR/"
-
-            echo "  Copying static files..."
-            if [ -d "sites/${{ matrix.site.name }}/static" ]; then
-              cp -r sites/${{ matrix.site.name }}/static "$BUILD_DIR/"
-            fi
-
-            # Copy go.mod and go.sum if they exist
-            if [ -f "sites/${{ matrix.site.name }}/go.mod" ]; then
-              cp sites/${{ matrix.site.name }}/go.mod "$BUILD_DIR/"
-            fi
-            if [ -f "sites/${{ matrix.site.name }}/go.sum" ]; then
-              cp sites/${{ matrix.site.name }}/go.sum "$BUILD_DIR/"
-            fi
-
-            # Merge configs using yq (proper YAML deep merge)
-            echo "  Merging configurations..."
-            yq eval-all 'select(fileIndex == 0) * select(fileIndex == 1)' \
-              orchestrator/configs/_base.yaml \
-              orchestrator/configs/${{ matrix.site.name }}.yaml > "$BUILD_DIR/hugo.yaml"
-
-            # Override baseURL (ensure trailing slash)
-            yq eval -i ".baseURL = \"${{ matrix.site.baseURL }}/\"" "$BUILD_DIR/hugo.yaml"
-
-            # Copy go.mod and go.sum from orchestrator if not present in site
-            if [[ -f "orchestrator/go.mod" && ! -f "$BUILD_DIR/go.mod" ]]; then
-              cp orchestrator/go.mod "$BUILD_DIR/"
-            fi
-            if [[ -f "orchestrator/go.sum" && ! -f "$BUILD_DIR/go.sum" ]]; then
-              cp orchestrator/go.sum "$BUILD_DIR/"
-            fi
-
-            echo "✅ Build directory prepared for ${{ matrix.site.name }}"
-          fi
-          echo "BUILD_DIR=$BUILD_DIR" >> $GITHUB_ENV
-
-      - name: Initialize Go modules for ${{ matrix.site.name }}
-        working-directory: ${{ env.BUILD_DIR }}
-        run: |
-          # Download Hugo modules using Go
-          echo "Downloading Hugo modules..."
-          go get -u ./...
-          go mod tidy
-
-          echo "✅ Go modules ready"
-
-      - name: Build ${{ matrix.site.name }}
-        working-directory: ${{ env.BUILD_DIR }}
-        env:
-          HUGO_CACHEDIR: ${{ runner.temp }}/hugo_cache
-          HUGO_ENVIRONMENT: production
-        run: |
-          echo "🔨 Building ${{ matrix.site.name }}..."
-          hugo --minify \
-            --baseURL "${{ matrix.site.baseURL }}/" \
-            --printI18nWarnings \
-            --printPathWarnings \
-            --printUnusedTemplates \
-            --logLevel info
-
-          echo "✅ Build complete for ${{ matrix.site.name }}"
-          echo "📊 Public directory size:"
-          du -sh public/
+          bash orchestrator/.github/scripts/build-site.sh \
+            "${{ matrix.site.repoRoot }}" \
+            "${{ matrix.site.name }}" \
+            "build"
 
       - name: Generate GitHub App token for ${{ matrix.site.name }}
         if: ${{ !matrix.site.self }}

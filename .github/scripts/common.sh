@@ -13,3 +13,11 @@ NC='\033[0m' # No Color
 
 # Export for use in subshells
 export BLUE GREEN YELLOW RED NC
+
+# print the parent script name for better debugging
+if [[ "${DEBUG:-0}" -eq 1 ]]; then
+  if [[ "${BASH_SOURCE[0]}" != "${0}" ]]; then
+    echo -e "${YELLOW}Sourcing common.sh from ${BASH_SOURCE[1]} $* ${NC}"
+  fi
+  set -x
+fi
