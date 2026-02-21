@@ -11,6 +11,8 @@ megalinter-reports/
 *megalinter_file_names_cspell.txt
 
 # Hugo files
-/public
+build/
+public/
+sites/
 resources/
 .hugo_build.lock

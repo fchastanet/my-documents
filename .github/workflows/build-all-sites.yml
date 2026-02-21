@@ -12,7 +12,6 @@ on:
       - 'shared/**'
       - 'configs/**'
       - '.github/workflows/build-all-sites.yml'
-  pull_request:
 
 concurrency:
   group: build-all-sites
