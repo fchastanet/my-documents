@@ -246,7 +246,7 @@ They can be called from any shell environment with:
 
 ### Script not found
 
-```
+```text
 ./script.sh: No such file or directory
 ```
 
@@ -257,7 +257,7 @@ chmod +x .github/scripts/*.sh
 
 ### Cannot locate colors.sh
 
-```
+```text
 source: line 1: /path/to/colors.sh: No such file or directory
 ```
 
@@ -265,7 +265,7 @@ source: line 1: /path/to/colors.sh: No such file or directory
 
 ### Permission denied
 
-```
+```text
 -bash: ./script.sh: Permission denied
 ```
 

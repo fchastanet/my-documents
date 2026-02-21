@@ -118,10 +118,11 @@ MARKDOWN_MARKDOWNLINT_FILTER_REGEX_EXCLUDE: |
     ^pages/doc|
     ^pages/bashDoc|
     ^pages/tests|
-    ^doc/guides/Options/generate.*\.md$
+    ^doc/guides/Options/generate.*\.md$|
+    ^doc/ai/
   )
 
-SPELL_CSPELL_CONFIG_FILE: cspell.yaml
+SPELL_CSPELL_CONFIG_FILE: cspell.json
 SPELL_CSPELL_FILTER_REGEX_EXCLUDE: |
   (?x)(
     \.git/|
@@ -154,3 +155,6 @@ HTML_HTMLHINT_FILTER_REGEX_EXCLUDE: |
     ^content/_index.html$|
     ^shared/layouts/partials/
   )
+
+STYLELINT_CONFIG_FILE: .stylelintrc.yaml
+STYLELINT_ARGUMENTS: '--syntax scss'

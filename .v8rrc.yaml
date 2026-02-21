@@ -38,3 +38,7 @@ customCatalog:
       description: dependabot
       fileMatch: ['.github/workflows/dependabot.yml']
       location: https://www.schemastore.org/dependabot-2.0.json
+    - name: hugo
+      description: hugo
+      fileMatch: ['configs/*.yaml']
+      location: https://www.schemastore.org/hugo.json

@@ -173,12 +173,12 @@ repos:
 
   - repo: local
     hooks:
-      - id: build site
+      - id: buildSite
         name: Build Hugo site
         language: system
         pass_filenames: false
         always_run: true
-        entry: hugo --printI18nWarnings --printPathWarnings --printUnusedTemplates
+        entry: make build
         stages: [pre-commit]
 
   # manual stage used to select github action with megalinter full config
