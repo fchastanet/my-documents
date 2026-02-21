@@ -5,4 +5,6 @@ fileignoreconfig:
   checksum: 8f5223c7df8359628ece203785d0f65ddd87df49d4ea3dfa2091ebf668b6a977
 - filename: doc/ai/2026-02-18-github-app-migration.md
   checksum: b98aa38403b66e78f84d2e207e246adfa991c3b4a57528b02543f14695367d84
+- filename: configs/bash-dev-env.yaml
+  checksum: 925488b5793bda648b98c609c1d4e06cac18e0bb9ea846691a76c6034c296153
 version: "1.0"

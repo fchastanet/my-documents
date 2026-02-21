@@ -27,15 +27,6 @@ params:
         url: https://github.com/fchastanet/bash-tools-framework/issues
         icon: fas fa-bug
         desc: Report issues
-    developer:
-      - name: Bash Tools
-        url: https://fchastanet.github.io/bash-tools/
-        icon: fas fa-tools
-        desc: Bash Tools
-      - name: Bash Compiler
-        url: https://fchastanet.github.io/bash-compiler/
-        icon: fas fa-hammer
-        desc: Bash Compiler
 
   # SEO
   meta:
@@ -43,7 +34,7 @@ params:
     keywords: 'bash, framework, application, development, cli, build-tools'
 
 menu:
-  main:
+  site:
     - name: GitHub
       url: https://github.com/fchastanet/bash-tools-framework
       weight: 10

@@ -23,37 +23,15 @@ params:
         url: https://github.com/fchastanet
         icon: fab fa-github
         desc: My GitHub profile
-    developer:
-      - name: GitHub
-        url: https://github.com/fchastanet/my-documents
-        icon: fab fa-github
-        desc: Development repository
-      - name: Bash Tools Framework
-        url: https://fchastanet.github.io/bash-tools-framework/
-        icon: fas fa-toolbox
-        desc: Bash Tools Framework documentation
-      - name: Bash Tools
-        url: https://fchastanet.github.io/bash-tools/
-        icon: fas fa-tools
-        desc: Bash Tools documentation
 
   # SEO
   meta:
     description: 'Technical documentation on Bash scripting, Docker, Jenkins, and development best practices'
     keywords: 'bash, best practices, docker, jenkins, documentation, development'
 
-# Menu configuration
 menu:
-  main:
+  site:
     - name: GitHub
       url: https://github.com/fchastanet/my-documents
       weight: 10
-      post: <sup><i class="ps-1 fa-solid fa-up-right-from-square fa-xs" aria-hidden="true"></i></sup>
-    - name: Bash Tools Framework
-      url: https://fchastanet.github.io/bash-tools-framework/
-      weight: 20
-      post: <sup><i class="ps-1 fa-solid fa-up-right-from-square fa-xs" aria-hidden="true"></i></sup>
-    - name: Bash Tools
-      url: https://fchastanet.github.io/bash-tools/
-      weight: 30
       post: <sup><i class="ps-1 fa-solid fa-up-right-from-square fa-xs" aria-hidden="true"></i></sup>

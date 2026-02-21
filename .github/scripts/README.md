@@ -137,13 +137,13 @@ The Makefile delegates to these scripts while keeping complex logic out of the M
 
 ```makefile
 install-hugo:
-	@$(SCRIPT_DIR)/install-hugo.sh $(HUGO_VERSION)
+    @$(SCRIPT_DIR)/install-hugo.sh $(HUGO_VERSION)
 
 link-repos:
-	@$(SCRIPT_DIR)/link-repos.sh $(SITES_DIR) $(REPOS)
+    @$(SCRIPT_DIR)/link-repos.sh $(SITES_DIR) $(REPOS)
 
 build-site:
-	@$(SCRIPT_DIR)/build-site.sh $(SITE) $(BUILD_DIR) $(SITES_DIR)
+    @$(SCRIPT_DIR)/build-site.sh $(SITE) $(BUILD_DIR) $(SITES_DIR)
 ```
 
 ## Direct Script Usage

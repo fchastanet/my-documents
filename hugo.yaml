@@ -92,6 +92,30 @@ params:
     readingtime:
       enable: false
     navbar_bg_color: '#5e35b1' # Deep purple
+  # Links for the user menu (top right)
+  links:
+    developer:
+      - name: Bash Tools Framework
+        url: https://fchastanet.github.io/bash-tools-framework/
+        icon: fas fa-toolbox
+        desc: Bash Tools Framework
+      - name: Bash Tools
+        url: https://fchastanet.github.io/bash-tools/
+        icon: fas fa-tools
+        desc: Bash Tools
+      - name: Bash Dev Env
+        url: https://fchastanet.github.io/bash-dev-env/
+        icon: fas fa-laptop-code
+        desc: Bash Dev Env
+      - name: Bash Compiler
+        url: https://fchastanet.github.io/bash-compiler/
+        icon: fas fa-cogs
+        desc: Bash Compiler
+    user:
+      - name: GitHub
+        url: https://github.com/fchastanet
+        icon: fab fa-github
+        desc: My GitHub profile
   # SEO
   meta:
     robots: 'index, follow'
@@ -104,29 +128,6 @@ params:
   github_project_repo: https://github.com/fchastanet/my-documents
   github_subdir: content
   github_branch: master
-  # Links for the user menu (top right)
-  links:
-    user:
-      - name: GitHub
-        url: https://github.com/fchastanet
-        icon: fab fa-github
-        desc: My GitHub profile
-    developer:
-      - name: GitHub
-        url: https://github.com/fchastanet/my-documents
-        icon: fab fa-github
-        desc: Development repository
-      - name: Bash Tools Framework
-        url: https://fchastanet.github.io/bash-tools-framework/
-        icon: fas fa-toolbox
-        desc: Bash Tools Framework documentation
-      - name: Bash Tools
-        url: https://fchastanet.github.io/bash-tools/
-        icon: fas fa-tools
-        desc: Bash Tools documentation
-# Site-specific configuration for my-documents
-title: My Documents
-baseURL: https://fchastanet.github.io/my-documents/
 # Menu configuration
 menu:
   main:
@@ -142,3 +143,19 @@ menu:
       url: https://fchastanet.github.io/bash-tools/
       weight: 30
       post: <sup><i class="ps-1 fa-solid fa-up-right-from-square fa-xs" aria-hidden="true"></i></sup>
+    - name: Bash Dev Env
+      url: https://fchastanet.github.io/bash-dev-env/
+      weight: 40
+      post: <sup><i class="ps-1 fa-solid fa-up-right-from-square fa-xs" aria-hidden="true"></i></sup>
+    - name: Bash Compiler
+      url: https://fchastanet.github.io/bash-compiler/
+      weight: 50
+      post: <sup><i class="ps-1 fa-solid fa-up-right-from-square fa-xs" aria-hidden="true"></i></sup>
+  site:
+    - name: GitHub
+      url: https://github.com/fchastanet/my-documents
+      weight: 10
+      post: <sup><i class="ps-1 fa-solid fa-up-right-from-square fa-xs" aria-hidden="true"></i></sup>
+# Site-specific configuration for my-documents
+title: My Documents
+baseURL: https://fchastanet.github.io/my-documents/

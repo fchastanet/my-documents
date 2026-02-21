@@ -27,15 +27,6 @@ params:
         url: https://github.com/fchastanet/bash-dev-env/issues
         icon: fas fa-bug
         desc: Report issues
-    developer:
-      - name: Bash Tools Framework
-        url: https://fchastanet.github.io/bash-tools-framework/
-        icon: fas fa-toolbox
-        desc: Bash Tools Framework
-      - name: Bash Tools
-        url: https://fchastanet.github.io/bash-tools/
-        icon: fas fa-tools
-        desc: Bash Tools
 
   # SEO
   meta:
@@ -43,7 +34,7 @@ params:
     keywords: 'bash, development, environment, docker, devcontainer, vscode'
 
 menu:
-  main:
+  site:
     - name: GitHub
       url: https://github.com/fchastanet/bash-dev-env
       weight: 10
