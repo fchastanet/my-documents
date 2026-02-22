@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Reference Lists on My Documents</title><link>https://fchastanet.github.io/my-documents/docs/lists/</link><description>Recent content in Reference Lists on My Documents</description><generator>Hugo</generator><language>en-us</language><atom:link href="https://fchastanet.github.io/my-documents/docs/lists/index.xml" rel="self" type="application/rss+xml"/><item><title>Test</title><link>https://fchastanet.github.io/my-documents/docs/lists/test/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://fchastanet.github.io/my-documents/docs/lists/test/</guid><description>&lt;h2 id="1-test-tools"&gt;1. Test tools&lt;/h2&gt;
+&lt;h3 id="11-testcontainers"&gt;1.1. TestContainers&lt;/h3&gt;
+&lt;p&gt;&lt;a href="https://testcontainers.com/"&gt;TestContainers&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Unit tests with real dependencies&lt;/p&gt;
+&lt;p&gt;TestContainers is an open source framework for providing throwaway, lightweight instances of
+databases, message brokers, web browsers, or just about anything that can run in a Docker
+container.&lt;/p&gt;
+&lt;p&gt;Test dependencies as code&lt;/p&gt;
+&lt;p&gt;No more need for mocks or complicated environment configurations. Define your test
+dependencies as code, then simply run your tests and containers will be created and then
+deleted.&lt;/p&gt;</description></item><item><title>Web Tools</title><link>https://fchastanet.github.io/my-documents/docs/lists/web/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://fchastanet.github.io/my-documents/docs/lists/web/</guid><description>&lt;h2 id="1-osint-tools"&gt;1. OSINT tools&lt;/h2&gt;
+&lt;p&gt;What Are Open Source Intelligence (OSINT) Tools? Open-source intelligence software, abbreviated
+as OSINT software, are tools that allow the collection of information that is publicly available
+or open-source. The goal of using OSINT software is mainly to learn more about an individual or a
+business.&lt;/p&gt;
+&lt;h3 id="11-lissy93web-check"&gt;1.1. Lissy93/web-check&lt;/h3&gt;
+&lt;p&gt;All-in-one OSINT tool for analyzing any website Comprehensive, on-demand open source intelligence
+for any website&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://github.com/Lissy93/web-check"&gt;github project Lissy93/web-check&lt;/a&gt;&lt;/p&gt;</description></item></channel></rss>

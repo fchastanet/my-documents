@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Development, Documentation, Seo] on My Documents</title><link>https://fchastanet.github.io/my-documents/tags/development-documentation-seo/</link><description>Recent content in Development, Documentation, Seo] on My Documents</description><generator>Hugo</generator><language>en-us</language><atom:link href="https://fchastanet.github.io/my-documents/tags/development-documentation-seo/index.xml" rel="self" type="application/rss+xml"/><item><title>Static Site Generation Migration Analysis</title><link>https://fchastanet.github.io/my-documents/docs/brainstorming/static-site-generation/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://fchastanet.github.io/my-documents/docs/brainstorming/static-site-generation/</guid><description>&lt;h1 id="static-site-generator-migration-analysis"&gt;Static Site Generator Migration Analysis&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;Date:&lt;/strong&gt; 2026-02-17
+&lt;strong&gt;Project:&lt;/strong&gt; my-documents repository migration and multi-site consolidation
+&lt;strong&gt;Goal:&lt;/strong&gt; Migrate from Docsify to an SEO-optimized static site generator while maintaining simplicity
+and GitHub CI compatibility&lt;/p&gt;
+&lt;h2 id="1-executive-summary"&gt;1. Executive Summary&lt;/h2&gt;
+&lt;p&gt;This document evaluates the current Docsify setup and recommends alternative static site generators
+that provide superior SEO performance while maintaining the simplicity and ease of deployment that
+made Docsify attractive.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Current Challenge:&lt;/strong&gt; Docsify renders content client-side, which severely limits SEO capabilities
+and page load performance. This is critical for a documentation site seeking organic search visibility.&lt;/p&gt;</description></item></channel></rss>

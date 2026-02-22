@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>How-To Guides on My Documents</title><link>https://fchastanet.github.io/my-documents/docs/howtos/</link><description>Recent content in How-To Guides on My Documents</description><generator>Hugo</generator><language>en-us</language><atom:link href="https://fchastanet.github.io/my-documents/docs/howtos/index.xml" rel="self" type="application/rss+xml"/><item><title>How to Write Dockerfiles</title><link>https://fchastanet.github.io/my-documents/docs/howtos/howto-write-dockerfile/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://fchastanet.github.io/my-documents/docs/howtos/howto-write-dockerfile/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="#1-dockerfile-best-practices"&gt;1. Dockerfile best practices&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#2-basic-best-practices"&gt;2. Basic best practices&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#21-best-practice-1-merge-the-image-layers"&gt;2.1. Best Practice #1: Merge the image layers&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#211-bad-practice-1"&gt;2.1.1. Bad practice #1&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#212-best-practice-1"&gt;2.1.2. Best practice #1&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="#22-best-practice-2-trace-commands-and-fail-on-error"&gt;2.2. Best Practice #2: trace commands and fail on error&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#221-bad-practice-2"&gt;2.2.1. Bad practice #2&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#222-best-practice-2"&gt;2.2.2. Best Practice #2&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="#23-best-practice-3-packages-ordering-and-versions"&gt;2.3. Best practice #3: packages ordering and versions&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#231-bad-practice-3"&gt;2.3.1. Bad practice #3&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#232-best-practice-3"&gt;2.3.2. Best Practice #3&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#2321-order-packages-alphabetically-and-one-package-by-line"&gt;2.3.2.1. Order packages alphabetically and one package by line&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#2322-always-specify-packages-versions"&gt;2.3.2.2. Always specify packages versions&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#2323-ensure-non-interactive"&gt;2.3.2.3. Ensure non interactive&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="#24-best-practice-4-ensure-image-receives-latest-security-updates"&gt;2.4. Best practice #4: ensure image receives latest security updates&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#241-bad-practice-4"&gt;2.4.1. Bad practice #4&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#242-best-practice-4"&gt;2.4.2. Best Practice #4&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="#25-conclusion-image-size-comparison"&gt;2.5. Conclusion: image size comparison&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#251-dockerfile-without-best-practices"&gt;2.5.1. Dockerfile without best practices&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#252-dockerfile-with-all-optimizations"&gt;2.5.2. Dockerfile with all optimizations&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="#3-docker-buildx-best-practices"&gt;3. Docker Buildx best practices&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#31-optimize-image-size"&gt;3.1. Optimize image size&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#311-dockerfile-not-optimized"&gt;3.1.1. Dockerfile not optimized&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#312-dockerfile-optimized"&gt;3.1.2. Dockerfile optimized&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="1-dockerfile-best-practices"&gt;1. Dockerfile best practices&lt;/h2&gt;
+&lt;p&gt;Follow &lt;a href="https://docs.docker.com/develop/develop-images/dockerfile_best-practices/"&gt;official best practices&lt;/a&gt; and you can
+follow these specific best practices&lt;/p&gt;</description></item><item><title>How to Write Docker Compose Files</title><link>https://fchastanet.github.io/my-documents/docs/howtos/howto-write-docker-compose/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://fchastanet.github.io/my-documents/docs/howtos/howto-write-docker-compose/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;a href="#1-platform"&gt;1. platform&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="1-platform"&gt;1. platform&lt;/h2&gt;
+&lt;p&gt;as not everyone is using the same environment (some are using MacOS for example which is targeting arm64 instead of
+amd64), it is advised to add this option to target the right architecture&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;docker-compose platform&lt;/strong&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;display:grid;"&gt;&lt;code class="language-yaml" data-lang="yaml"&gt;&lt;span style="display:flex; background-color:#dfdfdf"&gt;&lt;span&gt;&lt;span style="color:#204a87;font-weight:bold"&gt;services&lt;/span&gt;&lt;span style="color:#000;font-weight:bold"&gt;:&lt;/span&gt;&lt;span style="color:#f8f8f8"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f8f8f8"&gt; &lt;/span&gt;&lt;span style="color:#204a87;font-weight:bold"&gt;serviceName&lt;/span&gt;&lt;span style="color:#000;font-weight:bold"&gt;:&lt;/span&gt;&lt;span style="color:#f8f8f8"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f8f8f8"&gt; &lt;/span&gt;&lt;span style="color:#204a87;font-weight:bold"&gt;platform&lt;/span&gt;&lt;span style="color:#000;font-weight:bold"&gt;:&lt;/span&gt;&lt;span style="color:#f8f8f8"&gt; &lt;/span&gt;&lt;span style="color:#000"&gt;linux/x86_64&lt;/span&gt;&lt;span style="color:#f8f8f8"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f8f8f8"&gt; &lt;/span&gt;&lt;span style="color:#8f5902;font-style:italic"&gt;# ...&lt;/span&gt;&lt;span style="color:#f8f8f8"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title>Saml2Aws Setup</title><link>https://fchastanet.github.io/my-documents/docs/howtos/saml2aws/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://fchastanet.github.io/my-documents/docs/howtos/saml2aws/</guid><description>&lt;p&gt;Configure saml2aws accounts&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;display:grid;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex; background-color:#dfdfdf"&gt;&lt;span&gt;saml2aws configure &lt;span style="color:#4e9a06"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --idp-account&lt;span style="color:#ce5c00;font-weight:bold"&gt;=&lt;/span&gt;&lt;span style="color:#4e9a06"&gt;&amp;#39;&amp;lt;account_alias&amp;gt;&amp;#39;&lt;/span&gt; &lt;span style="color:#4e9a06"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --idp-provider&lt;span style="color:#ce5c00;font-weight:bold"&gt;=&lt;/span&gt;&lt;span style="color:#4e9a06"&gt;&amp;#39;AzureAD&amp;#39;&lt;/span&gt; &lt;span style="color:#4e9a06"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --mfa&lt;span style="color:#ce5c00;font-weight:bold"&gt;=&lt;/span&gt;&lt;span style="color:#4e9a06"&gt;&amp;#39;Auto&amp;#39;&lt;/span&gt; &lt;span style="color:#4e9a06"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --profile&lt;span style="color:#ce5c00;font-weight:bold"&gt;=&lt;/span&gt;&lt;span style="color:#4e9a06"&gt;&amp;#39;&amp;lt;profile&amp;gt;&amp;#39;&lt;/span&gt; &lt;span style="color:#4e9a06"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --url&lt;span style="color:#ce5c00;font-weight:bold"&gt;=&lt;/span&gt;&lt;span style="color:#4e9a06"&gt;&amp;#39;https://account.activedirectory.windowsazure.com&amp;#39;&lt;/span&gt; &lt;span style="color:#4e9a06"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --username&lt;span style="color:#ce5c00;font-weight:bold"&gt;=&lt;/span&gt;&lt;span style="color:#4e9a06"&gt;&amp;#39;&amp;lt;username&amp;gt;@microsoft.com&amp;#39;&lt;/span&gt; &lt;span style="color:#4e9a06"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --app-id&lt;span style="color:#ce5c00;font-weight:bold"&gt;=&lt;/span&gt;&lt;span style="color:#4e9a06"&gt;&amp;#39;&amp;lt;app_id&amp;gt;&amp;#39;&lt;/span&gt; &lt;span style="color:#4e9a06"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --skip-prompt
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;&amp;lt;app_id&amp;gt;&lt;/code&gt; is a unique identifier for the application we want credentials for (in this case an AWS environment).&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;&amp;lt;account_alias&amp;gt;&lt;/code&gt; serves as a name to identify the saml2aws configuration (see your ~/.saml2aws file&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;&amp;lt;profile&amp;gt;&lt;/code&gt; serves as the name of the aws cli profile that will be created when you log in.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This will automatically identify your tenant ID based on the AppID and will create a configuration based on the provided
+information. Configuration will be created in ~/.saml2aws&lt;/p&gt;</description></item></channel></rss>
