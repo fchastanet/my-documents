@@ -1,0 +1,37 @@
+# Site-specific configuration for my-documents
+title: My Documents
+baseURL: https://fchastanet.github.io/my-documents/
+
+params:
+  description: Collection of my documents on various subjects.
+  keywords: [bash, best practices, learn, docker, jenkins, documentation]
+
+  # Repository configuration
+  github_repo: https://github.com/fchastanet/my-documents
+  github_project_repo: https://github.com/fchastanet/my-documents
+  github_subdir: content
+  github_branch: master
+
+  # UI Configuration
+  ui:
+    navbar_bg_color: '#5e35b1' # Deep purple
+
+  # Links for the user menu (top right)
+  links:
+    user:
+      - name: GitHub
+        url: https://github.com/fchastanet
+        icon: fab fa-github
+        desc: My GitHub profile
+
+  # SEO
+  meta:
+    description: 'Technical documentation on Bash scripting, Docker, Jenkins, and development best practices'
+    keywords: 'bash, best practices, docker, jenkins, documentation, development'
+
+menu:
+  site:
+    - name: GitHub
+      url: https://github.com/fchastanet/my-documents
+      weight: 10
+      post: <sup><i class="ps-1 fa-solid fa-up-right-from-square fa-xs" aria-hidden="true"></i></sup>

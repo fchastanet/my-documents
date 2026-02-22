@@ -38,3 +38,11 @@ customCatalog:
       description: dependabot
       fileMatch: ['.github/workflows/dependabot.yml']
       location: https://www.schemastore.org/dependabot-2.0.json
+    - name: hugo
+      description: hugo
+      fileMatch: ['configs/*.yaml']
+      location: https://www.schemastore.org/hugo.json
+    - name: editorconfig-checker
+      description: editorconfig-checker
+      fileMatch: ['.editorconfig-checker.json']
+      location: https://raw.githubusercontent.com/editorconfig/editorconfig-defaults/refs/heads/master/editorconfig-defaults.schema.json

@@ -25,6 +25,19 @@
 [![DeepSource](https://deepsource.io/gh/fchastanet/my-documents.svg/?label=active+issues&show_trend=true)](https://deepsource.io/gh/fchastanet/my-documents/?ref=repository-badge "DeepSource active issues")
 [![DeepSource](https://deepsource.io/gh/fchastanet/my-documents.svg/?label=resolved+issues&show_trend=true)](https://deepsource.io/gh/fchastanet/my-documents/?ref=repository-badge "DeepSource resolved issues")
 
+<!--TOC-->
+
+- [1. Documentation Content](#1-documentation-content)
+  - [1.1. Bash scripts](#11-bash-scripts)
+  - [1.2. HowTos](#12-howtos)
+  - [1.3. Lists](#13-lists)
+- [2. Technical Architecture Summary](#2-technical-architecture-summary)
+- [3. Reusable Workflow for Dependent Repositories](#3-reusable-workflow-for-dependent-repositories)
+  - [3.1. Quick Start](#31-quick-start)
+  - [3.2. Full Documentation](#32-full-documentation)
+
+<!--TOC-->
+
 ## 1. Documentation Content
 
 ### 1.1. Bash scripts
@@ -45,134 +58,74 @@
 - [Test](/docs/lists/test/)
 - [Web](/docs/lists/web/)
 
-## 2. Documentation Site Built with Hugo
+## 2. Technical Architecture Summary
 
-This repository contains documentation built with
-[Hugo](https://gohugo.io/) static site generator and the
-[Docsy](https://www.docsy.dev/) theme. All content is in Markdown format and
-automatically published to GitHub Pages.
+This section summarizes the orchestrator's technical architecture. For full details, see [Technical Architecture](/content/docs/my-documents/technical-architecture.md).
 
-## 3. Building Locally
+- Centralized orchestrator builds and deploys five documentation sites using Hugo and Docsy.
+- Sites managed: my-documents, bash-compiler, bash-tools, bash-tools-framework, bash-dev-env.
+- Shared base config with per-site YAML overrides, merged via yq.
+- GitHub Actions matrix builds all sites in parallel (~60s total).
+- GitHub App handles secure deployments; repository_dispatch triggers orchestrator.
+- Shared layouts, assets, and archetypes reused across all sites.
+- Content structure: each site stores content in `content/docs/`; navigation auto-generated.
+- Custom partials for SEO meta tags, minified HTML output, optimized assets.
+- Pre-commit hooks and MegaLinter enforce Markdown, YAML, Bash, and spelling standards.
+- Local development: Makefile for build/test; Hugo Extended and Go required.
+- Automated deployment to GitHub Pages for each site; status tracked via CI.
+- Adding sites: checklist-driven process for new repos, configs, and workflow updates.
+- Troubleshooting guides for build, deployment, and linting issues.
+- Secrets managed via GitHub App and PAT; secret scanning enforced.
+- Test all sites after shared changes; document and review before commit.
+- Internal links use relative paths; code blocks are language-specified.
+- CI/CD: lint, build, and deploy workflows run on master branch.
+- Custom dictionaries for Bash terms; auto-sorted and enforced.
+- Robust, scalable, and secure multi-site documentation platform.
 
-### 3.1. Prerequisites
+## 3. Reusable Workflow for Dependent Repositories
 
-- [Hugo Extended](https://gohugo.io/installation/) version 0.110+
-- [Go](https://golang.org/doc/install) version 1.18+
+The `trigger-docs-reusable.yml` workflow enables dependent repositories to trigger documentation builds in my-documents
+without managing secrets or authentication.
 
-### 3.2. Quick Start
+### 3.1. Quick Start
 
-#### 3.2.1. Install Hugo
+Add this to `.github/workflows/trigger-docs.yml` in your dependent repository:
 
-**Linux:**
-
-```bash
-CGO_ENABLED=1 go install -tags extended github.com/gohugoio/hugo@latest
-```
-
-**Or download from [Hugo "extended" releases](https://github.com/gohugoio/hugo/releases)**
-
-#### 3.2.2. Clone and Setup
-
-```bash
-git clone https://github.com/fchastanet/my-documents.git
-cd my-documents
-
-# Download Hugo theme and dependencies
-hugo mod get -u
-```
-
-#### 3.2.3. Run Local Server
-
-```bash
-hugo server -D
-```
-
-The site will be available at `http://localhost:1313/my-documents/`
-
-- `-D` flag includes draft pages
-- Site auto-reloads on file changes
-- Press `Ctrl+C` to stop the server
-
-### 3.3. Building for Production
-
-```bash
-hugo --minify
-```
-
-Output is generated in the `public/` directory.
-
-### 3.4. Checking Site Statistics
-
-```bash
-hugo --printI18nWarnings --printPathWarnings --printUnusedTemplates
-```
-
-## 4. Documentation Structure
-
-The documentation is organized as follows:
-
-```text
-content/en/
-├── _index.html              # Homepage
-└── docs/
-    ├── _index.md            # Docs landing page
-    ├── bash-scripts/        # Bash scripting guides
-    ├── howtos/              # How-to guides
-    ├── lists/               # Reference lists
-    └── other-projects/      # Links to related projects
-```
-
-### 4.1. Adding New Documentation
-
-1. Create a Markdown file in the appropriate `content/en/docs/` subdirectory
-2. Add frontmatter with title, description, and weight (for ordering)
-3. Save and Hugo will automatically rebuild the site
-
-Example:
-
-```markdown
+```yaml
 ---
-title: My New Page
-description: Brief description of the page
-weight: 10
----
+name: Trigger Documentation Build
 
-Your content here...
+on:
+  push:
+    branches: [master]
+    paths:
+      - 'content/**'
+      - 'static/**'
+
+jobs:
+  trigger-docs:
+    uses: fchastanet/my-documents/.github/workflows/trigger-docs-reusable.yml@master
+    secrets: inherit
 ```
 
-## 5. Content Guidelines
+**That's it!** No secrets configuration needed. The workflow automatically:
 
-- Keep Markdown files focused and well-organized
-- Use ATX-style headers (`#`, `##`, etc.)
-- Line length: 120 characters maximum (enforced by mdformat)
-- Line endings: LF only
-- Use relative links for internal navigation
-- Code blocks should specify language: `` ```bash ```, `` ```yaml```, etc.
+- ✅ Uses GitHub App authentication (no PAT tokens required)
+- ✅ Triggers centralized build in my-documents
+- ✅ Provides detailed build status and links
+- ✅ Handles all authentication securely
 
-## 6. SEO Features
+### 3.2. Full Documentation
 
-This site includes the following SEO optimizations:
+For detailed documentation including advanced usage, troubleshooting, and migration guide:
 
-- Static HTML pre-rendering for all content
-- Automatic XML sitemap generation
-- Responsive design and mobile-first approach
-- Optimized page load performance
-- Per-page metadata and structured data (JSON-LD)
-- RSS feeds for content distribution
-- Canonical URLs to prevent duplication
-- Open Graph and Twitter card support
-- Breadcrumb navigation with schema markup
+**📖 [Trigger My-Documents Workflow Documentation](content/docs/my-documents/trigger-my-documents-workflow.md)**
 
-## 7. CI/CD Pipelines
+Topics covered:
 
-### 7.1. Hugo Build & Deploy (`hugo-build-deploy.yml`)
-
-- Builds on push to `master` branch
-- Validates build output
-- Deploys to GitHub Pages automatically
-
-### 7.2. Pre-commit Linting (`lint.yml`)
-
-- Runs Markdown and code quality checks
-- Auto-fixes formatting/linting issues
-- Runs MegaLinter validation
+- Architecture and authentication flow
+- Configuration options and input parameters
+- Advanced usage examples
+- Troubleshooting guide
+- Migration from PAT-based approach
+- Best practices and FAQ
