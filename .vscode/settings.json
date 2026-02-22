@@ -17,5 +17,7 @@
   },
   "[gohtml]": {
     "editor.defaultFormatter": "golang.go"
-  }
+  },
+  "scm.autoReveal": true,
+  "explorer.autoReveal": "focusNoScroll"
 }

@@ -52,7 +52,7 @@ fi
 echo "  Merging configurations..."
 "$script_dir/merge-configs.sh" \
   "$ORCHESTRATOR_DIR/configs/_base.yaml" \
-  "$ORCHESTRATOR_DIR/configs/$SITE_NAME.yaml" \
+  "$SOURCE_DIR/configs/site-config.yaml" \
   "$OUTPUT_DIR/hugo.yaml" \
   "$BASE_URL"
 

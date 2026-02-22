@@ -84,7 +84,7 @@ build:
 start:
 	@echo "$(BLUE)Starting Hugo dev server...$(NC)"
 	@yq eval-all 'select(fileIndex == 0) * select(fileIndex == 1)' \
-	  configs/_base.yaml configs/my-documents.yaml > hugo.yaml.tmp && \
+	  configs/_base.yaml configs/site-config.yaml > hugo.yaml.tmp && \
 	  mv hugo.yaml.tmp hugo.yaml
 	hugo server -D
 

@@ -1,0 +1,38 @@
+---
+name: Build and Deploy My Documents
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - 'content/**'
+      - 'shared/**'
+      - 'configs/**'
+      - 'static/**'
+      - '.github/workflows/build-site.yml'
+      - '.github/workflows/build-site-action.yml'
+      - '.github/scripts/**'
+
+  workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, cancel in-progress runs to ensure only the latest commit is deployed, and avoid multiple deployments in case of several commits in a short time.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-deploy:
+    uses: ./.github/workflows/build-site-action.yml
+    with:
+      site-name: 'my-documents'
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
