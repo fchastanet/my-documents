@@ -2,54 +2,220 @@
 
 ## Repository Overview
 
-This is a **documentation repository** built with **Hugo** static site generator
-and the **Docsy** theme. It is published to GitHub Pages at
-<https://fchastanet.github.io/my-documents/>. It contains technical
-documentation and HowTo guides on Bash scripting, Docker, Jenkins, and various
-development topics.
+This is a **centralized multi-site orchestrator** that builds and deploys multiple documentation sites using **Hugo**
+static site generator and the **Docsy** theme.
 
-**Key characteristics:**
+**Primary Purpose:** Build and deploy documentation sites for related Bash tooling projects
 
-- Static documentation site built with Hugo (fast, SEO-optimized)
-- Docsy theme for professional, responsive documentation design
-- All content in Markdown files with optional YAML frontmatter
-- Extensive linting and formatting automation
-- Automatic GitHub Pages deployment on push to master
-- Optimized for search engine indexing (SEO)
-- Static HTML output (no JavaScript required for functionality)
+**Key Characteristics:**
+
+- Orchestrates builds for 5 documentation sites (my-documents + 4 dependent repositories)
+- Centralized configuration management with per-site overrides
+- Parallel builds using GitHub Actions matrix strategy (~60s for all sites)
+- GitHub App authentication for secure deployments
+- Shared Hugo theme, layouts, and assets across all sites
+- SEO-optimized static HTML output
+- Automated linting and formatting (pre-commit hooks, MegaLinter)
+
+**Managed Documentation Sites:**
+
+| Site                 | Repository                      | Live URL                                             |
+| -------------------- | ------------------------------- | ---------------------------------------------------- |
+| My Documents         | fchastanet/my-documents         | <https://fchastanet.github.io/my-documents/>         |
+| Bash Compiler        | fchastanet/bash-compiler        | <https://fchastanet.github.io/bash-compiler/>        |
+| Bash Tools           | fchastanet/bash-tools           | <https://fchastanet.github.io/bash-tools/>           |
+| Bash Tools Framework | fchastanet/bash-tools-framework | <https://fchastanet.github.io/bash-tools-framework/> |
+| Bash Dev Env         | fchastanet/bash-dev-env         | <https://fchastanet.github.io/bash-dev-env/>         |
 
 ## Repository Structure
 
+### Orchestrator Files (my-documents)
+
 ```text
 /
-├── content/                     # All Markdown content
-│   └── en/                      # English language content
-│       ├── _index.html          # Home page
-│       ├── docs/                # Documentation sections
-│       │   ├── _index.md        # Docs landing page
-│       │   ├── bash-scripts/    # Bash scripting guides
-│       │   ├── howtos/          # How-to guides
-│       │   ├── lists/           # Reference lists
-│       │   └── other-projects/  # Links to related projects
-├── HowTo/                       # Legacy content (to be migrated)
-├── Lists/                       # Legacy content (to be migrated)
-├── static/                      # Static assets (images, downloads, etc.)
-├── archetypes/                  # Content templates
-│   ├── default.md               # Default page archetype
-│   └── docs.md                  # Docs page archetype
-├── assets/                      # CSS/SCSS overrides
-├── images/                      # Legacy images directory
-├── .github/
-│   ├── workflows/               # CI/CD automation
-│   │   ├── lint.yml             # Pre-commit linting
-│   │   └── hugo-build-deploy.yml # Hugo build & deploy
-│   └── copilot-instructions.md  # This file
-├── .cspell/                     # Custom spell-check dictionaries
-├── hugo.yaml                    # Hugo configuration
-├── go.mod                       # Go modules (Docsy theme)
-├── go.sum                       # Go modules checksums
-└── README.md                    # Repository landing page
+├── .github/workflows/
+│   ├── build-all-sites.yml          # Orchestrator workflow (builds all 5 sites)
+│   ├── hugo-build-deploy.yml        # Legacy: my-documents only build
+│   ├── trigger-docs-reusable.yml    # Template for dependent repos
+│   └── lint.yml                     # Pre-commit linting
+├── configs/
+│   ├── _base.yaml                   # Shared configuration for all sites
+│   ├── my-documents.yaml            # my-documents overrides
+│   ├── bash-compiler.yaml           # bash-compiler overrides
+│   ├── bash-tools.yaml              # bash-tools overrides
+│   ├── bash-tools-framework.yaml    # bash-tools-framework overrides
+│   └── bash-dev-env.yaml            # bash-dev-env overrides
+├── shared/
+│   ├── layouts/                     # Shared Hugo templates
+│   │   └── partials/hooks/          # SEO meta tags, structured data
+│   ├── assets/                      # Shared SCSS, CSS, JS
+│   │   └── scss/_variables_project.scss
+│   └── archetypes/                  # Content templates
+│       ├── default.md
+│       └── docs.md
+├── content/                         # my-documents own content
+│   └── en/
+│       ├── _index.html              # Homepage
+│       └── docs/                    # Documentation sections
+│           ├── bash-scripts/
+│           ├── howtos/
+│           ├── lists/
+│           ├── brainstorming/
+│           └── other-projects/
+├── static/                          # Static assets (images, downloads)
+├── .cspell/                         # Custom spell-check dictionaries
+├── hugo.yaml                        # Generated per build (do not manually edit)
+├── go.mod                           # Go modules (Docsy theme)
+├── go.sum                           # Go modules checksums
+├── Makefile                         # Local development commands
+└── README.md                        # User documentation
 ```
+
+### Dependent Repository Structure (Example: bash-compiler)
+
+```text
+bash-compiler/
+├── .github/workflows/
+│   └── trigger-docs.yml             # Triggers orchestrator on content changes
+├── content/en/
+│   ├── _index.md                    # Homepage
+│   └── docs/                        # Documentation pages
+│       └── *.md
+└── static/                          # Optional: site-specific static assets
+    └── images/
+```
+
+**Key Differences from Standard Hugo Repos:**
+
+- ❌ No `hugo.yaml` in dependent repos (orchestrator generates it)
+- ❌ No build workflows in dependent repos (orchestrator handles builds)
+- ❌ No theme files in dependent repos (shared from my-documents)
+- ❌ No theme files in dependent repos (shared from my-documents)
+- ✅ Only content and trigger workflow needed
+
+## Multi-Site Orchestrator Architecture
+
+### How It Works
+
+1. **Content Change:** Developer pushes to dependent repository (e.g., bash-compiler)
+2. **Trigger:** Trigger workflow calls `repository_dispatch` to my-documents
+3. **Orchestrator Activates:** `build-all-sites.yml` workflow starts
+4. **Parallel Build:** Matrix strategy builds all 5 sites simultaneously
+5. **Config Merge:** Each site gets `_base.yaml` + site-specific config merged via `yq`
+6. **Deploy:** GitHub App deploys each site to its respective GitHub Pages
+
+### Build Matrix Strategy
+
+```yaml
+matrix:
+  site:
+    - { name: my-documents, repo: fchastanet/my-documents, self: true }
+    - { name: bash-compiler, repo: fchastanet/bash-compiler, self: false }
+    - { name: bash-tools, repo: fchastanet/bash-tools, self: false }
+    - { name: bash-tools-framework, repo: fchastanet/bash-tools-framework, self: false }
+    - { name: bash-dev-env, repo: fchastanet/bash-dev-env, self: false }
+```
+
+- `self: true` - Build from orchestrator repo itself (my-documents)
+- `self: false` - Checkout and build from dependent repository
+
+### Configuration Management
+
+**Configuration Hierarchy:**
+
+1. **Base Config** (`configs/_base.yaml`) - Shared across all sites:
+
+   - Hugo modules (Docsy theme)
+   - Language and i18n settings
+   - Markup and syntax highlighting
+   - Output formats (HTML, sitemap, RSS)
+   - Default theme parameters
+
+2. **Site-Specific Config** (`configs/[site].yaml`) - Per-site overrides:
+   - Site title and baseURL
+   - Theme colors (`params.ui.navbar_bg_color`)
+   - Navigation menu items
+   - SEO keywords and description
+   - Repository links
+
+**Merging Strategy:**
+
+```bash
+# yq deep-merge (not concatenation)
+yq eval-all 'select(fileIndex == 0) * select(fileIndex == 1)' \
+  configs/_base.yaml \
+  configs/bash-compiler.yaml > hugo.yaml
+```
+
+**Merge Behavior:**
+
+- Scalar values: Site-specific overrides base
+- Objects: Deep merge (combined keys)
+- Arrays: Site-specific replaces base entirely
+
+### Shared Components
+
+**Layouts and Partials** (`shared/layouts/`):
+
+- `partials/hooks/head-end.html` - SEO meta tags, JSON-LD structured data
+- Custom partials override Docsy defaults
+
+**Assets** (`shared/assets/`):
+
+- `scss/_variables_project.scss` - Shared SCSS variables
+- Can be overridden per-site via dependent repo `static/css/`
+
+**Archetypes** (`shared/archetypes/`):
+
+- `default.md` - Basic page template
+- `docs.md` - Documentation page template with examples
+
+### Authentication and Deployment
+
+**GitHub App (Preferred Method):**
+
+- App ID: `DOC_APP_ID` secret (my-documents)
+- Private Key: `DOC_APP_PRIVATE_KEY` secret (my-documents)
+- Permissions: Contents (write), Pages (write)
+- Installed on all 5 repositories
+
+**Benefits over Deploy Keys:**
+
+- Fine-grained permissions
+- Automatic token expiration (1 hour)
+- Centralized management (2 secrets vs 4+ deploy keys)
+- Better audit trail
+
+**Trigger Authentication:**
+
+- Personal Access Token: `DOCS_BUILD_TOKEN` (each dependent repo)
+- Scope: `repo` (for repository_dispatch)
+
+### Local Development
+
+**Testing Single Site:**
+
+```bash
+make build-site SITE=bash-compiler
+cd build/bash-compiler
+hugo server -D --port 1314
+```
+
+**Testing All Sites:**
+
+```bash
+make link-repos    # Create symlinks to dependent repos
+make build-all     # Build all 5 sites
+make test-all      # Build + test with curl
+make unlink-repos  # Clean up symlinks
+```
+
+**Prerequisites:**
+
+- Hugo Extended 0.155.3+
+- Go 1.24+
+- yq 4.0+ (for config merging)
+- Dependent repos cloned side-by-side
 
 ## Git Conventions
 
@@ -288,7 +454,7 @@ pre-commit run -a
 
 3. **Write content** using Markdown with optional Docsy shortcodes
 
-4. **Test locally:** `hugo server -D` and verify at http://localhost:1313/my-documents/
+4. **Test locally:** `hugo server -D` and verify at <http://localhost:1313/my-documents/>
 
 5. **Commit and push**
 
@@ -354,6 +520,140 @@ After pushing, verify:
 - [ ] MegaLinter checks pass
 - [ ] GitHub Pages deployment succeeds (for master branch)
 - [ ] Live site renders correctly: <https://fchastanet.github.io/my-documents/>
+
+## Working with the Orchestrator
+
+### Adding a New Documentation Site
+
+**Checklist:**
+
+1. **In dependent repository:**
+   - [ ] Create `content/en/docs/` structure
+   - [ ] Add `content/en/_index.md` (homepage)
+   - [ ] Add `.github/workflows/trigger-docs.yml`
+   - [ ] Add `DOCS_BUILD_TOKEN` secret
+2. **In my-documents repository:**
+   - [ ] Create `configs/[new-site].yaml` with site-specific config
+   - [ ] Add site to matrix in `.github/workflows/build-all-sites.yml`
+   - [ ] Install GitHub App on new repository
+3. **Testing:**
+   - [ ] Test locally: `make build-site SITE=new-site`
+   - [ ] Push to trigger CI build
+   - [ ] Verify deployment to GitHub Pages
+
+### Updating Shared Components
+
+**Impact Analysis:**
+
+- Changes to `shared/layouts/` affect **all sites**
+- Changes to `shared/assets/` affect **all sites**
+- Changes to `configs/_base.yaml` affect **all sites**
+- Changes to `configs/[site].yaml` affect **one site only**
+
+**Testing Strategy:**
+
+```bash
+# Test change across all sites before committing
+make build-all
+
+# Verify each site individually
+for site in my-documents bash-compiler bash-tools bash-tools-framework bash-dev-env; do
+  echo "Testing $site..."
+  make build-site SITE=$site
+done
+```
+
+**Common Changes:**
+
+| Task                       | Files to Edit                                       | Impact         |
+| -------------------------- | --------------------------------------------------- | -------------- |
+| Update Hugo theme version  | `configs/_base.yaml` (module version)               | All sites      |
+| Add SEO feature            | `shared/layouts/partials/hooks/head-end.html`       | All sites      |
+| Change site-specific color | `configs/[site].yaml` (params.ui.navbar_bg_color)   | One site       |
+| Add new archetype          | `shared/archetypes/new-template.md`                 | All sites      |
+| Update base SCSS           | `shared/assets/scss/_variables_project.scss`        | All sites      |
+
+### Configuration Deep-Dive
+
+**Base Config Keys** (`configs/_base.yaml`):
+
+- `baseURL` - Overridden per site
+- `title` - Overridden per site
+- `module.mounts` - Shared resources (layouts, assets, archetypes)
+- `params.ui` - UI defaults (colors, sidebar, navbar)
+- `params.search` - Search configuration
+- `markup` - Markdown rendering, syntax highlighting
+- `outputs` - Output formats (HTML, RSS, sitemap)
+
+**Site-Specific Override Examples:**
+
+```yaml
+# bash-compiler.yaml
+baseURL: https://fchastanet.github.io/bash-compiler
+title: Bash Compiler Documentation
+params:
+  description: "Documentation for Bash Compiler"
+  ui:
+    navbar_bg_color: "#007bff" # Blue theme
+  github_repo: https://github.com/fchastanet/bash-compiler
+```
+
+### Troubleshooting Orchestrator Issues
+
+**Build Fails for All Sites:**
+
+1. Check Hugo version in workflow (0.155.3)
+2. Validate `configs/_base.yaml` syntax: `yq eval configs/_base.yaml`
+3. Check GitHub Actions logs for setup errors
+4. Verify yq installation succeeded
+
+**Build Fails for One Site:**
+
+1. Validate site config: `yq eval configs/[site].yaml`
+2. Test config merge locally:
+   ```bash
+   yq eval-all 'select(fileIndex == 0) * select(fileIndex == 1)' \
+     configs/_base.yaml configs/[site].yaml
+   ```
+3. Check content frontmatter in dependent repo
+4. Check for broken internal links
+
+**Deployment Fails:**
+
+1. Verify GitHub App installed on repository
+2. Check `DOC_APP_ID` and `DOC_APP_PRIVATE_KEY` secrets exist
+3. Verify app permissions: Contents (write), Pages (write)
+4. Check gh-pages branch created in dependent repo
+
+**Site Not Updating:**
+
+1. Wait 2-3 minutes for GitHub Pages propagation
+2. Check workflow completed successfully
+3. Clear browser cache
+4. Verify GitHub Pages settings: Deploy from gh-pages branch
+
+### Best Practices for AI Agents
+
+**When Editing Shared Components:**
+
+1. Always test across all sites before committing
+2. Document changes in commit message
+3. Alert user if change may break existing sites
+4. Provide rollback instructions
+
+**When Adding New Site:**
+
+1. Follow checklist in Section "Adding a New Documentation Site"
+2. Choose unique theme color for site
+3. Test locally before pushing
+4. Verify all links and assets work
+
+**When Debugging:**
+
+1. Identify which component failed (trigger, build, or deploy)
+2. Check appropriate logs (dependent repo or orchestrator)
+3. Reproduce locally when possible
+4. Provide specific solution based on error
 
 ## Troubleshooting
 
@@ -626,14 +926,26 @@ Use `weight` in frontmatter to control ordering within sections.
 
 When working on this repository:
 
-1. **Branch:** Always use `master`
-2. **Commit messages:** Detailed Markdown format with title and changes list
-3. **Linting:** Pre-commit hooks auto-fix most issues
-4. **Line length:** 120-character wrapping for Markdown
-5. **Spell checking:** Add technical terms to `.cspell/bash.txt`
-6. **Navigation:** Automatic from directory structure and frontmatter weight
-7. **Testing:** Build locally with `hugo server -D` and verify at <http://localhost:1313/my-documents/>
-8. **Content location:** Place all content in `content/en/docs/` subdirectories
-9. **Frontmatter:** Always include title, description, and weight
-10. **CI/CD:** Workflows handle linting and deployment automatically
-11. **On chat:** Only provide relevant changes, not entire files
+1. **Repository Type:** Multi-site orchestrator + own documentation
+2. **Branch:** Always use `master`
+3. **Commit messages:** Detailed Markdown format with title and changes list
+4. **Linting:** Pre-commit hooks auto-fix most issues
+5. **Line length:** 120-character wrapping for Markdown
+6. **Spell checking:** Add technical terms to `.cspell/bash.txt`
+7. **Navigation:** Automatic from directory structure and frontmatter weight
+8. **Testing:** Build locally with `hugo server -D` and verify at <http://localhost:1313/my-documents/>
+9. **Content location:** Place all content in `content/en/docs/` subdirectories
+10. **Frontmatter:** Always include title, description, and weight
+11. **CI/CD:** Workflows handle linting and deployment automatically
+12. **On chat:** Only provide relevant changes, not entire files
+
+**Orchestrator-Specific:**
+
+13. **Shared components impact all sites** - Test thoroughly before committing changes to `shared/`
+14. **Config changes:** Base config affects all sites, site-specific affects one
+15. **Adding sites:** Follow complete checklist (configs/, workflow matrix, GitHub App, secrets)
+16. **Build testing:** Use `make build-all` to test all sites locally
+17. **Config merging:** Use `yq` for deep-merge, validate syntax before committing
+18. **Authentication:** GitHub App for deployment, PAT for triggers
+19. **Parallel builds:** All 5 sites build simultaneously (~60s total)
+20. **Deployment:** Fully automated via GitHub Actions to respective GitHub Pages

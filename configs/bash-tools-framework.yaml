@@ -1,0 +1,45 @@
+# Site-specific configuration for bash-tools-framework
+title: Bash Tools Framework Documentation
+baseURL: https://fchastanet.github.io/bash-tools-framework/
+
+params:
+  description: 'Bash Tools Framework - Framework for building robust bash applications'
+  keywords: [bash, framework, application, development, cli]
+
+  # Repository configuration
+  github_repo: https://github.com/fchastanet/bash-tools-framework
+  github_project_repo: https://github.com/fchastanet/bash-tools-framework
+  github_subdir: content
+  github_branch: master
+
+  # UI Configuration - Red theme
+  ui:
+    navbar_bg_color: '#dc3545'
+
+  # Links
+  links:
+    user:
+      - name: GitHub
+        url: https://github.com/fchastanet/bash-tools-framework
+        icon: fab fa-github
+        desc: bash-tools-framework repository
+      - name: Issues
+        url: https://github.com/fchastanet/bash-tools-framework/issues
+        icon: fas fa-bug
+        desc: Report issues
+
+  # SEO
+  meta:
+    description: 'Bash Tools Framework documentation - build robust bash applications with ease'
+    keywords: 'bash, framework, application, development, cli, build-tools'
+
+menu:
+  site:
+    - name: GitHub
+      url: https://github.com/fchastanet/bash-tools-framework
+      weight: 10
+      post: <sup><i class="ps-1 fa-solid fa-up-right-from-square fa-xs" aria-hidden="true"></i></sup>
+    - name: Release Notes
+      url: https://github.com/fchastanet/bash-tools-framework/releases
+      weight: 20
+      post: <sup><i class="ps-1 fa-solid fa-up-right-from-square fa-xs" aria-hidden="true"></i></sup>

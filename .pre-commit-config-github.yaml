@@ -76,6 +76,19 @@ repos:
             AGENTS\.md
           )
 
+  - repo: https://github.com/ComPWA/prettier-pre-commit
+    rev: v3.8.1
+    hooks:
+      - id: prettier
+        args: [--cache]
+        exclude: |
+          (?x)(
+            \.md$|
+            ^\.vscode/.*\.code-snippets$|
+            ^content/_index.html$|
+            ^shared/layouts/partials/
+          )
+
   - repo: https://github.com/igorshubovych/markdownlint-cli
     rev: v0.47.0
     hooks:
@@ -94,7 +107,6 @@ repos:
       - id: mixed-line-ending
         args: [--fix=lf]
       - id: fix-byte-order-marker
-      - id: detect-private-key
       - id: end-of-file-fixer
         exclude: ^.idea/.*$
       - id: check-executables-have-shebangs
@@ -110,6 +122,12 @@ repos:
         args: [--ignore-case]
         stages: [pre-commit, pre-push, manual]
       - id: trailing-whitespace
+
+  - repo: https://github.com/thoughtworks/talisman
+    rev: 'v1.37.0'
+    hooks:
+      - id: talisman-push
+      - id: talisman-commit
 
   - repo: https://github.com/codespell-project/codespell
     rev: v2.4.1
@@ -143,26 +161,24 @@ repos:
       # and conflict-marker-size configuration in a git repo.
       - id: git-check
 
-  - repo: https://github.com/ComPWA/prettier-pre-commit
-    rev: v3.8.1
+  - repo: https://github.com/fchastanet/bash-tools-framework
+    rev: 6.2.4
     hooks:
-      - id: prettier
-        args: [--cache]
-        exclude: |
-          (?x)(
-            \.md$|
-            ^\.vscode/.*\.code-snippets$|
-            ^content/_index.html$
-          )
+      - id: fixShebangExecutionBit
+      - id: awkLint
+      - id: shellcheckLint
+      - id: shellcheckLintGithubAction
+      - id: plantuml
+        args: [--same-dir, -f, png, -f, svg, --limit-size, '1200']
 
   - repo: local
     hooks:
-      - id: build site
+      - id: buildSite
         name: Build Hugo site
         language: system
         pass_filenames: false
         always_run: true
-        entry: hugo --printI18nWarnings --printPathWarnings --printUnusedTemplates
+        entry: make build
         stages: [pre-commit]
 
   # manual stage used to select github action with megalinter full config

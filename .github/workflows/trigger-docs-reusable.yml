@@ -1,0 +1,118 @@
+---
+# Reusable workflow for triggering my-documents centralized build
+# This workflow can be called from dependent repositories (bash-compiler, bash-tools, etc.)
+#
+# Usage in dependent repo:
+#   Create .github/workflows/trigger-docs.yml that calls this workflow:
+#
+#   jobs:
+#     trigger-docs:
+#       uses: fchastanet/my-documents/.github/workflows/trigger-docs-reusable.yml@master
+#       secrets: inherit
+#
+name: Trigger Documentation Build
+
+on:
+  workflow_call:
+    inputs:
+      target_org:
+        description: 'Target organization/user (default: fchastanet)'
+        required: false
+        type: string
+        default: 'fchastanet'
+      target_repo:
+        description: 'Target repository name (default: my-documents)'
+        required: false
+        type: string
+        default: 'my-documents'
+      event_type:
+        description: 'Repository dispatch event type'
+        required: false
+        type: string
+        default: 'trigger-docs-rebuild'
+      docs_url_base:
+        description: 'Documentation URL base (default: https://fchastanet.github.io)'
+        required: false
+        type: string
+        default: 'https://fchastanet.github.io'
+      workflow_filename:
+        description: 'Workflow filename to monitor (default: build-all-sites.yml)'
+        required: false
+        type: string
+        default: 'build-all-sites.yml'
+      source_repo:
+        description: 'Source repository triggering the build (auto-detected if not provided)'
+        required: false
+        type: string
+        default: ''
+
+permissions:
+  contents: read
+
+jobs:
+  trigger:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate GitHub App token
+        id: app-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.DOC_APP_ID }}
+          private-key: ${{ secrets.DOC_APP_PRIVATE_KEY }}
+          owner: ${{ inputs.target_org }}
+          repositories: ${{ inputs.target_repo }}
+
+      - name: Trigger documentation build
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          TARGET_ORG: ${{ inputs.target_org }}
+          TARGET_REPO: ${{ inputs.target_repo }}
+          EVENT_TYPE: ${{ inputs.event_type }}
+          DOCS_URL_BASE: ${{ inputs.docs_url_base }}
+          WORKFLOW_FILE: ${{ inputs.workflow_filename }}
+          SOURCE_REPO: ${{ inputs.source_repo || github.repository }}
+        run: |
+          echo "🔔 Triggering documentation build in ${TARGET_ORG}/${TARGET_REPO}..."
+
+          RESPONSE=$(curl -s -w "\n%{http_code}" -X POST \
+            -H "Authorization: token ${GH_TOKEN}" \
+            -H "Accept: application/vnd.github.v3+json" \
+            "https://api.github.com/repos/${TARGET_ORG}/${TARGET_REPO}/dispatches" \
+            -d "{
+              \"event_type\": \"${EVENT_TYPE}\",
+              \"client_payload\": {
+                \"repo\": \"${SOURCE_REPO}\",
+                \"ref\": \"${{ github.ref }}\",
+                \"sha\": \"${{ github.sha }}\",
+                \"triggered_by\": \"${{ github.actor }}\"
+              }
+            }")
+
+          HTTP_CODE="$(echo "$RESPONSE" | tail -n1)"
+
+          if [ "$HTTP_CODE" = "204" ]; then
+            REPO_NAME="${SOURCE_REPO#*/}"
+            echo "✅ Successfully triggered docs build in ${TARGET_ORG}/${TARGET_REPO}"
+            echo "📖 Documentation will be updated at: ${DOCS_URL_BASE}/${REPO_NAME}/"
+            echo ""
+            (
+              echo "### ✅ Documentation build triggered"
+              echo ""
+              echo "**Source Repository:** \`${SOURCE_REPO}\`"
+              echo "**Target Repository:** \`${TARGET_ORG}/${TARGET_REPO}\`"
+              echo "**Commit:** \`${{ github.sha }}\`"
+              echo "**Triggered by:** \`${{ github.actor }}\`"
+              echo ""
+              echo "🔗 [View build status](https://github.com/${TARGET_ORG}/${TARGET_REPO}/actions/workflows/${WORKFLOW_FILE})"
+              echo "📖 [View documentation](${DOCS_URL_BASE}/${REPO_NAME}/)"
+            ) >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "❌ Failed to trigger docs build. HTTP code: $HTTP_CODE"
+            echo "$RESPONSE" | head -n-1
+            exit 1
+          fi
+
+      - name: Note about deployment delay
+        run: |
+          echo "ℹ️  Note: Documentation deployment may take 2-5 minutes"
+          echo "   Check the build status at: https://github.com/${{ inputs.target_org }}/${{ inputs.target_repo }}/actions"
