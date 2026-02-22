@@ -7,6 +7,8 @@ fileignoreconfig:
   checksum: b98aa38403b66e78f84d2e207e246adfa991c3b4a57528b02543f14695367d84
 - filename: configs/bash-dev-env.yaml
   checksum: 925488b5793bda648b98c609c1d4e06cac18e0bb9ea846691a76c6034c296153
+- filename: .github/workflows/build-all-sites.yml
+  checksum: 32225b9ab127f8674be208540737384c7358e3f39a7b20076ddd25bdfeba5fe6
 scopeconfig:
   - scope: go
   - scope: node

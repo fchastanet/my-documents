@@ -16,4 +16,4 @@ business.
 All-in-one OSINT tool for analyzing any website Comprehensive, on-demand open source intelligence
 for any website
 
-| Test Date | N/A | | Web site | [github project Lissy93/web-check](https://github.com/Lissy93/web-check)
+[github project Lissy93/web-check](https://github.com/Lissy93/web-check)

@@ -26,7 +26,7 @@ jobs:
         site:
           - name: my-documents
             repo: fchastanet/my-documents
-            repoRoot: orchestrator
+            repoRoot: .
             baseURL: 'https://fchastanet.github.io/my-documents'
             self: true
           - name: bash-compiler
@@ -41,7 +41,7 @@ jobs:
             self: false
           - name: bash-tools-framework
             repo: fchastanet/bash-tools-framework
-            rpoRoot: sites/bash-tools-framework
+            repoRoot: sites/bash-tools-framework
             baseURL: 'https://fchastanet.github.io/bash-tools-framework'
             self: false
           - name: bash-dev-env
@@ -60,7 +60,6 @@ jobs:
         uses: actions/checkout@v6
         with:
           repository: fchastanet/my-documents
-          path: orchestrator
           fetch-depth: 0
 
       - name: Checkout ${{ matrix.site.name }} content
@@ -77,28 +76,43 @@ jobs:
         with:
           go-version: '1.24'
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: 'npm'
+
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v3
         with:
           hugo-version: '0.155.3'
           extended: true
 
-      - name: Install Dart Sass
-        run: sudo snap install dart-sass
+      - name: Cache Hugo modules
+        uses: actions/cache@v5
+        with:
+          path: |
+            ~/.cache/hugo_modules
+            go.mod
+            go.sum
+          key: ${{ runner.os }}-hugo-modules-${{ hashFiles('**/go.sum') }}
+          restore-keys: |
+            ${{ runner.os }}-hugo-modules-
 
       - name: Install Node.js dependencies
-        run: |
-          npm ci
+        run: npm ci
 
-      - name: Install yq for YAML merging
-        run: |
-          sudo wget -qO /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
-          sudo chmod +x /usr/local/bin/yq
-          yq --version
+      - name: Install Dart Sass
+        run: npm install -g sass
+
+      - name: Setup yq
+        uses: vegardit/gha-setup-yq@v1
+        with:
+          yq-version: v4.52.4
 
       - name: Prepare build for ${{ matrix.site.name }}
         run: |
-          bash orchestrator/.github/scripts/build-site.sh \
+          bash .github/scripts/build-site.sh \
             "${{ matrix.site.repoRoot }}" \
             "${{ matrix.site.name }}" \
             "build"
@@ -118,7 +132,7 @@ jobs:
         with:
           github_token: ${{ matrix.site.self && secrets.GITHUB_TOKEN || steps.app-token.outputs.token }}
           external_repository: ${{ !matrix.site.self && matrix.site.repo || '' }}
-          publish_dir: ${{ env.BUILD_DIR }}/public
+          publish_dir: build/${{ matrix.site.name }}/public
           publish_branch: gh-pages
           force_orphan: true
           user_name: 'github-actions[bot]'
@@ -126,11 +140,20 @@ jobs:
           commit_message: 'Deploy ${{ matrix.site.name }} documentation'
 
       - name: Deployment summary
+        if: success()
         run: |
+          page_count=$(find "build/${{ matrix.site.name }}/public" -name '*.html' | wc -l)
+          size=$(du -sh "build/${{ matrix.site.name }}/public" | cut -f1)
           (
             echo "### ✅ ${{ matrix.site.name }} deployed successfully"
             echo ""
             echo "🔗 **URL:** ${{ matrix.site.baseURL }}/"
-            echo "📦 **Pages:** $(find "${{ env.BUILD_DIR }}/public" -name '*.html' | wc -l)"
-            echo "📄 **Size:** $(du -sh "${{ env.BUILD_DIR }}/public" | cut -f1)"
+            echo "📦 **Pages:** $page_count"
+            echo "📄 **Size:** $size"
           ) >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Cleanup build artifacts
+        if: always()
+        run: |
+          rm -rf "build/${{ matrix.site.name }}"
+          echo "✅ Build artifacts cleaned up for ${{ matrix.site.name }}"
