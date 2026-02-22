@@ -13,6 +13,7 @@ podman
 pygments
 readingtime
 sbom
+scopeconfig
 tabwidth
 tagname
 UNINDEXED

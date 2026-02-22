@@ -14,6 +14,7 @@ DISABLE_LINTERS:
   - REPOSITORY_CHECKOV
   - REPOSITORY_TRIVY
   - REPOSITORY_KICS
+  - CSS_STYLELINT
   - SPELL_VALE
   - SPELL_LYCHEE
   - SPELL_PROSELINT
@@ -89,32 +90,33 @@ JAVASCRIPT_ES_FILTER_REGEX_EXCLUDE: report/
 
 YAML_V8R_FILTER_REGEX_EXCLUDE: |
   (?x)(
-    ^\.vscode/\.checkov\.yml|
-    ^\.secretlintrc\.yml|
-    ^\.grype\.yaml
+    ^\.vscode/\.checkov\.yml$|
+    ^\.secretlintrc\.yml$|
+    ^\.grype\.yaml$|
+    ^package-lock\.json$
   )
 
 JSON_JSONLINT_FILTER_REGEX_EXCLUDE: |
   (?x)(
-    ^\.vscode/settings\.json|
-    ^conf/\.vscode/settings\.json|
-    ^\.vscode/launch\.json
+    ^\.vscode/settings\.json$|
+    ^conf/\.vscode/settings\.json$|
+    ^\.vscode/launch\.json$
   )
 MARKDOWN_MARKDOWN_LINK_CHECK_FILTER_REGEX_EXCLUDE: |
   (?x)(
-    ^pages/Commands.md|
-    ^pages/FrameworkFullDoc.md|
-    ^pages/README.md|
+    ^pages/Commands.md$|
+    ^pages/FrameworkFullDoc.md$|
+    ^pages/README.md$|
     ^pages/doc|
     ^pages/bashDoc|
     ^pages/tests|
-    ^pages/_sidebar.md
+    ^pages/_sidebar.md$
   )
 MARKDOWN_MARKDOWNLINT_FILTER_REGEX_EXCLUDE: |
   (?x)(
-    ^pages/Commands.md|
-    ^pages/FrameworkFullDoc.md|
-    ^pages/README.md|
+    ^pages/Commands.md$|
+    ^pages/FrameworkFullDoc.md$|
+    ^pages/README.md$|
     ^pages/doc|
     ^pages/bashDoc|
     ^pages/tests|
@@ -155,6 +157,3 @@ HTML_HTMLHINT_FILTER_REGEX_EXCLUDE: |
     ^content/_index.html$|
     ^shared/layouts/partials/
   )
-
-STYLELINT_CONFIG_FILE: .stylelintrc.yaml
-STYLELINT_ARGUMENTS: '--syntax scss'

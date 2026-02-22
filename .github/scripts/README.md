@@ -123,13 +123,13 @@ Test all built sites with curl to verify they work.
 
 All scripts use relative paths by default:
 
-| Parameter   | Default  | Purpose                              |
-| ----------- | -------- | ------------------------------------ |
-| `BUILD_DIR` | `build`  | Build output directory               |
-| `SITES_DIR` | `sites`  | Symlink directory for dependencies   |
-| `SITE`      | -        | Single site to build (required)      |
-| `VERSION`   | `0.155.3`| Hugo version to install              |
-| `REPOS`     | -        | List of repositories (space-separated)|
+| Parameter   | Default   | Purpose                                |
+| ----------- | --------- | -------------------------------------- |
+| `BUILD_DIR` | `build`   | Build output directory                 |
+| `SITES_DIR` | `sites`   | Symlink directory for dependencies     |
+| `SITE`      | -         | Single site to build (required)        |
+| `VERSION`   | `0.155.3` | Hugo version to install                |
+| `REPOS`     | -         | List of repositories (space-separated) |
 
 ## Using with Makefile
 

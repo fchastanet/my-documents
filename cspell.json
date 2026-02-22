@@ -72,8 +72,7 @@
   "overrides": [
     {
       "filename": ["**/*.md", "content/**"],
-      "dictionaries": ["documentation", "myBash"],
-      "replace": true
+      "dictionaries": ["documentation", "myBash"]
     },
     {
       "filename": ["**/*.sh"],
