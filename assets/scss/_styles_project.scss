@@ -1,0 +1,18 @@
+.article-meta {
+  border: 1px solid $meta-border-color;
+  border-radius: $meta-border-radius;
+  padding: $meta-padding;
+  margin-bottom: $meta-margin-bottom;
+  background-color: $meta-background-color;
+  color: $meta-foreground-color;
+}
+
+[data-bs-theme='light'] .article-meta {
+  background-color: darken($meta-background-color, 10%);
+  color: lighten($meta-foreground-color, 20%);
+}
+
+.article-meta-label,
+.taxonomy-title {
+  font-weight: $meta-label-font-weight;
+}

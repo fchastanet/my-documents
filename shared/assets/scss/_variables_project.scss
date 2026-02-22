@@ -20,3 +20,12 @@ $link-hover-decoration: underline !default;
 $font-family-sans-serif: 'Segoe UI', 'Roboto', 'Helvetica Neue', arial, sans-serif !default;
 $font-family-monospace:
   'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'Liberation Mono', 'Courier New', 'monospace' !default;
+
+/* Article metadata styling */
+$meta-border-color: #ddd !default;
+$meta-border-radius: 4px !default;
+$meta-padding: 0.5rem 1rem !default;
+$meta-margin-bottom: 1rem !default;
+$meta-foreground-color: #333 !default;
+$meta-background-color: #f9f9f9 !default;
+$meta-label-font-weight: bold !default;

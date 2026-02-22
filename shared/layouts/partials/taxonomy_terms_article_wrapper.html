@@ -1,0 +1,21 @@
+{{/*
+  overridden from Docsy from https://github.com/google/docsy/blob/b219dab55d72a43cacab180aedd0d80c502f03ab/layouts/_partials/taxonomy_terms_article_wrapper.html
+  - call to metadata-article.html added at the end to display creation and last updated dates
+*/ -}}
+{{ $context := . -}}
+{{ if .Site.Params.Taxonomy -}}
+  {{ if .Site.Params.Taxonomy.taxonomyPageHeader -}}
+    {{ range $index, $taxo := .Site.Params.Taxonomy.taxonomyPageHeader -}}
+      {{ partial "taxonomy_terms_article.html" (dict "context" $context "taxo" $taxo) -}}
+    {{ end }}
+  {{ else -}}
+    {{ range $taxo, $taxo_map := .Site.Taxonomies -}}
+      {{ partial "taxonomy_terms_article.html" (dict "context" $context "taxo" $taxo) -}}
+    {{ end }}
+  {{ end -}}
+{{ else -}}
+  {{ range $taxo, $taxo_map := .Site.Taxonomies -}}
+    {{ partial "taxonomy_terms_article.html" (dict "context" $context "taxo" $taxo) -}}
+  {{ end }}
+{{ end -}}
+{{ partial "metadata-article.html" . -}}

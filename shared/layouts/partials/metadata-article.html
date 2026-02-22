@@ -1,0 +1,16 @@
+{{- /*
+  custom partial to display article metadata such as creation and last updated dates
+  used in taxonomy_terms_article_wrapper.html and taxonomy_terms_article.html
+*/ -}}
+{{- if .Params.creationDate -}}
+  <div class="article-meta-item article-meta-created">
+    <span class="article-meta-label">Created on:</span>
+    <time datetime="{{ (time.AsTime .Params.creationDate).Format "2006-01-02T15:04:05Z07:00" }}">{{ (time.AsTime .Params.creationDate).Format "January 2, 2006" }}</time>
+  </div>
+{{ end -}}
+{{ if .Params.lastUpdated -}}
+  <div class="article-meta-item article-meta-updated">
+    <span class="article-meta-label">Last updated:</span>
+    <time datetime="{{ (time.AsTime .Params.lastUpdated).Format "2006-01-02T15:04:05Z07:00" }}">{{ (time.AsTime .Params.lastUpdated).Format "January 2, 2006" }}</time>
+  </div>
+{{ end -}}

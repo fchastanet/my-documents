@@ -13,4 +13,8 @@ scopeconfig:
   - scope: go
   - scope: node
   - scope: images
+threshold: medium
+custom_severities:
+- detector: HexContent
+  severity: low
 version: "1.0"
