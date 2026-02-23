@@ -1,6 +1,6 @@
 # Copilot Prompt: Migrate Repository from Docsify to Hugo/Docsy
 
-Target repos: `bash-compiler`, `bash-tools`, `bash-tools-framework`, `bash-dev-env`
+Target repos: `[repo-name]`, `bash-tools`, `bash-tools-framework`, `bash-dev-env`
 
 Repos migrate from Docsify to Hugo/Docsy, calling reusable action from `fchastanet/my-documents`.
 
@@ -25,7 +25,12 @@ Create `content/_index.md`:
 ```markdown
 ---
 title: [Site Title]
+linkTitle: [Site Title]
 description: [Brief description]
+type: docs
+weight: [10 then 20, 30...]
+creationDate: [Current date format YYYY-MM-DD]
+lastUpdated: [Current date format YYYY-MM-DD]
 ---
 ```
 
@@ -33,8 +38,12 @@ Create `content/docs/_index.md`:
 ```markdown
 ---
 title: Documentation
+linkTitle: Documentation
 description: Complete documentation for [Project Name]
+type: docs
 weight: 1
+creationDate: [Current date format YYYY-MM-DD]
+lastUpdated: [Current date format YYYY-MM-DD]
 ---
 ```
 
@@ -50,11 +59,19 @@ description: Brief description
 weight: 10
 categories: [documentation]
 tags: [example]
-creationDate: "2026-02-18"
-lastUpdated: "2026-02-22"
+creationDate: [see creationDate rule below]
+lastUpdated: [see lastUpdated rule below]
 version: "1.0"
 ---
 ```
+
+creationDate rules: get file creation date using
+`git log --follow --format=%aI --pretty="format:%ad" --date=format:'%Y-%m-%d' filename | tail -1`
+eg: `git log --follow --format=%aI --pretty="format:%ad" --date=format:'%Y-%m-%d' content/docs/howtos/howto-write-jenkinsfile/01-how-jenkins-works.md | tail -1`
+
+lastUpdated rules: get last modification date using
+`git log --follow --format=%aI --pretty="format:%ad" --date=format:'%Y-%m-%d' filename | head -1`
+eg: `git log --follow --format=%aI --pretty="format:%ad" --date=format:'%Y-%m-%d' content/docs/howtos/howto-write-jenkinsfile/01-how-jenkins-works.md | head -1`
 
 Update internal links from `[text](page.md)` to `/docs/section/page/` (no .md extension).
 
@@ -76,14 +93,56 @@ require (
 
 Create `configs/site-config.yaml`:
 ```yaml
-baseURL: https://fchastanet.github.io/[repo-name]
+# Site-specific configuration for [repo-name]
 title: [Repo Name] Documentation
+baseURL: https://fchastanet.github.io/[repo-name]/
 
 params:
-  description: "Documentation for [Repo Name]"
-  ui:
-    navbar_bg_color: "#007bff"
+  description: '[Repo Name] - [Brief description]'
+  keywords: '[comma-separated keywords]'
+
+  # Repository configuration
   github_repo: https://github.com/fchastanet/[repo-name]
+  github_project_repo: https://github.com/fchastanet/[repo-name]
+
+  # UI Configuration - Blue theme
+  ui:
+    navbar_bg_color: '#007bff'
+
+  # Links
+  links:
+    user:
+      - name: GitHub
+        url: https://github.com/fchastanet/[repo-name]
+        icon: fab fa-github
+        desc: [repo-name] repository
+      - name: Issues
+        url: https://github.com/fchastanet/[repo-name]/issues
+        icon: fas fa-bug
+        desc: Report issues
+
+  # SEO
+  meta:
+    description: '[Repo Name] documentation - [Brief description]'
+    keywords: '[comma-separated keywords]'
+
+menu:
+  site:
+    - name: GitHub
+      url: https://github.com/fchastanet/[repo-name]
+      weight: 10
+      post: <sup><i class="ps-1 fa-solid fa-up-right-from-square fa-xs" aria-hidden="true"></i></sup>
+    - name: Release Notes
+      url: https://github.com/fchastanet/[repo-name]/releases
+      weight: 20
+      post: <sup><i class="ps-1 fa-solid fa-up-right-from-square fa-xs" aria-hidden="true"></i></sup>
+
+```
+
+Create `assets/scss/_variables_project_override.scss`:
+```scss
+$primary: #007bff;
+$secondary: #6c757d;
 ```
 
 Create `.github/workflows/build-site.yml`:
@@ -205,82 +264,6 @@ Test deployed site:
 - Verify links and images work
 - Test search functionality
 
-## Troubleshooting
-
-### Module Errors
-
-```bash
-hugo mod clean
-rm go.sum
-hugo mod get -u
-```
-
-Verify go.mod syntax and module path matches repository.
-
-### Base Configuration Not Applied
-
-Verify hugo.yaml imports base config:
-```yaml
-module:
-  imports:
-    - path: github.com/fchastanet/my-documents
-      mounts:
-        - source: configs/_base.yaml
-          target: config/_default/config.yaml
-```
-
-Check modules: `hugo mod graph`
-
-### Workflow Permissions Errors
-
-Settings → Actions → General:
-- Workflow permissions: **Read and write permissions**
-- Allow GitHub Actions to create and approve pull requests: ✅
-
-Settings → Pages:
-- Source: **GitHub Actions** (not "Deploy from a branch")
-
-### Hugo Server Fails
-
-```bash
-# Verify Hugo Extended installed
-hugo version  # Should show "extended"
-
-# Download modules
-hugo mod get -u
-
-# Check frontmatter in markdown files (must be valid YAML)
-```
-
-### Broken Links
-
-Use Hugo path format `/docs/section/page/` (no .md extension).
-
-Verify file structure matches link references.
-
-### Images Not Displaying
-
-Move images to `static/images/`, reference as `/images/file.png`.
-
-Verify images are committed to repository.
-
-### Custom Styles Not Applied
-
-Create `assets/scss/_variables_project_override.scss`:
-```scss
-$primary: #007bff;
-$secondary: #6c757d;
-```
-
-Or use hugo.yaml params:
-```yaml
-params:
-  ui:
-    navbar_bg_color: "#007bff"
-```
-
-Clear cache: `rm -rf resources/_gen/`
-
 ## File Structure After Migration
 
 ```
@@ -297,6 +280,9 @@ Clear cache: `rm -rf resources/_gen/`
 │       └── section2/
 ├── static/
 │   └── images/
+├── assets/
+│   └── scss/
+│       └── _variables_project_override.scss
 ├── go.mod
 ├── go.sum
 ├── .gitignore
@@ -310,3 +296,4 @@ Required files:
 - `.github/workflows/build-site.yml` - Deployment workflow
 - `content/` - Documentation in Hugo structure
 - `static/` - Static assets (images, downloads)
+- `assets/scss/_variables_project_override.scss` - Custom SCSS variables for project-specific styling
