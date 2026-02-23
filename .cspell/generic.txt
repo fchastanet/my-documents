@@ -9,6 +9,7 @@ goldmark
 hsts
 jsonify
 logrus
+markdownify
 podman
 pygments
 readingtime
@@ -16,5 +17,6 @@ sbom
 scopeconfig
 tabwidth
 tagname
+taxo
 UNINDEXED
 unindexed

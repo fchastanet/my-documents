@@ -1,8 +1,10 @@
 Ansi
 backquotes
+baseof
 buildview
 Buildx
 Dockerfiles
+Fabrique
 Français
 française
 frontmatter
@@ -11,6 +13,7 @@ howto
 howtos
 Jenkinsfiles
 Makefiles
+Micode
 Multifactor
 nonprod
 OIDC
@@ -18,7 +21,10 @@ pageinfo
 Project
 Shopt
 Slurper
+subdirs
 tabpane
 theming
+unmarshal
 Votre
 webservices
+youtube

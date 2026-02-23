@@ -2,7 +2,9 @@
 
 ## Repository Type
 
-Reusable GitHub Action provider for Hugo/Docsy documentation sites. Provides shared resources via Hugo modules to dependent repos (bash-compiler, bash-tools, bash-tools-framework, bash-dev-env).
+Reusable GitHub Action provider for Hugo/Docsy documentation sites.
+Provides shared resources via Hugo modules to dependent repos (bash-compiler,
+bash-tools, bash-tools-framework, bash-dev-env).
 
 ## Critical Non-Standard Conventions
 
