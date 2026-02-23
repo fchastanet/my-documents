@@ -1,5 +1,7 @@
 ---
 title: Reference Lists
+creationDate: "2026-02-17"
+lastUpdated: "2026-02-17"
 linkTitle: Lists
 description: Curated reference lists and collections
 type: docs

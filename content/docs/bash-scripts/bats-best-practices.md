@@ -1,15 +1,12 @@
 ---
 title: Bats Testing Framework
+creationDate: "2023-11-09"
+lastUpdated: "2026-02-17"
 description: Best practices for testing Bash scripts with Bats framework
 weight: 30
-categories: [Bash]
-tags: [bash, scripts, best-practices]
+categories: [testing]
+tags: [bash, bats, unit-test, scripts, best-practices]
 ---
-
-- [1. use of default temp directory created by bats](#1-use-of-default-temp-directory-created-by-bats)
-- [2. avoid boilerplate code](#2-avoid-boilerplate-code)
-- [3. Override an environment variable when using bats run](#3-override-an-environment-variable-when-using-bats-run)
-- [4. Override a bash framework function](#4-override-a-bash-framework-function)
 
 ## 1. use of default temp directory created by bats
 

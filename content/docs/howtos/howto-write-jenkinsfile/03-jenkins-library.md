@@ -1,17 +1,12 @@
 ---
 title: Jenkins Library
+creationDate: "2023-07-01"
+lastUpdated: "2026-02-17"
 description: Creating and using Jenkins shared libraries
 weight: 30
 categories: [Jenkins]
 tags: [jenkins, jenkinsfile, ci-cd]
 ---
-
-- [1. What is a jenkins shared library ?](#1-what-is-a-jenkins-shared-library-)
-- [2. Loading libraries dynamically](#2-loading-libraries-dynamically)
-- [3. jenkins library directory structure](#3-jenkins-library-directory-structure)
-- [4. Jenkins library](#4-jenkins-library)
-- [5. Jenkins library structure](#5-jenkins-library-structure)
-- [6. external resource usage](#6-external-resource-usage)
 
 ## 1. What is a jenkins shared library ?
 

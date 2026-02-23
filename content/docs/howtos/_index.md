@@ -1,5 +1,7 @@
 ---
 title: How-To Guides
+creationDate: "2026-02-17"
+lastUpdated: "2026-02-17"
 linkTitle: HowTos
 description: Step-by-step guides for various technologies
 type: docs

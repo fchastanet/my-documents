@@ -1,5 +1,7 @@
 ---
 title: Annotated Jenkinsfiles - Part 1
+creationDate: "2023-07-01"
+lastUpdated: "2026-02-22"
 description: Detailed Jenkinsfile examples with annotations
 weight: 50
 categories: [Jenkins]

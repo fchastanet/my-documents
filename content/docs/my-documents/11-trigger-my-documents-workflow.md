@@ -3,69 +3,11 @@ title: My Documents - Trigger Reusable Workflow Documentation
 description: Overview of the technical architecture and implementation details of the My Documents reusable workflow for triggering documentation builds
 categories: [Documentation]
 tags: [documentation, github-actions, reusable-workflow, github-app, authentication, secrets-management, ai-generated]
+waigth: 11
 creationDate: "2026-02-21"
 lastUpdated: "2026-02-21"
 version: "1.0"
 ---
-
-<!--TOC-->
-
-- [Trigger My-Documents Reusable Workflow](#trigger-my-documents-reusable-workflow)
-  - [1. Overview](#1-overview)
-  - [2. Quick Start](#2-quick-start)
-    - [2.1. Basic Usage](#21-basic-usage)
-  - [3. How It Works](#3-how-it-works)
-    - [3.1. Architecture](#31-architecture)
-    - [3.2. Authentication Flow](#32-authentication-flow)
-  - [4. Configuration](#4-configuration)
-    - [4.1. Input Parameters](#41-input-parameters)
-    - [4.2. Advanced Usage Examples](#42-advanced-usage-examples)
-      - [4.2.1. Custom Documentation URL](#421-custom-documentation-url)
-      - [4.2.2. Different Target Repository](#422-different-target-repository)
-      - [4.2.3. Manual Trigger with Custom Event Type](#423-manual-trigger-with-custom-event-type)
-  - [5. Complete Example](#5-complete-example)
-  - [6. Secrets Configuration](#6-secrets-configuration)
-    - [6.1. In my-documents Repository](#61-in-my-documents-repository)
-    - [6.2. In Dependent Repositories](#62-in-dependent-repositories)
-  - [7. Understanding Secrets: Inherit and Access Control](#7-understanding-secrets-inherit-and-access-control)
-    - [7.1. What is `secrets: inherit`?](#71-what-is-secrets-inherit)
-    - [7.2. How Does It Work for Dependent Repositories?](#72-how-does-it-work-for-dependent-repositories)
-    - [7.3. Secret Access Hierarchy](#73-secret-access-hierarchy)
-    - [7.4. Why This Workflow Can't Be Used by Others](#74-why-this-workflow-cant-be-used-by-others)
-      - [7.4.1. Reason 1: GitHub App is Organization-Specific](#741-reason-1-github-app-is-organization-specific)
-      - [7.4.2. Reason 2: GitHub App Has No Access to Other Organizations](#742-reason-2-github-app-has-no-access-to-other-organizations)
-      - [7.4.3. Reason 3: Secrets Are Repository-Specific](#743-reason-3-secrets-are-repository-specific)
-    - [7.5. Practical Example: Why It Fails](#75-practical-example-why-it-fails)
-    - [7.6. How Someone Else Could Create Their Own Version](#76-how-someone-else-could-create-their-own-version)
-    - [7.7. Summary: Why This Workflow is Fchastanet-Only](#77-summary-why-this-workflow-is-fchastanet-only)
-    - [7.8. Conclusion](#78-conclusion)
-  - [8. Workflow Outputs](#8-workflow-outputs)
-    - [8.1. Console Output](#81-console-output)
-    - [8.2. GitHub Actions Summary](#82-github-actions-summary)
-  - [9. Troubleshooting](#9-troubleshooting)
-    - [9.1. Build Not Triggered](#91-build-not-triggered)
-    - [9.2. Authentication Failures](#92-authentication-failures)
-    - [9.3. Workflow Not Found](#93-workflow-not-found)
-    - [9.4. Debug Mode](#94-debug-mode)
-  - [10. Migration Guide](#10-migration-guide)
-    - [10.1. From Old Trigger Workflow](#101-from-old-trigger-workflow)
-  - [11. Best Practices](#11-best-practices)
-    - [11.1. Trigger Paths](#111-trigger-paths)
-    - [11.2. Concurrency Control](#112-concurrency-control)
-    - [11.3. Conditional Triggers](#113-conditional-triggers)
-  - [12. FAQ](#12-faq)
-    - [12.1. Q: Do I need to configure secrets in my dependent repository?](#121-q-do-i-need-to-configure-secrets-in-my-dependent-repository)
-    - [12.2. Q: Can I test the workflow before merging to master?](#122-q-can-i-test-the-workflow-before-merging-to-master)
-    - [12.3. Q: How long does documentation deployment take?](#123-q-how-long-does-documentation-deployment-take)
-    - [12.4. Q: Can I use this with my own organization?](#124-q-can-i-use-this-with-my-own-organization)
-    - [12.5. Q: What if the build fails?](#125-q-what-if-the-build-fails)
-    - [12.6. Q: Can I trigger builds for multiple repositories?](#126-q-can-i-trigger-builds-for-multiple-repositories)
-  - [13. Related Documentation](#13-related-documentation)
-  - [14. Support](#14-support)
-
-<!--TOC-->
-
-# Trigger My-Documents Reusable Workflow
 
 ## 1. Overview
 
@@ -683,7 +625,7 @@ jobs:
     uses: fchastanet/my-documents/.github/workflows/trigger-docs-reusable.yml@master
     secrets: inherit
     concurrency:
-      group: docs-build-${{ github.ref }}
+      group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
       cancel-in-progress: true
 ```
 

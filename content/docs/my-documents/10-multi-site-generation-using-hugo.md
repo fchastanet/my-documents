@@ -1,63 +1,13 @@
 ---
-title: My Documents - Static Site Generation Using Hugo
+title: My Documents - Multi repositories Site Generation
 description: Comprehensive documentation of the Hugo migration for multi-site documentation
 creationDate: "2026-02-18"
 lastUpdated: "2026-02-18"
 version: "1.0"
+weight: 10
 categories: [Brainstorming]
 tags: [hugo, docsy, multi-site, documentation, static-site-generator, github-actions, ai-generated]
 ---
-# My Documents - Static Site Generation Using Hugo - Migration Analysis and Implementation
-
-<!--TOC-->
-
-- [My Documents - Static Site Generation Using Hugo - Migration Analysis and Implementation](#my-documents---static-site-generation-using-hugo---migration-analysis-and-implementation)
-  - [1. Technical Solutions Evaluated](#1-technical-solutions-evaluated)
-    - [1.1. Static Site Generator Solutions](#11-static-site-generator-solutions)
-      - [1.1.1. Hugo (SELECTED)](#111-hugo-selected)
-      - [1.1.2. Astro](#112-astro)
-      - [1.1.3. 11ty (Eleventy)](#113-11ty-eleventy)
-      - [1.1.4. VuePress 2](#114-vuepress-2)
-      - [1.1.5. MkDocs](#115-mkdocs)
-      - [1.1.6. Next.js and Gatsby](#116-nextjs-and-gatsby)
-      - [1.1.7. Comparison Summary](#117-comparison-summary)
-    - [1.2. Multi-Site Build Pipeline Solutions](#12-multi-site-build-pipeline-solutions)
-      - [1.2.1. Centralized Orchestrator (my-documents builds all sites) (SELECTED)](#121-centralized-orchestrator-my-documents-builds-all-sites-selected)
-      - [1.2.2. Decentralized with Reusable Workflows + Hugo Modules](#122-decentralized-with-reusable-workflows--hugo-modules)
-      - [1.2.3. True Monorepo with Subdirectories](#123-true-monorepo-with-subdirectories)
-      - [1.2.4. Pipeline Solution Comparison](#124-pipeline-solution-comparison)
-  - [2. Chosen Solutions & Rationale](#2-chosen-solutions--rationale)
-    - [2.1. Static Site Generator: Hugo + Docsy Theme](#21-static-site-generator-hugo--docsy-theme)
-    - [2.2. Multi-Site Pipeline: Centralized Orchestrator](#22-multi-site-pipeline-centralized-orchestrator)
-  - [3. Implementation Details](#3-implementation-details)
-    - [3.1. Repository Architecture](#31-repository-architecture)
-    - [3.2. Directory Structure](#32-directory-structure)
-      - [3.2.1. my-documents (Orchestrator)](#321-my-documents-orchestrator)
-      - [3.2.2. Dependent Repository (Example: bash-compiler)](#322-dependent-repository-example-bash-compiler)
-    - [3.3. Configuration Merging Strategy](#33-configuration-merging-strategy)
-    - [3.4. Build Workflow](#34-build-workflow)
-    - [3.5. Deployment Approach](#35-deployment-approach)
-    - [3.6. Trigger Mechanism](#36-trigger-mechanism)
-    - [3.7. Theme Customization](#37-theme-customization)
-  - [4. Lessons Learned & Future Considerations](#4-lessons-learned--future-considerations)
-    - [4.1. GitHub App Migration from Deploy Keys](#41-github-app-migration-from-deploy-keys)
-    - [4.2. Trade-offs Discovered](#42-trade-offs-discovered)
-      - [4.2.1. All-Site Rebuild Trade-off](#421-all-site-rebuild-trade-off)
-      - [4.2.2. Authentication Complexity](#422-authentication-complexity)
-      - [4.2.3. Configuration Flexibility vs Consistency](#423-configuration-flexibility-vs-consistency)
-    - [4.3. Best Practices Identified](#43-best-practices-identified)
-      - [4.3.1. Configuration Management](#431-configuration-management)
-      - [4.3.2. Build Optimization](#432-build-optimization)
-      - [4.3.3. Dependency Management](#433-dependency-management)
-      - [4.3.4. Security](#434-security)
-    - [4.4. Future Considerations](#44-future-considerations)
-      - [4.4.1. Potential Optimizations](#441-potential-optimizations)
-      - [4.4.2. Scalability Considerations](#442-scalability-considerations)
-      - [4.4.3. Alternative Approaches for Future Projects](#443-alternative-approaches-for-future-projects)
-    - [4.5. Success Metrics](#45-success-metrics)
-  - [5. Conclusion](#5-conclusion)
-
-<!--TOC-->
 
 **Project:** Migration from Docsify to Hugo with Docsy theme for multiple documentation repositories
 

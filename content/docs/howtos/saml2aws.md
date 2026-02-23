@@ -1,7 +1,11 @@
 ---
 title: Saml2Aws Setup
+creationDate: "2024-09-15"
+lastUpdated: "2026-02-22"
 description: Guide to setting up and using Saml2Aws for AWS access
 weight: 40
+categories: [AWS]
+tags: [aws, saml2aws, sso, authentication]
 ---
 
 Configure saml2aws accounts

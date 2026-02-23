@@ -1,5 +1,7 @@
 ---
 title: Bash Scripts
+creationDate: "2026-02-17"
+lastUpdated: "2026-02-17"
 linkTitle: Bash Scripts
 description: Best practices for writing Bash scripts
 type: docs

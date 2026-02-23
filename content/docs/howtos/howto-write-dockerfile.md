@@ -1,33 +1,12 @@
 ---
 title: How to Write Dockerfiles
+creationDate: "2023-07-01"
+lastUpdated: "2026-02-17"
 description: Best practices for writing efficient and secure Dockerfiles
 weight: 20
+categories: [Docker]
+tags: [docker, dockerfile, best-practices]
 ---
-
-- [1. Dockerfile best practices](#1-dockerfile-best-practices)
-- [2. Basic best practices](#2-basic-best-practices)
-  - [2.1. Best Practice #1: Merge the image layers](#21-best-practice-1-merge-the-image-layers)
-    - [2.1.1. Bad practice #1](#211-bad-practice-1)
-    - [2.1.2. Best practice #1](#212-best-practice-1)
-  - [2.2. Best Practice #2: trace commands and fail on error](#22-best-practice-2-trace-commands-and-fail-on-error)
-    - [2.2.1. Bad practice #2](#221-bad-practice-2)
-    - [2.2.2. Best Practice #2](#222-best-practice-2)
-  - [2.3. Best practice #3: packages ordering and versions](#23-best-practice-3-packages-ordering-and-versions)
-    - [2.3.1. Bad practice #3](#231-bad-practice-3)
-    - [2.3.2. Best Practice #3](#232-best-practice-3)
-      - [2.3.2.1. Order packages alphabetically and one package by line](#2321-order-packages-alphabetically-and-one-package-by-line)
-      - [2.3.2.2. Always specify packages versions](#2322-always-specify-packages-versions)
-      - [2.3.2.3. Ensure non interactive](#2323-ensure-non-interactive)
-  - [2.4. Best practice #4: ensure image receives latest security updates](#24-best-practice-4-ensure-image-receives-latest-security-updates)
-    - [2.4.1. Bad practice #4](#241-bad-practice-4)
-    - [2.4.2. Best Practice #4](#242-best-practice-4)
-  - [2.5. Conclusion: image size comparison](#25-conclusion-image-size-comparison)
-    - [2.5.1. Dockerfile without best practices](#251-dockerfile-without-best-practices)
-    - [2.5.2. Dockerfile with all optimizations](#252-dockerfile-with-all-optimizations)
-- [3. Docker Buildx best practices](#3-docker-buildx-best-practices)
-  - [3.1. Optimize image size](#31-optimize-image-size)
-    - [3.1.1. Dockerfile not optimized](#311-dockerfile-not-optimized)
-    - [3.1.2. Dockerfile optimized](#312-dockerfile-optimized)
 
 ## 1. Dockerfile best practices
 

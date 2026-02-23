@@ -1,5 +1,7 @@
 ---
 title: Annotated Jenkinsfiles - Part 4
+creationDate: "2023-07-01"
+lastUpdated: "2026-02-17"
 description: Complex Jenkinsfile scenarios
 weight: 80
 categories: [Jenkins]

@@ -103,6 +103,17 @@ params:
     readingtime:
       enable: false
 
+  taxonomy:
+    taxonomyCloud:
+      - categories
+      - tags
+    taxonomyCloudTitle:
+      - Categories
+      - Tag Cloud
+    taxonomyPageHeader:
+      - categories
+      - tags
+
   links:
     developer:
       - name: Bash Tools Framework

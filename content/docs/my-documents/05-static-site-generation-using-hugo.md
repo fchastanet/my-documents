@@ -1,14 +1,15 @@
 ---
 title: Static Site Generation Migration Analysis
 description: Analysis of migrating from Docsify to an SEO-optimized static site generator
+weight: 05
 creationDate: "2026-02-17"
+lastUpdated: "2026-02-22"
 categories: [Brainstorming]
-tags: development, documentation, seo]
+tags: [development, documentation, seo]
 ---
-# Static Site Generator Migration Analysis
 
-**Date:** 2026-02-17
 **Project:** my-documents repository migration and multi-site consolidation
+
 **Goal:** Migrate from Docsify to an SEO-optimized static site generator while maintaining simplicity
 and GitHub CI compatibility
 

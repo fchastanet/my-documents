@@ -1,5 +1,7 @@
 ---
 title: Brainstorming
+creationDate: "2026-02-17"
+lastUpdated: "2026-02-17"
 linkTitle: Brainstorming
 description: In-depth brainstorming and analysis of documentation topics and strategies
 type: docs

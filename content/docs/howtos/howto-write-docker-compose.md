@@ -1,10 +1,12 @@
 ---
 title: How to Write Docker Compose Files
+creationDate: "2023-07-01"
+lastUpdated: "2026-02-17"
 description: Guide to writing and organizing Docker Compose files
 weight: 30
+categories: [Docker]
+tags: [docker, docker-compose, best-practices]
 ---
-
-- [1. platform](#1-platform)
 
 ## 1. platform
 

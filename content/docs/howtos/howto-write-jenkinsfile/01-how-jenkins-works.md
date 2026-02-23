@@ -1,18 +1,12 @@
 ---
 title: How Jenkins Works
+creationDate: "2023-07-01"
+lastUpdated: "2026-02-17"
 description: Understanding Jenkins architecture and concepts
 weight: 10
 categories: [Jenkins]
 tags: [jenkins, jenkinsfile, ci-cd]
 ---
-
-- [1. Jenkins Master Slave Architecture](#1-jenkins-master-slave-architecture)
-  - [1.1. Jenkins controller/Jenkins master node](#11-jenkins-controllerjenkins-master-node)
-  - [1.2. Nodes](#12-nodes)
-  - [1.3. Agents](#13-agents)
-  - [1.4. Executors](#14-executors)
-  - [1.5. Jobs](#15-jobs)
-- [2. Jenkins dynamic node](#2-jenkins-dynamic-node)
 
 Source: [https://www.jenkins.io/doc/book/managing/nodes/](https://www.jenkins.io/doc/book/managing/nodes/)
 

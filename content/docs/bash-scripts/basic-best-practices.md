@@ -1,48 +1,12 @@
 ---
 title: Basic Best Practices
+creationDate: "2023-11-09"
+lastUpdated: "2026-02-22"
 description: Foundational best practices for writing Bash scripts
 weight: 10
 categories: [Bash]
 tags: [bash, scripts, best-practices]
 ---
-
-- [1. External references](#1-external-references)
-- [2. General best practices](#2-general-best-practices)
-- [3. escape quotes](#3-escape-quotes)
-- [4. Bash environment options](#4-bash-environment-options)
-  - [4.1. errexit (set -e | set -o errexit)](#41-errexit-set--e--set--o-errexit)
-    - [4.1.1. Caveats with command substitution](#411-caveats-with-command-substitution)
-    - [4.1.2. Caveats with process substitution](#412-caveats-with-process-substitution)
-    - [4.1.3. Process substitution is asynchronous](#413-process-substitution-is-asynchronous)
-  - [4.2. pipefail (set -o pipefail)](#42-pipefail-set--o-pipefail)
-  - [4.3. errtrace (set -E | set -o errtrace)](#43-errtrace-set--e--set--o-errtrace)
-  - [4.4. nounset (set -u | set -o nounset)](#44-nounset-set--u--set--o-nounset)
-  - [4.5. inherit error exit code in sub shells](#45-inherit-error-exit-code-in-sub-shells)
-  - [4.6. posix (set -o posix)](#46-posix-set--o-posix)
-- [5. Main function](#5-main-function)
-- [6. Arguments](#6-arguments)
-- [7. some commands default options to use](#7-some-commands-default-options-to-use)
-- [8. Variables](#8-variables)
-  - [8.1. Variable declaration](#81-variable-declaration)
-  - [8.2. variable naming convention](#82-variable-naming-convention)
-  - [8.3. Variable expansion](#83-variable-expansion)
-    - [8.3.1. Examples](#831-examples)
-  - [8.4. Check if a variable is defined](#84-check-if-a-variable-is-defined)
-  - [8.5. Variable default value](#85-variable-default-value)
-  - [8.6. Passing variable by reference to function](#86-passing-variable-by-reference-to-function)
-    - [8.6.1. Example 1](#861-example-1)
-    - [8.6.2. Example 2](#862-example-2)
-- [9. Capture output](#9-capture-output)
-  - [9.1. Capture output and test result](#91-capture-output-and-test-result)
-  - [9.2. Capture output and retrieve status code](#92-capture-output-and-retrieve-status-code)
-- [10. Array](#10-array)
-- [11. Temporary directory](#11-temporary-directory)
-- [12. Traps](#12-traps)
-- [13. Deal with SIGPIPE - exit code 141](#13-deal-with-sigpipe---exit-code-141)
-- [14. Performances analysis](#14-performances-analysis)
-- [15. Bash Performance tips](#15-bash-performance-tips)
-  - [15.1. Array::wrap2 performance improvement](#151-arraywrap2-performance-improvement)
-
 ## 1. External references
 
 - [pure bash bible](https://github.com/dylanaraps/pure-bash-bible?tab=readme-ov-file)

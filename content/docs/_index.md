@@ -1,5 +1,7 @@
 ---
 title: Documentation
+creationDate: "2026-02-17"
+lastUpdated: "2026-02-17"
 linkTitle: Documentation
 description: Comprehensive guides and best practices
 type: docs

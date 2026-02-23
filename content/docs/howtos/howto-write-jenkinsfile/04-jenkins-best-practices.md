@@ -1,13 +1,12 @@
 ---
 title: Jenkins Best Practices
-description: Best practices for Jenkins configuration
+creationDate: "2023-07-01"
+lastUpdated: "2026-02-17"
+description: Best practices and patterns for Jenkins and Jenkinsfiles
 weight: 40
 categories: [Jenkins]
 tags: [jenkins, jenkinsfile, ci-cd]
 ---
-
-- [1. Pipeline best practices](#1-pipeline-best-practices)
-- [2. Shared library best practices](#2-shared-library-best-practices)
 
 ## 1. Pipeline best practices
 

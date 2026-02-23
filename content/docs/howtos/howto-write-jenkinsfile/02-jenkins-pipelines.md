@@ -1,18 +1,12 @@
 ---
 title: Jenkins Pipelines
+creationDate: "2023-07-01"
+lastUpdated: "2026-02-17"
 description: Declarative and scripted pipeline syntax
 weight: 20
 categories: [Jenkins]
 tags: [jenkins, jenkinsfile, ci-cd]
 ---
-
-- [1. What is a pipeline ?](#1-what-is-a-pipeline-)
-- [2. Pipeline creation via UI](#2-pipeline-creation-via-ui)
-- [3. Groovy](#3-groovy)
-- [4. Difference between scripted pipeline (freestyle) and declarative pipeline syntax](#4-difference-between-scripted-pipeline-freestyle-and-declarative-pipeline-syntax)
-- [5. Declarative pipeline example](#5-declarative-pipeline-example)
-- [6. Scripted pipeline example](#6-scripted-pipeline-example)
-- [7. Why Pipeline?](#7-why-pipeline)
 
 ## 1. What is a pipeline ?
 

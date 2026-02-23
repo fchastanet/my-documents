@@ -1,17 +1,12 @@
 ---
 title: Jenkins Recipes and Tips
-description: Common recipes and troubleshooting tips
+creationDate: "2023-07-01"
+lastUpdated: "2026-02-17"
+description: Useful recipes and tips for Jenkins and Jenkinsfiles
 weight: 100
 categories: [Jenkins]
 tags: [jenkins, jenkinsfile, ci-cd]
 ---
-
-- [1. Jenkins snippet generator](#1-jenkins-snippet-generator)
-- [2. Declarative pipeline allows you to restart a build from a given stage](#2-declarative-pipeline-allows-you-to-restart-a-build-from-a-given-stage)
-- [3. Replay a pipeline](#3-replay-a-pipeline)
-- [4. VS code Jenkinsfile validation](#4-vs-code-jenkinsfile-validation)
-- [5. How to chain pipelines ?](#5-how-to-chain-pipelines-)
-- [6. Viewing pipelines hierarchy](#6-viewing-pipelines-hierarchy)
 
 ## 1. Jenkins snippet generator
 

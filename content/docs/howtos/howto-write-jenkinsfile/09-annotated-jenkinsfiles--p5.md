@@ -1,6 +1,8 @@
 ---
 title: Annotated Jenkinsfiles - Part 5
-description: Advanced Jenkinsfile techniques
+creationDate: "2023-07-01"
+lastUpdated: "2026-02-17"
+description: Detailed Jenkinsfile examples with annotations
 weight: 90
 categories: [Jenkins]
 tags: [jenkins, jenkinsfile, ci-cd]

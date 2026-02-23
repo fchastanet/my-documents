@@ -16,3 +16,9 @@
 .taxonomy-title {
   font-weight: $meta-label-font-weight;
 }
+
+.td-page-meta--view,
+.td-page-meta--edit,
+.td-page-meta--child {
+  display: none !important;
+}
