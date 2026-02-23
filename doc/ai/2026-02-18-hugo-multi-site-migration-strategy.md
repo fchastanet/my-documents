@@ -33,7 +33,7 @@ Through interactive questions, established:
 
 ## Improved Comprehensive Prompt
 
-```
+````markdown
 Goal: Design and document a multi-repository Hugo static site migration strategy
 
 Context:
@@ -111,7 +111,7 @@ Output Format:
 - Visual architecture diagrams (ASCII art)
 - FAQ section addressing common questions
 - Actionable next steps checklist
-```
+````
 
 ## Improvements Over Original
 
@@ -152,7 +152,7 @@ Output Format:
 
 ## Recommended Prompt Template for Similar Tasks
 
-```
+````markdown
 # Architecture Decision for [SYSTEM_NAME]
 
 ## Context
@@ -205,7 +205,7 @@ Output Format:
 - Working code examples (copy-paste ready)
 - FAQ section
 - Actionable next steps
-```
+````
 
 ## Reusability
 

@@ -89,6 +89,10 @@ params:
   # Disable prism (use Hugo's built-in highlight)
   prism_syntax_highlighting: false
 
+  # Repository configuration
+  github_subdir: content
+  github_branch: master
+
   # UI Configuration
   ui:
     showLightDarkModeMenu: true

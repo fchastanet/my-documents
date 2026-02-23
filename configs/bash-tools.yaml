@@ -9,8 +9,6 @@ params:
   # Repository configuration
   github_repo: https://github.com/fchastanet/bash-tools
   github_project_repo: https://github.com/fchastanet/bash-tools
-  github_subdir: content
-  github_branch: master
 
   # UI Configuration - Green theme
   ui:

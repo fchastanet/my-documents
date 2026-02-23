@@ -27,6 +27,21 @@ mkdir -p "$OUTPUT_DIR"
   "$ORCHESTRATOR_DIR/shared" \
   "$OUTPUT_DIR"
 
+if [[ "$SOURCE_DIR" != "$ORCHESTRATOR_DIR" ]]; then
+  echo "  Setting up site-specific resources..."
+  # Copy site-specific resources
+  if [ -d "$SOURCE_DIR/layouts" ]; then
+    echo "    Copying site-specific layouts..."
+    mkdir -p "$OUTPUT_DIR/layouts"
+    cp -r "$SOURCE_DIR/layouts"/* "$OUTPUT_DIR/layouts/"
+  fi
+  if [ -d "$SOURCE_DIR/assets" ]; then
+    echo "    Copying site-specific assets..."
+    mkdir -p "$OUTPUT_DIR/assets"
+    cp -r "$SOURCE_DIR/assets"/* "$OUTPUT_DIR/assets/"
+  fi
+fi
+
 # Copy site content
 echo "  Copying content..."
 if [ -d "$SOURCE_DIR/content" ]; then
@@ -41,11 +56,12 @@ if [ -d "$SOURCE_DIR/static" ]; then
 fi
 
 # Copy go.mod and go.sum if they exist
-if [ -f "$SOURCE_DIR/go.mod" ]; then
-  cp "$SOURCE_DIR/go.mod" "$OUTPUT_DIR/"
+if [ -f "$ORCHESTRATOR_DIR/go.mod" ]; then
+  cp "$ORCHESTRATOR_DIR/go.mod" "$OUTPUT_DIR/"
+  sed -i "s|github.com/fchastanet/my-documents|github.com/fchastanet/$SITE_NAME|g" "$OUTPUT_DIR/go.mod"
 fi
-if [ -f "$SOURCE_DIR/go.sum" ]; then
-  cp "$SOURCE_DIR/go.sum" "$OUTPUT_DIR/"
+if [ -f "$ORCHESTRATOR_DIR/go.sum" ]; then
+  cp "$ORCHESTRATOR_DIR/go.sum" "$OUTPUT_DIR/"
 fi
 
 # Merge configurations

@@ -88,6 +88,10 @@ start:
 	  mv hugo.yaml.tmp hugo.yaml
 	hugo server -D
 
+start-site: build-site
+	@echo "$(BLUE)Starting Hugo dev server for $(SITE)...$(NC)"
+	cd build/$(SITE) && hugo server -D
+
 # Clean build artifacts
 clean:
 	@echo "$(BLUE)Cleaning build artifacts...$(NC)"

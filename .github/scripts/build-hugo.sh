@@ -21,7 +21,7 @@ echo -e "${BLUE}Building $SITE_NAME with Hugo...${NC}"
   cd "$BUILD_DIR"
 
   # Set environment variables for Hugo build
-  export HUGO_CACHEDIR="${HUGO_CACHEDIR:-$(pwd)/.hugo_cache}"
+  export HUGO_CACHEDIR="${HUGO_CACHEDIR:-$(cd ".." && pwd -P)/.hugo_cache}"
   export HUGO_ENVIRONMENT="${HUGO_ENVIRONMENT:-production}"
 
   # Build with all diagnostic flags

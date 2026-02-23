@@ -9,8 +9,6 @@ params:
   # Repository configuration
   github_repo: https://github.com/fchastanet/bash-dev-env
   github_project_repo: https://github.com/fchastanet/bash-dev-env
-  github_subdir: content
-  github_branch: master
 
   # UI Configuration - Orange theme
   ui:

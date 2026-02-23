@@ -9,8 +9,6 @@ params:
   # Repository configuration
   github_repo: https://github.com/fchastanet/bash-compiler
   github_project_repo: https://github.com/fchastanet/bash-compiler
-  github_subdir: content
-  github_branch: master
 
   # UI Configuration - Blue theme
   ui:
