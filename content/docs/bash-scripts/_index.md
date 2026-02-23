@@ -1,7 +1,7 @@
 ---
 title: Bash Scripts
 creationDate: "2026-02-17"
-lastUpdated: "2026-02-17"
+lastUpdated: "2026-02-23"
 linkTitle: Bash Scripts
 description: Best practices for writing Bash scripts
 type: docs
@@ -24,3 +24,5 @@ This section covers:
 ## 2. Getting Started
 
 Choose a topic from the sidebar to begin learning about Bash scripting best practices.
+
+{{< articles-list >}}

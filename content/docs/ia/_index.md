@@ -19,3 +19,5 @@ In-depth tutorials and guides on artificial intelligence topics.
 ## 2. Getting Started
 
 Select a guide from the sidebar to begin.
+
+{{< articles-list >}}

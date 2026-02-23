@@ -1,7 +1,7 @@
 ---
 title: How to Write Jenkinsfiles
 creationDate: "2026-02-17"
-lastUpdated: "2026-02-17"
+lastUpdated: "2026-02-23"
 linkTitle: Jenkinsfiles
 description: Comprehensive guide to writing Jenkins pipelines and Jenkinsfiles
 type: docs
@@ -24,3 +24,5 @@ practices, and annotated examples.
 - Jenkins best practices and configuration
 - Real-world Jenkinsfile examples with detailed annotations
 - Common recipes and troubleshooting tips
+
+{{< articles-list >}}

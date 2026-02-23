@@ -1,0 +1,39 @@
+{{/* List articles from the current section as a table, sorted by lastUpdated date (most recent first) */}} {{ $section
+:= .Page.CurrentSection }} {{ if and $section (ne $section.Kind "home") }} {{/* Get all pages in the current section,
+excluding the section index page itself */}} {{ $articles := (where $section.Pages "Kind" "page") }} {{ if gt (len
+$articles) 0 }} {{/* Sort articles by lastUpdated in reverse order (most recent first) */}} {{ $sorted := sort $articles
+"Params.lastUpdated" "desc" }}
+
+<div class="articles-list">
+  <h2>Articles in this section</h2>
+  <table class="table table-striped table-hover">
+    <thead class="table-dark">
+      <tr>
+        <th scope="col">Title</th>
+        <th scope="col">Description</th>
+        <th scope="col">Updated</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{ range $sorted }}
+      <tr>
+        <td>
+          <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+        </td>
+        <td>
+          {{ with .Params.description }} {{ . }} {{ else }}
+          <em>No description</em>
+          {{ end }}
+        </td>
+        <td>
+          {{ with .Params.lastUpdated }} {{ . }} {{ else }} {{ if .Params.creationDate }} {{ .Params.creationDate }} {{
+          else }}
+          <em>N/A</em>
+          {{ end }} {{ end }}
+        </td>
+      </tr>
+      {{ end }}
+    </tbody>
+  </table>
+</div>
+{{ end }} {{ end }}

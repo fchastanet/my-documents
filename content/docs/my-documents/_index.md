@@ -24,3 +24,5 @@ Dedicated section for articles about this repository, its structure, and how to 
 ## 2. Getting Started
 
 Select a documentation topic from the sidebar to begin.
+
+{{< articles-list >}}
