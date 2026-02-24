@@ -1,0 +1,21 @@
+{{- $src := .Get "src" -}}
+{{- $alt := .Get "alt" | default "" -}}
+{{- $title := .Get "title" | default $alt -}}
+
+{{- /* Handle different path types */ -}}
+{{- if not (hasPrefix $src "http") -}}
+  {{- if not (hasPrefix $src "/") -}}
+    {{- /* Relative path - resolve relative to the current page's directory */ -}}
+    {{- $pageDir := .Page.File.Dir -}}
+    {{- /* Combine page directory with relative image path */ -}}
+    {{- $src = printf "/%s%s" $pageDir $src -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* Prepend baseURL if configured */ -}}
+{{- $baseURL := site.BaseURL | strings.TrimSuffix "/" -}}
+{{- if and $baseURL (not (hasPrefix $src "http")) -}}
+  {{- $src = printf "%s%s" $baseURL $src -}}
+{{- end -}}
+
+<img src="{{ $src }}" alt="{{ $alt }}"{{ with $title }} title="{{ . }}"{{ end }} loading="lazy">

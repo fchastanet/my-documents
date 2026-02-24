@@ -1,0 +1,7 @@
+{{- $src := .Get "src" -}}
+{{- $file := or $src (.Get 0) -}}
+{{- if not $file -}}
+  {{- errorf "asset shortcode requires 'src' parameter" -}}
+{{- end -}}
+{{- $content := readFile $file -}}
+{{ safeHTML $content }}

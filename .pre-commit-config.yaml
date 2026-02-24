@@ -79,6 +79,7 @@ repos:
         exclude: |
           (?x)(
             \.md$|
+            ^shared/layouts/shortcodes/|
             ^\.vscode/.*\.code-snippets$|
             ^content/_index.html$|
             ^shared/layouts/partials/

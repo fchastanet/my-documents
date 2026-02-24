@@ -1,0 +1,32 @@
+{{- $src := .Get "src" -}}
+{{- $file := or $src (.Get 0) -}}
+{{- if not $file -}}
+  {{- errorf "codeExpand shortcode requires 'src' parameter" -}}
+{{- end -}}
+{{- $alt := .Get "alt" | default "" -}}
+{{- $title := .Get "title" | default "Click to expand" -}}
+{{- $codeHeader := .Get "header" | default "" -}}
+{{- $lang := .Get "lang" | default "text" -}}
+
+{{- /* Handle different path types */ -}}
+{{- if not (hasPrefix $src "http") -}}
+  {{- if not (hasPrefix $src "/") -}}
+    {{- /* Relative path - resolve relative to the current page's directory */ -}}
+    {{- $pageDir := .Page.File.Dir -}}
+    {{- /* Combine page directory with relative image path */ -}}
+    {{- $src = printf "/%s%s" $pageDir $src -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $content := readFile $src -}}
+{{- $safeContent := safeHTML $content -}}
+
+<details>
+<summary>{{ $title }}</summary>
+{{- if $codeHeader -}}
+<div class="card-header">{{ $codeHeader }}</div>
+{{- end -}}
+<div class="highlight">
+{{ highlight $safeContent $lang "" }}
+</div>
+</details>
