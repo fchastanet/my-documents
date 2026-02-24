@@ -10,6 +10,7 @@
     "**/logs/**",
     "**/megalinter-reports/**",
     "**/testsData/**",
+    "shared/**",
     "**/.venv/**",
     "**/*cache*/**",
     "**/.github/**",

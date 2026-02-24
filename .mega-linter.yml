@@ -155,5 +155,11 @@ SPELL_FILTER_REGEX_EXCLUDE: |
 HTML_HTMLHINT_FILTER_REGEX_EXCLUDE: |
   (?x)(
     ^content/_index.html$|
-    ^shared/layouts/partials/
+    ^shared/layouts/partials/|
+    ^shared/layouts/shortcodes
+  )
+
+HTML_DJLINT_FILTER_REGEX_EXCLUDE: |
+  (?x)(
+    ^shared/layouts/shortcodes
   )

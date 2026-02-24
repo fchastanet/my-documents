@@ -2,6 +2,7 @@ Catmull
 Chastanet
 cpes
 cyclonedx
+errorf
 fchastanet
 fileignoreconfig
 friday

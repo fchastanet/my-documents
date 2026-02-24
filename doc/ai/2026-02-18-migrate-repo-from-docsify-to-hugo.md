@@ -45,7 +45,11 @@ weight: 1
 creationDate: [Current date format YYYY-MM-DD]
 lastUpdated: [Current date format YYYY-MM-DD]
 ---
+
+{{< articles-list >}}
 ```
+
+`_index.md` files serve as landing pages for sections, with frontmatter defining metadata and content structure. They will not contain actual documentation content but will provide an overview and navigation for the section.
 
 ### Step 3: Migrate Content
 
@@ -75,7 +79,7 @@ eg: `git log --follow --format=%aI --pretty="format:%ad" --date=format:'%Y-%m-%d
 
 Update internal links from `[text](page.md)` to `/docs/section/page/` (no .md extension).
 
-Move images to `static/images/`, update references in markdown.
+Move images in `assets/` folder in the same directory where the file is used. If the file is used by multiple pages, keep it in `static/images/`. In any case, update references to `/images/filename.ext`.
 
 ### Step 4: Create Hugo Configuration Files
 
