@@ -50,6 +50,10 @@ jobs:
           ref: ${{ inputs.checkout-ref }}
           fetch-depth: 0
 
+      # docker buildx might be needed for consumers of this action
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
       - name: Setup Go
         uses: actions/setup-go@v5
         with:
@@ -88,6 +92,25 @@ jobs:
         uses: vegardit/gha-setup-yq@v1
         with:
           yq-version: v4.52.4
+
+      - name: Check for pre-build script
+        id: check-pre-build
+        if: inputs.checkout-repo != ''
+        run: |
+          if [ -f "_site-content/.github/scripts/pre-build.sh" ]; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+            echo "✅ Found pre-build script"
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+            echo "ℹ️ No pre-build script found"
+          fi
+
+      - name: Run pre-build script for ${{ inputs.site-name }}
+        if: steps.check-pre-build.outputs.exists == 'true'
+        working-directory: _site-content
+        run: |
+          chmod +x .github/scripts/pre-build.sh
+          bash .github/scripts/pre-build.sh
 
       - name: Build site for ${{ inputs.site-name }}
         run: |

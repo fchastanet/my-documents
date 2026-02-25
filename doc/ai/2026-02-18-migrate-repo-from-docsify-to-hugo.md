@@ -83,18 +83,6 @@ Move images in `assets/` folder in the same directory where the file is used. If
 
 ### Step 4: Create Hugo Configuration Files
 
-Create `go.mod`:
-```go
-module github.com/fchastanet/[repo-name]
-
-go 1.24
-
-require (
-  github.com/google/docsy v0.14.3 // indirect
-  github.com/google/docsy/dependencies v0.7.2 // indirect
-)
-```
-
 Create `configs/site-config.yaml`:
 ```yaml
 # Site-specific configuration for [repo-name]
@@ -287,15 +275,11 @@ Test deployed site:
 ├── assets/
 │   └── scss/
 │       └── _variables_project_override.scss
-├── go.mod
-├── go.sum
 ├── .gitignore
 └── [other repo files]
 ```
 
 Required files:
-- `go.mod` - Hugo module configuration
-- `go.sum` - Module checksums (auto-generated)
 - `configs/site-config.yaml` - Site-specific configuration
 - `.github/workflows/build-site.yml` - Deployment workflow
 - `content/` - Documentation in Hugo structure
