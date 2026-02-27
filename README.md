@@ -19,7 +19,7 @@
 
 ![GitHubLicense](https://img.shields.io/github/license/fchastanet/my-documents?label=license&style=for-the-badge)
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit)](https://github.com/pre-commit/pre-commit)
-[![CI/CD](https://github.com/fchastanet/my-documents/actions/workflows/lint.yml/badge.svg)](https://github.com/fchastanet/my-documents/actions?query=workflow:%22Pre-commit+run%22+branch:master)
+[![CI/CD](https://github.com/fchastanet/my-documents/actions/workflows/main.yml/badge.svg)](https://github.com/fchastanet/my-documents/actions?query=workflow:%22Pre-commit+run%22+branch:master)
 [![Hugo Build & Deploy](https://github.com/fchastanet/my-documents/actions/workflows/hugo-build-deploy.yml/badge.svg)](https://github.com/fchastanet/my-documents/actions?query=workflow:%22Deploy+Hugo%22+branch:master)
 [![ProjectStatus](http://opensource.box.com/badges/active.svg)](http://opensource.box.com/badges "Project Status")
 [![DeepSource](https://deepsource.io/gh/fchastanet/my-documents.svg/?label=active+issues&show_trend=true)](https://deepsource.io/gh/fchastanet/my-documents/?ref=repository-badge "DeepSource active issues")

@@ -102,7 +102,7 @@ SITE=bash-compiler make start-site # Test dependent site
 
 ## Workflows
 
-**lint.yml:** Pre-commit hooks + MegaLinter, creates auto-fix PRs (skip with "skip fix" in commit)
+**main.yml:** Pre-commit hooks + MegaLinter, creates auto-fix PRs (skip with "skip fix" in commit) + Builds Hugo site and deploys to GitHub Pages if master branch
 **build-site.yml:** Builds Hugo site, deploys to GitHub Pages (gh-pages branch)
 
 ## Common Commands

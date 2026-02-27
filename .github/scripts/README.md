@@ -233,7 +233,7 @@ make target-name
 These scripts are used in GitHub Actions workflows:
 
 - `.github/workflows/build-all-sites.yml` - Orchestrator build
-- `.github/workflows/lint.yml` - Linting and validation
+- `.github/workflows/main.yml` - Linting and validation and deployment on master branch
 
 They can be called from any shell environment with:
 

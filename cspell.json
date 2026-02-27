@@ -75,7 +75,7 @@
       "dictionaries": ["documentation", "myBash"]
     },
     {
-      "filename": ["**/*.sh"],
+      "filename": ["**/*.sh", "Makefile"],
       "dictionaries": ["myBash"]
     }
   ]

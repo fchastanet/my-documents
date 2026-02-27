@@ -8,9 +8,12 @@ fileignoreconfig
 friday
 goldmark
 hsts
+isset
 jsonify
 logrus
 markdownify
+noarchive
+noimageindex
 podman
 pygments
 readingtime
@@ -21,3 +24,4 @@ tagname
 taxo
 UNINDEXED
 unindexed
+warnf

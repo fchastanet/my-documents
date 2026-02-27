@@ -1603,11 +1603,11 @@ jobs:
       checkout-repo: 'fchastanet/my-documents'
 ```
 
-### 14.3. lint.yml
+### 14.3. main.yml
 
-**Location:** `my-documents/.github/workflows/lint.yml`
+**Location:** `my-documents/.github/workflows/main.yml`
 
-**Purpose:** Runs pre-commit hooks and MegaLinter on the repository.
+**Purpose:** Runs pre-commit hooks and MegaLinter on the repository and deploy documentation if master branch is updated.
 
 **Triggers:**
 
