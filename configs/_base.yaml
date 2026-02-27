@@ -53,7 +53,7 @@ markup:
     lineNoStart: 1
     lineNos: false
     lineNumbersInTable: true
-    noClasses: true
+    noClasses: false
     noHl: false
     style: tango
     tabWidth: 4
@@ -87,7 +87,7 @@ params:
   offlineSearchMaxResults: 10
 
   # Disable prism (use Hugo's built-in highlight)
-  prism_syntax_highlighting: false
+  prism_syntax_highlighting: true
 
   # Repository configuration
   github_subdir: content
