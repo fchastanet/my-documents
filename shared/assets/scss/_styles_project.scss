@@ -22,3 +22,79 @@
 .td-page-meta--child {
   display: none !important;
 }
+
+.backup-notice {
+  border-left: 5px solid #ff9800;
+  background-color: #fff3e0;
+  border-color: #ff9800;
+  & strong {
+    color: #e65100;
+  }
+  & a {
+    color: #d84315;
+    text-decoration: underline;
+    &:hover {
+      color: #bf360c;
+    }
+  }
+  & p {
+    color: #444;
+  }
+
+  &-content {
+    display: flex;
+    gap: 1rem;
+    @media (max-width: 576px) {
+      flex-direction: column;
+    }
+  }
+
+  &-icon {
+    flex-shrink: 0;
+    width: 2.5rem;
+    height: 2.5rem;
+    color: #ff9800;
+    margin-top: 0.25rem;
+    @media (max-width: 576px) {
+      width: 2rem;
+      height: 2rem;
+    }
+  }
+
+  &-text {
+    flex: 1;
+    h4 {
+      color: #e65100;
+      margin-bottom: 0.5rem;
+      @media (max-width: 576px) {
+        font-size: 1rem;
+      }
+    }
+  }
+
+  &-meta {
+    background-color: rgba(255, 152, 0, 0.08);
+    padding: 0.75rem;
+    border-radius: 0.25rem;
+    margin: 0.5rem 0;
+  }
+
+  &-meta p {
+    margin: 0.25rem 0;
+    font-size: 0.95rem;
+    @media (max-width: 576px) {
+      font-size: 0.9rem;
+      padding: 0.5rem;
+    }
+  }
+
+  & .external-link-icon {
+    margin-left: 0.25rem;
+    vertical-align: -2px;
+  }
+
+  & hr {
+    border-color: rgba(255, 152, 0, 0.3);
+    margin: 0.75rem 0;
+  }
+}

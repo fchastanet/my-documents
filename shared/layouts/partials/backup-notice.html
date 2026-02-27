@@ -1,0 +1,53 @@
+{{- /*
+  Backup Notice Partial Template
+  Displays a prominent notice for backup pages with original source information
+*/ -}}
+
+{{ $backup := .Params.backup -}}
+{{ if $backup }}
+  {{- /* Set default values for backup metadata */ -}}
+  {{- $originalUrl := $backup.originalUrl | default "" -}}
+  {{- $author := $backup.author | default "" -}}
+  {{- $creationDate := $backup.creationDate | default "" -}}
+  {{- /* Render the backup notice with metadata */ -}}
+<div class="alert alert-warning backup-notice" role="alert">
+  <div class="backup-notice-content">
+    <svg class="backup-notice-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M4 7h16M4 12h16M4 17h16M7 3v6M17 3v6"></path>
+    </svg>
+    <div class="backup-notice-text">
+      <h4 class="mb-2"><strong>📦 This is a Backup Copy</strong></h4>
+      <p class="mb-3">
+        This page is a backup archive of external reference material.
+        It is preserved to ensure continued access to valuable information
+        in case the original source becomes unavailable.
+      </p>
+      <div class="backup-notice-meta">
+        {{- if $originalUrl }}
+        <p>
+          <strong>Original Source:</strong>
+          <a href="{{ $originalUrl }}" target="_blank" rel="noopener noreferrer">
+            {{ $originalUrl }}
+            <svg class="external-link-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6"></path>
+              <polyline points="10 14 21 3"></polyline>
+            </svg>
+          </a>
+        </p>
+        {{- end }}
+        {{- if $author }}
+        <p><strong>Original Author:</strong> {{ $author | safeHTML }}</p>
+        {{- end }}
+        {{- if $creationDate }}
+        <p><strong>Original Date:</strong> <time datetime="{{ $creationDate | dateFormat "2006-01-02" }}">{{ $creationDate | dateFormat "January 2, 2006" }}</time></p>
+        {{- end }}
+        <p><strong>Backed Up On:</strong> <time datetime="{{ now | dateFormat "2006-01-02" }}">{{ now | dateFormat "January 2, 2006" }}</time></p>
+      </div>
+      <hr class="my-2">
+      <p class="mb-0 small text-muted">
+        ⚠️ <strong>Search engines are blocked from indexing this page</strong> to respect original content creators&quot; rights.
+      </p>
+    </div>
+  </div>
+</div>
+{{ end }}

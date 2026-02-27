@@ -82,7 +82,7 @@ repos:
             ^shared/layouts/shortcodes/|
             ^\.vscode/.*\.code-snippets$|
             ^content/_index.html$|
-            ^shared/layouts/partials/
+            ^shared/layouts/
           )
 
   - repo: https://github.com/igorshubovych/markdownlint-cli

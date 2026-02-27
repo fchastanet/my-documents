@@ -9,6 +9,8 @@ fileignoreconfig:
   checksum: 925488b5793bda648b98c609c1d4e06cac18e0bb9ea846691a76c6034c296153
 - filename: .github/workflows/build-site-action.yml
   checksum: f40530d9ca0a2e2bf4cd6cfec0ae0cd448f7d41e88e82d42dd8e530037916481
+- filename: shared/layouts/partials/head.html
+  checksum: a7abaaee0b50822e9dd5d0d1060f9f06ae88c3faecbea52853384740ece13887
 scopeconfig:
   - scope: go
   - scope: node
