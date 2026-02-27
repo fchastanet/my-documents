@@ -83,7 +83,7 @@ build:
 # Start Hugo dev server
 start:
 	@echo "$(BLUE)Starting Hugo dev server...$(NC)"
-	@yq eval-all 'select(fileIndex == 0) * select(fileIndex == 1)' \
+	@yq eval-all '. as $$item ireduce ({}; . *+ $$item)' \
 	  configs/_base.yaml configs/site-config.yaml > hugo.yaml.tmp && \
 	  mv hugo.yaml.tmp hugo.yaml
 	hugo server -D

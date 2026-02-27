@@ -27,7 +27,7 @@ echo -e "  Site: $SITE_CONFIG"
 echo -e "  Output: $OUTPUT_FILE"
 
 # Merge configs using yq (proper YAML deep merge)
-yq eval-all 'select(fileIndex == 0) * select(fileIndex == 1)' \
+yq eval-all '. as $item ireduce ({}; . *+ $item)' \
   "$BASE_CONFIG" "$SITE_CONFIG" > "$OUTPUT_FILE"
 
 # Override baseURL if provided

@@ -118,49 +118,19 @@ params:
       - categories
       - tags
 
-  links:
-    developer:
-      - name: Bash Tools Framework
-        url: https://fchastanet.github.io/bash-tools-framework/
-        icon: fas fa-toolbox
-        desc: Bash Tools Framework
-      - name: Bash Tools
-        url: https://fchastanet.github.io/bash-tools/
-        icon: fas fa-tools
-        desc: Bash Tools
-      - name: Bash Dev Env
-        url: https://fchastanet.github.io/bash-dev-env/
-        icon: fas fa-laptop-code
-        desc: Bash Dev Env
-      - name: Bash Compiler
-        url: https://fchastanet.github.io/bash-compiler/
-        icon: fas fa-cogs
-        desc: Bash Compiler
+  version_menu: Other Projects
+  versions:
+    - version: My Documents
+      url: https://fchastanet.github.io/my-documents/
+    - version: Bash Tools Framework
+      url: https://fchastanet.github.io/bash-tools-framework/
+    - version: Bash Tools
+      url: https://fchastanet.github.io/bash-tools/
+    - version: Bash Dev Env
+      url: https://fchastanet.github.io/bash-dev-env/
+    - version: Bash Compiler
+      url: https://fchastanet.github.io/bash-compiler/
 
   # SEO meta defaults
   meta:
     robots: 'index, follow'
-
-# Menu configuration
-menu:
-  main:
-    - name: GitHub
-      url: https://github.com/fchastanet/my-documents
-      weight: 10
-      post: <sup><i class="ps-1 fa-solid fa-up-right-from-square fa-xs" aria-hidden="true"></i></sup>
-    - name: Bash Tools Framework
-      url: https://fchastanet.github.io/bash-tools-framework/
-      weight: 20
-      post: <sup><i class="ps-1 fa-solid fa-up-right-from-square fa-xs" aria-hidden="true"></i></sup>
-    - name: Bash Tools
-      url: https://fchastanet.github.io/bash-tools/
-      weight: 30
-      post: <sup><i class="ps-1 fa-solid fa-up-right-from-square fa-xs" aria-hidden="true"></i></sup>
-    - name: Bash Dev Env
-      url: https://fchastanet.github.io/bash-dev-env/
-      weight: 40
-      post: <sup><i class="ps-1 fa-solid fa-up-right-from-square fa-xs" aria-hidden="true"></i></sup>
-    - name: Bash Compiler
-      url: https://fchastanet.github.io/bash-compiler/
-      weight: 50
-      post: <sup><i class="ps-1 fa-solid fa-up-right-from-square fa-xs" aria-hidden="true"></i></sup>
