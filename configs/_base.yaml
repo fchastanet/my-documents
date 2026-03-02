@@ -12,7 +12,7 @@ enableGitInfo: true
 pygmentsCodeFences: true
 pygmentsUseClasses: false
 pygmentsUseClassic: false
-pygmentsStyle: tango
+pygmentsStyle: monokai
 
 # Image processing configuration
 imaging:
@@ -46,8 +46,8 @@ markup:
   highlight:
     anchorLineNos: false
     codeFences: true
-    guessSyntax: false
-    hl_Lines: '1'
+    guessSyntax: true
+    hl_Lines: false
     hl_inline: false
     lineAnchors: ''
     lineNoStart: 1
@@ -55,7 +55,7 @@ markup:
     lineNumbersInTable: true
     noClasses: false
     noHl: false
-    style: tango
+    style: dracula
     tabWidth: 4
 
 # Outputs configuration for SEO
@@ -87,7 +87,7 @@ params:
   offlineSearchMaxResults: 10
 
   # Disable prism (use Hugo's built-in highlight)
-  prism_syntax_highlighting: true
+  prism_syntax_highlighting: false
 
   # Repository configuration
   github_subdir: content
