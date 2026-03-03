@@ -93,6 +93,7 @@ YAML_V8R_FILTER_REGEX_EXCLUDE: |
     ^\.vscode/\.checkov\.yml$|
     ^\.secretlintrc\.yml$|
     ^\.grype\.yaml$|
+    ^configs/.*\.yaml$|
     ^package-lock\.json$
   )
 

@@ -25,7 +25,7 @@ mkdir -p "$OUTPUT_DIR"
 # Copy shared resources from orchestrator
 "$script_dir/copy-shared-resources.sh" \
   "$ORCHESTRATOR_DIR/shared" \
-  "$OUTPUT_DIR"
+  "$OUTPUT_DIR/shared"
 
 if [[ "$SOURCE_DIR" != "$ORCHESTRATOR_DIR" ]]; then
   echo "  Setting up site-specific resources..."

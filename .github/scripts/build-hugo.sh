@@ -27,7 +27,14 @@ echo -e "${BLUE}Building $SITE_NAME with Hugo...${NC}"
   # Build with all diagnostic flags
   echo "  Running: hugo --minify with base URL: ${BASE_URL:-(from config)}"
 
-  args=(
+  args=()
+  if [[ "${BUILD:-0}" = "0" ]]; then
+    args+=(
+      server
+      --disableFastRender
+    )
+  fi
+  args+=(
     --minify
     --printI18nWarnings
     --printPathWarnings

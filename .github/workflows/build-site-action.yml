@@ -110,11 +110,11 @@ jobs:
         working-directory: _site-content
         run: |
           chmod +x .github/scripts/pre-build.sh
-          bash .github/scripts/pre-build.sh
+          .github/scripts/pre-build.sh
 
       - name: Build site for ${{ inputs.site-name }}
         run: |
-          bash .github/scripts/build-site.sh \
+          BUILD=1 .github/scripts/build-site.sh \
             "${{ inputs.site-dir }}" \
             "${{ inputs.site-name }}" \
             "build"

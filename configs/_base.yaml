@@ -2,6 +2,7 @@
 # This config is shared across all documentation sites
 
 # Language settings
+contentDir: content/docs
 languageCode: en-us
 defaultContentLanguage: en
 defaultContentLanguageInSubdir: false

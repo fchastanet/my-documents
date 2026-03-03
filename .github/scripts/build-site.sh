@@ -34,6 +34,8 @@ if [ ! -d "${SITE_DIR}/content" ]; then
 fi
 
 output_dir="${BUILD_DIR}/${SITE_NAME}"
+rm -Rf "$output_dir"
+mkdir -p "$output_dir"
 
 # Use prepare-build script to set up the build directory
 "$script_dir/prepare-build.sh" \

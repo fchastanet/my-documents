@@ -28,6 +28,7 @@ repos:
         types: [markdown]
         args: [--wrap, '120', --number]
         additional_dependencies:
+          - mdformat-frontmatter
           - mdformat-toc
           - mdformat-shfmt
           - mdformat-tables

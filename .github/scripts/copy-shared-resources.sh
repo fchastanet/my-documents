@@ -17,26 +17,6 @@ fi
 mkdir -p "$TARGET_DIR"
 
 echo -e "${BLUE}Copying shared resources from $SOURCE_DIR...${NC}"
-
-# Copy layouts
-if [ -d "$SOURCE_DIR/layouts" ]; then
-  echo "  Copying shared layouts..."
-  mkdir -p "$TARGET_DIR/layouts"
-  cp -r "$SOURCE_DIR/layouts"/* "$TARGET_DIR/layouts/"
-fi
-
-# Copy assets
-if [ -d "$SOURCE_DIR/assets" ]; then
-  echo "  Copying shared assets..."
-  mkdir -p "$TARGET_DIR/assets"
-  cp -r "$SOURCE_DIR/assets"/* "$TARGET_DIR/assets/"
-fi
-
-# Copy archetypes
-if [ -d "$SOURCE_DIR/archetypes" ]; then
-  echo "  Copying shared archetypes..."
-  mkdir -p "$TARGET_DIR/archetypes"
-  cp -r "$SOURCE_DIR/archetypes"/* "$TARGET_DIR/archetypes/"
-fi
+cp -r "$SOURCE_DIR"/* "$TARGET_DIR/"
 
 echo -e "${GREEN}✅ Shared resources copied${NC}"

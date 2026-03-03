@@ -66,11 +66,11 @@ build-site:
 	  echo "$(YELLOW)Usage: make build-site SITE=bash-compiler$(NC)"; \
 	  exit 1; \
 	fi
-	@$(SCRIPT_DIR)/build-site.sh $(SITES_DIR)/$(SITE) $(SITE) $(BUILD_DIR)
+	@BUILD=1 $(SCRIPT_DIR)/build-site.sh $(SITES_DIR)/$(SITE) $(SITE) $(BUILD_DIR)
 
 # Build all sites
 build-all: link-repos
-	@$(SCRIPT_DIR)/build-all.sh $(BUILD_DIR) $(SITES_DIR) $(REPOS)
+	@BUILD=1 $(SCRIPT_DIR)/build-all.sh $(BUILD_DIR) $(SITES_DIR) $(REPOS)
 
 # Test all sites
 test-all: build-all
@@ -78,11 +78,13 @@ test-all: build-all
 
 # Build my-documents only
 build:
-	@$(SCRIPT_DIR)/build-site.sh . my-documents build
+	@BUILD=1 $(SCRIPT_DIR)/build-site.sh . my-documents build
 
 # Start Hugo dev server
 start:
 	@echo "$(BLUE)Starting Hugo dev server...$(NC)"
+	rm -Rf $(BUILD_DIR)/my-documents
+	mkdir -p $(BUILD_DIR)/my-documents
 	@yq eval-all '. as $$item ireduce ({}; . *+ $$item)' \
 	  configs/_base.yaml configs/site-config.yaml > hugo.yaml.tmp && \
 	  mv hugo.yaml.tmp hugo.yaml
