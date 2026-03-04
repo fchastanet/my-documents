@@ -162,6 +162,12 @@ repos:
       - id: plantuml
         args: [--same-dir, -f, png, -f, svg, --limit-size, '1200']
 
+  - repo: https://github.com/rhysd/actionlint
+    rev: v1.7.11
+    hooks:
+      - id: actionlint
+        stages: [pre-commit, pre-push, manual]
+
   - repo: local
     hooks:
       - id: buildSite
