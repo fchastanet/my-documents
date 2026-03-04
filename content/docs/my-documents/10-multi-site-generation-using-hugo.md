@@ -1,9 +1,9 @@
 ---
 title: My Documents - Multi repositories Site Generation
 description: Comprehensive documentation of the Hugo migration for multi-site documentation
-creationDate: "2026-02-18"
-lastUpdated: "2026-02-18"
-version: "1.0"
+creationDate: '2026-02-18'
+lastUpdated: '2026-02-18'
+version: '1.0'
 weight: 10
 categories: [Brainstorming]
 tags: [hugo, docsy, multi-site, documentation, static-site-generator, github-actions, ai-generated]
@@ -21,7 +21,8 @@ tags: [hugo, docsy, multi-site, documentation, static-site-generator, github-act
 - `fchastanet/bash-tools-framework`
 - `fchastanet/bash-dev-env`
 
-**Related Documentation:** See [doc/ai/2026-02-18-migrate-repo-from-docsify-to-hugo.md](../../../doc/ai/2026-02-18-migrate-repo-from-docsify-to-hugo.md)
+**Related Documentation:** See
+[doc/ai/2026-02-18-migrate-repo-from-docsify-to-hugo.md](../../../doc/ai/2026-02-18-migrate-repo-from-docsify-to-hugo.md)
 for detailed migration guide.
 
 ## 1. Technical Solutions Evaluated
@@ -30,12 +31,11 @@ for detailed migration guide.
 
 #### 1.1.1. Hugo (SELECTED)
 
-**Evaluation:** ⭐⭐⭐⭐⭐
-**Type:** Go-based static site generator
+**Evaluation:** ⭐⭐⭐⭐⭐ **Type:** Go-based static site generator
 
 **Pros:**
 
-- Extremely fast compilation (<1s for most documentation sites)
+- Extremely fast compilation (\<1s for most documentation sites)
 - Excellent for documentation with purpose-built features
 - Superior SEO support (static HTML, sitemaps, feeds, schemas) - **9/10 SEO score**
 - Single binary with no dependency complications
@@ -59,8 +59,7 @@ for detailed migration guide.
 
 #### 1.1.2. Astro
 
-**Evaluation:** ⭐⭐⭐⭐
-**Type:** JavaScript/TypeScript-based with island architecture
+**Evaluation:** ⭐⭐⭐⭐ **Type:** JavaScript/TypeScript-based with island architecture
 
 **Pros:**
 
@@ -68,7 +67,7 @@ for detailed migration guide.
 - Modern JavaScript patterns with TypeScript support
 - Markdown + MDX support (embedded React/Vue components in Markdown)
 - Island architecture minimizes JavaScript shipping
-- Fast performance and build times (<2s)
+- Fast performance and build times (\<2s)
 - Automatic image optimization (AVIF support)
 - Vite-based with fast HMR
 
@@ -155,29 +154,28 @@ for detailed migration guide.
 **Reasons:**
 
 - Overkill complexity for pure documentation
-- Longer build times (5-30s vs <1s for Hugo)
+- Longer build times (5-30s vs \<1s for Hugo)
 - Heavy JavaScript requirements
 - Optimized for different use cases (web apps, not docs)
 - Maintenance burden too high for static documentation
 
 #### 1.1.7. Comparison Summary
 
-| Criteria | Hugo | Astro | 11ty | VuePress | MkDocs |
-| --- | --- | --- | --- | --- | --- |
-| **SEO Score** | 9/10 | 9/10 | 8/10 | 6/10 | 7/10 |
-| **Build Speed** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
-| **Learning Curve** | ⭐⭐⭐ | ⭐⭐ | ⭐⭐⭐ | ⭐⭐ | ⭐⭐⭐⭐ |
-| **GitHub Pages** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
-| **Documentation Focus** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
-| **Theme Ecosystem** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐⭐ |
-| **Multi-Site Support** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐ |
+| Criteria                | Hugo       | Astro      | 11ty       | VuePress | MkDocs     |
+| ----------------------- | ---------- | ---------- | ---------- | -------- | ---------- |
+| **SEO Score**           | 9/10       | 9/10       | 8/10       | 6/10     | 7/10       |
+| **Build Speed**         | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
+| **Learning Curve**      | ⭐⭐⭐     | ⭐⭐       | ⭐⭐⭐     | ⭐⭐     | ⭐⭐⭐⭐   |
+| **GitHub Pages**        | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
+| **Documentation Focus** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐   | ⭐⭐⭐     | ⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
+| **Theme Ecosystem**     | ⭐⭐⭐⭐⭐ | ⭐⭐⭐     | ⭐⭐⭐     | ⭐⭐⭐   | ⭐⭐⭐⭐   |
+| **Multi-Site Support**  | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐   | ⭐⭐⭐⭐   | ⭐⭐⭐   | ⭐⭐⭐     |
 
 ### 1.2. Multi-Site Build Pipeline Solutions
 
 #### 1.2.1. Centralized Orchestrator (my-documents builds all sites) (SELECTED)
 
-**Evaluation:** ⭐⭐⭐⭐⭐
-**Architecture:**
+**Evaluation:** ⭐⭐⭐⭐⭐ **Architecture:**
 
 ```text
 my-documents (orchestrator)
@@ -293,16 +291,16 @@ bash-compiler/ (independent)
 
 #### 1.2.4. Pipeline Solution Comparison
 
-| Criteria | Centralized Orchestrator | Decentralized Reusable | Monorepo |
-| --- | --- | --- | --- |
-| **Complexity** | Low (minimal per-repo) | Medium (per-repo setup) | Low (single repo) |
-| **Build Time** | ~60s all sites | ~30s per site | ~60s all sites |
-| **Maintenance** | Update once | Update workflow × N | Update once |
-| **Consistency** | ✅ Guaranteed | Can drift | ✅ Guaranteed |
-| **Failure Isolation** | All-or-nothing | ✅ Independent | All-or-nothing |
-| **Setup Effort** | 1 workflow + N configs | 6 files × N repos | Single setup |
-| **Independent URLs** | ✅ Yes | ✅ Yes | ❌ No |
-| **Hugo Modules** | ❌ Not needed | Required | ❌ Not needed |
+| Criteria              | Centralized Orchestrator | Decentralized Reusable  | Monorepo          |
+| --------------------- | ------------------------ | ----------------------- | ----------------- |
+| **Complexity**        | Low (minimal per-repo)   | Medium (per-repo setup) | Low (single repo) |
+| **Build Time**        | ~60s all sites           | ~30s per site           | ~60s all sites    |
+| **Maintenance**       | Update once              | Update workflow × N     | Update once       |
+| **Consistency**       | ✅ Guaranteed            | Can drift               | ✅ Guaranteed     |
+| **Failure Isolation** | All-or-nothing           | ✅ Independent          | All-or-nothing    |
+| **Setup Effort**      | 1 workflow + N configs   | 6 files × N repos       | Single setup      |
+| **Independent URLs**  | ✅ Yes                   | ✅ Yes                  | ❌ No             |
+| **Hugo Modules**      | ❌ Not needed            | Required                | ❌ Not needed     |
 
 ## 2. Chosen Solutions & Rationale
 
@@ -313,6 +311,7 @@ bash-compiler/ (independent)
 **Rationale:**
 
 1. **SEO Requirements Met:**
+
    - Static HTML pre-rendering (search engines can easily index)
    - Automatic sitemap and robots.txt generation
    - Per-page meta tags and structured data support
@@ -322,12 +321,14 @@ bash-compiler/ (independent)
    - **SEO improvement: 2/10 (Docsify) → 9/10 (Hugo)**
 
 2. **Technical Excellence:**
-   - Extremely fast builds (<1s for typical documentation site)
+
+   - Extremely fast builds (\<1s for typical documentation site)
    - Simple deployment (single Go binary, no dependency hell)
    - GitHub Pages native support
    - Mature, stable, battle-tested (10+ years in production use)
 
 3. **Documentation-Specific Features:**
+
    - Docsy theme built by Google specifically for documentation
    - Built-in search functionality
    - Responsive design
@@ -336,12 +337,14 @@ bash-compiler/ (independent)
    - Multi-language support
 
 4. **Developer Experience:**
+
    - Markdown + frontmatter (minimal migration effort from Docsify)
    - Good documentation and large community
    - Extensive theme ecosystem
    - Active development and updates
 
 5. **Multi-Site Architecture Support:**
+
    - Excellent support for shared configurations
    - Hugo modules for code reuse
    - Flexible configuration merging
@@ -361,18 +364,21 @@ bash-compiler/ (independent)
 **Rationale:**
 
 1. **Project Context Alignment:**
+
    - All repositories under same owner (fchastanet)
    - All share same purpose (Bash tooling documentation)
    - All need consistent look and feel
    - Related projects benefit from coordinated updates
 
 2. **Maintenance Efficiency:**
+
    - Single workflow update affects all sites immediately
    - One place to fix bugs or add features
    - Guaranteed consistency across all documentation
    - Reduced mental overhead (one system to understand)
 
 3. **Simplified Per-Repository Structure:**
+
    - Only 2 essential files per dependent repo:
      - Trigger workflow (10 lines)
      - Content directory
@@ -380,17 +386,20 @@ bash-compiler/ (independent)
    - No Go module management per repo
 
 4. **Configuration Management:**
+
    - Base configuration shared via `configs/_base.yaml`
    - Site-specific overrides in `configs/{site}.yaml`
    - Automatic merging with `yq` tool
    - No configuration drift possible
 
 5. **Build Efficiency:**
+
    - Parallel matrix execution builds all 5 sites simultaneously
    - Total time ~60s for all sites (vs 30s × 5 = 150s sequential)
    - Resource sharing in CI/CD (single Hugo/Go setup)
 
 6. **Deployment Simplification:**
+
    - Authentication centralized in my-documents (GitHub App)
    - Single set of deployment credentials
    - Easier to audit and manage security
@@ -403,8 +412,8 @@ bash-compiler/ (independent)
 
 **Alternatives Considered:**
 
-- **Decentralized Reusable Workflows:** Good for truly independent projects, but adds complexity without benefit for
-our use case where all sites are related and share theme/purpose
+- **Decentralized Reusable Workflows:** Good for truly independent projects, but adds complexity without benefit for our
+  use case where all sites are related and share theme/purpose
 - **Monorepo:** Would lose independent GitHub Pages URLs, not acceptable
 
 ## 3. Implementation Details
@@ -456,7 +465,7 @@ our use case where all sites are related and share theme/purpose
 **Key Files:**
 
 - [.github/workflows/build-all-sites.yml](../../.github/workflows/build-all-sites.yml) - Orchestrator workflow
-- [configs/_base.yaml](../../configs/_base.yaml) - Shared Hugo configuration
+- [configs/\_base.yaml](../../configs/_base.yaml) - Shared Hugo configuration
 - [configs/bash-compiler.yaml](../../configs/bash-compiler.yaml) - Example site-specific config
 - [shared/](../../shared/) - Shared theme customizations
 
@@ -476,7 +485,7 @@ fchastanet/bash-compiler/
 
 **Approach:** Use `yq` tool for proper YAML deep-merging
 
-**Base Configuration:** [configs/_base.yaml](../../configs/_base.yaml)
+**Base Configuration:** [configs/\_base.yaml](../../configs/_base.yaml)
 
 Contains:
 
@@ -503,9 +512,9 @@ Contains:
 Implemented in [.github/workflows/build-all-sites.yml](../../.github/workflows/build-all-sites.yml):
 
 ```yaml
-yq eval-all 'select(fileIndex == 0) * select(fileIndex == 1)' \
-  configs/_base.yaml \
-  configs/bash-compiler.yaml > hugo.yaml
+yq eval-all 'select(fileIndex == 0) * select(fileIndex == 1)' \ configs/_base.yaml
+\ configs/bash-compiler.yaml > hugo.yaml
+...
 ```
 
 **Result:** Clean, merged `hugo.yaml` with:
@@ -547,17 +556,17 @@ matrix:
 
 **Build Steps (Per Site):**
 
-1. **Checkout Orchestrator:** Clone my-documents repository
-2. **Checkout Content:** Clone dependent repository content (if not self)
-3. **Setup Tools:** Install Hugo Extended 0.155.3, Go 1.24, yq
-4. **Prepare Build Directory:**
-   - For my-documents: Use orchestrator directory
-   - For dependent repos: Create `build-{site}` directory
-5. **Merge Configurations:** Combine `_base.yaml` + `{site}.yaml`
-6. **Copy Shared Resources:** Link shared layouts, assets, archetypes
-7. **Copy Content:** Link content directory
-8. **Initialize Hugo Modules:** Run `hugo mod init` and `hugo mod get -u`
-9. **Build Site:** Run `hugo --minify`
+01. **Checkout Orchestrator:** Clone my-documents repository
+02. **Checkout Content:** Clone dependent repository content (if not self)
+03. **Setup Tools:** Install Hugo Extended 0.155.3, Go 1.24, yq
+04. **Prepare Build Directory:**
+    - For my-documents: Use orchestrator directory
+    - For dependent repos: Create `build-{site}` directory
+05. **Merge Configurations:** Combine `_base.yaml` + `{site}.yaml`
+06. **Copy Shared Resources:** Link shared layouts, assets, archetypes
+07. **Copy Content:** Link content directory
+08. **Initialize Hugo Modules:** Run `hugo mod init` and `hugo mod get -u`
+09. **Build Site:** Run `hugo --minify`
 10. **Deploy:** Push to respective GitHub Pages
 
 **Concurrency:** `cancel-in-progress: true` prevents duplicate builds
@@ -581,22 +590,22 @@ matrix:
 **Deployment Step Example:**
 
 ```yaml
-- name: Generate GitHub App token
-  id: app-token
-  uses: actions/create-github-app-token@v1
-  with:
-    app-id: ${{ secrets.DOC_APP_ID }}
-    private-key: ${{ secrets.DOC_APP_PRIVATE_KEY }}
-    owner: fchastanet
-    repositories: bash-compiler
+  - name: Generate GitHub App token
+    id: app-token
+    uses: actions/create-github-app-token@v1
+    with:
+      app-id: ${{ secrets.DOC_APP_ID }}
+      private-key: ${{ secrets.DOC_APP_PRIVATE_KEY }}
+      owner: fchastanet
+      repositories: bash-compiler
 
-- name: Deploy to GitHub Pages
-  uses: peaceiris/actions-gh-pages@v4
-  with:
-    github_token: ${{ steps.app-token.outputs.token }}
-    external_repository: fchastanet/bash-compiler
-    publish_dir: ./public
-    publish_branch: gh-pages
+  - name: Deploy to GitHub Pages
+    uses: peaceiris/actions-gh-pages@v4
+    with:
+      github_token: ${{ steps.app-token.outputs.token }}
+      external_repository: fchastanet/bash-compiler
+      publish_dir: ./public
+      publish_branch: gh-pages
 ```
 
 **Result URLs:**
@@ -618,8 +627,8 @@ on:
   push:
     branches: [master]
     paths:
-      - 'content/**'
-      - '.github/workflows/trigger-docs.yml'
+      - content/**
+      - .github/workflows/trigger-docs.yml
 
 jobs:
   trigger:
@@ -660,7 +669,7 @@ Examples:
 - Site-specific SEO keywords and description
 - Logo overrides
 
-**Mount Strategy:** Defined in [configs/_base.yaml](../../configs/_base.yaml)
+**Mount Strategy:** Defined in [configs/\_base.yaml](../../configs/_base.yaml)
 
 ```yaml
 module:
@@ -701,8 +710,8 @@ module:
 
 **GitHub Official Recommendation:**
 
-> "We recommend using GitHub Apps with permissions scoped to specific repositories for
-> enhanced security and more granular access control."
+> "We recommend using GitHub Apps with permissions scoped to specific repositories for enhanced security and more
+> granular access control."
 
 **Implementation:** See [doc/ai/2026-02-18-github-app-migration.md](../../../doc/ai/2026-02-18-github-app-migration.md)
 for complete migration guide
@@ -858,9 +867,8 @@ for complete migration guide
 
 ## 5. Conclusion
 
-The Hugo migration successfully addressed the SEO limitations of Docsify while
-establishing a scalable, maintainable multi-site documentation architecture.
-The centralized orchestrator approach provides the right balance of consistency
+The Hugo migration successfully addressed the SEO limitations of Docsify while establishing a scalable, maintainable
+multi-site documentation architecture. The centralized orchestrator approach provides the right balance of consistency
 and flexibility for related Bash tooling documentation projects.
 
 **Key Success Factors:**

@@ -1,7 +1,7 @@
 ---
 title: Web Tools
-creationDate: "2026-02-17"
-lastUpdated: "2026-02-22"
+creationDate: '2026-02-17'
+lastUpdated: '2026-02-22'
 description: Reference list of web analysis and OSINT tools
 weight: 20
 categories: [web]
@@ -10,14 +10,12 @@ tags: [web, osint, tools]
 
 ## 1. OSINT tools
 
-What Are Open Source Intelligence (OSINT) Tools? Open-source intelligence software, abbreviated
-as OSINT software, are tools that allow the collection of information that is publicly available
-or open-source. The goal of using OSINT software is mainly to learn more about an individual or a
-business.
+What Are Open Source Intelligence (OSINT) Tools? Open-source intelligence software, abbreviated as OSINT software, are
+tools that allow the collection of information that is publicly available or open-source. The goal of using OSINT
+software is mainly to learn more about an individual or a business.
 
 ### 1.1. Lissy93/web-check
 
-All-in-one OSINT tool for analyzing any website Comprehensive, on-demand open source intelligence
-for any website
+All-in-one OSINT tool for analyzing any website Comprehensive, on-demand open source intelligence for any website
 
 [github project Lissy93/web-check](https://github.com/Lissy93/web-check)

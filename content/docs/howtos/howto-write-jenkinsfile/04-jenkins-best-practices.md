@@ -1,7 +1,7 @@
 ---
 title: Jenkins Best Practices
-creationDate: "2023-07-01"
-lastUpdated: "2026-02-17"
+creationDate: '2023-07-01'
+lastUpdated: '2026-02-17'
 description: Best practices and patterns for Jenkins and Jenkinsfiles
 weight: 40
 categories: [Jenkins]

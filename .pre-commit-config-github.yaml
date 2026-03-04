@@ -44,6 +44,13 @@ repos:
           (?x)(
             ^\.github/|
             ^_navbar\.md$|
+            ^doc/ai/|
+            ^archetypes/|
+            ^shared/archetypes/|
+            ^content/docs/bash-scripts/basic-best-practices\.md$|
+            ^content/docs/howtos/saml2aws.md|
+            ^content/docs/howtos/howto-write-jenkinsfile/06-annotated-jenkinsfiles--p2\.md$|
+            ^content/docs/howtos/saml2aws.md b/content/docs/howtos/saml2aws.md
           )
 
   - repo: https://github.com/jsh9/markdown-heading-numbering
@@ -99,7 +106,11 @@ repos:
         exclude: |
           (?x)(
             ^\.github/|
-            ^doc/ai/
+            ^doc/ai/|
+            ^content/docs/bash-scripts/basic-best-practices\.md$^|
+            ^content/docs/howtos/saml2aws.md|
+            ^content/docs/howtos/howto-write-jenkinsfile/06-annotated-jenkinsfiles--p2\.md$|
+            ^content/docs/howtos/saml2aws.md b/content/docs/howtos/saml2aws.md
           )
 
   - repo: https://github.com/pre-commit/pre-commit-hooks

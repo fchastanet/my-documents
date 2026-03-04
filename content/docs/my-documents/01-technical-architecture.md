@@ -4,9 +4,9 @@ description: Complete technical architecture guide for the Hugo documentation sy
 weight: 01
 categories: [documentation, architecture]
 tags: [hugo, github-actions, docsy, architecture, ai-generated]
-creationDate: "2026-02-18"
-lastUpdated: "2026-02-22"
-version: "1.0"
+creationDate: '2026-02-18'
+lastUpdated: '2026-02-22'
+version: '1.0'
 ---
 
 ## 1. Overview
@@ -175,7 +175,7 @@ mkdir -p content/docs
 mkdir -p static
 
 # Create homepage
-cat > content/_index.md << 'EOF'
+cat >content/_index.md <<'EOF'
 ---
 title: My Project Documentation
 description: Welcome to My Project documentation
@@ -187,7 +187,7 @@ This is the documentation homepage.
 EOF
 
 # Create first documentation page
-cat > content/docs/_index.md << 'EOF'
+cat >content/docs/_index.md <<'EOF'
 ---
 title: Documentation
 linkTitle: Docs
@@ -255,11 +255,11 @@ module:
 
 # Site-specific parameters
 params:
-  description: "Documentation for Your Project"
+  description: Documentation for Your Project
 
   # Customize theme colors
   ui:
-    navbar_bg_color: "#007bff"  # Blue - choose your color
+    navbar_bg_color: '#007bff'  # Blue - choose your color
     sidebar_menu_compact: false
 
   # Repository configuration
@@ -280,18 +280,18 @@ Replace placeholders:
 
 Create `.github/workflows/build-site.yml`:
 
-```yaml
+```text
 name: Build and Deploy Documentation
 
 on:
   push:
     branches: [master]
     paths:
-      - 'content/**'
-      - 'static/**'
-      - 'hugo.yaml'
-      - 'go.mod'
-      - '.github/workflows/build-site.yml'
+      - content/**
+      - static/**
+      - hugo.yaml
+      - go.mod
+      - .github/workflows/build-site.yml
   workflow_dispatch:
 
 # Required permissions for GitHub Pages deployment
@@ -310,9 +310,9 @@ jobs:
     name: Build and Deploy
     uses: fchastanet/my-documents/.github/workflows/build-site-action.yml@master
     with:
-      site-name: 'YOUR-REPO'
-      base-url: 'https://YOUR-USERNAME.github.io/YOUR-REPO'
-      checkout-repo: 'YOUR-USERNAME/YOUR-REPO'
+      site-name: YOUR-REPO
+      base-url: https://YOUR-USERNAME.github.io/YOUR-REPO
+      checkout-repo: YOUR-USERNAME/YOUR-REPO
     permissions:
       contents: read
       pages: write
@@ -334,10 +334,8 @@ In your repository settings:
 2. Under **Source**, select **GitHub Actions**
 3. Click **Save**
 
-{{% alert title="Note" color="info" %}}
-With GitHub Actions as the source, Pages will deploy from workflow artifacts automatically. You do NOT need to
-select a branch like `gh-pages`.
-{{% /alert %}}
+{{% alert title="Note" color="info" %}} With GitHub Actions as the source, Pages will deploy from workflow artifacts
+automatically. You do NOT need to select a branch like `gh-pages`. {{% /alert %}}
 
 #### 4.2.6. Test and Deploy
 
@@ -510,9 +508,9 @@ module:
     - path: github.com/google/docsy/dependencies
 
 params:
-  description: "Documentation for Bash Compiler"
+  description: Documentation for Bash Compiler
   ui:
-    navbar_bg_color: "#007bff"
+    navbar_bg_color: '#007bff'
   github_repo: https://github.com/fchastanet/bash-compiler
   offlineSearch: true
 ```
@@ -532,7 +530,7 @@ Hugo merges configurations in this order:
 
 **Example:**
 
-```yaml
+```text
 # Base (_base.yaml)
 params:
   ui:
@@ -564,7 +562,7 @@ Common parameters to override per site:
 baseURL: https://YOUR-USER.github.io/YOUR-REPO
 title: Your Site Title
 params:
-  description: "Your site description"
+  description: Your site description
   github_repo: https://github.com/YOUR-USER/YOUR-REPO
 ```
 
@@ -573,7 +571,7 @@ params:
 ```yaml
 params:
   ui:
-    navbar_bg_color: "#007bff"      # Navbar color
+    navbar_bg_color: '#007bff'      # Navbar color
     sidebar_menu_compact: false      # Sidebar style
     navbar_logo: true                # Show logo in navbar
 
@@ -603,18 +601,18 @@ menu:
 
 The `build-site.yml` workflow in each repository calls the reusable action:
 
-```yaml
+```text
 name: Build and Deploy Documentation
 
 on:
   push:
     branches: [master]
     paths:
-      - 'content/**'
-      - 'static/**'
-      - 'hugo.yaml'
-      - 'go.mod'
-      - '.github/workflows/build-site.yml'
+      - content/**
+      - static/**
+      - hugo.yaml
+      - go.mod
+      - .github/workflows/build-site.yml
   workflow_dispatch:
 
 permissions:
@@ -631,9 +629,9 @@ jobs:
     name: Build and Deploy
     uses: fchastanet/my-documents/.github/workflows/build-site-action.yml@master
     with:
-      site-name: 'bash-compiler'
-      base-url: 'https://fchastanet.github.io/bash-compiler'
-      checkout-repo: 'fchastanet/bash-compiler'
+      site-name: bash-compiler
+      base-url: https://fchastanet.github.io/bash-compiler
+      checkout-repo: fchastanet/bash-compiler
     permissions:
       contents: read
       pages: write
@@ -660,9 +658,9 @@ These parameters must be provided with `with`:
 
 ```yaml
 with:
-  site-name: 'bash-compiler'
-  base-url: 'https://fchastanet.github.io/bash-compiler'
-  checkout-repo: 'fchastanet/bash-compiler'
+  site-name: bash-compiler
+  base-url: https://fchastanet.github.io/bash-compiler
+  checkout-repo: fchastanet/bash-compiler
 ```
 
 **Parameter Details:**
@@ -677,10 +675,10 @@ The reusable action may support additional parameters:
 
 ```yaml
 with:
-  hugo-version: '0.155.3'         # Default: latest
+  hugo-version: 0.155.3           # Default: latest
   go-version: '1.24'              # Default: 1.24
   extended: true                  # Default: true (Hugo Extended)
-  working-directory: '.'          # Default: repository root
+  working-directory: .            # Default: repository root
 ```
 
 Check the reusable action definition for all available parameters.
@@ -694,10 +692,10 @@ on:
   push:
     branches: [master]
     paths:
-      - 'content/**'
-      - 'static/**'
-      - 'hugo.yaml'
-      - 'go.mod'
+      - content/**
+      - static/**
+      - hugo.yaml
+      - go.mod
 ```
 
 This triggers the workflow only when documentation-related files change, saving CI minutes.
@@ -716,7 +714,7 @@ Allows manual workflow runs from the GitHub Actions UI.
 ```yaml
 on:
   schedule:
-    - cron: '0 0 * * 0'  # Weekly on Sunday at midnight UTC
+    - cron: 0 0 * * 0    # Weekly on Sunday at midnight UTC
 ```
 
 Useful for rebuilding with updated dependencies.
@@ -953,9 +951,9 @@ hugo config mounts
    on:
      push:
        paths:
-         - 'content/**'
-         - 'static/**'
-         - 'hugo.yaml'
+         - content/**
+         - static/**
+         - hugo.yaml
    ```
 
    Ensure changed files match these patterns.
@@ -976,6 +974,7 @@ hugo config mounts
    ```
 
 4. **Permissions issue**: Ensure Actions are enabled in repository settings:
+
    - Settings → Actions → General → "Allow all actions and reusable workflows"
 
 ### 11.2. Hugo Build Failures
@@ -1096,6 +1095,7 @@ hugo config mounts
 **Solutions:**
 
 1. **Check Pages source:**
+
    - Settings → Pages → Source must be "GitHub Actions"
 
 2. **Verify permissions:**
@@ -1108,11 +1108,12 @@ hugo config mounts
    ```
 
 3. **Check deployment logs:**
+
    - Actions tab → Click workflow run → Expand "Deploy to GitHub Pages" step
 
 4. **Concurrency conflict:**
 
-   ```yaml
+   ```text
    concurrency:
      group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
      cancel-in-progress: true  # Cancel in-progress runs to ensure only the latest commit is deployed
@@ -1227,9 +1228,9 @@ Each site can customize the Docsy theme while maintaining shared base styles.
 # hugo.yaml
 params:
   ui:
-    navbar_bg_color: "#007bff"     # Blue navbar
-    sidebar_bg_color: "#f8f9fa"    # Light gray sidebar
-    navbar_text_color: "#ffffff"   # White text
+    navbar_bg_color: '#007bff'     # Blue navbar
+    sidebar_bg_color: '#f8f9fa'    # Light gray sidebar
+    navbar_text_color: '#ffffff'   # White text
 ```
 
 **Custom SCSS Variables:**
@@ -1295,14 +1296,14 @@ images: ["/images/guide-preview.png"]
 ```yaml
 # hugo.yaml
 params:
-  description: "Default site description"
-  images: ["/images/site-preview.png"]
+  description: Default site description
+  images: [/images/site-preview.png]
 
   # Social links for structured data
   github_repo: https://github.com/user/repo
 
   # Google Analytics (optional)
-  google_analytics: "G-XXXXXXXXXX"
+  google_analytics: G-XXXXXXXXXX
 ```
 
 **Verify SEO:**
@@ -1394,6 +1395,7 @@ The reusable action is defined in `my-documents/.github/workflows/build-site-act
    ```
 
 3. **Make changes:**
+
    - Edit `.github/workflows/build-site-action.yml`
    - Update documentation if needed
    - Test changes thoroughly
@@ -1427,7 +1429,8 @@ The reusable action is defined in `my-documents/.github/workflows/build-site-act
    # .github/workflows/build-site.yml
    jobs:
      build-deploy:
-       uses: YOUR-USERNAME/my-documents/.github/workflows/build-site-action.yml@feature/improve-action
+       uses: |-
+         YOUR-USERNAME/my-documents/.github/workflows/build-site-action.yml@feature/improve-action
    ```
 
 3. **Trigger workflow:**
@@ -1438,6 +1441,7 @@ The reusable action is defined in `my-documents/.github/workflows/build-site-act
    ```
 
 4. **Verify results:**
+
    - Check Actions tab for workflow run
    - Ensure build and deployment succeed
    - Test deployed site
@@ -1459,7 +1463,7 @@ hugo server -D
 
 ```bash
 # Add new shared layout
-echo '<meta name="test" content="value">' > shared/layouts/partials/test.html
+echo '<meta name="test" content="value">' >shared/layouts/partials/test.html
 
 # Rebuild dependent site
 cd ../bash-compiler
@@ -1518,28 +1522,28 @@ curl http://localhost:1313 | grep 'name="test"'
 ```yaml
 inputs:
   site-name:
-    description: 'Name of the site being built'
+    description: Name of the site being built
     required: true
     type: string
 
   base-url:
-    description: 'Base URL for the site'
+    description: Base URL for the site
     required: true
     type: string
 
   checkout-repo:
-    description: 'Repository to checkout (owner/repo)'
+    description: Repository to checkout (owner/repo)
     required: true
     type: string
 
   hugo-version:
-    description: 'Hugo version to use'
+    description: Hugo version to use
     required: false
     type: string
-    default: 'latest'
+    default: latest
 
   go-version:
-    description: 'Go version to use'
+    description: Go version to use
     required: false
     type: string
     default: '1.24'
@@ -1562,9 +1566,9 @@ jobs:
   build-deploy:
     uses: fchastanet/my-documents/.github/workflows/build-site-action.yml@master
     with:
-      site-name: 'bash-compiler'
-      base-url: 'https://fchastanet.github.io/bash-compiler'
-      checkout-repo: 'fchastanet/bash-compiler'
+      site-name: bash-compiler
+      base-url: https://fchastanet.github.io/bash-compiler
+      checkout-repo: fchastanet/bash-compiler
 ```
 
 ### 14.2. build-site.yml (my-documents Own)
@@ -1580,12 +1584,12 @@ on:
   push:
     branches: [master]
     paths:
-      - 'content/**'
-      - 'static/**'
-      - 'shared/**'
-      - 'configs/**'
-      - 'hugo.yaml'
-      - 'go.mod'
+      - content/**
+      - static/**
+      - shared/**
+      - configs/**
+      - hugo.yaml
+      - go.mod
   workflow_dispatch:
 ```
 
@@ -1598,16 +1602,17 @@ jobs:
   build-deploy:
     uses: ./.github/workflows/build-site-action.yml
     with:
-      site-name: 'my-documents'
-      base-url: 'https://fchastanet.github.io/my-documents'
-      checkout-repo: 'fchastanet/my-documents'
+      site-name: my-documents
+      base-url: https://fchastanet.github.io/my-documents
+      checkout-repo: fchastanet/my-documents
 ```
 
 ### 14.3. main.yml
 
 **Location:** `my-documents/.github/workflows/main.yml`
 
-**Purpose:** Runs pre-commit hooks and MegaLinter on the repository and deploy documentation if master branch is updated.
+**Purpose:** Runs pre-commit hooks and MegaLinter on the repository and deploy documentation if master branch is
+updated.
 
 **Triggers:**
 
@@ -1645,7 +1650,8 @@ If linters make changes and commit message doesn't contain "skip fix", an auto-f
 
 ## 15. Summary
 
-This documentation system uses a modern, reusable GitHub Actions architecture that simplifies deployment and maintenance:
+This documentation system uses a modern, reusable GitHub Actions architecture that simplifies deployment and
+maintenance:
 
 **Key Takeaways:**
 

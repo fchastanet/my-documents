@@ -1,7 +1,7 @@
 ---
 title: Jenkins Library
-creationDate: "2023-07-01"
-lastUpdated: "2026-02-17"
+creationDate: '2023-07-01'
+lastUpdated: '2026-02-17'
 description: Creating and using Jenkins shared libraries
 weight: 30
 categories: [Jenkins]

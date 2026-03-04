@@ -2,8 +2,7 @@
 
 <!-- remove -->
 
-> **_NOTE:_** Documentation is best viewed on
-> [github-pages](https://fchastanet.github.io/my-documents/)
+> **_NOTE:_** Documentation is best viewed on [github-pages](https://fchastanet.github.io/my-documents/)
 
 <!-- endRemove -->
 
@@ -60,7 +59,8 @@
 
 ## 2. Technical Architecture Summary
 
-This section summarizes the orchestrator's technical architecture. For full details, see [Technical Architecture](/content/docs/my-documents/technical-architecture.md).
+This section summarizes the orchestrator's technical architecture. For full details, see
+[Technical Architecture](/content/docs/my-documents/technical-architecture.md).
 
 - Centralized orchestrator builds and deploys five documentation sites using Hugo and Docsy.
 - Sites managed: my-documents, bash-compiler, bash-tools, bash-tools-framework, bash-dev-env.
@@ -92,19 +92,19 @@ without managing secrets or authentication.
 Add this to `.github/workflows/trigger-docs.yml` in your dependent repository:
 
 ```yaml
----
 name: Trigger Documentation Build
 
 on:
   push:
     branches: [master]
     paths:
-      - 'content/**'
-      - 'static/**'
+      - content/**
+      - static/**
 
 jobs:
   trigger-docs:
-    uses: fchastanet/my-documents/.github/workflows/trigger-docs-reusable.yml@master
+    uses: |-
+      fchastanet/my-documents/.github/workflows/trigger-docs-reusable.yml@master
     secrets: inherit
 ```
 

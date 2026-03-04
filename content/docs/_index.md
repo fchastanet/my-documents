@@ -1,7 +1,7 @@
 ---
 title: Documentation
-creationDate: "2026-02-17"
-lastUpdated: "2026-02-17"
+creationDate: '2026-02-17'
+lastUpdated: '2026-02-17'
 linkTitle: Documentation
 description: Comprehensive guides and best practices
 type: docs
@@ -9,8 +9,10 @@ weight: 10
 ---
 
 {{% pageinfo %}}
-Welcome to the documentation! Browse through guides organized by topic covering Bash scripting,
-Docker, Jenkins, and more.
+
+Welcome to the documentation! Browse through guides organized by topic covering Bash scripting, Docker, Jenkins, and
+more.
+
 {{% /pageinfo %}}
 
 ## 1. Browse Documentation
@@ -24,5 +26,5 @@ Use the sidebar navigation to explore:
 
 ## 2. Getting Started
 
-Choose a section from the sidebar to begin exploring the documentation. Each section contains
-detailed guides, best practices, and real-world examples.
+Choose a section from the sidebar to begin exploring the documentation. Each section contains detailed guides, best
+practices, and real-world examples.

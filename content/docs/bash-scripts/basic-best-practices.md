@@ -1,12 +1,13 @@
 ---
 title: Basic Best Practices
-creationDate: "2023-11-09"
-lastUpdated: "2026-02-22"
+creationDate: '2023-11-09'
+lastUpdated: '2026-02-22'
 description: Foundational best practices for writing Bash scripts
 weight: 10
 categories: [Bash]
 tags: [bash, scripts, best-practices]
 ---
+
 ## 1. External references
 
 - [pure bash bible](https://github.com/dylanaraps/pure-bash-bible?tab=readme-ov-file)
@@ -187,8 +188,8 @@ Compiler::Implement::mergeInterfacesFunctions "${COMPILED_FILE2}" | {
 }
 ```
 
-The issue with this previous solution is that commands runs in a sub-shell but using `shopt -s lastpipe` could solve this
-issue.
+The issue with this previous solution is that commands runs in a sub-shell but using `shopt -s lastpipe` could solve
+this issue.
 
 Another solution would be to simply read the array from stdin:
 
@@ -426,7 +427,7 @@ Extract file name from full file path: `fileName="${REAL_SCRIPT_FILE##*/}"`
 
 ```bash
 if [[ -z ${varName+xxx} ]]; then
-  # varName is not set
+  ; # varName is not set
 fi
 ```
 

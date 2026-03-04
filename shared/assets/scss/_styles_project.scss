@@ -12,13 +12,8 @@
   border-radius: $meta-border-radius;
   padding: $meta-padding;
   margin-bottom: $meta-margin-bottom;
-  background-color: $meta-background-color;
+  background-color: #aaa;
   color: $meta-foreground-color;
-}
-
-[data-bs-theme='light'] .article-meta {
-  background-color: darken($meta-background-color, 10%);
-  color: lighten($meta-foreground-color, 20%);
 }
 
 .article-meta-label,

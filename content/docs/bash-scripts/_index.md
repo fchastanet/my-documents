@@ -1,7 +1,7 @@
 ---
 title: Bash Scripts
-creationDate: "2026-02-17"
-lastUpdated: "2026-02-23"
+creationDate: '2026-02-17'
+lastUpdated: '2026-02-23'
 linkTitle: Bash Scripts
 description: Best practices for writing Bash scripts
 type: docs
@@ -9,8 +9,10 @@ weight: 10
 ---
 
 {{% pageinfo %}}
-Learn how to write efficient, maintainable, and robust Bash scripts with these comprehensive
-guides covering basic practices, Linux commands, and testing.
+
+Learn how to write efficient, maintainable, and robust Bash scripts with these comprehensive guides covering basic
+practices, Linux commands, and testing.
+
 {{% /pageinfo %}}
 
 ## 1. What You'll Learn

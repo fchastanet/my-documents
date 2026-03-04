@@ -1,7 +1,7 @@
 ---
 title: How to Write Dockerfiles
-creationDate: "2023-07-01"
-lastUpdated: "2026-02-17"
+creationDate: '2023-07-01'
+lastUpdated: '2026-02-17'
 description: Best practices for writing efficient and secure Dockerfiles
 weight: 20
 categories: [Docker]
@@ -44,7 +44,7 @@ in a Dockerfile each RUN command will create an image layer.
 
 Here a bad practice that you shouldn't follow
 
-![avoid layer cache issue](HowTo-Write-Dockerfile-DockerCompose/images/dockerfileLayersBestPractices.png)
+{{< img src="assets/dockerfileLayersBestPractices.png" alt="avoid layer cache issue" >}}
 
 #### 2.1.2. Best practice #1
 
@@ -83,8 +83,67 @@ RUN apt-get update \
           /usr/share/doc/*
 ```
 
-`docker build .`  gives the following
-[log output(partly truncated)](HowTo-Write-Dockerfile-DockerCompose/badPractice2.log)
+`docker build .`  gives the following log output(partly truncated):
+
+```text
+...
+#5 [2/2] RUN apt-get update
+    && [ -d badFolder ]
+    && apt-get install -y apache2
+    && rm -rf
+      /var/lib/apt/lists/*
+      /tmp/*
+      /var/tmp/*
+      /usr/share/doc/*
+#5 3.818 Get:1 http://archive.ubuntu.com/ubuntu focal InRelease [265 kB]
+...
+#5 6.252 Fetched 25.6 MB in 6s (4417 kB/s)
+#5 6.252 Reading package lists...
+#5 ERROR: process "/bin/sh -c apt-get update
+  && [ -d badFolder ]
+  && apt-get install -y apache2
+  && rm -rf
+    /var/lib/apt/lists/*
+    /tmp/*
+    /var/tmp/*
+    /usr/share/doc/*"
+did not complete successfully: exit code: 1
+------
+> [2/2] RUN apt-get update
+  && [ -d badFolder ]
+  && apt-get install -y apache2
+  && rm -rf
+    /var/lib/apt/lists/*
+    /tmp/*
+    /var/tmp/*
+    /usr/share/doc/*:
+#5 5.383 Get:10 http://archive.ubuntu.com/ubuntu focal/main amd64 Packages [1275 kB]
+...
+
+------
+Dockerfile1:3
+--------------------
+  2 |
+  3 | >>> RUN apt-get update \
+  4 | >>>     && [ -d badFolder ] \
+  5 | >>>     && apt-get install -y apache2 \
+  6 | >>>     && rm -rf \
+  7 | >>>           /var/lib/apt/lists/\* \
+  8 | >>>           /tmp/\* \
+  9 | >>>           /var/tmp/\* \
+  10 | >>>           /usr/share/doc/\*
+  11 |
+--------------------
+ERROR: failed to solve: process "/bin/sh -c apt-get update
+  && [ -d badFolder ]
+  && apt-get install -y apache2
+  && rm -rf
+    /var/lib/apt/lists/*
+    /tmp/*
+    /var/tmp/*
+    /usr/share/doc/*
+did not complete successfully: exit code: 1
+```
 
 Not easy here to know that the command `[ -d badFolder ]` makes the build failing
 
@@ -141,8 +200,65 @@ RUN apt-get update ;\
           /usr/share/doc/*
 ```
 
-`docker build .`  gives the following
-[log output(partly truncated)](HowTo-Write-Dockerfile-DockerCompose/bestPractice2.log)
+`docker build .`  gives the following log output(partly truncated):
+
+```text
+...
+#5 [2/2] RUN apt-get update ;
+  [ -d  badFolder ] ;
+  apt-get install -y apache2 ;
+  rm -rf
+    /var/lib/apt/lists/*
+    /tmp/*
+    /var/tmp/*
+    /usr/share/doc/*
+#5 0.318 + apt-get update
+#5 3.522 Get:1 http://archive.ubuntu.com/ubuntu focal InRelease [265 kB]
+...
+#5 5.310 Fetched 25.6 MB in 5s (5141 kB/s)
+#5 5.310 Reading package lists...
+#5 6.172 + '[' -d badFolder ']'
+#5 ERROR: process "/bin/bash -o pipefail -o errexit -o xtrace -c
+  apt-get update ;
+  [ -d  badFolder ] ;
+  apt-get install -y apache2 ;
+  rm -rf
+    /var/lib/apt/lists/*
+    /tmp/*
+    /var/tmp/*
+    /usr/share/doc/*
+did not complete successfully: exit code: 1
+------
+ > [2/2] RUN apt-get update ;
+  [ -d  badFolder ] ;
+  apt-get install -y apache2 ;
+  rm -rf
+    /var/lib/apt/lists/*
+    /tmp/*
+    /var/tmp/*
+    /usr/share/doc/\*:
+#5 4.228 Get:11 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 Packages [3014 kB]
+...
+#5 6.172 + '[' -d badFolder ']'
+------
+Dockerfile1:4
+--------------------
+   3 |     SHELL ["/bin/bash", "-o", "pipefail", "-o", "errexit", "-o", "xtrace", "-c"]
+   4 | >>> RUN apt-get update ;\
+   5 | >>>     [ -d  badFolder ] ;\
+   6 | >>>     apt-get install -y apache2 ;\
+   7 | >>>     rm -rf \
+   8 | >>>           /var/lib/apt/lists/\* \
+   9 | >>>           /tmp/\* \
+  10 | >>>           /var/tmp/\* \
+  11 | >>>           /usr/share/doc/\*
+  12 |
+--------------------
+ERROR: failed to solve: process "/bin/bash -o pipefail -o errexit -o xtrace -c
+apt-get update ;    [ -d  badFolder ] ;    apt-get install -y apache2 ;    rm -rf
+/var/lib/apt/lists/*         /tmp/*         /var/tmp/*         /usr/share/doc/*"
+did not complete successfully: exit code: 1
+```
 
 Here the command line displayed just above the error indicates **clearly** from where the error comes from:
 

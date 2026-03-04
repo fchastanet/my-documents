@@ -4,9 +4,9 @@ description: Overview of the technical architecture and implementation details o
 categories: [Documentation]
 tags: [documentation, github-actions, reusable-workflow, github-app, authentication, secrets-management, ai-generated]
 weight: 11
-creationDate: "2026-02-21"
-lastUpdated: "2026-02-21"
-version: "1.0"
+creationDate: '2026-02-21'
+lastUpdated: '2026-02-21'
+version: '1.0'
 ---
 
 ## 1. Overview
@@ -30,22 +30,22 @@ my-documents orchestrator.
 Create `.github/workflows/trigger-docs.yml` in your dependent repository:
 
 ```yaml
----
 name: Trigger Documentation Build
 
 on:
   push:
     branches: [master]
     paths:
-      - 'content/**'
-      - 'static/**'
-      - 'go.mod'
-      - 'go.sum'
+      - content/**
+      - static/**
+      - go.mod
+      - go.sum
   workflow_dispatch:
 
 jobs:
   trigger-docs:
-    uses: fchastanet/my-documents/.github/workflows/trigger-docs-reusable.yml@master
+    uses: |-
+      fchastanet/my-documents/.github/workflows/trigger-docs-reusable.yml@master
     secrets: inherit
 ```
 
@@ -121,15 +121,15 @@ That's it! No secrets to configure, no tokens to manage.
 
 All inputs are optional with sensible defaults:
 
-| Input              | Description                     | Default                              |
-| ------------------ | ------------------------------- | ------------------------------------ |
-| `target_org`       | Target organization/user        | `fchastanet`                         |
-| `target_repo`      | Target repository name          | `my-documents`                       |
-| `event_type`       | Repository dispatch event type  | `trigger-docs-rebuild`               |
-| `docs_url_base`    | Documentation URL base          | `https://fchastanet.github.io`       |
-| `workflow_filename`| Workflow filename to monitor    | `build-all-sites.yml`                |
-| `source_repo`      | Source repository               | `${{ github.repository }}`           |
-|                    | (auto-detected if not provided) |                                      |
+| Input               | Description                     | Default                        |
+| ------------------- | ------------------------------- | ------------------------------ |
+| `target_org`        | Target organization/user        | `fchastanet`                   |
+| `target_repo`       | Target repository name          | `my-documents`                 |
+| `event_type`        | Repository dispatch event type  | `trigger-docs-rebuild`         |
+| `docs_url_base`     | Documentation URL base          | `https://fchastanet.github.io` |
+| `workflow_filename` | Workflow filename to monitor    | `build-all-sites.yml`          |
+| `source_repo`       | Source repository               | `${{ github.repository }}`     |
+|                     | (auto-detected if not provided) |                                |
 
 ### 4.2. Advanced Usage Examples
 
@@ -138,9 +138,10 @@ All inputs are optional with sensible defaults:
 ```yaml
 jobs:
   trigger-docs:
-    uses: fchastanet/my-documents/.github/workflows/trigger-docs-reusable.yml@master
+    uses: |-
+      fchastanet/my-documents/.github/workflows/trigger-docs-reusable.yml@master
     with:
-      docs_url_base: 'https://docs.example.com'
+      docs_url_base: https://docs.example.com
     secrets: inherit
 ```
 
@@ -149,11 +150,12 @@ jobs:
 ```yaml
 jobs:
   trigger-docs:
-    uses: fchastanet/my-documents/.github/workflows/trigger-docs-reusable.yml@master
+    uses: |-
+      fchastanet/my-documents/.github/workflows/trigger-docs-reusable.yml@master
     with:
-      target_org: 'myOrg'
-      target_repo: 'my-docs'
-      workflow_filename: 'build-docs.yml'
+      target_org: myOrg
+      target_repo: my-docs
+      workflow_filename: build-docs.yml
     secrets: inherit
 ```
 
@@ -162,9 +164,10 @@ jobs:
 ```yaml
 jobs:
   trigger-docs:
-    uses: fchastanet/my-documents/.github/workflows/trigger-docs-reusable.yml@master
+    uses: |-
+      fchastanet/my-documents/.github/workflows/trigger-docs-reusable.yml@master
     with:
-      event_type: 'custom-docs-rebuild'
+      event_type: custom-docs-rebuild
     secrets: inherit
 ```
 
@@ -173,7 +176,6 @@ jobs:
 Here's a complete example for a dependent repository:
 
 ```yaml
----
 name: Trigger Documentation Build
 
 on:
@@ -181,11 +183,11 @@ on:
   push:
     branches: [master]
     paths:
-      - 'content/**'      # Hugo content
-      - 'static/**'       # Static assets
-      - 'go.mod'          # Hugo modules
-      - 'go.sum'          # Hugo module checksums
-      - 'configs/**'      # If using custom configs
+      - content/**        # Hugo content
+      - static/**         # Static assets
+      - go.mod            # Hugo modules
+      - go.sum            # Hugo module checksums
+      - configs/**        # If using custom configs
 
   # Allow manual triggering
   workflow_dispatch:
@@ -197,7 +199,8 @@ on:
 jobs:
   trigger-docs:
     name: Trigger Documentation Build
-    uses: fchastanet/my-documents/.github/workflows/trigger-docs-reusable.yml@master
+    uses: |-
+      fchastanet/my-documents/.github/workflows/trigger-docs-reusable.yml@master
     secrets: inherit
 ```
 
@@ -207,10 +210,10 @@ jobs:
 
 The reusable workflow requires these secrets to be configured in the my-documents repository:
 
-| Secret                 | Description                         | How to Get                                 |
-| ---------------------- | ----------------------------------- | ------------------------------------------ |
-| `DOC_APP_ID`           | GitHub App ID                       | From GitHub App settings                   |
-| `DOC_APP_PRIVATE_KEY`  | GitHub App private key (PEM format) | Generated when creating GitHub App         |
+| Secret                | Description                         | How to Get                         |
+| --------------------- | ----------------------------------- | ---------------------------------- |
+| `DOC_APP_ID`          | GitHub App ID                       | From GitHub App settings           |
+| `DOC_APP_PRIVATE_KEY` | GitHub App private key (PEM format) | Generated when creating GitHub App |
 
 **Setting up secrets:**
 
@@ -237,7 +240,8 @@ When a dependent repository (like bash-compiler) calls this reusable workflow wi
 ```yaml
 jobs:
   trigger-docs:
-    uses: fchastanet/my-documents/.github/workflows/trigger-docs-reusable.yml@master
+    uses: |-
+      fchastanet/my-documents/.github/workflows/trigger-docs-reusable.yml@master
     secrets: inherit
 ```
 
@@ -254,7 +258,8 @@ NOT:
 The key to understanding this is the **execution context**:
 
 1. **Workflow file location:** `.github/workflows/trigger-docs-reusable.yml` lives in **my-documents**
-2. **Calling workflow location:** `.github/workflows/trigger-docs.yml` lives in **bash-compiler** (or other dependent repo)
+2. **Calling workflow location:** `.github/workflows/trigger-docs.yml` lives in **bash-compiler** (or other dependent
+   repo)
 3. **Execution context:** When bash-compiler calls the reusable workflow, the reusable workflow **still runs in the
    my-documents context**
 
@@ -321,7 +326,8 @@ The workflow uses `DOC_APP_ID` and `DOC_APP_PRIVATE_KEY` secrets that are:
 # In their-org/their-repo
 jobs:
   trigger-docs:
-    uses: fchastanet/my-documents/.github/workflows/trigger-docs-reusable.yml@master
+    uses: |-
+      fchastanet/my-documents/.github/workflows/trigger-docs-reusable.yml@master
     secrets: inherit
 ```
 
@@ -357,11 +363,11 @@ Error: Resource not accessible by integration
 
 GitHub Actions secrets are stored at three levels:
 
-| Level            | Scope                            | Accessible By                         |
-| ---------------- | -------------------------------- | ------------------------------------- |
-| **Repository**   | Single repository                | Workflows in that repository only     |
-| **Environment**  | Specific deployment environment  | Workflows targeting that environment  |
-| **Organization** | All repositories in organization | All workflows in the organization     |
+| Level            | Scope                            | Accessible By                        |
+| ---------------- | -------------------------------- | ------------------------------------ |
+| **Repository**   | Single repository                | Workflows in that repository only    |
+| **Environment**  | Specific deployment environment  | Workflows targeting that environment |
+| **Organization** | All repositories in organization | All workflows in the organization    |
 
 My-documents secrets are stored at the **repository level**:
 
@@ -377,7 +383,8 @@ My-documents secrets are stored at the **repository level**:
 # In john/bash-compiler (dependent repo fork)
 jobs:
   trigger-docs:
-    uses: john/my-documents-fork/.github/workflows/trigger-docs-reusable.yml@master
+    uses: |-
+      john/my-documents-fork/.github/workflows/trigger-docs-reusable.yml@master
     secrets: inherit
 ```
 
@@ -402,6 +409,7 @@ jobs:
 **If someone wanted to use this pattern for their own orchestrator:**
 
 1. **Create their own GitHub App**
+
    - In their organization settings
    - With Contents: write and Pages: write permissions
    - Install on their repositories
@@ -414,11 +422,13 @@ jobs:
    ```
 
 3. **Create their own reusable workflow**
+
    - Copy and adapt the trigger-docs-reusable.yml
    - Reference their own secrets
    - Change target_org default to their organization
 
 4. **Update dependent repositories**
+
    - Point to their reusable workflow
    - Use `secrets: inherit` in their calls
 
@@ -428,28 +438,30 @@ jobs:
 # In their-org/bash-compiler
 jobs:
   trigger-docs:
-    uses: their-org/my-docs-orchestrator/.github/workflows/trigger-docs-reusable.yml@master
+    uses: |-
+      their-org/my-docs-orchestrator/.github/workflows/trigger-docs-reusable.yml@master
     secrets: inherit
     # This now references their-org's secrets, not fchastanet's
 ```
 
 ### 7.7. Summary: Why This Workflow is Fchastanet-Only
 
-| Component                      | Why It's Fchastanet-Specific         | Can Be Generalized?             |
-| ------------------------------ | ------------------------------------ | ------------------------------- |
-| Workflow logic                 | Generic, reusable for any workflow   | ✅ Yes, with different inputs   |
-| `DOC_APP_ID` secret            | Specific to fchastanet's GitHub App  | ❌ No, organization-specific    |
-| `DOC_APP_PRIVATE_KEY` secret   | Specific to fchastanet's GitHub App  | ❌ No, organization-specific    |
-| Target repository (default)    | Hardcoded to my-documents            | ✅ Yes, via `target_repo` input |
-| Target organization (default)  | Hardcoded to fchastanet              | ✅ Yes, via `target_org` input  |
-| GitHub App installation        | Only on fchastanet repositories      | ❌ No, would need own app       |
+| Component                     | Why It's Fchastanet-Specific        | Can Be Generalized?             |
+| ----------------------------- | ----------------------------------- | ------------------------------- |
+| Workflow logic                | Generic, reusable for any workflow  | ✅ Yes, with different inputs   |
+| `DOC_APP_ID` secret           | Specific to fchastanet's GitHub App | ❌ No, organization-specific    |
+| `DOC_APP_PRIVATE_KEY` secret  | Specific to fchastanet's GitHub App | ❌ No, organization-specific    |
+| Target repository (default)   | Hardcoded to my-documents           | ✅ Yes, via `target_repo` input |
+| Target organization (default) | Hardcoded to fchastanet             | ✅ Yes, via `target_org` input  |
+| GitHub App installation       | Only on fchastanet repositories     | ❌ No, would need own app       |
 
 ### 7.8. Conclusion
 
 The `secrets: inherit` mechanism is elegant for internal workflows within an organization because:
 
 - **For dependent repos in fchastanet:** They can call the workflow without managing secrets (works perfectly)
-- **For external users:** They cannot use this workflow as-is because the GitHub App and secrets are organization-specific
+- **For external users:** They cannot use this workflow as-is because the GitHub App and secrets are
+  organization-specific
 - **This is intentional:** It provides security and prevents unauthorized access to the build orchestration
 
 This is **not a limitation** but a **security feature** - the workflow is designed to work only within the fchastanet
@@ -496,12 +508,15 @@ The workflow creates a detailed summary visible in the Actions UI:
 **Possible Causes:**
 
 1. **GitHub App not installed** on target repository
+
    - Solution: Install the GitHub App on my-documents repository
 
 2. **GitHub App permissions insufficient**
+
    - Solution: Ensure app has `Contents: write` permission
 
 3. **Event type mismatch**
+
    - Solution: Verify `event_type` input matches what build-all-sites.yml expects
 
 ### 9.2. Authentication Failures
@@ -514,12 +529,15 @@ The workflow creates a detailed summary visible in the Actions UI:
 **Possible Causes:**
 
 1. **Secrets not configured** in my-documents
+
    - Solution: Add `DOC_APP_ID` and `DOC_APP_PRIVATE_KEY` secrets
 
 2. **GitHub App private key incorrect**
+
    - Solution: Regenerate private key in GitHub App settings
 
 3. **GitHub App permissions revoked**
+
    - Solution: Reinstall GitHub App on repositories
 
 ### 9.3. Workflow Not Found
@@ -532,9 +550,11 @@ The workflow creates a detailed summary visible in the Actions UI:
 **Possible Causes:**
 
 1. **Wrong branch reference**
+
    - Solution: Use `@master` not `@main` (my-documents uses master branch)
 
 2. **Workflow file renamed or moved**
+
    - Solution: Verify file exists at `.github/workflows/trigger-docs-reusable.yml`
 
 ### 9.4. Debug Mode
@@ -544,7 +564,8 @@ Enable debug logging in dependent repository:
 ```yaml
 jobs:
   trigger-docs:
-    uses: fchastanet/my-documents/.github/workflows/trigger-docs-reusable.yml@master
+    uses: |-
+      fchastanet/my-documents/.github/workflows/trigger-docs-reusable.yml@master
     secrets: inherit
 ```
 
@@ -579,7 +600,8 @@ jobs:
 ```yaml
 jobs:
   trigger-docs:
-    uses: fchastanet/my-documents/.github/workflows/trigger-docs-reusable.yml@master
+    uses: |-
+      fchastanet/my-documents/.github/workflows/trigger-docs-reusable.yml@master
     secrets: inherit
 ```
 
@@ -602,10 +624,10 @@ on:
   push:
     branches: [master]
     paths:
-      - 'content/**'      # Documentation content
-      - 'static/**'       # Static assets
-      - 'go.mod'          # Hugo modules (theme updates)
-      - 'go.sum'
+      - content/**        # Documentation content
+      - static/**         # Static assets
+      - go.mod            # Hugo modules (theme updates)
+      - go.sum
 ```
 
 **Don't trigger on:**
@@ -619,10 +641,11 @@ on:
 
 Prevent multiple concurrent builds:
 
-```yaml
+```text
 jobs:
   trigger-docs:
-    uses: fchastanet/my-documents/.github/workflows/trigger-docs-reusable.yml@master
+    uses: |-
+      fchastanet/my-documents/.github/workflows/trigger-docs-reusable.yml@master
     secrets: inherit
     concurrency:
       group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
@@ -637,7 +660,8 @@ Only trigger for certain branches:
 jobs:
   trigger-docs:
     if: github.ref == 'refs/heads/master'
-    uses: fchastanet/my-documents/.github/workflows/trigger-docs-reusable.yml@master
+    uses: |-
+      fchastanet/my-documents/.github/workflows/trigger-docs-reusable.yml@master
     secrets: inherit
 ```
 

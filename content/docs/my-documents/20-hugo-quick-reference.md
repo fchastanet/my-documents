@@ -1,8 +1,13 @@
-# Quick Reference: Hugo Site Development
-
-**Repository:** my-documents
-**Theme:** Docsy
-**Hugo Version:** 0.110+
+---
+title: Quick Reference - Hugo Site Development
+description: A quick reference guide for developing and maintaining the Hugo documentation site
+categories: [Documentation]
+tags: [documentation, github-actions, reusable-workflow, github-app, authentication, secrets-management, ai-generated]
+weight: 20
+creationDate: '2026-03-04'
+lastUpdated: '2026-03-04'
+version: '1.0'
+---
 
 ## 1. Local Development
 
@@ -35,7 +40,7 @@ hugo new docs/bash-scripts/my-page.md
 
 Edit the file with frontmatter:
 
-```yaml
+```markdown
 ---
 title: My New Page
 description: Brief description for SEO
@@ -58,7 +63,7 @@ touch content/en/docs/new-section/_index.md
 
 ### 2.3. Frontmatter Fields
 
-```yaml
+```markdown
 ---
 title: Page Title              # Required, shown as H1
 description: SEO description   # Required, used in meta tags
@@ -188,8 +193,8 @@ hugo --minify
 Add technical terms to `.cspell/bash.txt`:
 
 ```bash
-echo "newWord" >> .cspell/bash.txt
-pre-commit run file-contents-sorter    # auto-sorts
+echo "newWord" >>.cspell/bash.txt
+pre-commit run file-contents-sorter # auto-sorts
 ```
 
 ## 11. Git Workflow
@@ -219,7 +224,7 @@ hugo server -D
 ### 12.2. Module not found errors
 
 ```bash
-hugo version  # Check it says "extended"
+hugo version # Check it says "extended"
 hugo mod get -u
 ```
 
@@ -238,17 +243,17 @@ hugo --minify
 
 ## 13. File Locations
 
-| Item | Path |
-| ---- | ---- |
-| Site config | `hugo.yaml` |
-| Home page | `content/en/_index.html` |
-| Docs home | `content/en/docs/_index.md` |
-| Bash guides | `content/en/docs/bash-scripts/` |
-| How-TO guides | `content/en/docs/howtos/` |
-| Lists | `content/en/docs/lists/` |
-| Images | `static/section-name/` |
-| Archetypes | `archetypes/*.md` |
-| Theme config | `hugo.yaml` params section |
+| Item          | Path                            |
+| ------------- | ------------------------------- |
+| Site config   | `hugo.yaml`                     |
+| Home page     | `content/en/_index.html`        |
+| Docs home     | `content/en/docs/_index.md`     |
+| Bash guides   | `content/en/docs/bash-scripts/` |
+| How-TO guides | `content/en/docs/howtos/`       |
+| Lists         | `content/en/docs/lists/`        |
+| Images        | `static/section-name/`          |
+| Archetypes    | `archetypes/*.md`               |
+| Theme config  | `hugo.yaml` params section      |
 
 ## 14. SEO Best Practices
 
@@ -272,12 +277,12 @@ hugo --minify
 ## 16. Useful Commands
 
 ```bash
-hugo server -D                          # Run dev server
-hugo --minify                           # Build for production
-hugo --printI18nWarnings                # Check for i18n issues
-hugo --printPathWarnings                # Check path warnings
-hugo --printUnusedTemplates             # Check unused templates
-pre-commit run -a                       # Run all linters
+hugo server -D              # Run dev server
+hugo --minify               # Build for production
+hugo --printI18nWarnings    # Check for i18n issues
+hugo --printPathWarnings    # Check path warnings
+hugo --printUnusedTemplates # Check unused templates
+pre-commit run -a           # Run all linters
 ```
 
 ## 17. Theme Customization
@@ -290,7 +295,7 @@ To override Docsy styles:
 
 For more details: <https://www.docsy.dev/docs/>
 
----
+______________________________________________________________________
 
 **Quick Links:**
 

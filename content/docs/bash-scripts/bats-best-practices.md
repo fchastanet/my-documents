@@ -1,7 +1,7 @@
 ---
 title: Bats Testing Framework
-creationDate: "2023-11-09"
-lastUpdated: "2026-02-17"
+creationDate: '2023-11-09'
+lastUpdated: '2026-02-17'
 description: Best practices for testing Bash scripts with Bats framework
 weight: 30
 categories: [testing]

@@ -1,7 +1,7 @@
 ---
 title: Reference Lists
-creationDate: "2026-02-17"
-lastUpdated: "2026-02-23"
+creationDate: '2026-02-17'
+lastUpdated: '2026-02-23'
 linkTitle: Lists
 description: Curated reference lists and collections
 type: docs
@@ -9,7 +9,9 @@ weight: 30
 ---
 
 {{% pageinfo %}}
+
 Curated lists of tools, resources, and references for development and testing.
+
 {{% /pageinfo %}}
 
 ## 1. Available Lists

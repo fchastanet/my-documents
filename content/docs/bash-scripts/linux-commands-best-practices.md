@@ -1,7 +1,7 @@
 ---
 title: Linux Commands Best Practices
-creationDate: "2023-11-09"
-lastUpdated: "2026-02-17"
+creationDate: '2023-11-09'
+lastUpdated: '2026-02-17'
 description: Best practices for using Linux commands in Bash scripts
 weight: 20
 categories: [Bash]

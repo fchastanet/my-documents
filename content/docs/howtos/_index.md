@@ -1,7 +1,7 @@
 ---
 title: How-To Guides
-creationDate: "2026-02-17"
-lastUpdated: "2026-02-23"
+creationDate: '2026-02-17'
+lastUpdated: '2026-02-23'
 linkTitle: HowTos
 description: Step-by-step guides for various technologies
 type: docs
@@ -9,7 +9,9 @@ weight: 20
 ---
 
 {{% pageinfo %}}
+
 In-depth tutorials and how-to guides for Docker, Jenkins, and other development technologies.
+
 {{% /pageinfo %}}
 
 ## 1. Available Guides

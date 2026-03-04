@@ -1,7 +1,7 @@
 ---
 title: Jenkins Pipelines
-creationDate: "2023-07-01"
-lastUpdated: "2026-02-17"
+creationDate: '2023-07-01'
+lastUpdated: '2026-02-17'
 description: Declarative and scripted pipeline syntax
 weight: 20
 categories: [Jenkins]

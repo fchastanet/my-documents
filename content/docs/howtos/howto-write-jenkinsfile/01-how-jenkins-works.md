@@ -1,7 +1,7 @@
 ---
 title: How Jenkins Works
-creationDate: "2023-07-01"
-lastUpdated: "2026-02-17"
+creationDate: '2023-07-01'
+lastUpdated: '2026-02-17'
 description: Understanding Jenkins architecture and concepts
 weight: 10
 categories: [Jenkins]
@@ -90,4 +90,4 @@ requirements as well as the amount of I/O and network activity:
 
 Jenkins has static slave nodes and can trigger the generation of dynamic slave nodes
 
-![Jenkins Master/slave architecture](images/JenkinsMasterSlave.png)
+{{< img src="assets/JenkinsMasterSlave.png" alt="Jenkins Master/slave architecture" >}}
