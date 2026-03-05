@@ -37,6 +37,15 @@ output_dir="${BUILD_DIR}/${SITE_NAME}"
 rm -Rf "$output_dir"
 mkdir -p "$output_dir"
 
+if [[ -f "${SITE_DIR}/.github/scripts/pre-build.sh" ]]; then
+  echo -e "${BLUE}Running pre-build script for ${SITE_NAME}...${NC}"
+  chmod +x "${SITE_DIR}/.github/scripts/pre-build.sh"
+  (
+    cd "${SITE_DIR}"
+    .github/scripts/pre-build.sh
+  )
+fi
+
 # Use prepare-build script to set up the build directory
 "$script_dir/prepare-build.sh" \
   "$SITE_NAME" \
