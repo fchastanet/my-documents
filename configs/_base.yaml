@@ -6,7 +6,7 @@ contentDir: content/docs
 languageCode: en-us
 defaultContentLanguage: en
 defaultContentLanguageInSubdir: false
-enableRobotsTXT: true
+enableRobotsTXT: false
 enableGitInfo: true
 
 # Syntax highlighting

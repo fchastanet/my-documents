@@ -117,6 +117,7 @@ npx cspell --debug --quiet .           # Check spelling with debug
 ```
 
 **Add word to spell dictionary:**
+
 ```bash
 echo "newWord" >> .cspell/bash.txt
 pre-commit run file-contents-sorter   # Sort dictionary

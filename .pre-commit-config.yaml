@@ -3,20 +3,6 @@ default_install_hook_types: [pre-commit, pre-push]
 default_stages: [pre-commit, manual]
 minimum_pre_commit_version: 3.5.0
 repos:
-  - repo: local
-    # this hook is not intended to be run on github
-    # it just allows to generate the same pre-commit
-    # file with some specific option to github
-    hooks:
-      - id: preCommitGeneration
-        name: preCommitGeneration
-        entry: .github/preCommitGeneration.sh
-        language: system
-        pass_filenames: false
-        always_run: true
-        require_serial: true
-        stages: [pre-commit, pre-push, manual]
-
   - repo: https://github.com/executablebooks/mdformat
     # Do this before other tools "fixing" the line endings
     rev: 0.7.21

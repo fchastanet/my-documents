@@ -26,6 +26,7 @@ mkdocs
 mktemp
 mktemp
 mypy
+nojekyll
 osint
 PENDO
 pendo
