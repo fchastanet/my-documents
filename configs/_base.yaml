@@ -135,3 +135,6 @@ params:
   # SEO meta defaults
   meta:
     robots: 'index, follow'
+
+  search:
+    indexing_verification: 'GY0eVZfliUo_lbkSnr1r6Y4S2nNVK9W9aUL9eDjvp9E'
