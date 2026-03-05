@@ -55,6 +55,9 @@ if [ -d "$SOURCE_DIR/static" ]; then
   cp -r "$SOURCE_DIR/static" "$OUTPUT_DIR/"
 fi
 
+echo "  Create a .nojekyll file to make google search to recognize the sitemap.xml file"
+touch "$OUTPUT_DIR/.nojekyll"
+
 # Copy go.mod and go.sum if they exist
 if [ -f "$ORCHESTRATOR_DIR/go.mod" ]; then
   cp "$ORCHESTRATOR_DIR/go.mod" "$OUTPUT_DIR/"
