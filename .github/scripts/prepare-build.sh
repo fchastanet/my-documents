@@ -3,7 +3,7 @@
 # Handles both orchestrator (my-documents) and dependent site builds
 # Usage: ./prepare-build.sh SITE_NAME ORCHESTRATOR_DIR SOURCE_DIR OUTPUT_DIR [BASE_URL]
 # Example: ./prepare-build.sh my-documents orchestrator . . "https://devlab.top"
-# Example: ./prepare-build.sh bash-compiler orchestrator sites/bash-compiler build/bash-compiler "https://devlab.top/bash-compiler"
+# Example: ./prepare-build.sh bash-compiler orchestrator sites/bash-compiler build/bash-compiler "https://bash-compiler.devlab.top"
 
 # shellcheck source=.github/scripts/common.sh
 source "$(dirname "$0")/common.sh"

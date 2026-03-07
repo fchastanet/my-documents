@@ -29,10 +29,10 @@ configurations, layouts, and assets while maintaining their independence.
 | Site                 | Repository                      | Live URL                                   |
 | -------------------- | ------------------------------- | ------------------------------------------ |
 | My Documents         | fchastanet/my-documents         | <https://devlab.top/>                      |
-| Bash Compiler        | fchastanet/bash-compiler        | <https://devlab.top/bash-compiler/>        |
-| Bash Tools           | fchastanet/bash-tools           | <https://devlab.top/bash-tools/>           |
-| Bash Tools Framework | fchastanet/bash-tools-framework | <https://devlab.top/bash-tools-framework/> |
-| Bash Dev Env         | fchastanet/bash-dev-env         | <https://devlab.top/bash-dev-env/>         |
+| Bash Compiler        | fchastanet/bash-compiler        | <https://bash-compiler.devlab.top/>        |
+| Bash Tools           | fchastanet/bash-tools           | <https://bash-tools.devlab.top/>           |
+| Bash Tools Framework | fchastanet/bash-tools-framework | <https://bash-tools-framework.devlab.top/> |
+| Bash Dev Env         | fchastanet/bash-dev-env         | <https://bash-dev-env.devlab.top/>         |
 
 ## 2. Building Locally
 
@@ -490,7 +490,7 @@ This imports shared configuration including:
 Override base settings for your site:
 
 ```yaml
-baseURL: https://devlab.top/bash-compiler
+baseURL: https://bash-compiler.devlab.top
 title: Bash Compiler Documentation
 languageCode: en-us
 
@@ -630,7 +630,7 @@ jobs:
     uses: fchastanet/my-documents/.github/workflows/build-site-action.yml@master
     with:
       site-name: bash-compiler
-      base-url: https://devlab.top/bash-compiler
+      base-url: https://bash-compiler.devlab.top
       checkout-repo: fchastanet/bash-compiler
     permissions:
       contents: read
@@ -659,7 +659,7 @@ These parameters must be provided with `with`:
 ```yaml
 with:
   site-name: bash-compiler
-  base-url: https://devlab.top/bash-compiler
+  base-url: https://bash-compiler.devlab.top
   checkout-repo: fchastanet/bash-compiler
 ```
 
@@ -1567,7 +1567,7 @@ jobs:
     uses: fchastanet/my-documents/.github/workflows/build-site-action.yml@master
     with:
       site-name: bash-compiler
-      base-url: https://devlab.top/bash-compiler
+      base-url: https://bash-compiler.devlab.top
       checkout-repo: fchastanet/bash-compiler
 ```
 

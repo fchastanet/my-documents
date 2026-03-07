@@ -476,7 +476,7 @@ The workflow provides rich output and summaries:
 ```text
 🔔 Triggering documentation build in fchastanet/my-documents...
 ✅ Successfully triggered docs build in fchastanet/my-documents
-📖 Documentation will be updated at: https://devlab.top/bash-compiler/
+📖 Documentation will be updated at: https://bash-compiler.devlab.top/
 ℹ️  Note: Documentation deployment may take 2-5 minutes
 ```
 
@@ -493,7 +493,7 @@ The workflow creates a detailed summary visible in the Actions UI:
 **Triggered by:** `fchastanet`
 
 🔗 [View build status](https://github.com/fchastanet/my-documents/actions/workflows/build-all-sites.yml)
-📖 [View documentation](https://devlab.top/bash-compiler/)
+📖 [View documentation](https://bash-compiler.devlab.top/)
 ```
 
 ## 9. Troubleshooting

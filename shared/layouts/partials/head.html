@@ -46,7 +46,7 @@
     const links = document.querySelectorAll('a[href]');
     links.forEach(link => {
       const url = new URL(link.href, window.location.href);
-      if (url.origin !== window.location.origin && url.origin !== 'https://devlab.top') {
+      if (url.origin !== window.location.origin && !/https:\/\/.*devlab\.top/.test(url.origin)) {
         link.setAttribute('target', '_blank');
         link.setAttribute('rel', 'noopener noreferrer');
       } else {

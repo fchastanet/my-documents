@@ -10,9 +10,9 @@ weight: 40
 
 Links to related documentation and projects in this documentation suite.
 
-- [Bash Tools Framework](https://devlab.top/bash-tools-framework/)
-- [Bash Tools](https://devlab.top/bash-tools/)
-- [Bash Dev Env](https://devlab.top/bash-dev-env/)
-- [Bash Compiler](https://devlab.top/bash-compiler/)
+- [Bash Tools Framework](https://bash-tools-framework.devlab.top/)
+- [Bash Tools](https://bash-tools.devlab.top/)
+- [Bash Dev Env](https://bash-dev-env.devlab.top/)
+- [Bash Compiler](https://bash-compiler.devlab.top/)
 
 {{< articles-list >}}

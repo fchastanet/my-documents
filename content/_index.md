@@ -24,21 +24,21 @@ Here the links to my main open source projects:
 > Personal collection of notes, guides, and resources on various topics related to development, testing, and
 > documentation.
 
-[Bash Tools Framework](https://devlab.top/bash-tools-framework/)
+[Bash Tools Framework](https://bash-tools-framework.devlab.top/)
 
 > This framework provides a comprehensive collection of bash functions and commands that help you lint files, generate
 > shell documentation, compile bash files, and much more.
 
-[Bash Tools](https://devlab.top/bash-tools/)
+[Bash Tools](https://bash-tools.devlab.top/)
 
 > A collection of several bash tools using bash-tools-framework allowing to easily import bash script, log, display log
 > messages, database manipulation, user interaction, version comparison, and more.
 
-[Bash Dev Env](https://devlab.top/bash-dev-env/)
+[Bash Dev Env](https://bash-dev-env.devlab.top/)
 
 > Comprehensive Bash-based development environment installation and configuration system for Ubuntu-based distributions
 
-[Bash Compiler](https://devlab.top/bash-compiler/)
+[Bash Compiler](https://bash-compiler.devlab.top/)
 
 > Go tool allowing to aggregate bash files into one allowing bash script reusability
 

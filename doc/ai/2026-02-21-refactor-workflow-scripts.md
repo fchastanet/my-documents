@@ -42,7 +42,7 @@ Refactored the codebase to follow a **script-driven approach** where:
 ```bash
 ./merge-configs.sh configs/_base.yaml configs/bash-compiler.yaml \
   build/bash-compiler/hugo.yaml \
-  "https://devlab.top/bash-compiler"
+  "https://bash-compiler.devlab.top"
 ```
 
 **Benefits:**
@@ -92,7 +92,7 @@ Refactored the codebase to follow a **script-driven approach** where:
 ```bash
 ./prepare-build.sh bash-compiler false orchestrator sites/bash-compiler \
   build/bash-compiler \
-  "https://devlab.top/bash-compiler"
+  "https://bash-compiler.devlab.top"
 ```
 - Copies shared resources from orchestrator
 - Copies site content and static files

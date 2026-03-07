@@ -124,13 +124,13 @@ params:
     - version: DevLab
       url: https://devlab.top/
     - version: Bash Tools Framework
-      url: https://devlab.top/bash-tools-framework/
+      url: https://bash-tools-framework.devlab.top/
     - version: Bash Tools
-      url: https://devlab.top/bash-tools/
+      url: https://bash-tools.devlab.top/
     - version: Bash Dev Env
-      url: https://devlab.top/bash-dev-env/
+      url: https://bash-dev-env.devlab.top/
     - version: Bash Compiler
-      url: https://devlab.top/bash-compiler/
+      url: https://bash-compiler.devlab.top/
 
   # SEO meta defaults
   meta:

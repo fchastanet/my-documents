@@ -549,7 +549,7 @@ matrix:
       self: true
     - name: bash-compiler
       repo: fchastanet/bash-compiler
-      baseURL: https://devlab.top/bash-compiler
+      baseURL: https://bash-compiler.devlab.top
       self: false
     # ... other sites
 ```
@@ -611,10 +611,10 @@ matrix:
 **Result URLs:**
 
 - <https://devlab.top/>
-- <https://devlab.top/bash-compiler/>
-- <https://devlab.top/bash-tools/>
-- <https://devlab.top/bash-tools-framework/>
-- <https://devlab.top/bash-dev-env/>
+- <https://bash-compiler.devlab.top/>
+- <https://bash-tools.devlab.top/>
+- <https://bash-tools-framework.devlab.top/>
+- <https://bash-dev-env.devlab.top/>
 
 ### 3.6. Trigger Mechanism
 
