@@ -84,7 +84,7 @@ Successfully migrated the my-documents repository from a **centralized multi-sit
 ```yaml
 inputs:
   site-name: 'bash-compiler'                    # Required: Site identifier
-  baseURL: 'https://fchastanet.github.io/bash-compiler'  # Optional: Override baseURL
+  baseURL: 'https://devlab.top/bash-compiler'  # Optional: Override baseURL
   checkout-repo: 'fchastanet/bash-compiler'     # Optional: Repo to checkout content from
   config-file: 'bash-compiler.yaml'             # Optional: Config file (default: site-name.yaml)
   content-path: 'content'                        # Optional: Content directory (default: content)
@@ -108,7 +108,7 @@ jobs:
     uses: ./.github/workflows/build-site-action.yml
     with:
       site-name: 'my-documents'
-      baseURL: 'https://fchastanet.github.io/my-documents'
+      baseURL: 'https://devlab.top/my-documents'
     permissions:
       contents: read
       pages: write
@@ -273,7 +273,7 @@ module:
     - path: github.com/google/docsy
     - path: github.com/google/docsy/dependencies
 
-baseURL: https://fchastanet.github.io/bash-compiler
+baseURL: https://devlab.top/bash-compiler
 title: Bash Compiler Documentation
 
 params:
@@ -311,7 +311,7 @@ jobs:
     uses: fchastanet/my-documents/.github/workflows/build-site-action.yml@master
     with:
       site-name: 'bash-compiler'
-      baseURL: 'https://fchastanet.github.io/bash-compiler'
+      baseURL: 'https://devlab.top/bash-compiler'
       checkout-repo: 'fchastanet/bash-compiler'
     permissions:
       contents: read

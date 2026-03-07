@@ -545,11 +545,11 @@ matrix:
   site:
     - name: my-documents
       repo: fchastanet/my-documents
-      baseURL: https://fchastanet.github.io/my-documents
+      baseURL: https://devlab.top/my-documents
       self: true
     - name: bash-compiler
       repo: fchastanet/bash-compiler
-      baseURL: https://fchastanet.github.io/bash-compiler
+      baseURL: https://devlab.top/bash-compiler
       self: false
     # ... other sites
 ```
@@ -610,11 +610,11 @@ matrix:
 
 **Result URLs:**
 
-- <https://fchastanet.github.io/my-documents/>
-- <https://fchastanet.github.io/bash-compiler/>
-- <https://fchastanet.github.io/bash-tools/>
-- <https://fchastanet.github.io/bash-tools-framework/>
-- <https://fchastanet.github.io/bash-dev-env/>
+- <https://devlab.top/my-documents/>
+- <https://devlab.top/bash-compiler/>
+- <https://devlab.top/bash-tools/>
+- <https://devlab.top/bash-tools-framework/>
+- <https://devlab.top/bash-dev-env/>
 
 ### 3.6. Trigger Mechanism
 

@@ -42,7 +42,7 @@ Refactored the codebase to follow a **script-driven approach** where:
 ```bash
 ./merge-configs.sh configs/_base.yaml configs/bash-compiler.yaml \
   build/bash-compiler/hugo.yaml \
-  "https://fchastanet.github.io/bash-compiler"
+  "https://devlab.top/bash-compiler"
 ```
 
 **Benefits:**
@@ -83,7 +83,7 @@ Refactored the codebase to follow a **script-driven approach** where:
 #### For Orchestrator (my-documents)
 ```bash
 ./prepare-build.sh my-documents true orchestrator . orchestrator \
-  "https://fchastanet.github.io/my-documents"
+  "https://devlab.top/my-documents"
 ```
 - Merges base + my-documents specific config
 - Sets output directory to orchestrator root
@@ -92,7 +92,7 @@ Refactored the codebase to follow a **script-driven approach** where:
 ```bash
 ./prepare-build.sh bash-compiler false orchestrator sites/bash-compiler \
   build/bash-compiler \
-  "https://fchastanet.github.io/bash-compiler"
+  "https://devlab.top/bash-compiler"
 ```
 - Copies shared resources from orchestrator
 - Copies site content and static files
@@ -147,7 +147,7 @@ Refactored the codebase to follow a **script-driven approach** where:
 **Example:**
 ```bash
 ./build-hugo.sh orchestrator my-documents \
-  "https://fchastanet.github.io/my-documents"
+  "https://devlab.top/my-documents"
 ```
 
 **Benefits:**

@@ -87,7 +87,7 @@ Create `configs/site-config.yaml`:
 ```yaml
 # Site-specific configuration for [repo-name]
 title: [Repo Name] Documentation
-baseURL: https://fchastanet.github.io/[repo-name]/
+baseURL: https://devlab.top/[repo-name]/
 
 params:
   description: '[Repo Name] - [Brief description]'
@@ -161,7 +161,7 @@ jobs:
     uses: fchastanet/my-documents/.github/workflows/build-site-action.yml@master
     with:
       site-name: '[repo-name]'
-      baseURL: 'https://fchastanet.github.io/[repo-name]'
+      baseURL: 'https://devlab.top/[repo-name]'
       checkout-repo: 'fchastanet/[repo-name]'
     permissions:
       contents: read
@@ -249,7 +249,7 @@ Check Actions tab in repository - build workflow should complete successfully.
 Verify GitHub Pages:
 - Settings → Pages
 - Check deployment status
-- URL: `https://fchastanet.github.io/[repo-name]/`
+- URL: `https://devlab.top/[repo-name]/`
 
 Test deployed site:
 - Navigate through all sections

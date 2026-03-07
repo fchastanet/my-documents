@@ -2,8 +2,8 @@
 # Prepare build directory for a site
 # Handles both orchestrator (my-documents) and dependent site builds
 # Usage: ./prepare-build.sh SITE_NAME ORCHESTRATOR_DIR SOURCE_DIR OUTPUT_DIR [BASE_URL]
-# Example: ./prepare-build.sh my-documents orchestrator . . "https://fchastanet.github.io/my-documents"
-# Example: ./prepare-build.sh bash-compiler orchestrator sites/bash-compiler build/bash-compiler "https://fchastanet.github.io/bash-compiler"
+# Example: ./prepare-build.sh my-documents orchestrator . . "https://devlab.top/my-documents"
+# Example: ./prepare-build.sh bash-compiler orchestrator sites/bash-compiler build/bash-compiler "https://devlab.top/bash-compiler"
 
 # shellcheck source=.github/scripts/common.sh
 source "$(dirname "$0")/common.sh"
@@ -77,7 +77,7 @@ if [[ "${SITE_NAME}" == "fchastanet.github.io" ]]; then
   echo "Disallow:">> "$OUTPUT_DIR/public/robots.txt"
   for i in "${sites[@]}"; do
     echo "  Adding sitemap for $i..."
-    echo "Sitemap: https://fchastanet.github.io/${i}sitemap.xml">> "$OUTPUT_DIR/public/robots.txt"
+    echo "Sitemap: https://devlab.top/${i}sitemap.xml">> "$OUTPUT_DIR/public/robots.txt"
   done
 fi
 

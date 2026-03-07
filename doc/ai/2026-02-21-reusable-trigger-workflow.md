@@ -94,7 +94,7 @@ repositories to trigger centralized documentation builds in my-documents, with t
 | `target_org`        | Organization hosting orchestrator         | `fchastanet`                   |
 | `target_repo`       | Orchestrator repository name              | `my-documents`                 |
 | `event_type`        | Repository dispatch event type            | `trigger-docs-rebuild`         |
-| `docs_url_base`     | Base URL for documentation sites          | `https://fchastanet.github.io` |
+| `docs_url_base`     | Base URL for documentation sites          | `https://devlab.top/` |
 | `workflow_filename` | Workflow to monitor in orchestrator       | `build-all-sites.yml`          |
 | `source_repo`       | Repository triggering the build           | Auto-detected                  |
 

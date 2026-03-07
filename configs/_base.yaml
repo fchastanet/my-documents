@@ -121,16 +121,18 @@ params:
 
   version_menu: Other Projects
   versions:
+    - version: DevLab
+      url: https://devlab.top/
     - version: My Documents
-      url: https://fchastanet.github.io/my-documents/
+      url: https://devlab.top/my-documents/
     - version: Bash Tools Framework
-      url: https://fchastanet.github.io/bash-tools-framework/
+      url: https://devlab.top/bash-tools-framework/
     - version: Bash Tools
-      url: https://fchastanet.github.io/bash-tools/
+      url: https://devlab.top/bash-tools/
     - version: Bash Dev Env
-      url: https://fchastanet.github.io/bash-dev-env/
+      url: https://devlab.top/bash-dev-env/
     - version: Bash Compiler
-      url: https://fchastanet.github.io/bash-compiler/
+      url: https://devlab.top/bash-compiler/
 
   # SEO meta defaults
   meta:
@@ -138,3 +140,10 @@ params:
 
   search:
     indexing_verification: 'GY0eVZfliUo_lbkSnr1r6Y4S2nNVK9W9aUL9eDjvp9E'
+
+menu:
+  main:
+    - name: DevLab
+      url: https://devlab.top
+      weight: 1
+      post: <sup><i class="ps-1 fa-solid fa-up-right-from-square fa-xs" aria-hidden="true"></i></sup>

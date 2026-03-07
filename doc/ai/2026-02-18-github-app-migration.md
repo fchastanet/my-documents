@@ -228,7 +228,7 @@ Run workflow → should succeed without errors
 2. Commit and push to master
 3. Watch Actions → "Build All Documentation Sites"
 4. Verify all sites deploy successfully
-5. Check one of the deployed sites (e.g., https://fchastanet.github.io/bash-compiler/)
+5. Check one of the deployed sites (e.g., https://devlab.top/bash-compiler/)
 
 ## Troubleshooting
 

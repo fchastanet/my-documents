@@ -26,13 +26,13 @@ configurations, layouts, and assets while maintaining their independence.
 
 ### 1.2. Managed Documentation Sites
 
-| Site                 | Repository                      | Live URL                                             |
-| -------------------- | ------------------------------- | ---------------------------------------------------- |
-| My Documents         | fchastanet/my-documents         | <https://fchastanet.github.io/my-documents/>         |
-| Bash Compiler        | fchastanet/bash-compiler        | <https://fchastanet.github.io/bash-compiler/>        |
-| Bash Tools           | fchastanet/bash-tools           | <https://fchastanet.github.io/bash-tools/>           |
-| Bash Tools Framework | fchastanet/bash-tools-framework | <https://fchastanet.github.io/bash-tools-framework/> |
-| Bash Dev Env         | fchastanet/bash-dev-env         | <https://fchastanet.github.io/bash-dev-env/>         |
+| Site                 | Repository                      | Live URL                                   |
+| -------------------- | ------------------------------- | ------------------------------------------ |
+| My Documents         | fchastanet/my-documents         | <https://devlab.top/my-documents/>         |
+| Bash Compiler        | fchastanet/bash-compiler        | <https://devlab.top/bash-compiler/>        |
+| Bash Tools           | fchastanet/bash-tools           | <https://devlab.top/bash-tools/>           |
+| Bash Tools Framework | fchastanet/bash-tools-framework | <https://devlab.top/bash-tools-framework/> |
+| Bash Dev Env         | fchastanet/bash-dev-env         | <https://devlab.top/bash-dev-env/>         |
 
 ## 2. Building Locally
 
@@ -490,7 +490,7 @@ This imports shared configuration including:
 Override base settings for your site:
 
 ```yaml
-baseURL: https://fchastanet.github.io/bash-compiler
+baseURL: https://devlab.top/bash-compiler
 title: Bash Compiler Documentation
 languageCode: en-us
 
@@ -630,7 +630,7 @@ jobs:
     uses: fchastanet/my-documents/.github/workflows/build-site-action.yml@master
     with:
       site-name: bash-compiler
-      base-url: https://fchastanet.github.io/bash-compiler
+      base-url: https://devlab.top/bash-compiler
       checkout-repo: fchastanet/bash-compiler
     permissions:
       contents: read
@@ -659,7 +659,7 @@ These parameters must be provided with `with`:
 ```yaml
 with:
   site-name: bash-compiler
-  base-url: https://fchastanet.github.io/bash-compiler
+  base-url: https://devlab.top/bash-compiler
   checkout-repo: fchastanet/bash-compiler
 ```
 
@@ -1567,7 +1567,7 @@ jobs:
     uses: fchastanet/my-documents/.github/workflows/build-site-action.yml@master
     with:
       site-name: bash-compiler
-      base-url: https://fchastanet.github.io/bash-compiler
+      base-url: https://devlab.top/bash-compiler
       checkout-repo: fchastanet/bash-compiler
 ```
 
@@ -1603,7 +1603,7 @@ jobs:
     uses: ./.github/workflows/build-site-action.yml
     with:
       site-name: my-documents
-      base-url: https://fchastanet.github.io/my-documents
+      base-url: https://devlab.top/my-documents
       checkout-repo: fchastanet/my-documents
 ```
 

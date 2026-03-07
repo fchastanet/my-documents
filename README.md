@@ -2,17 +2,17 @@
 
 <!-- remove -->
 
-> **_NOTE:_** Documentation is best viewed on [github-pages](https://fchastanet.github.io/my-documents/)
+> **_NOTE:_** Documentation is best viewed on [github-pages](https://devlab.top/my-documents/)
 
 <!-- endRemove -->
 
 > **_TIP:_** Checkout related projects of this suite
 >
-> - **[My documents](https://fchastanet.github.io/my-documents/)**
-> - [Bash Tools Framework](https://fchastanet.github.io/bash-tools-framework/)
-> - [Bash Tools](https://fchastanet.github.io/bash-tools/)
-> - [Bash Dev Env](https://fchastanet.github.io/bash-dev-env/)
-> - [Bash Compiler](https://fchastanet.github.io/bash-compiler/)
+> - **[My documents](https://devlab.top/my-documents/)**
+> - [Bash Tools Framework](https://devlab.top/bash-tools-framework/)
+> - [Bash Tools](https://devlab.top/bash-tools/)
+> - [Bash Dev Env](https://devlab.top/bash-dev-env/)
+> - [Bash Compiler](https://devlab.top/bash-compiler/)
 
 <!-- markdownlint-capture -->
 

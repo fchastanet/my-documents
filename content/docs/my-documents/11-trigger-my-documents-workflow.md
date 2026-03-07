@@ -121,15 +121,15 @@ That's it! No secrets to configure, no tokens to manage.
 
 All inputs are optional with sensible defaults:
 
-| Input               | Description                     | Default                        |
-| ------------------- | ------------------------------- | ------------------------------ |
-| `target_org`        | Target organization/user        | `fchastanet`                   |
-| `target_repo`       | Target repository name          | `my-documents`                 |
-| `event_type`        | Repository dispatch event type  | `trigger-docs-rebuild`         |
-| `docs_url_base`     | Documentation URL base          | `https://fchastanet.github.io` |
-| `workflow_filename` | Workflow filename to monitor    | `build-all-sites.yml`          |
-| `source_repo`       | Source repository               | `${{ github.repository }}`     |
-|                     | (auto-detected if not provided) |                                |
+| Input               | Description                     | Default                    |
+| ------------------- | ------------------------------- | -------------------------- |
+| `target_org`        | Target organization/user        | `fchastanet`               |
+| `target_repo`       | Target repository name          | `my-documents`             |
+| `event_type`        | Repository dispatch event type  | `trigger-docs-rebuild`     |
+| `docs_url_base`     | Documentation URL base          | `https://devlab.top/`      |
+| `workflow_filename` | Workflow filename to monitor    | `build-all-sites.yml`      |
+| `source_repo`       | Source repository               | `${{ github.repository }}` |
+|                     | (auto-detected if not provided) |                            |
 
 ### 4.2. Advanced Usage Examples
 
@@ -476,7 +476,7 @@ The workflow provides rich output and summaries:
 ```text
 🔔 Triggering documentation build in fchastanet/my-documents...
 ✅ Successfully triggered docs build in fchastanet/my-documents
-📖 Documentation will be updated at: https://fchastanet.github.io/bash-compiler/
+📖 Documentation will be updated at: https://devlab.top/bash-compiler/
 ℹ️  Note: Documentation deployment may take 2-5 minutes
 ```
 
@@ -493,7 +493,7 @@ The workflow creates a detailed summary visible in the Actions UI:
 **Triggered by:** `fchastanet`
 
 🔗 [View build status](https://github.com/fchastanet/my-documents/actions/workflows/build-all-sites.yml)
-📖 [View documentation](https://fchastanet.github.io/bash-compiler/)
+📖 [View documentation](https://devlab.top/bash-compiler/)
 ```
 
 ## 9. Troubleshooting

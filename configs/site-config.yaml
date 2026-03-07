@@ -1,6 +1,6 @@
 # Site-specific configuration for my-documents
 title: My Documents
-baseURL: https://fchastanet.github.io/my-documents/
+baseURL: https://devlab.top/my-documents/
 
 params:
   description: Collection of my documents on various subjects.
@@ -29,6 +29,10 @@ params:
 
 menu:
   main:
+    - name: Home
+      url: https://devlab.top/my-documents/
+      weight: 5
+      post: <sup><i class="ps-1 fa-solid fa-up-right-from-square fa-xs" aria-hidden="true"></i></sup>
     - name: GitHub
       url: https://github.com/fchastanet/my-documents
       weight: 10

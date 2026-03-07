@@ -31,10 +31,10 @@ on:
         type: string
         default: 'trigger-docs-rebuild'
       docs_url_base:
-        description: 'Documentation URL base (default: https://fchastanet.github.io)'
+        description: 'Documentation URL base (default: https://devlab.top/)'
         required: false
         type: string
-        default: 'https://fchastanet.github.io'
+        default: 'https://devlab.top/'
       workflow_filename:
         description: 'Workflow filename to monitor (default: build-all-sites.yml)'
         required: false

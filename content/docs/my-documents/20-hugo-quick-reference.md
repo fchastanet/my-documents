@@ -302,4 +302,4 @@ ______________________________________________________________________
 - [Hugo Docs](https://gohugo.io/documentation/)
 - [Docsy Theme](https://www.docsy.dev/)
 - [GitHub Repo](https://github.com/fchastanet/my-documents)
-- [Published Site](https://fchastanet.github.io/my-documents/)
+- [Published Site](https://devlab.top/my-documents/)
