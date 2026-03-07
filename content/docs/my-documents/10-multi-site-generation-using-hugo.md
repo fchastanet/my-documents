@@ -545,7 +545,7 @@ matrix:
   site:
     - name: my-documents
       repo: fchastanet/my-documents
-      baseURL: https://devlab.top/my-documents
+      baseURL: https://devlab.top
       self: true
     - name: bash-compiler
       repo: fchastanet/bash-compiler
@@ -610,7 +610,7 @@ matrix:
 
 **Result URLs:**
 
-- <https://devlab.top/my-documents/>
+- <https://devlab.top/>
 - <https://devlab.top/bash-compiler/>
 - <https://devlab.top/bash-tools/>
 - <https://devlab.top/bash-tools-framework/>

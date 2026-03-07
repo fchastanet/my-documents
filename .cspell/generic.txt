@@ -3,10 +3,12 @@ Catmull
 Chastanet
 cpes
 cyclonedx
+devlab
 dracula
 errorf
 fchastanet
 fileignoreconfig
+François
 friday
 frontmatter
 goldmark

@@ -1,7 +1,7 @@
 #!/bin/bash
 # Build site with Hugo
 # Usage: ./build-hugo.sh BUILD_DIR [SITE_NAME] [BASE_URL]
-# Example: ./build-hugo.sh orchestrator my-documents "https://devlab.top/my-documents"
+# Example: ./build-hugo.sh orchestrator my-documents "https://devlab.top"
 
 # shellcheck source=.github/scripts/common.sh
 source "$(dirname "$0")/common.sh"

@@ -83,7 +83,7 @@ Refactored the codebase to follow a **script-driven approach** where:
 #### For Orchestrator (my-documents)
 ```bash
 ./prepare-build.sh my-documents true orchestrator . orchestrator \
-  "https://devlab.top/my-documents"
+  "https://devlab.top"
 ```
 - Merges base + my-documents specific config
 - Sets output directory to orchestrator root
@@ -147,7 +147,7 @@ Refactored the codebase to follow a **script-driven approach** where:
 **Example:**
 ```bash
 ./build-hugo.sh orchestrator my-documents \
-  "https://devlab.top/my-documents"
+  "https://devlab.top"
 ```
 
 **Benefits:**

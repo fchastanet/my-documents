@@ -28,7 +28,7 @@ configurations, layouts, and assets while maintaining their independence.
 
 | Site                 | Repository                      | Live URL                                   |
 | -------------------- | ------------------------------- | ------------------------------------------ |
-| My Documents         | fchastanet/my-documents         | <https://devlab.top/my-documents/>         |
+| My Documents         | fchastanet/my-documents         | <https://devlab.top/>                      |
 | Bash Compiler        | fchastanet/bash-compiler        | <https://devlab.top/bash-compiler/>        |
 | Bash Tools           | fchastanet/bash-tools           | <https://devlab.top/bash-tools/>           |
 | Bash Tools Framework | fchastanet/bash-tools-framework | <https://devlab.top/bash-tools-framework/> |
@@ -1603,7 +1603,7 @@ jobs:
     uses: ./.github/workflows/build-site-action.yml
     with:
       site-name: my-documents
-      base-url: https://devlab.top/my-documents
+      base-url: https://devlab.top
       checkout-repo: fchastanet/my-documents
 ```
 

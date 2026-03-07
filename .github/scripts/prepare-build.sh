@@ -2,7 +2,7 @@
 # Prepare build directory for a site
 # Handles both orchestrator (my-documents) and dependent site builds
 # Usage: ./prepare-build.sh SITE_NAME ORCHESTRATOR_DIR SOURCE_DIR OUTPUT_DIR [BASE_URL]
-# Example: ./prepare-build.sh my-documents orchestrator . . "https://devlab.top/my-documents"
+# Example: ./prepare-build.sh my-documents orchestrator . . "https://devlab.top"
 # Example: ./prepare-build.sh bash-compiler orchestrator sites/bash-compiler build/bash-compiler "https://devlab.top/bash-compiler"
 
 # shellcheck source=.github/scripts/common.sh
@@ -58,15 +58,14 @@ fi
 echo "$OUTPUT_DIR"
 mkdir -p "$OUTPUT_DIR/public"
 
-if [[ "${SITE_NAME}" == "fchastanet.github.io" ]]; then
+if [[ "${SITE_NAME}" == "my-documents" ]]; then
   echo "  Create a .nojekyll file to make google search to recognize the sitemap.xml file"
   touch "$OUTPUT_DIR/public/.nojekyll"
 
   echo "  Create robots.txt to allow sitemap.xml crawling"
-  >"$OUTPUT_DIR/public/robots.txt"
+  echo >"$OUTPUT_DIR/public/robots.txt"
   sites=(
     ""
-    "my-documents/"
     "bash-compiler/"
     "bash-tools-framework/"
     "bash-tools/"
@@ -76,7 +75,7 @@ if [[ "${SITE_NAME}" == "fchastanet.github.io" ]]; then
   echo "User-agent: *">> "$OUTPUT_DIR/public/robots.txt"
   echo "Disallow:">> "$OUTPUT_DIR/public/robots.txt"
   for i in "${sites[@]}"; do
-    echo "  Adding sitemap for $i..."
+    echo "  Adding sitemap for ${i:-DevLab}..."
     echo "Sitemap: https://devlab.top/${i}sitemap.xml">> "$OUTPUT_DIR/public/robots.txt"
   done
 fi

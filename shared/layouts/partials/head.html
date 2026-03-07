@@ -39,6 +39,22 @@
 
     document.documentElement.setAttribute('data-bs-theme', theme);
   })();
+
+  // when page finish to load
+  window.addEventListener('load', function() {
+    // make all external links open in a new tab
+    const links = document.querySelectorAll('a[href]');
+    links.forEach(link => {
+      const url = new URL(link.href, window.location.href);
+      if (url.origin !== window.location.origin && url.origin !== 'https://devlab.top') {
+        link.setAttribute('target', '_blank');
+        link.setAttribute('rel', 'noopener noreferrer');
+      } else {
+        link.setAttribute('target', '_self');
+        link.setAttribute('rel', '');
+      }
+    });
+  });
 </script>
 {{ end -}}
 

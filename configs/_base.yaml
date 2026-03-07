@@ -123,8 +123,6 @@ params:
   versions:
     - version: DevLab
       url: https://devlab.top/
-    - version: My Documents
-      url: https://devlab.top/my-documents/
     - version: Bash Tools Framework
       url: https://devlab.top/bash-tools-framework/
     - version: Bash Tools
@@ -146,4 +144,3 @@ menu:
     - name: DevLab
       url: https://devlab.top
       weight: 1
-      post: <sup><i class="ps-1 fa-solid fa-up-right-from-square fa-xs" aria-hidden="true"></i></sup>

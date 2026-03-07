@@ -1,11 +1,12 @@
 # Site-specific configuration for my-documents
-title: My Documents
-baseURL: https://devlab.top/my-documents/
+title: François Chastanet's DevLab
+baseURL: https://devlab.top/
 
 params:
-  description: Collection of my documents on various subjects.
+  description: |
+    Personal collection of notes, guides, and resources on various topics related to development, testing, and
+    documentation.
   keywords: [bash, best practices, learn, docker, jenkins, documentation]
-
   # Repository configuration
   github_repo: https://github.com/fchastanet/my-documents
   github_project_repo: https://github.com/fchastanet/my-documents
@@ -29,11 +30,9 @@ params:
 
 menu:
   main:
-    - name: Home
-      url: https://devlab.top/my-documents/
+    - name: DevLab
+      url: https://devlab.top/
       weight: 5
-      post: <sup><i class="ps-1 fa-solid fa-up-right-from-square fa-xs" aria-hidden="true"></i></sup>
     - name: GitHub
       url: https://github.com/fchastanet/my-documents
       weight: 10
-      post: <sup><i class="ps-1 fa-solid fa-up-right-from-square fa-xs" aria-hidden="true"></i></sup>

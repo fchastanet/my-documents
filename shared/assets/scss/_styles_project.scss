@@ -102,3 +102,50 @@
     margin: 0.75rem 0;
   }
 }
+
+// Internal link icon (chain link) for internal links: devlab.top or relative paths
+a[href^='/']::after,
+a[href*='devlab.top']:not([target='_blank'])::after,
+a::after {
+  content: '';
+  display: inline-block;
+  width: 0.875em;
+  height: 0.875em;
+  margin-left: 0.25rem;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></g></svg>');
+  background-repeat: no-repeat;
+  background-size: contain;
+  vertical-align: baseline;
+  opacity: 0.7;
+  [data-bs-theme='dark'] & {
+    filter: invert(1);
+  }
+}
+
+// External link icon for external links (not devlab.top)
+a[href^='http']:not([href*='devlab.top'])::after,
+a[target='_blank']::after,
+a.external-link::after {
+  content: '';
+  display: inline-block;
+  width: 0.875em;
+  height: 0.875em;
+  margin-left: 0.25rem;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"><path d="M6.22 8.72a.75.75 0 0 0 1.06 1.06l5.22-5.22v1.69a.75.75 0 0 0 1.5 0v-3.5a.75.75 0 0 0-.75-.75h-3.5a.75.75 0 0 0 0 1.5h1.69L6.22 8.72z"/><path d="M3.5 6.75c0-.69.56-1.25 1.25-1.25H7A.75.75 0 0 0 7 4H4.75A2.75 2.75 0 0 0 2 6.75v4.5A2.75 2.75 0 0 0 4.75 14h4.5A2.75 2.75 0 0 0 12 11.25V9a.75.75 0 0 0-1.5 0v2.25c0 .69-.56 1.25-1.25 1.25h-4.5c-.69 0-1.25-.56-1.25-1.25v-4.5z"/></svg>');
+  background-repeat: no-repeat;
+  background-size: contain;
+  vertical-align: baseline;
+  opacity: 0.7;
+  [data-bs-theme='dark'] & {
+    filter: invert(1);
+  }
+}
+
+// Exclude anchor links (#) and navigation links from getting icons
+.td-sidebar-nav a::after,
+.td-sidebar-menu a::after,
+.td-sidebar-toc a::after,
+a[href^='#']::after {
+  content: none !important;
+  display: none !important;
+}

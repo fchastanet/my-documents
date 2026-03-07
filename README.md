@@ -2,13 +2,13 @@
 
 <!-- remove -->
 
-> **_NOTE:_** Documentation is best viewed on [github-pages](https://devlab.top/my-documents/)
+> **_NOTE:_** Documentation is best viewed on [github-pages](https://devlab.top/)
 
 <!-- endRemove -->
 
 > **_TIP:_** Checkout related projects of this suite
 >
-> - **[My documents](https://devlab.top/my-documents/)**
+> - **[My documents](https://devlab.top/)**
 > - [Bash Tools Framework](https://devlab.top/bash-tools-framework/)
 > - [Bash Tools](https://devlab.top/bash-tools/)
 > - [Bash Dev Env](https://devlab.top/bash-dev-env/)

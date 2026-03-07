@@ -123,12 +123,9 @@ menu:
     - name: GitHub
       url: https://github.com/fchastanet/[repo-name]
       weight: 10
-      post: <sup><i class="ps-1 fa-solid fa-up-right-from-square fa-xs" aria-hidden="true"></i></sup>
     - name: Release Notes
       url: https://github.com/fchastanet/[repo-name]/releases
       weight: 20
-      post: <sup><i class="ps-1 fa-solid fa-up-right-from-square fa-xs" aria-hidden="true"></i></sup>
-
 ```
 
 Create `assets/scss/_variables_project_override.scss`:

@@ -108,7 +108,7 @@ jobs:
     uses: ./.github/workflows/build-site-action.yml
     with:
       site-name: 'my-documents'
-      baseURL: 'https://devlab.top/my-documents'
+      baseURL: 'https://devlab.top'
     permissions:
       contents: read
       pages: write
