@@ -1,26 +1,13 @@
 # My documents
 
-<!-- remove -->
-
-> **_NOTE:_** Documentation is best viewed on [github-pages](https://devlab.top/)
-
-<!-- endRemove -->
-
-> **_TIP:_** Checkout related projects of this suite
->
-> - **[My documents](https://devlab.top/)**
-> - [Bash Tools Framework](https://bash-tools-framework.devlab.top/)
-> - [Bash Tools](https://bash-tools.devlab.top/)
-> - [Bash Dev Env](https://bash-dev-env.devlab.top/)
-> - [Bash Compiler](https://bash-compiler.devlab.top/)
+> **_NOTE:_** **Documentation is best viewed on [https://devlab.top](https://devlab.top/)**
 
 <!-- markdownlint-capture -->
 
 ![GitHubLicense](https://img.shields.io/github/license/fchastanet/my-documents?label=license&style=for-the-badge)
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit)](https://github.com/pre-commit/pre-commit)
-[![CI/CD](https://github.com/fchastanet/my-documents/actions/workflows/main.yml/badge.svg)](https://github.com/fchastanet/my-documents/actions?query=workflow:%22Pre-commit+run%22+branch:master)
-[![Hugo Build & Deploy](https://github.com/fchastanet/my-documents/actions/workflows/hugo-build-deploy.yml/badge.svg)](https://github.com/fchastanet/my-documents/actions?query=workflow:%22Deploy+Hugo%22+branch:master)
-[![ProjectStatus](http://opensource.box.com/badges/active.svg)](http://opensource.box.com/badges "Project Status")
+[![CI/CD](https://github.com/fchastanet/my-documents/actions/workflows/main.yml/badge.svg)](https://github.com/fchastanet/my-documents/actions/workflows/main.yml?query=branch%3Amaster)
+[![Project status](https://opensource.box.com/badges/active.svg)](http://opensource.box.com/badges "Project status")
 [![DeepSource](https://deepsource.io/gh/fchastanet/my-documents.svg/?label=active+issues&show_trend=true)](https://deepsource.io/gh/fchastanet/my-documents/?ref=repository-badge "DeepSource active issues")
 [![DeepSource](https://deepsource.io/gh/fchastanet/my-documents.svg/?label=resolved+issues&show_trend=true)](https://deepsource.io/gh/fchastanet/my-documents/?ref=repository-badge "DeepSource resolved issues")
 
@@ -37,30 +24,40 @@
 
 <!--TOC-->
 
+A personal collection of guides and resources on software development, testing, and documentation, organized by topic.
+
+> **_TIP:_** Checkout related projects of this suite
+>
+> - **[My documents](https://devlab.top/)**
+> - [Bash Tools Framework](https://bash-tools-framework.devlab.top/)
+> - [Bash Tools](https://bash-tools.devlab.top/)
+> - [Bash Dev Env](https://bash-dev-env.devlab.top/)
+> - [Bash Compiler](https://bash-compiler.devlab.top/)
+
 ## 1. Documentation Content
 
 ### 1.1. Bash scripts
 
-- [Basic best practices](/docs/bash-scripts/00-basic-best-practices/)
-- [Linux best practices](/docs/bash-scripts/10-linux-commands-best-practices/)
-- [Bats best practices](/docs/bash-scripts/20-bats-best-practices/)
+- [Basic best practices](https://devlab.top/docs/bash-scripts/basic-best-practices/)
+- [Linux best practices](https://devlab.top/docs/bash-scripts/linux-commands-best-practices/)
+- [Bats best practices](https://devlab.top/docs/bash-scripts/bats-best-practices/)
 
 ### 1.2. HowTos
 
-- [How to write a Jenkinsfile](/docs/howtos/howto-write-jenkinsfile/)
-- [How to write a Dockerfile](/docs/howtos/howto-write-dockerfile/)
-- [How to write a docker-compose.yml file](/docs/howtos/howto-write-docker-compose/)
-- [Saml2Aws](/docs/howtos/saml2aws/)
+- [How to write a Jenkinsfile](https://devlab.top/docs/howtos/howto-write-jenkinsfile/)
+- [How to write a Dockerfile](https://devlab.top/docs/howtos/howto-write-dockerfile/)
+- [How to write a docker-compose.yml file](https://devlab.top/docs/howtos/howto-write-docker-compose/)
+- [Saml2Aws](https://devlab.top/docs/howtos/saml2aws/)
 
 ### 1.3. Lists
 
-- [Test](/docs/lists/test/)
-- [Web](/docs/lists/web/)
+- [Test](https://devlab.top/docs/lists/test/)
+- [Web](https://devlab.top/docs/lists/web/)
 
 ## 2. Technical Architecture Summary
 
 This section summarizes the orchestrator's technical architecture. For full details, see
-[Technical Architecture](/content/docs/my-documents/technical-architecture.md).
+[Technical Architecture](https://devlab.top/docs/my-documents/01-technical-architecture/).
 
 - Centralized orchestrator builds and deploys five documentation sites using Hugo and Docsy.
 - Sites managed: my-documents, bash-compiler, bash-tools, bash-tools-framework, bash-dev-env.
@@ -119,7 +116,8 @@ jobs:
 
 For detailed documentation including advanced usage, troubleshooting, and migration guide:
 
-**📖 [Trigger My-Documents Workflow Documentation](content/docs/my-documents/trigger-my-documents-workflow.md)**
+**📖
+[Trigger My-Documents Workflow Documentation](https://devlab.top/docs/my-documents/11-trigger-my-documents-workflow/)**
 
 Topics covered:
 
