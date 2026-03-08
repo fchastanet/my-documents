@@ -1,7 +1,10 @@
-{{/* Custom layout for docs sections that includes the articles list partial */}}
-{{ define "main" }}
+{{/* overridden from Docsy from
+https://github.com/google/docsy/blob/b219dab55d72a43cacab180aedd0d80c502f03ab/layouts/_td-content.html - moved -
+description to article meta section and added lead class for better styling */ -}}
+{{- partial "backup-notice.html" . -}}
+{{ $backup := .Params.backup -}}
 <div class="td-content">
-  <h1>{{ .Title }}</h1>
+  <h1>{{ if $backup }}Archive of: {{ end }}{{ .Title }}</h1>
   <header class="article-meta">
     <div class="article-meta-item article-meta-created">
       <span class="article-meta-label">Summary:</span>
@@ -14,14 +17,14 @@
       {{ end -}}
     </div>
   </header>
-  {{ .Content }}
-  {{ partial "articles-list.html" . }}
+  {{ .Render "_td-content-after-header" -}}
+  {{ .Content -}}
   {{ partial "feedback.html" . -}}
   {{ if (.Site.Config.Services.Disqus.Shortname) -}}
     <br />
     {{- partial "disqus-comment.html" . -}}
   {{ end -}}
-  {{ partial "giscus-comments.html" . -}}
+  {{ partial "giscus-comments.html" . }}
   {{ partial "page-meta-lastmod.html" . }}
 </div>
-{{ end }}
+{{/**/ -}}

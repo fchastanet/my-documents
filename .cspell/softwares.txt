@@ -11,6 +11,7 @@ Docsy
 dotnet
 dpkg
 firefox
+giscus
 github
 gitleaks
 gpgsign

@@ -122,6 +122,10 @@ a::after {
   }
 }
 
+#comments {
+  margin-top: 2rem;
+}
+
 // External link icon for external links (not devlab.top)
 a[href^='http']:not([href*='devlab.top'])::after,
 a[target='_blank']::after,

@@ -1,4 +1,7 @@
-{{/* List all articles in the current section as a table, sorted by lastUpdated date (most recent first) */}}
+{{/*
+  List all articles in the current section as a table,
+  sorted by lastUpdated date (most recent first)
+*/}}
 {{ $section := .CurrentSection }}
 {{ if and $section (ne $section.Kind "home") }}
   {{/* Get all pages in the current section, excluding the section index page itself */}}

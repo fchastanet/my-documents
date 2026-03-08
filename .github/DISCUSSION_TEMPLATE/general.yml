@@ -1,0 +1,18 @@
+title: '[Comment] '
+labels: ['Comment']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please use this template for general questions, feedback, and discussions about the project.
+        For specific bug reports or feature requests, please use the appropriate issue templates.
+
+        **Note:** If you have a question about how to use the project or need help with something,
+        please ask in the [Q&A category](https://github.com/fchastanet/my-documents/discussions/categories/q-a).
+  - type: input
+    id: page
+    attributes:
+      label: page reference
+      description: |
+        "Indicate here if the question or feedback is related to a specific page or section of the documentation (e.g.,
+        'Issue with Docker section' or 'Question about Jenkins best practices')."

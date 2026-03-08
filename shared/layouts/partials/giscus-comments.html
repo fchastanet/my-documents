@@ -1,0 +1,22 @@
+{{ if .Site.Params.giscus.repo }}
+<div id="comments">
+<script
+  src="https://giscus.app/client.js"
+  data-repo="{{ .Site.Params.giscus.repo }}"
+  data-repo-id="{{ .Site.Params.giscus.repo_id }}"
+  data-category="{{ default "General" .Site.Params.giscus.category }}"
+  data-category-id="{{ .Site.Params.giscus.category_id }}"
+  data-mapping="{{ default "url" .Site.Params.giscus.mapping }}"
+  data-strict="0"
+  data-reactions-enabled="{{ default "1" .Site.Params.giscus.data_reactions }}"
+  data-emit-metadata="0"
+  data-input-position="{{ default "top" .Site.Params.giscus.data_input_position }}"
+  data-theme="{{ default "preferred_color_scheme" .Site.Params.giscus.theme }}"
+  data-lang="en"
+  data-loading="lazy"
+  crossorigin="anonymous"
+  async
+></script>
+</div>
+Or, if you want, you can alternatively use the <a href="https://github.com/fchastanet/my-documents/discussions/categories/q-a">GitHub discussion Q&amp;A</a> for feedback and questions.
+{{ end }}

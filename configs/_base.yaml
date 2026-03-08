@@ -139,6 +139,21 @@ params:
   search:
     indexing_verification: 'GY0eVZfliUo_lbkSnr1r6Y4S2nNVK9W9aUL9eDjvp9E'
 
+  giscus:
+    repo: fchastanet/my-documents
+    repo_id: R_kgDOJz8eNg
+    category: General
+    category_id: DIC_kwDOJz8eNs4C38d1
+    mapping: 'url'
+    theme: 'dark'
+    data_reactions: '1'
+    data_input_position: 'top'
+    strict: '0'
+    emit_metadata: '0'
+    lang: 'en'
+    loading: 'lazy'
+    crossorigin: 'anonymous'
+
 menu:
   main:
     - name: DevLab
