@@ -39,7 +39,7 @@ Added `{{< articles-list >}}` shortcode to all `_index.md` files in:
 - `/content/docs/howtos/_index.md`
 - `/content/docs/lists/_index.md`
 - `/content/docs/brainstorming/_index.md`
-- `/content/docs/ia/_index.md`
+- `/content/docs/ai/_index.md`
 - `/content/docs/my-documents/_index.md`
 - `/content/docs/other-projects/_index.md`
 - `/content/docs/howtos/howto-write-jenkinsfile/_index.md`
