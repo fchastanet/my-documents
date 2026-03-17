@@ -59,8 +59,9 @@
 {{ end -}}
 
 {{ range .AlternativeOutputFormats -}}
-<link rel="{{ .Rel }}" type="{{ .MediaType.Type }}" href="{{ .Permalink | safeURL }}">
+<link rel="{{ .Rel }}" type="{{ .MediaType.Type }}" href="{{ .Permalink | safeURL }}" />
 {{ end -}}
+<link rel="canonical" href="{{ .Permalink | safeURL }}" />
 
 {{ $outputFormat := partial "outputformat.html" . -}}
 {{ $backup := .Params.backup -}}
@@ -69,9 +70,9 @@
   (ne $outputFormat "print")
   (ne .Site.Language.Lang "xx")
   (not $backup) -}}
-<meta name="robots" content="index, follow">
+<meta name="robots" content="index, follow" />
 {{ else -}}
-<meta name="robots" content="noindex, noarchive, nocache, nofollow, nosnippet, notranslate, noimageindex">
+<meta name="robots" content="noindex, noarchive, nocache, nofollow, nosnippet, notranslate, noimageindex" />
 {{ end -}}
 
 {{ partialCached "favicons.html" . }}
@@ -83,7 +84,7 @@
     {{ .Site.Title -}}
   {{ end -}}
 </title>
-<meta name="description" content="{{ partial "page-description.html" . }}">
+<meta name="description" content="{{ partial "page-description.html" . }}" />
 {{ partial "opengraph.html" . -}}
 {{ partial "schema.html" . -}}
 {{ partial "twitter_cards.html" . -}}

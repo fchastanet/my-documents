@@ -15,6 +15,7 @@
     "*.puml": "default",
     "*.html": "default"
   },
+  "files.trimTrailingWhitespace": true,
   "[gohtml]": {
     "editor.defaultFormatter": "golang.go"
   },
