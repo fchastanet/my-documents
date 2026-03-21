@@ -3,6 +3,20 @@ default_install_hook_types: [pre-commit, pre-push]
 default_stages: [pre-commit, manual]
 minimum_pre_commit_version: 3.5.0
 repos:
+  - repo: https://github.com/sudosubin/pre-commit-image
+    rev: v0.1.2
+    hooks:
+      # resize image to max resolution of 800x600
+      - id: image
+        args: [--max-width, "1200", --max-height, "1200"]
+        files: \.(avif|heic|heif|jpeg|jpg|png|webp)$
+
+  - repo: https://github.com/oxipng/oxipng
+    rev: v10.1.0
+    hooks:
+      - id: oxipng
+        args: ["-o", "4", "--strip", "safe", "--alpha"]
+
   - repo: https://github.com/executablebooks/mdformat
     # Do this before other tools "fixing" the line endings
     rev: 0.7.21
@@ -108,6 +122,12 @@ repos:
       - id: check-xml
       - id: check-yaml
       - id: check-added-large-files
+        files: \.(avif|heic|heif|jpeg|jpg|png|webp)$
+        args: [--maxkb=1024, --enforce-all]
+      - id: check-added-large-files
+        # check for non image files larger than 100KB
+        args: [--maxkb=128]
+        exclude: \.(avif|heic|heif|jpeg|jpg|png|webp)$
       - id: forbid-new-submodules
       - id: check-json
         exclude: ^.vscode/.*$
