@@ -61,7 +61,6 @@ markup:
 
 # Outputs configuration for SEO
 outputs:
-  home: [HTML, RSS, print, JSON]
   section: [HTML, RSS, print]
 
 # Taxonomies for better content organization
