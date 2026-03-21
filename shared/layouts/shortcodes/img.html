@@ -1,6 +1,8 @@
 {{- $src := .Get "src" -}}
 {{- $alt := .Get "alt" | default "" -}}
 {{- $title := .Get "title" | default $alt -}}
+{{- $width := .Get "width" -}}
+{{- $height := .Get "height" -}}
 
 {{- /* Handle different path types */ -}}
 {{- if not (hasPrefix $src "http") -}}
@@ -18,4 +20,8 @@
   {{- $src = printf "%s%s" $baseURL $src -}}
 {{- end -}}
 
-<img src="{{ $src }}" alt="{{ $alt }}"{{ with $title }} title="{{ . }}"{{ end }} loading="lazy">
+<img src="{{ $src }}" alt="{{ $alt }}"
+{{ with $title }} title="{{ . }}"{{ end }}
+{{ with $width }} width="{{ . }}"{{ end }}
+{{ with $height }} height="{{  . }}"{{ end }}
+loading="lazy">
