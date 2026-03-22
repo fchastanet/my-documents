@@ -30,7 +30,9 @@
     "**/*/svg",
     "TODO.md",
     "doc/ai/**",
-    "static/**"
+    "static/**",
+    "content/disavow.txt",
+    "**/*.svg"
   ],
   "ignoreRegExpList": ["urls", "packages", "markdownToc"],
   "patterns": [
@@ -67,6 +69,11 @@
       "name": "softwares",
       "path": ".cspell/softwares.txt",
       "addWords": true
+    },
+    {
+      "name": "marp",
+      "path": ".cspell/marp.txt",
+      "addWords": true
     }
   ],
   "dictionaries": ["generic", "softwares"],
@@ -74,6 +81,10 @@
     {
       "filename": ["**/*.md", "content/**"],
       "dictionaries": ["documentation", "myBash"]
+    },
+    {
+      "filename": ["marp/**/*.md", "marp/**/*.mmd"],
+      "dictionaries": ["marp"]
     },
     {
       "filename": ["**/*.sh", "Makefile"],

@@ -1,4 +1,5 @@
 actionlint
+canonify
 Catmull
 Chastanet
 cpes

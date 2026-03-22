@@ -58,7 +58,7 @@ echo -e "${BLUE}  Generating PPTX files...${NC}"
 # Verify outputs were created by checking each source file has corresponding outputs
 missing_files=0
 while IFS= read -r -d '' marp_file; do
-  relative_path="${marp_file#${MARP_DIR}/}"
+  relative_path="${marp_file#"${MARP_DIR}/"}"
   base_name="$(basename "$relative_path" .md)"
   dir_name="$(dirname "$relative_path")"
 

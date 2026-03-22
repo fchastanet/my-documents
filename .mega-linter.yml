@@ -122,7 +122,8 @@ MARKDOWN_MARKDOWNLINT_FILTER_REGEX_EXCLUDE: |
     ^pages/bashDoc|
     ^pages/tests|
     ^doc/guides/Options/generate.*\.md$|
-    ^doc/ai/
+    ^doc/ai/|
+    ^marp/
   )
 
 SPELL_CSPELL_CONFIG_FILE: cspell.json

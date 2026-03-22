@@ -2,7 +2,7 @@
 title: 'Alternatives to Innovation Week: Engaging Team Activities for Continuous Improvement'
 description: A guide to various team activities that foster innovation and continuous improvement, providing alternatives to traditional Innovation Week events.
 categories: [Work]
-tags: [work, innovation, team-building, continuous-improvement, hackathon, sprint, workshop]
+tags: [work, innovation, team-building, continuous-improvement, Hackathon, sprint, workshop]
 weight: 20
 creationDate: '2026-03-21'
 lastUpdated: '2026-03-22'
@@ -74,7 +74,7 @@ improvement within teams. Here are some engaging activities that can be implemen
 element.
 
 **Detail:** Hackathons are typically 1-3 day intensive events where participants form teams to work on innovative ideas
-from scratch. Unlike Innovation Week, hackathons are usually more competitive with judging and prizes involved. They can
+from scratch. Unlike Innovation Week, Hackathons are usually more competitive with judging and prizes involved. They can
 be themed (e.g., "AI integration," "customer experience improvement") or open-ended. Teams pitch ideas at the start,
 form around the most compelling concepts, and race to create a working prototype or proof of concept by the deadline.
 
@@ -101,12 +101,12 @@ to production. The competitive aspect can be motivating for some but stressful f
 
 **Alternative Ways to Do It:**
 
-1. **Micro-Hackathons (Half-Day Sprints):** Run 4-hour focused hackathons during regular work hours, perhaps monthly.
+1. **Micro-Hackathons (Half-Day Sprints):** Run 4-hour focused Hackathons during regular work hours, perhaps monthly.
    Teams work on small, well-scoped challenges ("Fix our slowest API endpoint," "Improve error messages in module X").
    Less exhausting than multi-day events, easier to schedule, allows more frequent innovation cycles, and produces more
    immediately actionable results. Lower stakes make it more inclusive.
 
-2. **Async Hackathon (Week-Long, Part-Time):** Spread the hackathon across a full week where participants dedicate 2-3
+2. **Async Hackathon (Week-Long, Part-Time):** Spread the Hackathon across a full week where participants dedicate 2-3
    hours daily instead of intensive full days. Teams coordinate in different timezones, document progress
    asynchronously, and demo at week's end. This accommodates different work styles, allows for deeper thinking between
    sessions, reduces burnout, and is more inclusive for those with caregiving responsibilities or who don't thrive under
@@ -145,7 +145,7 @@ sustainable long-term impact.
 
 - Requires careful planning to balance skills.
 - May slow down delivery if team members are unfamiliar with each other.
-- Not as "fun" or creative as a hackathon.
+- Not as "fun" or creative as a Hackathon.
 - Needs strong facilitation to prevent confusion.
 - May face resistance from teams comfortable with their routines.
 
@@ -178,7 +178,7 @@ external training.
 What makes this different from Innovation Week is the absence of pressure to produce deliverables. There's no demo at
 the end, no competition, and no expectation that you'll ship something. Instead, the goal is to upskill the team, share
 tribal knowledge, and expose everyone to tools and techniques they might not encounter in their daily work. This makes
-it more inclusive for junior team members and those who find hackathon-style events intimidating.
+it more inclusive for junior team members and those who find Hackathon-style events intimidating.
 
 The format can be structured (scheduled sessions) or unstructured (open space for people to teach what they want), but
 it requires good facilitation to ensure engagement and prevent it from becoming passive lecture time.
