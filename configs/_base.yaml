@@ -9,6 +9,9 @@ defaultContentLanguageInSubdir: false
 enableRobotsTXT: false
 enableGitInfo: true
 
+# URL settings
+canonifyURLs: true
+
 # Syntax highlighting
 pygmentsCodeFences: true
 pygmentsUseClasses: false
