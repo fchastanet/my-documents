@@ -1,0 +1,7 @@
+[✨feat]\[checkout\]: add discount code validation
+
+- Validate format before submission
+- Return meaningful error messages
+- Prevent duplicate discount applications
+
+Fixes #1234

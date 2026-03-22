@@ -11,7 +11,7 @@ GREEN := \033[0;32m
 YELLOW := \033[0;33m
 NC := \033[0m # No Color
 
-.PHONY: help install install-hugo install-yq clean link-repos unlink-repos build-all build-site start build test-all
+.PHONY: help install install-hugo install-yq clean link-repos unlink-repos build-all build-site start build test-all build-marp clean-marp
 
 # Default target
 help:
@@ -33,6 +33,10 @@ help:
 	@echo "  make start         - Start Hugo dev server (my-documents only)"
 	@echo "  make build         - Build my-documents site"
 	@echo "  make clean         - Remove build artifacts"
+	@echo ""
+	@echo "$(GREEN)Marp Presentations:$(NC)"
+	@echo "  make build-marp    - Convert Marp presentations to HTML and PPTX"
+	@echo "  make clean-marp    - Remove generated Marp files"
 	@echo ""
 	@echo "$(YELLOW)Note:$(NC) For multi-site testing, clone other repos to ../[repo-name]/"
 
@@ -79,9 +83,10 @@ test-all: build-all
 # Build my-documents only
 build:
 	@BUILD=1 $(SCRIPT_DIR)/build-site.sh . my-documents build
+	@$(MAKE) build-marp
 
 # Start Hugo dev server
-start:
+start: build-marp
 	@echo "$(BLUE)Starting Hugo dev server...$(NC)"
 	rm -Rf $(BUILD_DIR)/my-documents
 	mkdir -p $(BUILD_DIR)/my-documents
@@ -95,7 +100,17 @@ start-site: build-site
 	cd build/$(SITE) && hugo server -D
 
 # Clean build artifacts
-clean:
+clean: clean-marp
 	@echo "$(BLUE)Cleaning build artifacts...$(NC)"
 	rm -rf $(SITES_DIR) $(BUILD_DIR) resources/_gen hugo.yaml.tmp .hugo_build.lock
 	@echo "$(GREEN)✅ Clean complete$(NC)"
+
+# Build Marp presentations to HTML and PPTX
+build-marp:
+	@$(SCRIPT_DIR)/build-marp.sh marp static/presentations
+
+# Clean generated Marp files
+clean-marp:
+	@echo "$(BLUE)Cleaning Marp presentations...$(NC)"
+	rm -rf static/presentations
+	@echo "$(GREEN)✅ Marp presentations cleaned$(NC)"

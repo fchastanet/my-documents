@@ -1,0 +1,70 @@
+✨🔧(patient): Patient Management Service Refactor (Domain Layer)
+
+Refactor patient management logic in the domain and application layers for improved testability and maintainability.
+Update related tests and documentation.
+
+## ✨ Patient Management Feature (Phase 1)
+
+- Implement patient CRUD operations in domain/application layers
+- Refactor PatientService using dependency injection (custom DI container)
+- Update patient model and validation logic
+
+## 🔧 Packages/Layers Affected
+
+- Migrate all core services and commands to dependency injection using custom DI container.
+
+## 🛠️ Github workflow
+
+- Implement CI/CD pipeline for automated testing and deployment
+- Configure linting and formatting checks
+- Set up issue templates and pull request templates
+
+## 🖥️ UI
+
+- Update patient form to use new validation logic
+
+## 🔧 Drag and Drop Refactoring
+
+- Refactor drag-and-drop logic to use new service structure
+
+## 🛡️ Refactoring
+
+- Refactor data access layer to use repository pattern
+
+## 🐛 Bug Fixes & Technical Debt Reduction
+
+- Fix patient data serialization issue
+
+## 📊 Metrics & Results
+
+- Add logging for patient operations
+
+## 🚀 Benefits
+
+- Improve code maintainability and testability
+
+## 📄 Documentation
+
+- Update patient management section in docs/ai/2025-09-14-PATIENT_MANAGEMENT.md
+
+## 🛡️ Compliance
+
+- Ensure patient data encryption (HIPAA compliance)
+
+## 💥 Breaking Changes
+
+- Remove deprecated patient endpoints; update API consumers
+
+## 🧪 Tests
+
+- Add unit tests for PatientService
+- Update integration tests for patient endpoints
+
+## 📚 Related Docs
+
+- See design spec in docs/specs/patient-management.md
+
+## ✅ Reviewer Checklist
+
+- [ ] Migration steps documented
+- [ ] New patterns reviewed

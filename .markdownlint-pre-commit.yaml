@@ -1,0 +1,13 @@
+---
+MD007:
+  indent: 2
+MD009/no-trailing-spaces: true
+MD013/line-length: true
+MD013:
+  line_length: 120
+MD025:
+  front_matter_title: ''
+MD026:
+  punctuation: '.,;:!。，；:'
+MD036: false
+MD041: false

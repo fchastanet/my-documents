@@ -29,7 +29,8 @@
     ".env",
     "**/*/svg",
     "TODO.md",
-    "doc/ai/**"
+    "doc/ai/**",
+    "static/**"
   ],
   "ignoreRegExpList": ["urls", "packages", "markdownToc"],
   "patterns": [

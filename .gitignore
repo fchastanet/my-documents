@@ -19,3 +19,5 @@ resources/
 hugo.yaml
 
 .github/skills/fc-learning-slide
+
+**/*.pptx

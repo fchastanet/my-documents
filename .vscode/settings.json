@@ -15,6 +15,11 @@
     "*.puml": "default",
     "*.html": "default"
   },
+  "github.copilot.chat.commitMessageGeneration.instructions": [
+    {
+      "file": ".github/skills/fc-commit-message/SKILL.md"
+    }
+  ],
   "files.trimTrailingWhitespace": true,
   "[gohtml]": {
     "editor.defaultFormatter": "golang.go"

@@ -8,14 +8,14 @@ repos:
     hooks:
       # resize image to max resolution of 800x600
       - id: image
-        args: [--max-width, "1200", --max-height, "1200"]
+        args: [--max-width, '1200', --max-height, '1200']
         files: \.(avif|heic|heif|jpeg|jpg|png|webp)$
 
   - repo: https://github.com/oxipng/oxipng
     rev: v10.1.0
     hooks:
       - id: oxipng
-        args: ["-o", "4", "--strip", "safe", "--alpha"]
+        args: ['-o', '4', '--strip', 'safe', '--alpha']
 
   - repo: https://github.com/executablebooks/mdformat
     # Do this before other tools "fixing" the line endings
@@ -59,7 +59,8 @@ repos:
           (?x)(
             ^\.github/|
             ^doc/ai/|
-            AGENTS\.md
+            AGENTS\.md|
+            ^marp/
           )
 
   - repo: https://github.com/jsh9/markdown-toc-creator
@@ -76,7 +77,8 @@ repos:
           (?x)(
             ^\.github/|
             ^doc/ai/|
-            AGENTS\.md
+            AGENTS\.md|
+            ^marp/
           )
 
   - repo: https://github.com/ComPWA/prettier-pre-commit
@@ -97,7 +99,8 @@ repos:
     rev: v0.48.0
     hooks:
       - id: markdownlint
-        args: [--config=.markdownlint-pre-commit.json, --fix]
+        name: Markdownlint for non-Marp files
+        args: [--config=.markdownlint-pre-commit.yaml, --fix]
         exclude: |
           (?x)(
             ^\.github/|
@@ -105,8 +108,13 @@ repos:
             ^content/docs/bash-scripts/basic-best-practices\.md$^|
             ^content/docs/howtos/saml2aws.md|
             ^content/docs/howtos/howto-write-jenkinsfile/06-annotated-jenkinsfiles--p2\.md$|
-            ^content/docs/howtos/saml2aws.md b/content/docs/howtos/saml2aws.md
+            ^content/docs/howtos/saml2aws.md b/content/docs/howtos/saml2aws.md|
+            ^marp/
           )
+      - id: markdownlint
+        name: Markdownlint for Marp files
+        args: [--config=marp/.markdownlint.yaml, --fix]
+        files: ^marp/.*\.md$
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v6.0.0
@@ -116,7 +124,11 @@ repos:
         args: [--fix=lf]
       - id: fix-byte-order-marker
       - id: end-of-file-fixer
-        exclude: ^.idea/.*$
+        exclude: |
+          (?x)(
+            ^.idea/.*$|
+            \.svg$
+          )
       - id: check-executables-have-shebangs
       - id: check-shebang-scripts-are-executable
       - id: check-xml

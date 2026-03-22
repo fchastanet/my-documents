@@ -1,0 +1,8 @@
+graph LR
+    A[Markdown Files<br/>marp/**/*.md] --> B[build-marp.sh]
+    B --> C[Marp CLI]
+    C --> D[HTML Files<br/>static/presentations/**/*.html]
+    C --> E[PPTX Files<br/>static/presentations/**/*.pptx]
+    D --> F[Hugo Build]
+    E --> F
+    F --> G[Website<br/>gh-pages]
