@@ -17,7 +17,7 @@
   },
   "github.copilot.chat.commitMessageGeneration.instructions": [
     {
-      "file": ".github/skills/fc-commit-message/SKILL.md"
+      "file": "../copilot-prompts/skills/fc-commit-message/SKILL.md"
     }
   ],
   "files.trimTrailingWhitespace": true,

@@ -18,6 +18,4 @@ resources/
 .hugo_build.lock
 hugo.yaml
 
-.github/skills/fc-learning-slide
-
 **/*.pptx

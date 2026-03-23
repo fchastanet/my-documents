@@ -1,3 +1,0 @@
-[💥breaking][auth]: restructure token storage
-
-BREAKING CHANGE: Token now stored in secure memory instead of localStorage. Requires client migration to new auth API.
