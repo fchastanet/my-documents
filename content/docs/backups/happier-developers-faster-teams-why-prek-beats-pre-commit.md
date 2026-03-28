@@ -77,9 +77,9 @@ set -euo pipefail
 INSTALL_RUNS=10   # more runs for install
 RUNTIME_RUNS=5    # fewer runs for runtime
 
-echo “Starting benchmarks...”
+echo "Starting benchmarks..."
 echo
-echo “Tool versions:”
+echo "Tool versions:"
 prek --version || true
 pre-commit --version || true
 echo
