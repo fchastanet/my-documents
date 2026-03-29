@@ -2,3 +2,6 @@
 domain:m.yidianys.top
 domain:kuxv.cn
 domain:seos.vip
+
+# Fake mobile subdomain spam
+domain:m.devlab.top
