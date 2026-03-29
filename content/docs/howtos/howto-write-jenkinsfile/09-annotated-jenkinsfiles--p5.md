@@ -5,8 +5,8 @@ weight: 90
 categories: [Jenkins]
 tags: [jenkins, jenkinsfile, ci-cd]
 date: '2023-07-01T08:00:00+02:00'
-lastmod: '2026-02-17T08:00:00+01:00'
-version: '1.0'
+lastmod: '2026-03-30T00:01:44+02:00'
+version: '1.2'
 ---
 
 ## 1. introduction
@@ -90,8 +90,7 @@ def call(Map args) {
         name: 'instance',
         defaultValue: '1',
         description: '''The instance ID to define which QA instance it should
-        be deployed to (Will only apply if targetEnv is qa). Default is 1 for
-        CK and 01 for Darwin'''
+        be deployed to (Will only apply if targetEnv is qa).'''
       )
 
       booleanParam(
