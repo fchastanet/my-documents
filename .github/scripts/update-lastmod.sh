@@ -1,8 +1,8 @@
 #!/bin/bash
 # Update date and lastmod frontmatter fields in markdown files
 # Usage:
-#   ./update-lastmod.sh                    # Migration mode: update all files in content/
-#   ./update-lastmod.sh file1.md file2.md  # Commit mode: update specific files
+#   ./update-lastmod.sh --init    # Migration mode: update all git-tracked files in content/
+#   ./update-lastmod.sh --commit  # Commit mode: update staged content/*.md files (for pre-commit)
 
 # shellcheck source=.github/scripts/common.sh
 source "$(dirname "$0")/common.sh"
@@ -272,6 +272,31 @@ processMigrationMode() {
   fi
 }
 
+# Check if file has actual content changes (not just metadata)
+# Args: $1 = file path
+# Returns: 0 if file has changes, 1 if no changes
+hasActualChanges() {
+  local file="$1"
+
+  # Check if file is tracked by git
+  if ! git ls-files --error-unmatch "$file" >/dev/null 2>&1; then
+    # New file, not tracked yet - consider it as changed
+    return 0
+  fi
+
+  # Get the diff excluding frontmatter date/lastmod/version lines
+  local diff
+  diff=$(git diff HEAD -- "$file" 2>/dev/null | grep -E "^[+-]" | grep -vE "^[+-](date|lastmod|version):" || true)
+
+  if [[ -n "$diff" ]]; then
+    # Has actual content changes
+    return 0
+  else
+    # No actual changes (only metadata might have changed)
+    return 1
+  fi
+}
+
 # Process a file in commit mode (set current date if fields missing)
 # Args: $1 = file path
 processCommitMode() {
@@ -307,18 +332,28 @@ processCommitMode() {
   local todayDate
   todayDate=$(getTodayDate)
 
-  # Check if lastmod already has today's date
+  # Check 1: Skip if file has no actual content changes (for pre-commit run -a)
+  # Check 2: Skip if lastmod already has today's date (for multiple commits same day)
   local skipUpdate=0
-  if hasFrontmatterField "$frontmatter" "lastmod"; then
+  local skipReason=""
+
+  if ! hasActualChanges "$file"; then
+    skipUpdate=1
+    skipReason="No content changes detected"
+  elif hasFrontmatterField "$frontmatter" "lastmod"; then
     local existingLastmod
     existingLastmod=$(getFrontmatterField "$frontmatter" "lastmod")
     local existingDate
     existingDate=$(getDatePortion "$existingLastmod")
 
     if [[ "$existingDate" == "$todayDate" ]]; then
-      echo -e "${YELLOW}  ⊘ Already updated today, skipping lastmod and version${NC}"
       skipUpdate=1
+      skipReason="Already updated today"
     fi
+  fi
+
+  if [[ $skipUpdate -eq 1 ]]; then
+    echo -e "${YELLOW}  ⊘ $skipReason, skipping lastmod and version${NC}"
   fi
 
   # Remove date, lastmod, and version fields from frontmatter (we'll add them at the end)
@@ -381,26 +416,81 @@ processCommitMode() {
 
 # Main function
 main() {
+  local mode=""
+
+  # Parse arguments
   if [[ $# -eq 0 ]]; then
-    # Migration mode: process all .md files in content/
-    echo -e "${BLUE}Running in migration mode: updating all files in $CONTENT_DIR/${NC}"
+    echo -e "${RED}Error: Mode required. Use --init or --commit${NC}" >&2
+    echo "Usage:" >&2
+    echo "  $0 --init    # Migration mode: process all git-tracked content/*.md files" >&2
+    echo "  $0 --commit  # Commit mode:    process staged content/*.md files" >&2
+    exit 1
+  fi
+
+  case "$1" in
+    --init)
+      mode="init"
+      ;;
+    --commit)
+      mode="commit"
+      ;;
+    *)
+      echo -e "${RED}Error: Unknown mode '$1'. Use --init or --commit${NC}" >&2
+      exit 1
+      ;;
+  esac
+
+  if [[ "$mode" == "init" ]]; then
+    # Migration mode: process all git-tracked .md files in content/
+    echo -e "${BLUE}Running in migration mode: updating git-tracked files in $CONTENT_DIR/${NC}"
 
     local fileCount=0
-    while IFS= read -r -d '' file; do
+    local files=()
+
+    # Get git-tracked files in content/ directory
+    while IFS= read -r file; do
+      if [[ "$file" =~ ^${CONTENT_DIR}/.*\.md$ ]]; then
+        files+=("$file")
+      fi
+    done < <(git ls-files "$CONTENT_DIR/**/*.md" 2>/dev/null)
+
+    if [[ ${#files[@]} -eq 0 ]]; then
+      echo -e "${YELLOW}⊘ No git-tracked markdown files found in $CONTENT_DIR/${NC}"
+      exit 0
+    fi
+
+    for file in "${files[@]}"; do
       processMigrationMode "$file"
       fileCount=$((fileCount + 1))
-    done < <(find "$CONTENT_DIR" -type f -name "*.md" -print0)
-
-    echo -e "${GREEN}✅ Migration complete: processed $fileCount files${NC}"
-  else
-    # Commit mode: process specific files
-    echo -e "${BLUE}Running in commit mode: updating ${#@} file(s)${NC}"
-
-    for file in "$@"; do
-      processCommitMode "$file"
     done
 
-    echo -e "${GREEN}✅ Commit mode complete${NC}"
+    echo -e "${GREEN}✅ Migration complete: processed $fileCount files${NC}"
+
+  elif [[ "$mode" == "commit" ]]; then
+    # Commit mode: process staged content/*.md files
+    echo -e "${BLUE}Running in commit mode: updating staged files in $CONTENT_DIR/${NC}"
+
+    local fileCount=0
+    local files=()
+
+    # Get staged files in content/ directory
+    while IFS= read -r file; do
+      if [[ -n "$file" && "$file" =~ ^${CONTENT_DIR}/.*\.md$ ]]; then
+        files+=("$file")
+      fi
+    done < <(git diff --cached --name-only --diff-filter=ACM 2>/dev/null | grep "^${CONTENT_DIR}/.*\.md$")
+
+    if [[ ${#files[@]} -eq 0 ]]; then
+      echo -e "${YELLOW}⊘ No staged markdown files found in $CONTENT_DIR/${NC}"
+      exit 0
+    fi
+
+    for file in "${files[@]}"; do
+      processCommitMode "$file"
+      fileCount=$((fileCount + 1))
+    done
+
+    echo -e "${GREEN}✅ Commit mode complete: processed $fileCount files${NC}"
   fi
 }
 

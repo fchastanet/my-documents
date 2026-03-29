@@ -85,9 +85,9 @@ Remove symlinks to dependent repositories.
 Update `date`, `lastmod`, and `version` frontmatter fields in markdown files. Integrates with pre-commit hooks to
 automatically manage Hugo frontmatter metadata.
 
-**Two modes of operation:**
+**Two explicit modes:**
 
-1. **Migration mode** (no arguments): Updates **all** `.md` files in `content/` directory
+1. **Migration mode (`--init`)**: Updates all **git-tracked** `.md` files in `content/` directory
    - Migrates `creationDate` → `date`
    - Migrates `lastUpdated` → `lastmod`
    - Removes old field names
@@ -95,23 +95,37 @@ automatically manage Hugo frontmatter metadata.
    - Uses git history for dates if old fields don't exist
    - Places `date`, `lastmod`, and `version` at the **end** of frontmatter
 
-2. **Commit mode** (with file arguments): Updates specific files being committed
+2. **Commit mode (`--commit`)**: Updates specific files that are **staged** in git (for pre-commit hooks)
+   - Automatically detects staged `content/**/*.md` files
    - Adds `date` if missing (current timestamp)
-   - Updates `lastmod` (current timestamp) **only if not already updated today**
-   - Adds `version: "1.0"` if missing, or **increments** existing version (e.g., 1.2 → 1.3)
-     **only if not already updated today**
+   - Updates `lastmod` (current timestamp) **with smart detection**
+   - Increments `version` **with smart detection**
    - Places `date`, `lastmod`, and `version` at the **end** of frontmatter
-   - **Smart update detection**: Skips `lastmod` and `version` updates if `lastmod` already has today's date (prevents
-   repeated updates on multiple commit attempts)
+
+**Smart update detection in commit mode (two complementary checks):**
+
+The script prevents unnecessary updates with two checks:
+
+1. **Date check**: Skip if `lastmod` already has today's date
+   - Prevents repeated updates on multiple commits the same day
+   - Use case: You commit → stage changes → commit again → no update ✓
+
+2. **Git check**: Skip if file has no actual content changes
+   - Prevents updates when running `pre-commit run -a` on unchanged files
+   - Checks git diff to detect real changes vs. reformatting
 
 **Usage:**
 
 ```bash
-# Migration mode: migrate all files
-.github/scripts/update-lastmod.sh
+# Migration mode: migrate all git-tracked files
+.github/scripts/update-lastmod.sh --init
 
-# Commit mode: update specific files (called by pre-commit)
-.github/scripts/update-lastmod.sh content/docs/page1.md content/docs/page2.md
+# Commit mode: process staged content/*.md files (called by pre-commit)
+.github/scripts/update-lastmod.sh --commit
+
+# Error: no mode specified
+.github/scripts/update-lastmod.sh
+# Error: Mode required. Use --init or --commit
 ```
 
 **Date format:**
@@ -131,34 +145,53 @@ automatically manage Hugo frontmatter metadata.
 
 **Pre-commit hook:**
 
-The script is automatically called by pre-commit hooks for any `.md` files in `content/`:
+The script is automatically called by pre-commit hooks for staged `.md` files in `content/`:
 
 ```yaml
 - id: update-lastmod
   name: Update date and lastmod frontmatter
   language: system
   files: ^content/.*\.md$
-  entry: .github/scripts/update-lastmod.sh
+  pass_filenames: false
+  entry: .github/scripts/update-lastmod.sh --commit
   stages: [pre-commit]
 ```
 
-**Smart update behavior in commit mode:**
+**How it works:**
 
-The script prevents unnecessary updates when you commit multiple times on the same day:
+1. Pre-commit detects staged `content/**/*.md` files (via `files:` pattern)
+2. Calls `update-lastmod.sh --commit` (via `entry:`)
+3. Script queries git for actually staged files: `git diff --cached --name-only`
+4. Processes only those staged files with smart detection
+5. Updates are staged automatically for the commit
 
-- **First commit of the day**: Updates `lastmod` and increments `version`
-- **Subsequent commits on same day**: Skips updates (no changes)
-- **Commit on different day**: Updates `lastmod` and increments `version`
+**Smart update behavior:**
 
-This prevents the infinite loop problem where:
-1. You commit → fields updated
-2. You stage changes and commit again → fields would update again (✗)
-3. This would repeat indefinitely
+```
+Scenario 1: First commit of the day with actual changes
+─────────────────────────────────────────────────────
+1. Edit file and commit
+   → ✓ Updating lastmod: 2026-03-29T10:00:00+02:00
+   → ✓ Incrementing version: 1.2 → 1.3
 
-Now with the smart detection:
-1. You commit → fields updated with today's date
-2. You stage changes and commit again → skipped (already updated today) ✓
-3. You can use `git commit --amend` safely ✓
+2. Stage changes and commit again (same day)
+   → ⊘ Already updated today, skipping lastmod and version
+
+3. Use 'git commit --amend' (same day)
+   → ⊘ Already updated today, skipping lastmod and version
+
+Scenario 2: Running pre-commit on all files without changes
+────────────────────────────────────────────────────────────
+pre-commit run -a
+   → ⊘ No content changes detected, skipping lastmod and version
+   (for files without actual changes in git)
+
+Scenario 3: Next day with changes
+──────────────────────────────────
+1. Next day, edit and commit
+   → ✓ Updating lastmod: 2026-03-30T09:15:00+02:00
+   → ✓ Incrementing version: 1.3 → 1.4
+```
 
 **Migration process:**
 
@@ -168,8 +201,8 @@ To migrate existing content from old frontmatter fields:
 # 1. Backup your content (optional)
 git stash
 
-# 2. Run migration on all files
-.github/scripts/update-lastmod.sh
+# 2. Run migration on all git-tracked files
+.github/scripts/update-lastmod.sh --init
 
 # 3. Review changes
 git diff

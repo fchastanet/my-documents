@@ -205,8 +205,9 @@ repos:
         name: Update date and lastmod frontmatter
         language: system
         files: ^content/.*\.md$
-        pass_filenames: true
-        entry: .github/scripts/update-lastmod.sh
+        pass_filenames: false
+        always_run: false
+        entry: .github/scripts/update-lastmod.sh --commit
         stages: [pre-commit]
       - id: build
         name: Build this Hugo site
