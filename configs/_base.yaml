@@ -24,6 +24,11 @@ imaging:
   quality: 75
   anchor: Smart
 
+sitemap:
+  changeFreq: 'monthly'
+  disable: false
+  priority: -1
+
 # Hugo modules - Docsy theme
 module:
   imports:

@@ -4,8 +4,9 @@ linkTitle: Presentations
 description: Interactive presentations and slide decks on various topics
 type: docs
 weight: 30
-creationDate: '2026-03-21'
-lastUpdated: '2026-03-21'
+date: '2026-03-21T08:00:00+01:00'
+lastmod: '2026-03-21T08:00:00+01:00'
+version: '1.0'
 ---
 
 {{% pageinfo %}}

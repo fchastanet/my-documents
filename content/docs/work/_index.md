@@ -1,11 +1,12 @@
 ---
 title: Work
-creationDate: '2026-03-21'
-lastUpdated: '2026-03-21'
 linkTitle: Work
 description: Documentation related to work projects, including guides, best practices, and project-specific information.
 type: docs
 weight: 90
+date: '2026-03-21T08:00:00+01:00'
+lastmod: '2026-03-21T08:00:00+01:00'
+version: '1.0'
 ---
 
 {{% pageinfo %}}

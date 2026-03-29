@@ -1,11 +1,12 @@
 ---
 title: Annotated Jenkinsfiles - Part 1
-creationDate: '2023-07-01'
-lastUpdated: '2026-02-22'
 description: Detailed Jenkinsfile examples with annotations
 weight: 50
 categories: [Jenkins]
 tags: [jenkins, jenkinsfile, ci-cd]
+date: '2023-07-01T08:00:00+02:00'
+lastmod: '2026-02-22T08:00:00+01:00'
+version: '1.0'
 ---
 
 [Pipeline example](https://www.jenkins.io/doc/book/pipeline/#pipeline-example)

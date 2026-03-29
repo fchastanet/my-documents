@@ -1,12 +1,12 @@
 ---
 title: My Documents - Multi repositories Site Generation
 description: Comprehensive documentation of the Hugo migration for multi-site documentation
-creationDate: '2026-02-18'
-lastUpdated: '2026-02-18'
 version: '1.0'
 weight: 10
 categories: [Brainstorming]
 tags: [hugo, docsy, multi-site, documentation, static-site-generator, github-actions, ai-generated]
+date: '2026-02-18T08:00:00+01:00'
+lastmod: '2026-02-18T08:00:00+01:00'
 ---
 
 **Project:** Migration from Docsify to Hugo with Docsy theme for multiple documentation repositories

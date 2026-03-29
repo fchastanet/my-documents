@@ -1,11 +1,12 @@
 ---
 title: Linux Commands Best Practices
-creationDate: '2023-11-09'
-lastUpdated: '2026-02-17'
 description: Best practices for using Linux commands in Bash scripts
 weight: 20
 categories: [Bash]
 tags: [linux, bash, scripts, best-practices]
+date: '2023-11-09T08:00:00+01:00'
+lastmod: '2026-02-17T08:00:00+01:00'
+version: '1.0'
 ---
 
 - [1. some commands default options to use](#1-some-commands-default-options-to-use)

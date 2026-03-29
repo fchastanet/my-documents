@@ -1,11 +1,12 @@
 ---
 title: Bats Testing Framework
-creationDate: '2023-11-09'
-lastUpdated: '2026-02-17'
 description: Best practices for testing Bash scripts with Bats framework
 weight: 30
 categories: [testing]
 tags: [bash, bats, unit-test, scripts, best-practices]
+date: '2023-11-09T08:00:00+01:00'
+lastmod: '2026-02-17T08:00:00+01:00'
+version: '1.0'
 ---
 
 ## 1. use of default temp directory created by bats

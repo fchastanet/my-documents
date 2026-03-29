@@ -4,9 +4,9 @@ description: A quick reference guide for developing and maintaining the Hugo doc
 categories: [Documentation]
 tags: [documentation, github-actions, reusable-workflow, github-app, authentication, secrets-management, ai-generated]
 weight: 20
-creationDate: '2026-03-04'
-lastUpdated: '2026-03-04'
 version: '1.0'
+date: '2026-03-04T08:00:00+01:00'
+lastmod: '2026-03-04T08:00:00+01:00'
 ---
 
 ## 1. Local Development

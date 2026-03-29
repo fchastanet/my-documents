@@ -1,11 +1,12 @@
 ---
 title: Web Tools
-creationDate: '2026-02-17'
-lastUpdated: '2026-02-22'
 description: Reference list of web analysis and OSINT tools
 weight: 20
 categories: [web]
 tags: [web, osint, tools]
+date: '2026-02-17T08:00:00+01:00'
+lastmod: '2026-02-22T08:00:00+01:00'
+version: '1.0'
 ---
 
 ## 1. OSINT tools

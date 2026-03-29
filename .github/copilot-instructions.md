@@ -30,11 +30,11 @@ description: Brief description # Optional, for SEO
 weight: 10                      # Optional, controls order (lower = higher)
 categories: [documentation]     # Optional
 tags: [example]                 # Optional
-creationDate: "2026-02-18"     # Required for new pages
-lastUpdated: "2026-02-22"      # Update on every edit
+date: "2026-02-18T08:00:00+01:00"     # Required for new pages
+lastmod: "2026-02-22T08:00:00+01:00"      # Update on every edit
 version: "1.0"                  # Semantic versioning
 ```
-**AI must update `lastUpdated` on edits, set `creationDate` on new pages.**
+**AI must update `lastmod` on edits, set `date` on new pages.**
 
 ### Spell Checking
 - Custom dictionaries in `.cspell/`
@@ -127,7 +127,7 @@ pre-commit run file-contents-sorter   # Sort dictionary
 
 1. **Shared component changes** (`shared/`, `configs/_base.yaml`) → affects ALL 5 sites, test thoroughly
 2. **Config editing:** Never edit `hugo.yaml` (generated), edit `configs/_base.yaml` or `configs/site-config.yaml`
-3. **Frontmatter updates:** Always update `lastUpdated` field when editing, add `creationDate` when creating new pages
+3. **Frontmatter updates:** Always update `lastmod` field when editing, add `date` when creating new pages
 4. **Spell checking:** Add technical terms to `.cspell/bash.txt`, keep sorted
 5. **Testing:** Use `make start` to test changes locally
 6. **Default branch:** Use `master` (not `main`)

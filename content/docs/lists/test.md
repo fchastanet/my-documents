@@ -1,11 +1,12 @@
 ---
 title: Test
-creationDate: '2024-09-15'
-lastUpdated: '2026-02-17'
 description: Reference list of testing tools and frameworks
 weight: 10
 categories: [testing]
 tags: [testing, tools, frameworks]
+date: '2024-09-15T08:00:00+02:00'
+lastmod: '2026-02-17T08:00:00+01:00'
+version: '1.0'
 ---
 
 ## 1. TestContainers

@@ -8,10 +8,10 @@ backup:
   author: Benito Martin
   authorUrl: https://substack.com/@benitomartin
   originalUrl: https://aiechoes.substack.com/p/happier-developers-faster-teams-why
-  creationDate: 2025-10-09
-creationDate: 2023-03-18
-lastUpdated: 2026-02-27
+  date: 2025-10-09
 version: '1.0'
+date: '2023-03-18T08:00:00+01:00'
+lastmod: '2026-02-27T08:00:00+01:00'
 ---
 
 ## 1. A Rust-powered alternative to pre-commit that scale from small repos to massive projects
@@ -74,8 +74,8 @@ To make the results reproducible, here’s the exact script I used:
 #!/usr/bin/env bash
 set -euo pipefail
 
-INSTALL_RUNS=10   # more runs for install
-RUNTIME_RUNS=5    # fewer runs for runtime
+INSTALL_RUNS=10 # more runs for install
+RUNTIME_RUNS=5  # fewer runs for runtime
 
 echo "Starting benchmarks..."
 echo
@@ -93,13 +93,13 @@ echo
 # --runs:    repeat exactly $INSTALL_RUNS times for each tool
 # Export: results go to install_benchmark.md in Markdown table format.
 
-echo “=== Install benchmark (cold) ===”
+echo "=== Install benchmark (cold) ==="
 hyperfine \
   --runs $INSTALL_RUNS \
-  --prepare ‘prek clean && pre-commit clean && uv cache clean’ \
-  --cleanup ‘prek clean && pre-commit clean && uv cache clean’ \
-  ‘pre-commit install --install-hooks’ \
-  ‘prek install --install-hooks’ \
+  --prepare 'prek clean && pre-commit clean && uv cache clean' \
+  --cleanup 'prek clean && pre-commit clean && uv cache clean' \
+  'pre-commit install --install-hooks' \
+  'prek install --install-hooks' \
   --export-markdown install_benchmark.md
 
 # -------------------------------
@@ -112,20 +112,20 @@ hyperfine \
 # Export: results go to runtime_warm_benchmark.md
 
 echo
-echo “=== Runtime benchmark (warm, steady state) ===”
+echo "=== Runtime benchmark (warm, steady state) ==="
 hyperfine \
   --warmup 3 \
   --runs $RUNTIME_RUNS \
-  --cleanup ‘prek clean && pre-commit clean && uv cache clean’ \
-  ‘pre-commit run --all-files’ \
-  ‘prek run --all-files’ \
+  --cleanup 'prek clean && pre-commit clean && uv cache clean' \
+  'pre-commit run --all-files' \
+  'prek run --all-files' \
   --export-markdown runtime_warm_benchmark.md
 
 echo
-echo “Benchmarks completed.”
-echo “Results saved to:”
-echo “  install_benchmark.md”
-echo “  runtime_warm_benchmark.md”
+echo "Benchmarks completed."
+echo "Results saved to:"
+echo "  install_benchmark.md"
+echo "  runtime_warm_benchmark.md"
 ```
 
 ## 2. Benchmark Results

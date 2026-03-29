@@ -1,11 +1,12 @@
 ---
 title: 'Alpine vs Ubuntu Image: Performance Comparison for Docker Builds'
-creationDate: '2025-03-12'
-lastUpdated: '2026-03-21'
 description: A detailed comparison between Alpine and Ubuntu Docker images, focusing on performance differences in build times and test execution.
 weight: 20
 categories: [Docker]
 tags: [docker, alpine, ubuntu, performance, optimization]
+date: '2025-03-12T08:00:00+01:00'
+lastmod: '2026-03-21T08:00:00+01:00'
+version: '1.0'
 ---
 
 When I was working on a UI project I remarked that unit tests(Jest) were running really slowly on our CI pipeline

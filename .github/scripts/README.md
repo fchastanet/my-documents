@@ -72,6 +72,129 @@ Remove symlinks to dependent repositories.
 .github/scripts/unlink-repos.sh sites bash-compiler bash-tools bash-tools-framework bash-dev-env
 ```
 
+### `update-lastmod.sh`
+
+Update `date`, `lastmod`, and `version` frontmatter fields in markdown files. Integrates with pre-commit hooks to automatically manage Hugo frontmatter metadata.
+
+**Two modes of operation:**
+
+1. **Migration mode** (no arguments): Updates **all** `.md` files in `content/` directory
+   - Migrates `creationDate` → `date`
+   - Migrates `lastUpdated` → `lastmod`
+   - Removes old field names
+   - Adds `version: "1.0"` if version field doesn't exist
+   - Uses git history for dates if old fields don't exist
+   - Places `date`, `lastmod`, and `version` at the **end** of frontmatter
+
+2. **Commit mode** (with file arguments): Updates specific files being committed
+   - Adds `date` if missing (current timestamp)
+   - Updates `lastmod` (current timestamp)
+   - Adds `version: "1.0"` if missing, or **increments** existing version (e.g., 1.2 → 1.3)
+   - Places `date`, `lastmod`, and `version` at the **end** of frontmatter
+
+**Usage:**
+```bash
+# Migration mode: migrate all files
+.github/scripts/update-lastmod.sh
+
+# Commit mode: update specific files (called by pre-commit)
+.github/scripts/update-lastmod.sh content/docs/page1.md content/docs/page2.md
+```
+
+**Date format:**
+- Format: `2023-10-19T08:00:00+02:00` (ISO 8601 with timezone)
+- Timezone: Europe/Paris
+- Default time: 08:00:00 (when only date is available)
+
+**Version increment:**
+- Increments the last number in the version: `1.2` → `1.3`, `2.15` → `2.16`
+- Supports formats: `X.Y` or `X.Y.Z`
+- Example: `1.9` → `1.10`, not `2.0`
+
+**Git integration:**
+- Uses `git log --follow` to find file creation date
+- Uses `git log -1` to find last modification date
+- Falls back to current date if file not in git yet
+
+**Pre-commit hook:**
+
+The script is automatically called by pre-commit hooks for any `.md` files in `content/`:
+
+```yaml
+- id: update-lastmod
+  name: Update date and lastmod frontmatter
+  language: system
+  files: ^content/.*\.md$
+  entry: .github/scripts/update-lastmod.sh
+  stages: [pre-commit]
+```
+
+**Migration process:**
+
+To migrate existing content from old frontmatter fields:
+
+```bash
+# 1. Backup your content (optional)
+git stash
+
+# 2. Run migration on all files
+.github/scripts/update-lastmod.sh
+
+# 3. Review changes
+git diff
+
+# 4. Commit migration
+git add content/
+git commit -m "docs: Migrate frontmatter to Hugo standard date fields"
+```
+
+**Frontmatter transformation:**
+
+Before (old format):
+```yaml
+---
+title: My Page
+description: Page description
+categories: [docs]
+weight: 10
+creationDate: '2026-02-18'
+lastUpdated: '2026-02-22'
+version: '1.2'
+---
+```
+
+After migration:
+```yaml
+---
+title: My Page
+description: Page description
+categories: [docs]
+weight: 10
+date: "2026-02-18T08:00:00+01:00"
+lastmod: "2026-02-22T08:00:00+01:00"
+version: "1.2"
+---
+```
+
+After commit (version incremented):
+```yaml
+---
+title: My Page
+description: Page description
+categories: [docs]
+weight: 10
+date: "2026-02-18T08:00:00+01:00"
+lastmod: "2026-03-29T15:53:17+02:00"
+version: "1.3"
+---
+```
+
+**Hugo date field behavior:**
+
+See Hugo documentation:
+- [Page.Date()](https://gohugo.io/methods/page/date/) - Primary date
+- [Page.Lastmod()](https://gohugo.io/methods/page/lastmod/) - Last modification
+
 ### `build-site.sh`
 
 Build a specific documentation site.

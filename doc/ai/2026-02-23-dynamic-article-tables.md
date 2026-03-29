@@ -8,7 +8,7 @@
 User wanted to display a table of all articles in `_index.md` files for each folder, showing:
 - Title
 - Meta description
-- Date (lastUpdated)
+- Date (lastmod)
 - Articles sorted by date in reverse order (most recent first)
 
 ## Solution Implemented
@@ -19,8 +19,8 @@ Created a Hugo shortcode approach rather than modifying layouts directly, which 
 
 1. **Shortcode: `shared/layouts/shortcodes/articles-list.html`**
    - Displays articles as a Bootstrap table
-   - Sorts by `lastUpdated` parameter in descending order
-   - Falls back to `creationDate` if `lastUpdated` is not available
+   - Sorts by `lastmod` parameter in descending order
+   - Falls back to `date` if `lastmod` is not available
    - Shows title (linked), description, and date columns
 
 2. **Section Layout: `shared/layouts/_default/section.html`**
@@ -44,7 +44,7 @@ Added `{{< articles-list >}}` shortcode to all `_index.md` files in:
 - `/content/docs/other-projects/_index.md`
 - `/content/docs/howtos/howto-write-jenkinsfile/_index.md`
 
-Updated `lastUpdated` field to "2026-02-23" in all modified files.
+Updated `lastmod` field to "2026-02-23" in all modified files.
 
 ## Implementation Details
 
@@ -60,12 +60,12 @@ Updated `lastUpdated` field to "2026-02-23" in all modified files.
 ```go
 {{ $section := .Page.CurrentSection }}
 {{ $articles := (where $section.Pages "Kind" "page") }}
-{{ $sorted := sort $articles "Params.lastUpdated" "desc" }}
+{{ $sorted := sort $articles "Params.lastmod" "desc" }}
 ```
 
 - Filters only page-kind items (excludes section indexes)
-- Sorts by `Params.lastUpdated` in descending order
-- Falls back to `creationDate` if `lastUpdated` is missing
+- Sorts by `Params.lastmod` in descending order
+- Falls back to `Params.date` if `lastmod` is missing
 
 ### Table Styling
 

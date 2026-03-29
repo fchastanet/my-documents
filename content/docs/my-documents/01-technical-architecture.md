@@ -4,9 +4,9 @@ description: Complete technical architecture guide for the Hugo documentation sy
 weight: 01
 categories: [documentation, architecture]
 tags: [hugo, github-actions, docsy, architecture, ai-generated]
-creationDate: '2026-02-18'
-lastUpdated: '2026-02-22'
 version: '1.0'
+date: '2026-02-18T08:00:00+01:00'
+lastmod: '2026-02-22T08:00:00+01:00'
 ---
 
 ## 1. Overview

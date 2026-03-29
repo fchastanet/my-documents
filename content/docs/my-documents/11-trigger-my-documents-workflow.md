@@ -4,9 +4,9 @@ description: Overview of the technical architecture and implementation details o
 categories: [Documentation]
 tags: [documentation, github-actions, reusable-workflow, github-app, authentication, secrets-management, ai-generated]
 weight: 11
-creationDate: '2026-02-21'
-lastUpdated: '2026-02-21'
 version: '1.0'
+date: '2026-02-21T08:00:00+01:00'
+lastmod: '2026-02-21T08:00:00+01:00'
 ---
 
 ## 1. Overview

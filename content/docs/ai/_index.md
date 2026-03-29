@@ -4,8 +4,9 @@ linkTitle: Artificial Intelligence
 description: In-depth tutorials and guides on artificial intelligence topics
 type: docs
 weight: 25
-creationDate: '2026-02-23'
-lastUpdated: '2026-02-23'
+date: '2026-02-23T08:00:00+01:00'
+lastmod: '2026-02-23T08:00:00+01:00'
+version: '1.0'
 ---
 
 {{% pageinfo %}}

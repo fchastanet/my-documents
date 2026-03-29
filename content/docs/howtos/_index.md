@@ -1,11 +1,12 @@
 ---
 title: How-To Guides
-creationDate: '2026-02-17'
-lastUpdated: '2026-02-23'
 linkTitle: HowTos
 description: Step-by-step guides for various technologies
 type: docs
 weight: 20
+date: '2026-02-17T08:00:00+01:00'
+lastmod: '2026-02-23T08:00:00+01:00'
+version: '1.0'
 ---
 
 {{% pageinfo %}}

@@ -1,11 +1,11 @@
 ---
 title: 'Docker Skill: Optimizing Dockerfiles for Performance and Efficiency'
 description: AI Skill for optimizing Dockerfiles, including best practices for reducing image size and improving build performance.
-creationDate: '2026-03-25'
-lastUpdated: '2026-03-25'
 version: '1.0'
 categories: [AI]
 tags: [AI, skills, productivity]
+date: '2026-03-25T08:00:00+01:00'
+lastmod: '2026-03-25T08:00:00+01:00'
 ---
 
 This [AI Docker Skill](https://github.com/fchastanet/copilot-prompts/blob/master/skills/fc-optimize-dockerfile/SKILL.md)

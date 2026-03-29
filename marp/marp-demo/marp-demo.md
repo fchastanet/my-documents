@@ -19,8 +19,8 @@ style: |
     display: block;
     margin: 0 auto;
   }
-creationDate: '2026-03-22'
-lastUpdated: '2026-03-22'
+date: '2026-03-22'
+lastmod: '2026-03-22'
 version: '1.0'
 ---
 

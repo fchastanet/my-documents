@@ -3,8 +3,9 @@ title: Debug Hugo
 linkTitle: Debug Hugo
 type: docs
 tags: [hugo, debugging, templates, ai-generated]
-creationDate: '2026-03-08'
-lastUpdated: '2026-03-08'
+date: '2026-03-08T08:00:00+01:00'
+lastmod: '2026-03-08T08:00:00+01:00'
+version: '1.0'
 ---
 
 <!--TOC-->

@@ -1,11 +1,12 @@
 ---
 title: Jenkins Recipes and Tips
-creationDate: '2023-07-01'
-lastUpdated: '2026-02-17'
 description: Useful recipes and tips for Jenkins and Jenkinsfiles
 weight: 100
 categories: [Jenkins]
 tags: [jenkins, jenkinsfile, ci-cd]
+date: '2023-07-01T08:00:00+02:00'
+lastmod: '2026-02-17T08:00:00+01:00'
+version: '1.0'
 ---
 
 ## 1. Jenkins snippet generator

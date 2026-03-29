@@ -1,11 +1,11 @@
 ---
 title: Prek an alternative to pre-commit
 description: Comprehensive documentation on how to use Prek, a replacement for pre-commit, with a focus on speed and ease of use
-creationDate: '2026-02-22'
-lastUpdated: '2026-02-22'
 version: '1.0'
 categories: [Tooling]
 tags: [Prek, pre-commit, tooling]
+date: '2026-02-22T08:00:00+01:00'
+lastmod: '2026-02-22T08:00:00+01:00'
 ---
 
 Prek is a modern alternative to pre-commit, designed to be faster and easier to use. It provides a streamlined

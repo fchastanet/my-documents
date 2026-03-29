@@ -1,8 +1,13 @@
 ---
+###############################################################################
+# AUTOMATICALLY GENERATED
+# DO NOT EDIT IT
+# @generated
+###############################################################################
 default_install_hook_types: [pre-commit, pre-push]
 default_stages: [pre-commit, manual]
 minimum_pre_commit_version: 3.5.0
-fail_fast: true
+fail_fast: false
 repos:
   - repo: https://github.com/sudosubin/pre-commit-image
     rev: v0.1.2

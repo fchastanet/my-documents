@@ -29,8 +29,8 @@ linkTitle: [Site Title]
 description: [Brief description]
 type: docs
 weight: [10 then 20, 30...]
-creationDate: [Current date format YYYY-MM-DD]
-lastUpdated: [Current date format YYYY-MM-DD]
+date: [Current date format YYYY-MM-DD]
+lastmod: [Current date format YYYY-MM-DD]
 ---
 ```
 
@@ -42,8 +42,8 @@ linkTitle: Documentation
 description: Complete documentation for [Project Name]
 type: docs
 weight: 1
-creationDate: [Current date format YYYY-MM-DD]
-lastUpdated: [Current date format YYYY-MM-DD]
+date: [Current date format YYYY-MM-DD]
+lastmod: [Current date format YYYY-MM-DD]
 ---
 
 {{< articles-list >}}
@@ -63,17 +63,17 @@ description: Brief description
 weight: 10
 categories: [documentation]
 tags: [example]
-creationDate: [see creationDate rule below]
-lastUpdated: [see lastUpdated rule below]
+date: [see date rule below]
+lastmod: [see lastmod rule below]
 version: "1.0"
 ---
 ```
 
-creationDate rules: get file creation date using
+date rules: get file creation date using
 `git log --follow --format=%aI --pretty="format:%ad" --date=format:'%Y-%m-%d' filename | tail -1`
 eg: `git log --follow --format=%aI --pretty="format:%ad" --date=format:'%Y-%m-%d' content/docs/howtos/howto-write-jenkinsfile/01-how-jenkins-works.md | tail -1`
 
-lastUpdated rules: get last modification date using
+lastmod rules: get last modification date using
 `git log --follow --format=%aI --pretty="format:%ad" --date=format:'%Y-%m-%d' filename | head -1`
 eg: `git log --follow --format=%aI --pretty="format:%ad" --date=format:'%Y-%m-%d' content/docs/howtos/howto-write-jenkinsfile/01-how-jenkins-works.md | head -1`
 

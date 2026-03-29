@@ -4,6 +4,9 @@ description: Archive of external reference material preserved for long-term acce
 weight: 100
 categories: [documentation, backups]
 tags: [archive, reference, backup]
+date: '2026-03-18T08:00:00+01:00'
+lastmod: '2026-03-18T08:00:00+01:00'
+version: '1.0'
 ---
 
 {{% pageinfo %}}

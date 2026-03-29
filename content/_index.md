@@ -2,6 +2,9 @@
 title: François Chastanet's DevLab
 linkTitle: DevLab
 type: docs
+date: '2026-02-17T08:00:00+01:00'
+lastmod: '2026-03-08T08:00:00+01:00'
+version: '1.0'
 ---
 
 {{% pageinfo %}}

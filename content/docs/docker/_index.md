@@ -1,11 +1,12 @@
 ---
 title: Docker related articles
 description: In-depth articles and comparisons related to Docker, including image optimization and performance analysis.
-creationDate: '2024-03-21'
-lastUpdated: '2026-03-21'
 linkTitle: Docker
 type: docs
 weight: 30
+date: '2024-03-21T08:00:00+01:00'
+lastmod: '2026-03-21T08:00:00+01:00'
+version: '1.0'
 ---
 
 {{% pageinfo %}}

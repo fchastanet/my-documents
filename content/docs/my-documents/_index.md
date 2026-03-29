@@ -4,8 +4,9 @@ linkTitle: My Documents
 description: Articles about this repository, its structure, and how to use it effectively
 type: docs
 weight: 5
-creationDate: '2026-02-23'
-lastUpdated: '2026-02-23'
+date: '2026-02-23T08:00:00+01:00'
+lastmod: '2026-02-23T08:00:00+01:00'
+version: '1.0'
 ---
 
 {{% pageinfo %}}

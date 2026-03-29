@@ -1,11 +1,12 @@
 ---
 title: Bash Scripts
-creationDate: '2026-02-17'
-lastUpdated: '2026-02-23'
 linkTitle: Bash Scripts
 description: Best practices for writing Bash scripts
 type: docs
 weight: 10
+date: '2026-02-17T08:00:00+01:00'
+lastmod: '2026-02-23T08:00:00+01:00'
+version: '1.0'
 ---
 
 {{% pageinfo %}}

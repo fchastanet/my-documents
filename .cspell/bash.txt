@@ -13,9 +13,11 @@ GITHUB
 HEALTHCHECK
 hugo
 ireduce
+lastmod
 lastpipe
 linux
 mapfile
+nlastmod
 nodoc
 noninteractive
 nounset

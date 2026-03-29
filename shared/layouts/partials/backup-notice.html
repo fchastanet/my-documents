@@ -8,7 +8,7 @@
   {{- /* Set default values for backup metadata */ -}}
   {{- $originalUrl := $backup.originalUrl | default "" -}}
   {{- $author := $backup.author | default "" -}}
-  {{- $creationDate := $backup.creationDate | default "" -}}
+  {{- $date := $backup.date | default "" -}}
   {{- /* Render the backup notice with metadata */ -}}
 <div class="alert alert-warning backup-notice" role="alert">
   <div class="backup-notice-content">
@@ -38,8 +38,8 @@
         {{- if $author }}
         <p><strong>Original Author:</strong> {{ $author | safeHTML }}</p>
         {{- end }}
-        {{- if $creationDate }}
-        <p><strong>Original Date:</strong> <time datetime="{{ $creationDate | dateFormat "2006-01-02" }}">{{ $creationDate | dateFormat "January 2, 2006" }}</time></p>
+        {{- if $date }}
+        <p><strong>Original Date:</strong> <time datetime="{{ $date | dateFormat "2006-01-02" }}">{{ $date | dateFormat "January 2, 2006" }}</time></p>
         {{- end }}
         <p><strong>Backed Up On:</strong> <time datetime="{{ now | dateFormat "2006-01-02" }}">{{ now | dateFormat "January 2, 2006" }}</time></p>
       </div>

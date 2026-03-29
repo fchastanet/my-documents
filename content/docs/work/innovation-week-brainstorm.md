@@ -4,9 +4,9 @@ description: A guide to various team activities that foster innovation and conti
 categories: [Work]
 tags: [work, innovation, team-building, continuous-improvement, Hackathon, sprint, workshop]
 weight: 20
-creationDate: '2026-03-21'
-lastUpdated: '2026-03-22'
 version: '1.2'
+date: '2026-03-21T08:00:00+01:00'
+lastmod: '2026-03-22T08:00:00+01:00'
 ---
 
 ## 1. Introduction

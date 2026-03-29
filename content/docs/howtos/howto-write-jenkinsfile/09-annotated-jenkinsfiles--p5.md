@@ -1,11 +1,12 @@
 ---
 title: Annotated Jenkinsfiles - Part 5
-creationDate: '2023-07-01'
-lastUpdated: '2026-02-17'
 description: Detailed Jenkinsfile examples with annotations
 weight: 90
 categories: [Jenkins]
 tags: [jenkins, jenkinsfile, ci-cd]
+date: '2023-07-01T08:00:00+02:00'
+lastmod: '2026-02-17T08:00:00+01:00'
+version: '1.0'
 ---
 
 ## 1. introduction

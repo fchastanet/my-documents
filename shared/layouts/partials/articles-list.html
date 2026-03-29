@@ -1,6 +1,6 @@
 {{/*
   List all articles in the current section as a table,
-  sorted by lastUpdated date (most recent first)
+  sorted by lastmod date (most recent first)
 */}}
 {{ $section := .CurrentSection }}
 {{ if and $section (ne $section.Kind "home") }}
@@ -8,8 +8,8 @@
   {{ $articles := (where $section.Pages "Kind" "page") }}
 
   {{ if gt (len $articles) 0 }}
-    {{/* Sort articles by lastUpdated in reverse order (most recent first) */}}
-    {{ $sorted := sort $articles "Params.lastUpdated" "desc" }}
+    {{/* Sort articles by lastmod in reverse order (most recent first) */}}
+    {{ $sorted := sort $articles "Params.lastmod" "desc" }}
 
     <div class="articles-list">
       <h2>Articles in this section</h2>
@@ -35,11 +35,11 @@
                 {{ end }}
               </td>
               <td>
-                {{ with .Params.lastUpdated }}
+                {{ with .Params.lastmod }}
                   {{ . }}
                 {{ else }}
-                  {{ if .Params.creationDate }}
-                    {{ .Params.creationDate }}
+                  {{ if .Params.date }}
+                    {{ .Params.date }}
                   {{ else }}
                     <em>N/A</em>
                   {{ end }}
