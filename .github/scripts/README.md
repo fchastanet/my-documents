@@ -9,6 +9,7 @@ This directory contains reusable bash scripts extracted from the Makefile to mai
 Shared color definitions for consistent output across all scripts.
 
 **Usage in scripts:**
+
 ```bash
 source "$(dirname "$0")/colors.sh"
 echo -e "${GREEN}Success${NC}"
@@ -26,11 +27,13 @@ echo -e "${GREEN}Success${NC}"
 Install Hugo extended build.
 
 **Usage:**
+
 ```bash
 .github/scripts/install-hugo.sh [VERSION]
 ```
 
 **Example:**
+
 ```bash
 .github/scripts/install-hugo.sh 0.155.3
 ```
@@ -40,6 +43,7 @@ Install Hugo extended build.
 Install yq YAML processor.
 
 **Usage:**
+
 ```bash
 .github/scripts/install-yq.sh
 ```
@@ -49,11 +53,13 @@ Install yq YAML processor.
 Create symlinks to dependent repositories for local testing.
 
 **Usage:**
+
 ```bash
 .github/scripts/link-repos.sh SITES_DIR REPO1 REPO2 ...
 ```
 
 **Example:**
+
 ```bash
 .github/scripts/link-repos.sh sites bash-compiler bash-tools bash-tools-framework bash-dev-env
 ```
@@ -63,18 +69,21 @@ Create symlinks to dependent repositories for local testing.
 Remove symlinks to dependent repositories.
 
 **Usage:**
+
 ```bash
 .github/scripts/unlink-repos.sh SITES_DIR REPO1 REPO2 ...
 ```
 
 **Example:**
+
 ```bash
 .github/scripts/unlink-repos.sh sites bash-compiler bash-tools bash-tools-framework bash-dev-env
 ```
 
 ### `update-lastmod.sh`
 
-Update `date`, `lastmod`, and `version` frontmatter fields in markdown files. Integrates with pre-commit hooks to automatically manage Hugo frontmatter metadata.
+Update `date`, `lastmod`, and `version` frontmatter fields in markdown files. Integrates with pre-commit hooks to
+automatically manage Hugo frontmatter metadata.
 
 **Two modes of operation:**
 
@@ -88,11 +97,15 @@ Update `date`, `lastmod`, and `version` frontmatter fields in markdown files. In
 
 2. **Commit mode** (with file arguments): Updates specific files being committed
    - Adds `date` if missing (current timestamp)
-   - Updates `lastmod` (current timestamp)
+   - Updates `lastmod` (current timestamp) **only if not already updated today**
    - Adds `version: "1.0"` if missing, or **increments** existing version (e.g., 1.2 → 1.3)
+     **only if not already updated today**
    - Places `date`, `lastmod`, and `version` at the **end** of frontmatter
+   - **Smart update detection**: Skips `lastmod` and `version` updates if `lastmod` already has today's date (prevents
+   repeated updates on multiple commit attempts)
 
 **Usage:**
+
 ```bash
 # Migration mode: migrate all files
 .github/scripts/update-lastmod.sh
@@ -129,6 +142,24 @@ The script is automatically called by pre-commit hooks for any `.md` files in `c
   stages: [pre-commit]
 ```
 
+**Smart update behavior in commit mode:**
+
+The script prevents unnecessary updates when you commit multiple times on the same day:
+
+- **First commit of the day**: Updates `lastmod` and increments `version`
+- **Subsequent commits on same day**: Skips updates (no changes)
+- **Commit on different day**: Updates `lastmod` and increments `version`
+
+This prevents the infinite loop problem where:
+1. You commit → fields updated
+2. You stage changes and commit again → fields would update again (✗)
+3. This would repeat indefinitely
+
+Now with the smart detection:
+1. You commit → fields updated with today's date
+2. You stage changes and commit again → skipped (already updated today) ✓
+3. You can use `git commit --amend` safely ✓
+
 **Migration process:**
 
 To migrate existing content from old frontmatter fields:
@@ -151,6 +182,7 @@ git commit -m "docs: Migrate frontmatter to Hugo standard date fields"
 **Frontmatter transformation:**
 
 Before (old format):
+
 ```yaml
 ---
 title: My Page
@@ -164,6 +196,7 @@ version: '1.2'
 ```
 
 After migration:
+
 ```yaml
 ---
 title: My Page
@@ -177,6 +210,21 @@ version: "1.2"
 ```
 
 After commit (version incremented):
+
+```yaml
+---
+title: My Page
+description: Page description
+categories: [docs]
+weight: 10
+date: "2026-02-18T08:00:00+01:00"
+lastmod: "2026-03-29T15:53:17+02:00"
+version: "1.3"
+---
+```
+
+Commit again same day (no changes):
+
 ```yaml
 ---
 title: My Page
@@ -200,11 +248,13 @@ See Hugo documentation:
 Build a specific documentation site.
 
 **Usage:**
+
 ```bash
 .github/scripts/build-site.sh SITE [BUILD_DIR] [SITES_DIR]
 ```
 
 **Example:**
+
 ```bash
 .github/scripts/build-site.sh bash-compiler build sites
 ```
@@ -214,11 +264,13 @@ Build a specific documentation site.
 Build all documentation sites in parallel.
 
 **Usage:**
+
 ```bash
 .github/scripts/build-all.sh [BUILD_DIR] [SITES_DIR] REPO1 REPO2 ...
 ```
 
 **Example:**
+
 ```bash
 .github/scripts/build-all.sh build sites bash-compiler bash-tools bash-tools-framework bash-dev-env
 ```
@@ -233,11 +285,13 @@ Build all documentation sites in parallel.
 Test all built sites with curl to verify they work.
 
 **Usage:**
+
 ```bash
 .github/scripts/test-all.sh [BUILD_DIR] [SITES_DIR] REPO1 REPO2 ...
 ```
 
 **Example:**
+
 ```bash
 .github/scripts/test-all.sh build sites bash-compiler bash-tools bash-tools-framework bash-dev-env
 ```
@@ -309,26 +363,31 @@ This means:
 When adding new scripts:
 
 1. **Source colors.sh** at the top:
+
    ```bash
    source "$(dirname "$0")/colors.sh"
    ```
 
 2. **Use strict mode**:
+
    ```bash
    set -euo pipefail
    ```
 
 3. **Accept parameters** for flexibility:
+
    ```bash
    PARAM="${1:?Error: PARAM required}"
    ```
 
 4. **Add usage comment** at the top:
+
    ```bash
    # Usage: ./script.sh PARAM1 PARAM2
    ```
 
 5. **Use color output**:
+
    ```bash
    echo -e "${BLUE}Starting...${NC}"
    echo -e "${GREEN}Success!${NC}"
@@ -374,6 +433,7 @@ They can be called from any shell environment with:
 ```
 
 **Solution:** Ensure scripts are executable:
+
 ```bash
 chmod +x .github/scripts/*.sh
 ```
@@ -393,6 +453,7 @@ source: line 1: /path/to/colors.sh: No such file or directory
 ```
 
 **Solution:**
+
 ```bash
 chmod +x .github/scripts/*.sh
 ```

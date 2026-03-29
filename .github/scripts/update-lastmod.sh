@@ -18,6 +18,19 @@ getCurrentDate() {
   TZ="$TIMEZONE" date +"$DATE_FORMAT"
 }
 
+# Get today's date (YYYY-MM-DD only)
+getTodayDate() {
+  TZ="$TIMEZONE" date +"%Y-%m-%d"
+}
+
+# Extract date portion from ISO8601 timestamp
+# Args: $1 = timestamp (e.g., "2026-03-29T15:30:05+02:00")
+getDatePortion() {
+  local timestamp="$1"
+  # Extract YYYY-MM-DD portion
+  echo "$timestamp" | sed 's/T.*//; s/["'\'']*//g'
+}
+
 # Get git creation date for a file
 # Args: $1 = file path
 getGitCreationDate() {
@@ -291,6 +304,22 @@ processCommitMode() {
   fi
 
   currentDate=$(getCurrentDate)
+  local todayDate
+  todayDate=$(getTodayDate)
+
+  # Check if lastmod already has today's date
+  local skipUpdate=0
+  if hasFrontmatterField "$frontmatter" "lastmod"; then
+    local existingLastmod
+    existingLastmod=$(getFrontmatterField "$frontmatter" "lastmod")
+    local existingDate
+    existingDate=$(getDatePortion "$existingLastmod")
+
+    if [[ "$existingDate" == "$todayDate" ]]; then
+      echo -e "${YELLOW}  ⊘ Already updated today, skipping lastmod and version${NC}"
+      skipUpdate=1
+    fi
+  fi
 
   # Remove date, lastmod, and version fields from frontmatter (we'll add them at the end)
   newFrontmatter=$(echo "$frontmatter" | grep -v "^date:" | grep -v "^lastmod:" | grep -v "^version:")
@@ -305,13 +334,28 @@ processCommitMode() {
     modified=1
   fi
 
-  # Always update lastmod
-  echo -e "${GREEN}  ✓ Updating lastmod: $currentDate${NC}"
-  modified=1
+  # Update lastmod only if not already updated today
+  local lastmodValue
+  if [[ $skipUpdate -eq 1 ]]; then
+    # Keep existing lastmod
+    lastmodValue=$(getFrontmatterField "$frontmatter" "lastmod")
+  else
+    # Update to current date
+    lastmodValue="$currentDate"
+    echo -e "${GREEN}  ✓ Updating lastmod: $currentDate${NC}"
+    modified=1
+  fi
 
   # Handle version increment
   local versionValue
-  if hasFrontmatterField "$frontmatter" "version"; then
+  if [[ $skipUpdate -eq 1 ]]; then
+    # Keep existing version
+    if hasFrontmatterField "$frontmatter" "version"; then
+      versionValue=$(getFrontmatterField "$frontmatter" "version")
+    else
+      versionValue="1.0"
+    fi
+  elif hasFrontmatterField "$frontmatter" "version"; then
     local oldVersion
     oldVersion=$(getFrontmatterField "$frontmatter" "version")
     versionValue=$(incrementVersion "$oldVersion")
@@ -324,7 +368,7 @@ processCommitMode() {
   fi
 
   # Add date, lastmod, and version at the end of frontmatter
-  newFrontmatter=$(printf "%s\ndate: '%s'\nlastmod: '%s'\nversion: '%s'" "$newFrontmatter" "$dateValue" "$currentDate" "$versionValue")
+  newFrontmatter=$(printf "%s\ndate: '%s'\nlastmod: '%s'\nversion: '%s'" "$newFrontmatter" "$dateValue" "$lastmodValue" "$versionValue")
 
   # Update file if modified
   if [[ $modified -eq 1 ]]; then
