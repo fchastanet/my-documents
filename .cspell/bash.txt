@@ -1,5 +1,6 @@
 ABRT
 ansi
+appuser
 autoremove
 CACHEDIR
 CREDS
@@ -9,6 +10,7 @@ errexit
 errtrace
 github
 GITHUB
+HEALTHCHECK
 hugo
 ireduce
 lastpipe
@@ -24,7 +26,10 @@ posix
 readarray
 shopt
 SIGPIPE
+tini
 TMPDIR
 tmpdir
 unalias
+urlopen
+WORKDIR
 xtrace

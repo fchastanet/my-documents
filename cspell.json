@@ -32,7 +32,8 @@
     "doc/ai/**",
     "static/**",
     "content/disavow.txt",
-    "**/*.svg"
+    "**/*.svg",
+    "content/docs/howtos/assets/dockerignore-*"
   ],
   "ignoreRegExpList": ["urls", "packages", "markdownToc"],
   "patterns": [

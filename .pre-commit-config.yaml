@@ -200,8 +200,8 @@ repos:
 
   - repo: local
     hooks:
-      - id: buildSite
-        name: Build Hugo site
+      - id: build
+        name: Build this Hugo site
         language: system
         pass_filenames: false
         always_run: true

@@ -19,7 +19,7 @@ repo_root="$(dirname "$(dirname "$script_dir")")"
 # Build Marp presentations
 if [ -d "${repo_root}/marp" ]; then
   echo -e "${BLUE}Building Marp presentations...${NC}"
-  "${script_dir}/build-marp.sh" "${repo_root}/marp" "${repo_root}/static/presentations"
+  "${script_dir}/build-marp.sh" "marp" "${repo_root}/static/presentations"
   echo -e "${GREEN}✅ Marp presentations built${NC}"
 else
   echo -e "${BLUE}No marp directory found, skipping Marp build${NC}"

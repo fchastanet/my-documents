@@ -80,10 +80,13 @@ build-all: link-repos
 test-all: build-all
 	@$(SCRIPT_DIR)/test-all.sh $(BUILD_DIR) $(SITES_DIR) $(REPOS)
 
+# Build Marp presentations to HTML and PPTX
+build-marp:
+	@$(SCRIPT_DIR)/build-marp.sh marp static/presentations
+
 # Build my-documents only
 build:
 	@BUILD=1 $(SCRIPT_DIR)/build-site.sh . my-documents build
-	@$(MAKE) build-marp
 
 # Start Hugo dev server
 start: build-marp
@@ -104,10 +107,6 @@ clean: clean-marp
 	@echo "$(BLUE)Cleaning build artifacts...$(NC)"
 	rm -rf $(SITES_DIR) $(BUILD_DIR) resources/_gen hugo.yaml.tmp .hugo_build.lock
 	@echo "$(GREEN)✅ Clean complete$(NC)"
-
-# Build Marp presentations to HTML and PPTX
-build-marp:
-	@$(SCRIPT_DIR)/build-marp.sh marp static/presentations
 
 # Clean generated Marp files
 clean-marp:
