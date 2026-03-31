@@ -1,0 +1,97 @@
+{{/*
+  Display the most recently published articles from across the entire site
+  in a card/block style format.
+
+  Usage: {{< recent-articles limit="10" >}}
+*/}}
+
+{{ $limit := 10 }}
+{{ if .Get "limit" }}
+  {{ $limit = int (.Get "limit") }}
+{{ end }}
+
+{{/* Get all regular pages from the site, excluding section pages */}}
+{{ $allPages := where .Site.RegularPages "Type" "docs" }}
+
+{{/* Sort by lastmod date in descending order (most recent first) */}}
+{{ $sortedPages := sort $allPages "Params.lastmod" "desc" }}
+
+{{/* Limit to the specified number */}}
+{{ $recentPages := first $limit $sortedPages }}
+
+{{ if gt (len $recentPages) 0 }}
+<div class="recent-articles-section my-5">
+  <div class="row">
+    {{ range $recentPages }}
+      {{ $thumbnail := "" }}
+
+      {{/* Try to find an image: 1. featured image, 2. first page resource, 3. parse content */}}
+      {{ if .Params.featured_image }}
+        {{ $thumbnail = .Params.featured_image }}
+      {{ else }}
+        {{/* Look for image resources in the page bundle */}}
+        {{ $images := .Resources.ByType "image" }}
+        {{ if gt (len $images) 0 }}
+          {{ $thumbnail = (index $images 0).RelPermalink }}
+        {{ else }}
+          {{/* Try to extract first image from markdown content */}}
+          {{ $content := .RawContent }}
+          {{ $imageRegex := `!\[.*?\]\((.*?)\)` }}
+          {{ $matches := findRE $imageRegex $content 1 }}
+          {{ if gt (len $matches) 0 }}
+            {{ $match := index $matches 0 }}
+            {{ $urlRegex := `\((.*?)\)` }}
+            {{ $urls := findRE $urlRegex $match 1 }}
+            {{ if gt (len $urls) 0 }}
+              {{ $url := index $urls 0 }}
+              {{ $thumbnail = trim (trim $url "(") ")" }}
+            {{ end }}
+          {{ end }}
+        {{ end }}
+      {{ end }}
+
+      <div class="col-lg-6 col-md-6 mb-4">
+        <div class="card h-100 shadow-sm">
+          {{ if $thumbnail }}
+            <img src="{{ $thumbnail }}" class="card-img-top" alt="{{ .Title }}" style="height: 200px; object-fit: cover;">
+          {{ end }}
+          <div class="card-body">
+            <h5 class="card-title">
+              <a href="{{ .RelPermalink }}" class="text-decoration-none">{{ .Title }}</a>
+            </h5>
+            {{ with .Params.description }}
+              <p class="card-text text-muted">{{ . }}</p>
+            {{ else }}
+              {{ with .Summary }}
+                <p class="card-text text-muted">{{ . }}</p>
+              {{ end }}
+            {{ end }}
+            <div class="card-footer bg-transparent border-0 px-0 pt-3">
+              <small class="text-muted">
+                <i class="fas fa-calendar-alt"></i>
+                Updated:
+                {{ with .Params.lastmod }}
+                  {{ dateFormat "Jan 2, 2006" . }}
+                {{ else }}
+                  {{ if .Params.date }}
+                    {{ dateFormat "Jan 2, 2006" .Params.date }}
+                  {{ else }}
+                    N/A
+                  {{ end }}
+                {{ end }}
+              </small>
+              {{ if .Params.categories }}
+                <div class="mt-2">
+                  {{ range .Params.categories }}
+                    <span class="badge bg-primary me-1">{{ . }}</span>
+                  {{ end }}
+                </div>
+              {{ end }}
+            </div>
+          </div>
+        </div>
+      </div>
+    {{ end }}
+  </div>
+</div>
+{{ end }}

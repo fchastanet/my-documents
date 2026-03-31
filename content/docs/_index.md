@@ -5,8 +5,8 @@ description: Comprehensive guides and best practices
 type: docs
 weight: 10
 date: '2026-02-17T08:00:00+01:00'
-lastmod: '2026-02-17T08:00:00+01:00'
-version: '1.0'
+lastmod: '2026-03-31T23:56:51+02:00'
+version: '1.1'
 ---
 
 {{% pageinfo %}}
@@ -25,7 +25,6 @@ Use the sidebar navigation to explore:
 - **Reference Lists** - Curated lists of tools and resources
 - **Other Projects** - Related documentation sites and tools
 
-## 2. Getting Started
+## 2. My recent articles
 
-Choose a section from the sidebar to begin exploring the documentation. Each section contains detailed guides, best
-practices, and real-world examples.
+{{< recent-articles >}}
