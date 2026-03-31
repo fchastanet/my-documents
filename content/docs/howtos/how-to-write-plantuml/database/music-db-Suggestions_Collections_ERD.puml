@@ -1,0 +1,73 @@
+@startuml Suggestions Collections - Entity Relationship Diagram
+
+title MongoDB Collections: Suggestion System - Entity Relationship Diagram
+!include content/docs/howtos/how-to-write-plantuml/database/db_theme_standard.puml
+
+package "Playlist Collections" <<Only the relevant fields are shown>> as PC #LightGray {
+  !includesub content/docs/howtos/how-to-write-plantuml/database/music-db-Playlists_Collections_ERD.puml!PLAYLIST_MODEL
+  !includesub content/docs/howtos/how-to-write-plantuml/database/music-db-Playlists_Collections_ERD.puml!PLAYLIST_INSTANCES_MODEL
+}
+
+package "User Collections" <<Only the relevant fields are shown>> as UC #LightGray{
+  !includesub content/docs/howtos/how-to-write-plantuml/database/music-db-Moods_Collections_ERD.puml!MODEL_USER_TASTES
+}
+
+!startsub MODEL_PENDING_USER_SUGGESTION
+ENTITY pending_user_suggestion {
+  PK _id : ObjectId
+  --
+  + IDX user_tastes_id: ObjectId
+  + IDX playlist_instances_id : ObjectId
+  + IDX computed_at : datetime
+  user_urn : string
+  user_moods : ObjectId[]
+  playlist_urn : string
+  playlist_uuid : UUID
+  playlist_moods : ObjectId[]
+  playlist_instance_is_suggestible : bool
+  instance_urn : string
+}
+!endsub
+
+!startsub MODEL_PENDING_USER_SUGGESTION_DETAILS
+ENTITY pending_user_suggestion {
+  __Indexes__
+  UNIQUE user_tastes_playlist_instances_unique_idx(user_tastes_id ASC, playlist_instances_id ASC)
+  IDX compute_at_idx(computed_at ASC)
+  IDX playlist_instances_idx(playlist_instances_id ASC)
+}
+!endsub
+
+!startsub MODEL_USER_SUGGESTION
+ENTITY user_suggestion {
+  PK _id : ObjectId
+  --
+  +user_tastes_id: ObjectId
+  +user_urn : string
+  +playlist_instances_id : ObjectId
+  +playlist_instance_is_suggestible : bool
+  +score : float
+  playlist_urn : string
+  playlist_uuid : UUID
+  instance_urn : string
+  computed_at : datetime
+}
+
+' Relationships
+user_tastes ||--o{ pending_user_suggestion
+playlist_instances ||--o{ pending_user_suggestion
+user_tastes ||-d-o{ user_suggestion
+playlist_instances ||-u-o{ user_suggestion
+
+!endsub
+
+!startsub MODEL_USER_SUGGESTION_DETAILS
+ENTITY user_suggestion {
+  __Indexes__
+  UNIQUE user_tastes_playlist_instances_unique_idx(user_tastes_id ASC, playlist_instances_id ASC)
+  IDX user_tastes_score_idx(user_tastes_id ASC, score DESC)
+  IDX playlist_instances_idx(playlist_instances_id ASC)
+  IDX user_urn_is_suggestible_score_idx(user_urn ASC, playlist_instance_is_suggestible DESC, score DESC)
+}
+!endsub
+@enduml

@@ -75,6 +75,11 @@
       "name": "marp",
       "path": ".cspell/marp.txt",
       "addWords": true
+    },
+    {
+      "name": "plantuml",
+      "path": ".cspell/plantuml.txt",
+      "addWords": true
     }
   ],
   "dictionaries": ["generic", "softwares"],
@@ -86,6 +91,10 @@
     {
       "filename": ["marp/**/*.md", "marp/**/*.mmd"],
       "dictionaries": ["marp"]
+    },
+    {
+      "filename": ["**/*.puml", "**/*.plantuml", "content/docs/howtos/how-to-write-plantuml/01-reusable-plantuml.md"],
+      "dictionaries": ["plantuml"]
     },
     {
       "filename": ["**/*.sh", "Makefile", ".pre-commit-config.yaml"],

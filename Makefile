@@ -89,7 +89,7 @@ build:
 	@BUILD=1 $(SCRIPT_DIR)/build-site.sh . my-documents build
 
 # Start Hugo dev server
-start: build-marp
+start:
 	@echo "$(BLUE)Starting Hugo dev server...$(NC)"
 	rm -Rf $(BUILD_DIR)/my-documents
 	mkdir -p $(BUILD_DIR)/my-documents

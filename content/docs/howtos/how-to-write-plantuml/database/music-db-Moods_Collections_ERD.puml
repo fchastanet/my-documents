@@ -1,0 +1,71 @@
+@startuml Moods Collections - Entity Relationship Diagram
+
+title MongoDB Collections: Moods taxonomy and related collections - Entity Relationship Diagram
+
+!include content/docs/howtos/how-to-write-plantuml/database/db_theme_standard.puml
+
+
+package "Playlist Collections" <<Only the relevant fields are shown>> #LightGray {
+  !includesub content/docs/howtos/how-to-write-plantuml/database/music-db-Playlists_Collections_ERD.puml!PLAYLIST_MODEL
+}
+!startsub MODEL_USER_TASTES
+ENTITY user_tastes {
+  PK _id : ObjectId
+  --
+  + user_urn : string
+  + instance_urn : string
+  + has_moods : boolean
+  moods_ids : ObjectId[]
+}
+!endsub
+
+!startsub MODEL_USER_TASTES_DETAILS
+ENTITY user_tastes {
+DETAILS created_at : datetime
+DETAILS updated_at : datetime
+__Indexes__
+UNIQUE_SPARSE user_urn_unique_idx(user_urn ASC)
+SPARSE instance_urn_has_moods_idx(instance_urn ASC, has_moods DESC)
+}
+!endsub
+
+!startsub MODEL_MOOD
+ENTITY mood {
+PK _id : ObjectId
+--
++ name : string
++ vector: float[]
++ vector_cohere: float[]
++ translations : dict<string, string>
+}
+!endsub
+
+!startsub MODEL_MOOD_DETAILS
+ENTITY mood {
+__Indexes__
+UNIQUE name_unique_idx(name ASC)
+SPARSE vector_exists_idx(vector ASC)
+}
+' Relationships
+mood }o--o{ user_tastes : "moods_ids references _id in mood"
+mood }o-r-o{ playlists : "moods references _id in mood"
+!endsub
+
+note left of mood::name
+  The name of the mood in English
+  (e.g., "energetic", "chill", "melancholic")
+end note
+note left of mood::translations
+  A dictionary containing translations
+  of the mood name in various languages.
+  The keys are BCP-47 language (e.g., "fr" for French)
+  and the values are the translated mood names.
+end note
+note right of mood::vector
+  A vector representation of the mood.name field,
+  generated using amazon.titan-embed-text-v1.
+  This field is used for semantic search and
+  similarity comparisons between moods.
+end note
+
+@enduml

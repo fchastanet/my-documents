@@ -1,0 +1,17 @@
+@startuml
+!pragma layout smetana
+!include content/docs/howtos/how-to-write-plantuml/database/db_theme_standard.puml
+!includesub content/docs/howtos/how-to-write-plantuml/database/music-db-Playlists_Collections_ERD.puml!PLAYLIST_MODEL
+!includesub content/docs/howtos/how-to-write-plantuml/database/music-db-Playlists_Collections_ERD.puml!PLAYLIST_MODEL_DETAILS
+!includesub content/docs/howtos/how-to-write-plantuml/database/music-db-Playlists_Collections_ERD.puml!PLAYLIST_INSTANCES_MODEL
+!includesub content/docs/howtos/how-to-write-plantuml/database/music-db-Playlists_Collections_ERD.puml!PLAYLIST_INSTANCES_MODEL_DETAILS
+!includesub content/docs/howtos/how-to-write-plantuml/database/music-db-Moods_Collections_ERD.puml!MODEL_USER_TASTES
+!includesub content/docs/howtos/how-to-write-plantuml/database/music-db-Moods_Collections_ERD.puml!MODEL_USER_TASTES_DETAILS
+!includesub content/docs/howtos/how-to-write-plantuml/database/music-db-Moods_Collections_ERD.puml!MODEL_MOOD
+!includesub content/docs/howtos/how-to-write-plantuml/database/music-db-Moods_Collections_ERD.puml!MODEL_MOOD_DETAILS
+!includesub content/docs/howtos/how-to-write-plantuml/database/music-db-Suggestions_Collections_ERD.puml!MODEL_PENDING_USER_SUGGESTION
+!includesub content/docs/howtos/how-to-write-plantuml/database/music-db-Suggestions_Collections_ERD.puml!MODEL_PENDING_USER_SUGGESTION_DETAILS
+!includesub content/docs/howtos/how-to-write-plantuml/database/music-db-Suggestions_Collections_ERD.puml!MODEL_USER_SUGGESTION
+!includesub content/docs/howtos/how-to-write-plantuml/database/music-db-Suggestions_Collections_ERD.puml!MODEL_USER_SUGGESTION_DETAILS
+!includesub content/docs/howtos/how-to-write-plantuml/database/music-db-Logs.puml!MODEL_MUSIC_API_LOGS
+@enduml

@@ -190,7 +190,7 @@ repos:
       - id: shellcheckLint
       - id: shellcheckLintGithubAction
       - id: plantuml
-        args: [--same-dir, -f, png, -f, svg, --limit-size, '1200']
+        args: [--same-dir, -f, svg, --limit-size, '1200']
       - id: mermaid
       - id: hugoUpdateLastmod
         stages: [pre-commit]

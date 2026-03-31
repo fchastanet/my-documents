@@ -1,0 +1,11 @@
+endlegend
+endsub
+enduml
+includesub
+linetype
+skinparam
+smetana
+spotify
+startsub
+startuml
+uuid

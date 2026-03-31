@@ -1,0 +1,62 @@
+@startuml
+' ==============================================
+' MongoDB Database Diagram Standard Theme
+' ==============================================
+' This is a REUSABLE style definition file that provides:
+' - Consistent visual styling across all database diagrams
+' - Standard notation for database elements (PK, FK, indexes)
+' - Color-coded legends for different entity types
+' - Icon definitions for database constraints
+'
+' USAGE: Include this file in any database ERD diagram:
+'   !include path/to/db_theme_standard.puml
+'
+' This ensures all diagrams share the same professional appearance
+' and use consistent notation conventions.
+' ==============================================
+
+skinparam {
+    defaultFontName Arial
+    defaultFontSize 12
+    roundCorner 8
+    packageStyle rectangle
+    linetype ortho
+    BackgroundColor #FFF
+    shadowing false
+    ArrowColor #555555
+    ArrowThickness 2
+
+    entity {
+        Margin 20
+    }
+}
+
+!define ENTITY entity
+!define PK <&key><u><b>
+!define FK <u><i>
+!define IDX <&magnifying-glass>
+!define UNIQUE <u><&magnifying-glass><<unique>>
+!define SPARSE <i><&magnifying-glass><<sparse>>
+!define UNIQUE_SPARSE <u><i><&magnifying-glass><<unique_sparse>>
+!define DETAILS -
+
+legend
+|= |= Type |
+|<back:#FF0000>   </back>| Type A class |
+|<back:#00FF00>   </back>| Type B class |
+|<back:blue>   </back>| Type C class |
+endlegend
+
+legend left
+  |= notation |= meaning|
+  | <img : https://cdn-0.plantuml.com/public-field.png{scale=1.4}>(+)  | Indexed column  |
+  | <img : https://cdn-0.plantuml.com/private-field.png{scale=1.4}>(-) | details |
+  | ""<&key>"" | Primary Key |
+  | ""<u><i>column"" | Foreign Key |
+  | ""<&magnifying-glass>"" | Standard Index |
+  | UNIQUE | Unique Index |
+  | SPARSE | Sparse Index |
+  | UNIQUE_SPARSE | Unique & Sparse Index |
+endlegend
+
+@enduml

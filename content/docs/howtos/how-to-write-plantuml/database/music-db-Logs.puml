@@ -1,0 +1,91 @@
+@startuml
+
+title MongoDB Collections: Music API Logs - Entity Relationship Diagram
+!include content/docs/howtos/how-to-write-plantuml/database/db_theme_standard.puml
+
+!startsub MODEL_MUSIC_API_LOGS
+ENTITY music_api_logs {
+  PK _id : ObjectId
+  --
+  + instance_urn : string
+  user_urn : string
+  + created_at : datetime
+  tag : string
+  target_field : string
+  payload : dict
+  prediction : array
+}
+
+json payload_schema as "**Payload Schema**" {
+  "**field**": "enum(description|theme|target_audience)",
+  "**playlist_title**": "string",
+  "**fallback_locale**": "en-US",
+  "**additional_metadata**": {
+    "**description**": "string",
+    "**theme**": "string",
+    "**target_audience**": "string"
+  },
+  "**example**": "string"
+}
+music_api_logs --> payload_schema: payload schema
+
+!endsub
+
+!startsub MODEL_MUSIC_API_LOGS_DETAILS
+ENTITY music_api_logs {
+  __Indexes__
+  IDX ttl_idx_90(created_at ASC)
+  IDX instance_urn_created_at_idx(instance_urn ASC, created_at DESC)
+}
+
+note left of music_api_logs::ttl_idx_90
+  **Index Purpose:**
+  Automatically delete documents after a certain
+  period (e.g., 90 days) to manage storage and
+  ensure data relevance.
+  **expireAfterSeconds:**  7776000 (90 days)
+end note
+
+json payload as "**Payload Example**" {
+  "**field**": "title",
+  "**value**": "Summer Vibes Mix",
+  "**fallback_locale**": "en-US"
+}
+music_api_logs -r-> payload: payload
+
+json prediction as "**Prediction Example**" {
+  [
+    "Feel-Good Summer Playlist",
+    "Sunshine & Good Times",
+    "Ultimate Summer Anthems"
+  ]
+}
+music_api_logs -d-> prediction: prediction
+
+json complete_example as "**Complete Document Example**" {
+    "**_id**": "698ddd946f3bad1915a67e87",
+    "**instance_urn**": "urn:music:spotify",
+    "**user_urn**": "urn:music:spotify:user/DB991B65-1B6F-A942-32BD-4558C0ED7AF4",
+    "**tag**": "music-ai.playlist_metadata.generate",
+    "**target_field**": "description",
+    "**payload**": {
+        "**field**": "description",
+        "**playlist_title**": "Acoustic Coffee House",
+        "**fallback_locale**": "en-US",
+        "**additional_metadata**": {
+            "**description**": "Warm acoustic sounds perfect for your morning coffee. Featuring indie folk, singer-songwriter gems **(truncated...)**",
+            "**theme**": null,
+            "**target_audience**": null
+        },
+        "**example**": "ex: Discover fresh indie folk tracks to elevate your coffee ritual **(truncated...)**"
+    },
+    "**prediction**": [
+      "Cozy acoustic melodies and indie folk favorites to accompany your coffee break **(truncated...)**"
+    ],
+    "**created_at**": "2026-02-12T14:03:00.928Z"
+}
+music_api_logs --> complete_example
+
+
+!endsub
+@enduml

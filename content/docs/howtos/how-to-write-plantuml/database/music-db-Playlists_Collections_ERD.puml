@@ -1,0 +1,87 @@
+@startuml Playlists Collections - Entity Relationship Diagram
+
+title MongoDB Collections: playlist_instances and playlists
+
+!include content/docs/howtos/how-to-write-plantuml/database/db_theme_standard.puml
+
+' PLAYLIST_MODEL
+!startsub PLAYLIST_MODEL
+ENTITY playlists {
+  PK _id : ObjectId
+  --
+  + IDX reference_code : string
+  + IDX is_featured : bool
+  + IDX must_tag_moods_at : datetime|null
+}
+!endsub
+
+!startsub PLAYLIST_MODEL_DETAILS
+ENTITY playlists {
+  # moods : ObjectId[]
+  # locale : string
+  # title : string
+  # description : string
+  # genre : string
+  # theme : string
+  # target_audience : string
+  # moods_tagged_at : datetime|null
+  - created_at : datetime
+  - updated_at : datetime
+  __Indexes__
+  SPARSE is_featured_reference_code_idx(is_featured ASC, reference_code ASC)
+  SPARSE must_tag_moods_at_idx (must_tag_moods_at ASC)
+}
+!endsub
+
+' PLAYLIST_INSTANCES_MODEL
+!startsub PLAYLIST_INSTANCES_MODEL
+
+ENTITY playlist_instances {
+  PK _id : ObjectId
+  --
+  + IDX instance_urn : string
+  + IDX playlist : Link[playlists]
+  + IDX playlist_urn : string
+  + IDX has_moods : bool
+  + IDX is_published : bool
+}
+
+' Relationships
+playlist_instances ||--o{ playlists : "playlist_id"
+
+!endsub
+
+!startsub PLAYLIST_INSTANCES_MODEL_DETAILS
+ENTITY playlist_instances {
+uuid : UUID
+is_moods_based_suggestion : bool
+-created_at : datetime
+-updated_at : datetime
+__Indexes__
+IDX playlist_id_idx(playlist.$id ASC)
+IDX instance_urn_has_moods_is_published_idx(instance_urn ASC, has_moods ASC, is_published ASC)
+UNIQUE playlist_urn_instance_urn_unique_idx(playlist_urn ASC, instance_urn ASC)
+}
+!endsub
+
+
+note right of playlists::is_featured_reference_code_idx
+  **Index Purpose:**
+  Contains playlist data from various music streaming
+  platforms. Serves as main source for user suggestions.
+end note
+
+note right of playlist_instances::playlist_urn_instance_urn_unique_idx
+  **Index Purpose:**
+  Featured playlists catalogue with shared
+  information across multiple playlist versions.
+  Master template for mood tagging reference.
+end note
+
+note bottom of playlists
+  **Relationship Pattern:**
+  One featured_playlist can be associated with multiple playlist records
+  playlist_instances.playlist.$id → playlist._id
+end note
+
+@enduml
