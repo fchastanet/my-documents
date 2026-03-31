@@ -46,7 +46,7 @@ repos:
             ^content/docs/bash-scripts/basic-best-practices\.md$|
             ^content/docs/howtos/saml2aws.md|
             ^content/docs/howtos/howto-write-jenkinsfile/06-annotated-jenkinsfiles--p2\.md$|
-            ^content/docs/howtos/saml2aws.md b/content/docs/howtos/saml2aws.md
+            ^content/docs/backups/happier-developers-faster-teams-why-prek-beats-pre-commit\.md$
           )
 
   - repo: https://github.com/jsh9/markdown-heading-numbering
