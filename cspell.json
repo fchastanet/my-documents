@@ -80,9 +80,14 @@
       "name": "plantuml",
       "path": ".cspell/plantuml.txt",
       "addWords": true
+    },
+    {
+      "name": "forbidden",
+      "path": ".cspell/forbidden.txt",
+      "addWords": false
     }
   ],
-  "dictionaries": ["generic", "softwares"],
+  "dictionaries": ["generic", "softwares", "forbidden"],
   "overrides": [
     {
       "filename": ["**/*.md", "content/**"],

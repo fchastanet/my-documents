@@ -1,3 +1,4 @@
+Beanie
 buildx
 cloudflare
 codespell
@@ -29,6 +30,8 @@ megalinter
 mkdocs
 mktemp
 mktemp
+MongoDB
+mongosh
 mypy
 nojekyll
 osint
