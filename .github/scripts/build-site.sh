@@ -13,29 +13,29 @@ if (( $# < 2 )); then
 fi
 
 SITE_DIR="$1"
-SITE_NAME="${2:-$(basename "$SITE_DIR")}"
+SITE_NAME="${2:-$(basename "${SITE_DIR}")}"
 BUILD_DIR="${3:-build}"
 
 script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-repo_root="$(dirname "$(dirname "$script_dir")")"
+repo_root="$(dirname "$(dirname "${script_dir}")")"
 
 echo -e "${BLUE}Building ${SITE_NAME}...${NC}"
 
 # Verify site directory exists
-if [ ! -d "${SITE_DIR}" ]; then
+if [[ ! -d "${SITE_DIR}" ]]; then
   echo -e "${YELLOW}⚠  ${SITE_DIR} not found. Run 'make link-repos' first.${NC}"
   exit 1
 fi
 
 # Verify content exists
-if [ ! -d "${SITE_DIR}/content" ]; then
+if [[ ! -d "${SITE_DIR}/content" ]]; then
   echo -e "${YELLOW}⚠  Skipping ${SITE_NAME} as ${SITE_DIR}/content not found.${NC}"
   exit 0
 fi
 
 output_dir="${BUILD_DIR}/${SITE_NAME}"
-rm -Rf "$output_dir"
-mkdir -p "$output_dir"
+rm -Rf "${output_dir}"
+mkdir -p "${output_dir}"
 
 if [[ -f "${SITE_DIR}/.github/scripts/pre-build.sh" ]]; then
   echo -e "${BLUE}Running pre-build script for ${SITE_NAME}...${NC}"
@@ -47,21 +47,21 @@ if [[ -f "${SITE_DIR}/.github/scripts/pre-build.sh" ]]; then
 fi
 
 # Use prepare-build script to set up the build directory
-"$script_dir/prepare-build.sh" \
-  "$SITE_NAME" \
-  "$repo_root" \
-  "$SITE_DIR" \
-  "$output_dir"
+"${script_dir}/prepare-build.sh" \
+  "${SITE_NAME}" \
+  "${repo_root}" \
+  "${SITE_DIR}" \
+  "${output_dir}"
 
 # Initialize Go modules
-"$script_dir/initialize-modules.sh" \
-  "$output_dir" \
-  "$SITE_DIR"
+"${script_dir}/initialize-modules.sh" \
+  "${output_dir}" \
+  "${SITE_DIR}"
 
 # Build with Hugo
-"$script_dir/build-hugo.sh" \
-  "$output_dir" \
-  "$SITE_DIR"
+"${script_dir}/build-hugo.sh" \
+  "${output_dir}" \
+  "${SITE_DIR}"
 
 echo -e "${GREEN}✅ ${SITE_NAME} built successfully${NC}"
 echo -e "  Output: ${output_dir}/public/"

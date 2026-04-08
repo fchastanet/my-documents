@@ -20,3 +20,5 @@ resources/
 .hugo_build.lock
 hugo.yaml
 **/*.pptx
+
+.cspell/forbidden.txt

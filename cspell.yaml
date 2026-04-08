@@ -1,0 +1,186 @@
+---
+$schema: https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json
+version: "0.2"
+language: en
+noConfigSearch: true
+caseSensitive: true
+useGitignore: true
+enableGlobDot: true
+ignorePaths:
+  - .git/**
+  - '**/.git/**'
+  - '**/node_modules/**'
+  - .history/**
+  - logs/**
+  - '**/logs/**'
+  - bin/**
+  - '**/bin/**'
+  - '**/testsData/**'
+  - package-lock.json
+  - '**/*.svg'
+  - .vscode
+  - .cspell/**
+  - report
+  - .jscpd.json
+  - megalinter-reports
+  - '*-megalinter_file_names_cspell.txt'
+  - '**/*megalinter_file_names_cspell.txt'
+  - .shellcheckrc
+  - vendor/**
+  - '**/backup/**'
+  - commit-msg.md
+  - .mega-linter*.yml
+  - TODO.md
+  - .env
+  - go.sum
+  - go.mod
+  - doc/ai/**
+  - static/**
+  - content/disavow.txt
+  - content/docs/howtos/assets/dockerignore-*
+dictionaryDefinitions:
+  - name: forbidden
+    addWords: false
+    path: .cspell/forbidden.txt
+  - name: myBash
+    path: .cspell/bash.txt
+    addWords: true
+  - name: githubWorkflow
+    path: .cspell/githubWorkflow.txt
+    addWords: true
+  - name: config
+    path: .cspell/config.txt
+    addWords: true
+  - name: mySoftwares
+    path: .cspell/softwares.txt
+    addWords: true
+  - name: markdown
+    path: .cspell/markdown.txt
+    addWords: true
+  - name: lintersConfig
+    path: .cspell/lintersConfig.txt
+    addWords: true
+  # Specific dictionaries for this repo
+  - name: plantuml
+    path: .cspell/plantuml.txt
+    addWords: true
+  - name: generic
+    path: .cspell/generic.txt
+    addWords: true
+  - name: marp
+    path: .cspell/marp.txt
+    addWords: true
+
+languageSettings:
+  - languageId: githubWorkflow
+    locale: '*'
+    dictionaries:
+      - githubWorkflow
+      - bash
+      - go
+      - myBash
+      - mySoftwares
+      - software
+  - languageId: config
+    locale: '*'
+    caseSensitive: true
+    dictionaries:
+      - config
+      - mySoftwares
+      - software
+  - languageId: shellscript
+    locale: '*'
+    dictionaries:
+      - bash
+      - myBash
+      - mySoftwares
+      - software
+
+  - languageId: markdown
+    locale: '*'
+    dictionaries:
+      - markdown
+      - mySoftwares
+      - softwareTerms
+
+# ----------
+overrides:
+  - filename:
+      - '.*'
+      - '*.yml'
+      - '*.yaml'
+      - 'configs/site-config.yaml'
+      - '*.toml'
+      - 'package.json'
+    languageId: config
+  - filename:
+      - .github/**/*.yml
+      - .github/*.yml
+      - templates-examples/**
+    languageId: githubWorkflow
+  - filename:
+      - '*.yml'
+      - '*.yaml'
+      - '*.toml'
+    dictionaries:
+      - lintersConfig
+  - filename:
+    - "**/*.puml"
+    - "**/*.plantuml"
+    - content/docs/howtos/how-to-write-plantuml/01-reusable-plantuml.md
+    dictionaries:
+      - plantuml
+
+  # Specific overrides for this repo
+  - languageId: shellscript
+    filename:
+      - '**/*.sh'
+      - '*.bash'
+      - .github/copilot-instructions.md
+      - '*.{yaml,yml}'
+      - '**/*.env'
+      - '.env.*'
+    dictionaries:
+      - config
+  - languageId: shellscript
+    filename:
+      - "**/*.sh"
+      - Makefile
+      - ".pre-commit-config.yaml"
+    dictionaries:
+      - myBash
+
+  - languageId: markdown
+    filename:
+      - LICENSE
+
+  - filename:
+    - "**/*.md"
+    - content/**
+    dictionaries:
+    - markdown
+    - myBash
+  - filename:
+      - marp/**/*.md
+      - marp/**/*.mmd
+    dictionaries:
+    - marp
+
+patterns:
+  - name: urls
+    pattern: "/https?://([^ \t\"'()]+)/g"
+  - name: packages
+    pattern: /[-A-Za-z0-9.]+/[-A-Za-z0-9.]+/g
+  - name: markdownToc
+    pattern: \]\(#[^)]+\)$
+ignoreRegExpList:
+  - urls
+  - packages
+  - markdownToc
+enableFiletypes:
+  - shellscript
+
+dictionaries:
+  - generic
+  - mySoftwares
+  - forbidden

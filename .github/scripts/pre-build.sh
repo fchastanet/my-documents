@@ -14,10 +14,10 @@ echo -e "${BLUE}Running pre-build for my-documents...${NC}"
 
 # Determine the repository root
 script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-repo_root="$(dirname "$(dirname "$script_dir")")"
+repo_root="$(dirname "$(dirname "${script_dir}")")"
 
 # Build Marp presentations
-if [ -d "${repo_root}/marp" ]; then
+if [[ -d "${repo_root}/marp" ]]; then
   echo -e "${BLUE}Building Marp presentations...${NC}"
   "${script_dir}/build-marp.sh" "marp" "${repo_root}/static/presentations"
   echo -e "${GREEN}✅ Marp presentations built${NC}"

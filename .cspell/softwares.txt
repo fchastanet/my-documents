@@ -2,15 +2,15 @@ Beanie
 buildx
 cloudflare
 codespell
-codespell
 Disqus
 disqus
 django
 docsify
-docsy
 Docsy
+docsy
 dotnet
 dpkg
+ecma
 firefox
 giscus
 github
@@ -29,7 +29,6 @@ mdformat
 megalinter
 mkdocs
 mktemp
-mktemp
 MongoDB
 mongosh
 mypy
@@ -41,8 +40,8 @@ pendo
 phpstorm
 phpunit
 plantuml
-prek
 Prek
+prek
 Pydantic
 secretlint
 shellcheck

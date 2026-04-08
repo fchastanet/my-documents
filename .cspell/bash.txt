@@ -8,11 +8,12 @@ doesn
 elif
 errexit
 errtrace
-github
 GITHUB
+github
 HEALTHCHECK
 hugo
 ireduce
+Lastmod
 lastmod
 lastpipe
 linux
@@ -20,7 +21,6 @@ mapfile
 nlastmod
 nodoc
 noninteractive
-nounset
 nounset
 pipefail
 PIPESTATUS

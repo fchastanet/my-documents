@@ -11,15 +11,15 @@ SITES_DIR="${2:-sites}"
 shift 2 || true
 REPOS=("$@")
 
-if [ ${#REPOS[@]} -eq 0 ]; then
+if [[ "${#REPOS[@]}" = "0" ]]; then
   echo -e "${YELLOW}No repositories specified${NC}"
   exit 1
 fi
 
 script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-repo_root="$(dirname "$(dirname "$script_dir")")"
+repo_root="$(dirname "$(dirname "${script_dir}")")"
 
-cd "$repo_root"
+cd "${repo_root}"
 
 echo -e "${BLUE}Testing all sites with curl...${NC}"
 
@@ -40,7 +40,7 @@ echo -e "${BLUE}Testing all sites with curl...${NC}"
 # Test other sites
 
 for repo in "${REPOS[@]}"; do
-  if [ -d "${BUILD_DIR}/${repo}/public" ]; then
+  if [[ -d "${BUILD_DIR}/${repo}/public" ]]; then
     (
       echo "  Testing ${repo}..."
       trap '(kill $SITE_SERVER_PID 2>/dev/null; sleep 1) || true' EXIT

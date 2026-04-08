@@ -16,54 +16,54 @@ BASE_URL="${5:-}"
 
 script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-echo -e "${BLUE}Preparing build for $SITE_NAME...${NC}"
+echo -e "${BLUE}Preparing build for ${SITE_NAME}...${NC}"
 
 # For dependent sites
 echo "  Setting up dependent site..."
-mkdir -p "$OUTPUT_DIR"
+mkdir -p "${OUTPUT_DIR}"
 
 # Copy shared resources from orchestrator
-"$script_dir/copy-shared-resources.sh" \
-  "$ORCHESTRATOR_DIR/shared" \
-  "$OUTPUT_DIR/shared"
+"${script_dir}/copy-shared-resources.sh" \
+  "${ORCHESTRATOR_DIR}/shared" \
+  "${OUTPUT_DIR}/shared"
 
-if [[ "$SOURCE_DIR" != "$ORCHESTRATOR_DIR" ]]; then
+if [[ "${SOURCE_DIR}" != "${ORCHESTRATOR_DIR}" ]]; then
   echo "  Setting up site-specific resources..."
   # Copy site-specific resources
-  if [ -d "$SOURCE_DIR/layouts" ]; then
+  if [[ -d "${SOURCE_DIR}/layouts" ]]; then
     echo "    Copying site-specific layouts..."
-    mkdir -p "$OUTPUT_DIR/layouts"
-    cp -r "$SOURCE_DIR/layouts"/* "$OUTPUT_DIR/layouts/"
+    mkdir -p "${OUTPUT_DIR}/layouts"
+    cp -r "${SOURCE_DIR}/layouts"/* "${OUTPUT_DIR}/layouts/"
   fi
-  if [ -d "$SOURCE_DIR/assets" ]; then
+  if [[ -d "${SOURCE_DIR}/assets" ]]; then
     echo "    Copying site-specific assets..."
-    mkdir -p "$OUTPUT_DIR/assets"
-    cp -r "$SOURCE_DIR/assets"/* "$OUTPUT_DIR/assets/"
+    mkdir -p "${OUTPUT_DIR}/assets"
+    cp -r "${SOURCE_DIR}/assets"/* "${OUTPUT_DIR}/assets/"
   fi
 fi
 
 # Copy site content
 echo "  Copying content..."
-if [ -d "$SOURCE_DIR/content" ]; then
-  cp -r "$SOURCE_DIR/content" "$OUTPUT_DIR/"
+if [[ -d "${SOURCE_DIR}/content" ]]; then
+  cp -r "${SOURCE_DIR}/content" "${OUTPUT_DIR}/"
 else
-  echo -e "${YELLOW}⚠ No content directory found in $SOURCE_DIR${NC}"
+  echo -e "${YELLOW}⚠ No content directory found in ${SOURCE_DIR}${NC}"
 fi
 
 echo "  Copying static files..."
-if [ -d "$SOURCE_DIR/static" ]; then
-  cp -r "$SOURCE_DIR/static" "$OUTPUT_DIR/"
+if [[ -d "${SOURCE_DIR}/static" ]]; then
+  cp -r "${SOURCE_DIR}/static" "${OUTPUT_DIR}/"
 fi
 
-echo "$OUTPUT_DIR"
-mkdir -p "$OUTPUT_DIR/public"
+echo "${OUTPUT_DIR}"
+mkdir -p "${OUTPUT_DIR}/public"
 
-if [[ "${SITE_NAME}" == "my-documents" ]]; then
+if [[ "${SITE_NAME}" = "my-documents" ]]; then
   echo "  Create a .nojekyll file to make google search to recognize the sitemap.xml file"
-  touch "$OUTPUT_DIR/public/.nojekyll"
+  touch "${OUTPUT_DIR}/public/.nojekyll"
 
   echo "  Create robots.txt to allow sitemap.xml crawling"
-  echo >"$OUTPUT_DIR/public/robots.txt"
+  echo >"${OUTPUT_DIR}/public/robots.txt"
   sites=(
     ""
     "bash-compiler/"
@@ -72,39 +72,40 @@ if [[ "${SITE_NAME}" == "my-documents" ]]; then
     "bash-dev-env/"
   )
 
-  echo "User-agent: *">> "$OUTPUT_DIR/public/robots.txt"
-  echo "Disallow:">> "$OUTPUT_DIR/public/robots.txt"
+  echo "User-agent: *">> "${OUTPUT_DIR}/public/robots.txt"
+  echo "Disallow:">> "${OUTPUT_DIR}/public/robots.txt"
   for i in "${sites[@]}"; do
     echo "  Adding sitemap for ${i:-DevLab}..."
-    echo "Sitemap: https://devlab.top/${i}sitemap.xml">> "$OUTPUT_DIR/public/robots.txt"
+    echo "Sitemap: https://devlab.top/${i}sitemap.xml" \
+      >> "${OUTPUT_DIR}/public/robots.txt"
   done
 fi
 
 # Copy go.mod and go.sum if they exist
-if [ -f "$ORCHESTRATOR_DIR/go.mod" ]; then
-  cp "$ORCHESTRATOR_DIR/go.mod" "$OUTPUT_DIR/"
-  sed -i "s|github.com/fchastanet/my-documents|github.com/fchastanet/$SITE_NAME|g" "$OUTPUT_DIR/go.mod"
+if [[ -f "${ORCHESTRATOR_DIR}/go.mod" ]]; then
+  cp "${ORCHESTRATOR_DIR}/go.mod" "${OUTPUT_DIR}/"
+  sed -i "s|github.com/fchastanet/my-documents|github.com/fchastanet/${SITE_NAME}|g" "${OUTPUT_DIR}/go.mod"
 fi
-if [ -f "$ORCHESTRATOR_DIR/go.sum" ]; then
-  cp "$ORCHESTRATOR_DIR/go.sum" "$OUTPUT_DIR/"
+if [[ -f "${ORCHESTRATOR_DIR}/go.sum" ]]; then
+  cp "${ORCHESTRATOR_DIR}/go.sum" "${OUTPUT_DIR}/"
 fi
 
 # Merge configurations
 echo "  Merging configurations..."
-"$script_dir/merge-configs.sh" \
-  "$ORCHESTRATOR_DIR/configs/_base.yaml" \
-  "$SOURCE_DIR/configs/site-config.yaml" \
-  "$OUTPUT_DIR/hugo.yaml" \
-  "$BASE_URL"
+"${script_dir}/merge-configs.sh" \
+  "${ORCHESTRATOR_DIR}/configs/_base.yaml" \
+  "${SOURCE_DIR}/configs/site-config.yaml" \
+  "${OUTPUT_DIR}/hugo.yaml" \
+  "${BASE_URL}"
 
 # Copy go.mod and go.sum from orchestrator if not present in site
-if [[ -f "$ORCHESTRATOR_DIR/go.mod" && ! -f "$OUTPUT_DIR/go.mod" ]]; then
+if [[ -f "${ORCHESTRATOR_DIR}/go.mod" && ! -f "${OUTPUT_DIR}/go.mod" ]]; then
   echo "  Copying go.mod from orchestrator..."
-  cp "$ORCHESTRATOR_DIR/go.mod" "$OUTPUT_DIR/"
+  cp "${ORCHESTRATOR_DIR}/go.mod" "${OUTPUT_DIR}/"
 fi
-if [[ -f "$ORCHESTRATOR_DIR/go.sum" && ! -f "$OUTPUT_DIR/go.sum" ]]; then
+if [[ -f "${ORCHESTRATOR_DIR}/go.sum" && ! -f "${OUTPUT_DIR}/go.sum" ]]; then
   echo "  Copying go.sum from orchestrator..."
-  cp "$ORCHESTRATOR_DIR/go.sum" "$OUTPUT_DIR/"
+  cp "${ORCHESTRATOR_DIR}/go.sum" "${OUTPUT_DIR}/"
 fi
 
-echo -e "${GREEN}✅ Build directory prepared for $SITE_NAME${NC}"
+echo -e "${GREEN}✅ Build directory prepared for ${SITE_NAME}${NC}"

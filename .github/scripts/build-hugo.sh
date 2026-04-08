@@ -10,15 +10,15 @@ BUILD_DIR="${1:?Error: BUILD_DIR argument required}"
 SITE_NAME="${2:-site}"
 BASE_URL="${3:-}"
 
-if [[ ! -d "$BUILD_DIR" ]]; then
-  echo -e "${RED}✗ Build directory not found: $BUILD_DIR${NC}"
+if [[ ! -d "${BUILD_DIR}" ]]; then
+  echo -e "${RED}✗ Build directory not found: ${BUILD_DIR}${NC}"
   exit 1
 fi
 
-echo -e "${BLUE}Building $SITE_NAME with Hugo...${NC}"
+echo -e "${BLUE}Building ${SITE_NAME} with Hugo...${NC}"
 
 (
-  cd "$BUILD_DIR"
+  cd "${BUILD_DIR}" || exit 1
 
   # Set environment variables for Hugo build
   export HUGO_CACHEDIR="${HUGO_CACHEDIR:-$(cd ".." && pwd -P)/.hugo_cache}"
@@ -41,12 +41,12 @@ echo -e "${BLUE}Building $SITE_NAME with Hugo...${NC}"
     --printUnusedTemplates
     --logLevel info
   )
-  if [[ -n "$BASE_URL" ]]; then
-    args+=(--baseURL "$BASE_URL/")
+  if [[ -n "${BASE_URL}" ]]; then
+    args+=(--baseURL "${BASE_URL}/")
   fi
   hugo "${args[@]}"
 
-  echo -e "${GREEN}✅ Build complete for $SITE_NAME${NC}"
+  echo -e "${GREEN}✅ Build complete for ${SITE_NAME}${NC}"
   echo "  📊 Public directory size:"
   du -sh public/
 )

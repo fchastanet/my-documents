@@ -1,0 +1,9 @@
+external-sources=true
+enable=require-variable-braces
+enable=avoid-nullary-conditions
+enable=add-default-case
+enable=quote-safe-variables
+enable=require-double-brackets
+source-path=SCRIPTDIR
+# special property used by shellcheckLint
+exclude=(^bin/|^install$|^conf/dbScripts/extractData$|\.bats$|\.tpl$|/testsData/|\.cache/pre-commit)
