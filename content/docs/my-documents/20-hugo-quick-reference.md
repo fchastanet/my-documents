@@ -4,9 +4,9 @@ description: A quick reference guide for developing and maintaining the Hugo doc
 categories: [Documentation]
 tags: [documentation, github-actions, reusable-workflow, github-app, authentication, secrets-management, ai-generated]
 weight: 20
-version: '1.0'
 date: '2026-03-04T08:00:00+01:00'
-lastmod: '2026-03-04T08:00:00+01:00'
+lastmod: '2026-04-11T21:01:42+02:00'
+version: '1.1'
 ---
 
 ## 1. Local Development
@@ -100,7 +100,7 @@ static/
 Reference in markdown:
 
 ```markdown
-![Alt text](/howto-write-dockerfile/image-name.png)
+![Alt text](/docs/docker/assets/Alpine-vs-Ubuntu.png)
 ```
 
 ## 5. Common Docsy Shortcodes
