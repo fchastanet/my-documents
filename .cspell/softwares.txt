@@ -1,4 +1,5 @@
 Beanie
+braelyn
 buildx
 cloudflare
 codespell
@@ -43,6 +44,7 @@ plantuml
 Prek
 prek
 Pydantic
+rudy
 secretlint
 shellcheck
 shfmt
