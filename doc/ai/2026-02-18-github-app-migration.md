@@ -202,22 +202,24 @@ name: Test GitHub App
 on: workflow_dispatch
 
 jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/create-github-app-token@v1
-        id: app-token
-        with:
-          app-id: ${{ secrets.DOC_APP_ID }}
-          private-key: ${{ secrets.DOC_APP_PRIVATE_KEY }}
-          owner: fchastanet
-          repositories: bash-compiler
+   test:
+      runs-on: ubuntu-latest
+      env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true # Forces Node 24 runtime
+      steps:
+         - uses: actions/create-github-app-token@v1
+         id: app-token
+         with:
+            app-id: ${{ secrets.DOC_APP_ID }}
+            private-key: ${{ secrets.DOC_APP_PRIVATE_KEY }}
+            owner: fchastanet
+            repositories: bash-compiler
 
-      - run: |
-          echo "Token generated successfully!"
-          echo "Token length: ${#GITHUB_TOKEN}"
-        env:
-          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
+         - run: |
+            echo "Token generated successfully!"
+            echo "Token length: ${#GITHUB_TOKEN}"
+         env:
+            GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
 ```
 
 Run workflow → should succeed without errors

@@ -52,6 +52,8 @@ permissions:
 jobs:
   trigger:
     runs-on: ubuntu-latest
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true # Forces Node 24 runtime
     steps:
       - name: Generate GitHub App token
         id: app-token

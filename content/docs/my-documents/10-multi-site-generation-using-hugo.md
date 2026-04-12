@@ -1,12 +1,12 @@
 ---
 title: My Documents - Multi repositories Site Generation
 description: Comprehensive documentation of the Hugo migration for multi-site documentation
-version: '1.0'
 weight: 10
 categories: [Brainstorming]
 tags: [hugo, docsy, multi-site, documentation, static-site-generator, github-actions, ai-generated]
 date: '2026-02-18T08:00:00+01:00'
-lastmod: '2026-02-18T08:00:00+01:00'
+lastmod: '2026-04-12T18:57:13+02:00'
+version: '1.1'
 ---
 
 **Project:** Migration from Docsify to Hugo with Docsy theme for multiple documentation repositories
@@ -633,6 +633,8 @@ on:
 jobs:
   trigger:
     runs-on: ubuntu-latest
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true # Forces Node 24 runtime
     steps:
       - name: Trigger my-documents build
         uses: peter-evans/repository-dispatch@v3

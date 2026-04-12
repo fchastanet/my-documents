@@ -1,5 +1,5 @@
 ---
-name: Build and Deploy My Documents
+name: Build and Deploy Documentation
 
 on:
   workflow_dispatch:

@@ -4,9 +4,9 @@ description: Overview of the technical architecture and implementation details o
 categories: [Documentation]
 tags: [documentation, github-actions, reusable-workflow, github-app, authentication, secrets-management, ai-generated]
 weight: 11
-version: '1.0'
 date: '2026-02-21T08:00:00+01:00'
-lastmod: '2026-02-21T08:00:00+01:00'
+lastmod: '2026-04-12T18:57:13+02:00'
+version: '1.1'
 ---
 
 ## 1. Overview
@@ -587,6 +587,8 @@ If you're migrating from the old PAT-based trigger workflow:
 jobs:
   trigger:
     runs-on: ubuntu-latest
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true # Forces Node 24 runtime
     steps:
       - name: Trigger my-documents build
         run: |
