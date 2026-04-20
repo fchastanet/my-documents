@@ -1,0 +1,246 @@
+@startuml Arbre d'identification des émotions
+!theme plain
+
+skinparam activity {
+  BackgroundColor<<Question>> LightBlue
+  BackgroundColor<<Sensation>> Orange
+  BackgroundColor<<EmotionBase>> Salmon
+  BackgroundColor<<EmotionAffinée>> Plum
+  BackgroundColor<<Besoin>> LightGreen
+  BackgroundColor<<Sentiment>> Pink
+  BorderColor Black
+  FontSize 11
+}
+
+title Arbre décisionnel d'identification des émotions\n(Pour personnes alexithymiques)
+
+start
+
+:Comment souhaitez-vous\ndécrire ce que vous ressentez?<<Question>>;
+
+switch (Choix?)
+case (Sensations physiques)
+  :Concentrez-vous sur\nvotre corps<<Question>>;
+
+  if (Ressentez-vous de l'énergie,\nde l'agitation, des tensions?<<Question>>) then (Oui - Activation haute)
+
+    if (Ces sensations sont-elles\nplutôt agréables ou désagréables?<<Question>>) then (Agréables)
+
+      if (Avez-vous envie de bouger,\nde partager, de célébrer?<<Sensation>>) then (Oui)
+        :JOIE<<EmotionBase>>\n- Sourire\n- Légèreté\n- Énergie;
+        :Besoin de partager,\nde célébrer<<Besoin>>;
+
+        :Affiner?<<Question>>;
+        switch (Type de joie?)
+        case (Calme)
+          :Satisfaction<<EmotionAffinée>>;
+        case (Intense)
+          if (Avec les autres?) then (Oui)
+            :Amusement<<EmotionAffinée>>;
+          else (Seul)
+            :Excitation<<EmotionAffinée>>;
+          endif
+        case (Contemplative)
+          :Appréciation esthétique<<EmotionAffinée>>;
+        endswitch
+
+      else (Non - Envie de fuir/bouger)
+        :PEUR<<EmotionBase>>\n- Cœur rapide\n- Ventre serré\n- Tremblements;
+        :Besoin de sécurité,\nde protection<<Besoin>>;
+
+        :Affiner?<<Question>>;
+        if (Niveau d'intensité?) then (Élevé)
+          :Horreur / Terreur<<EmotionAffinée>>;
+        else (Modéré)
+          if (Avec incertitude?) then (Oui)
+            :Anxiété<<EmotionAffinée>>;
+          else (Non)
+            :Peur simple<<EmotionAffinée>>;
+          endif
+        endif
+
+      endif
+
+    else (Désagréables)
+
+      if (Avez-vous envie de repousser,\nd'attaquer, de crier?<<Sensation>>) then (Oui)
+        :COLÈRE<<EmotionBase>>\n- Tension\n- Mâchoire crispée\n- Points serrés;
+        :Besoin de respect,\nde justice, de limites<<Besoin>>;
+
+        :Affiner?<<Question>>;
+        switch (Intensité et cible?)
+        case (Forte, vers autrui)
+          :Haine / Fureur<<EmotionAffinée>>;
+        case (Modérée)
+          if (Injustice perçue?) then (Oui)
+            :Indignation<<EmotionAffinée>>;
+          else (Non)
+            :Irritation / Agacement<<EmotionAffinée>>;
+          endif
+        endswitch
+
+      else (Non - Plutôt se détourner)
+        if (Sensation de nausée,\nhaut-le-cœur?<<Sensation>>) then (Oui)
+          :DÉGOÛT<<EmotionBase>>\n- Nausée\n- Nez retroussé\n- Recul;
+          :Besoin de sécurité,\nde fuite<<Besoin>>;
+
+          :Affiner?<<Question>>;
+          if (Type?) then (Moral)
+            :Honte<<EmotionAffinée>>;
+          else (Physique)
+            :Dégoût pur<<EmotionAffinée>>;
+          endif
+
+        else (Non)
+          :SURPRISE<<EmotionBase>>\n- Souffle coupé\n- Yeux grands ouverts\n- Immobilisation;
+          :Besoin de comprendre,\nde sécurité<<Besoin>>;
+
+          :Affiner?<<Question>>;
+          if (Valence?) then (Positive)
+            :Émerveillement<<EmotionAffinée>>;
+          else (Neutre / Négative)
+            if (Incompréhension?) then (Oui)
+              :Confusion<<EmotionAffinée>>;
+            else (Non)
+              :Surprise simple<<EmotionAffinée>>;
+            endif
+          endif
+
+        endif
+      endif
+
+    endif
+
+  else (Non - Activation basse)
+
+    if (Ressentez-vous du vide,\nde la lourdeur, de la fatigue?<<Sensation>>) then (Oui)
+      :TRISTESSE<<EmotionBase>>\n- Lourdeur\n- Gorge serrée\n- Larmes;
+      :Besoin de réconfort,\nd'écoute, de sens<<Besoin>>;
+
+      :Affiner?<<Question>>;
+      if (Type et durée?) then (Profonde, longue)
+        :Mélancolie<<EmotionAffinée>>;
+      else (Modérée)
+        if (Tournée vers le passé?) then (Oui)
+          :Nostalgie<<EmotionAffinée>>;
+        else (Non)
+          if (Avec compassion?) then (Oui)
+            :Douleur empathique<<EmotionAffinée>>;
+          else (Non)
+            :Tristesse simple<<EmotionAffinée>>;
+          endif
+        endif
+      endif
+
+    else (Non - État neutre/calme)
+      :CALME / SÉRÉNITÉ<<EmotionBase>>\n- Détente\n- Respiration régulière\n- Apaisement;
+      :Besoins satisfaits<<Besoin>>;
+
+      :État positif actuel<<EmotionAffinée>>\nPas d'émotion forte;
+
+    endif
+
+  endif
+
+case (Situation/Contexte)
+  :Pensez à ce qui\nvient de se passer<<Question>>;
+
+  if (Cet événement était-il\ninattendu, soudain?<<Question>>) then (Oui)
+    :SURPRISE<<EmotionBase>>\n- Souffle coupé\n- Yeux ouverts\n- Immobilisation;
+    :Besoin de comprendre<<Besoin>>;
+
+    :Affiner selon contexte?<<Question>>;
+    switch (Contexte?)
+    case (Beau/Impressionnant)
+      :Émerveillement<<EmotionAffinée>>;
+    case (Incompréhensible)
+      :Confusion<<EmotionAffinée>>;
+    case (Neutre)
+      :Surprise simple<<EmotionAffinée>>;
+    endswitch
+
+  else (Non - Attendu)
+
+    if (Avez-vous perdu quelque chose\nd'important (personne, object, situation)?<<Question>>) then (Oui)
+      :TRISTESSE<<EmotionBase>>\n- Lourdeur\n- Gorge serrée\n- Larmes;
+      :Besoin de réconfort,\nde sens<<Besoin>>;
+
+      :Affiner?<<Question>>;
+      switch (Type de perte?)
+      case (Personne/Relation)
+        :Chagrin profond<<EmotionAffinée>>;
+      case (Passé révolu)
+        :Nostalgie<<EmotionAffinée>>;
+      case (Empathie pour autrui)
+        :Douleur empathique<<EmotionAffinée>>;
+      endswitch
+
+    else (Non)
+
+      if (Quelqu'un a-t-il franchi vos limites,\nvos valeurs, ou agi injustement?<<Question>>) then (Oui)
+        :COLÈRE<<EmotionBase>>\n- Tension\n- Mâchoire crispée\n- Chaleur;
+        :Besoin de respect,\nde justice<<Besoin>>;
+
+        :Affiner?<<Question>>;
+        switch (Gravité?)
+        case (Violation grave)
+          :Haine / Fureur<<EmotionAffinée>>;
+        case (Injustice)
+          :Indignation<<EmotionAffinée>>;
+        case (Agacement)
+          :Irritation<<EmotionAffinée>>;
+        endswitch
+
+      else (Non)
+
+        if (Y a-t-il un danger\nou une menace présente?<<Question>>) then (Oui)
+          :PEUR<<EmotionBase>>\n- Cœur rapide\n- Tension\n- Envie de fuir;
+          :Besoin de sécurité<<Besoin>>;
+
+          :Affiner?<<Question>>;
+          switch (Intensité?)
+          case (Extrême)
+            :Horreur / Terreur<<EmotionAffinée>>;
+          case (Anticipation)
+            :Anxiété<<EmotionAffinée>>;
+          case (Modérée)
+            :Peur simple<<EmotionAffinée>>;
+          endswitch
+
+        else (Non)
+
+          if (Quelque chose de positif\nvient-il de se produire?<<Question>>) then (Oui)
+            :JOIE<<EmotionBase>>\n- Sourire\n- Légèreté\n- Énergie;
+            :Besoin de partager,\nde célébrer<<Besoin>>;
+
+            :Affiner?<<Question>>;
+            switch (Type de joie?)
+            case (Sociale/Partagée)
+              :Amusement<<EmotionAffinée>>;
+            case (Accomplissement)
+              :Satisfaction<<EmotionAffinée>>;
+            case (Contemplative)
+              :Appréciation<<EmotionAffinée>>;
+            case (Intense)
+              :Excitation<<EmotionAffinée>>;
+            endswitch
+
+          else (Non - Situation neutre)
+            :CALME<<EmotionBase>>\n- Détente\n- Neutralité;
+            :Pas d'émotion forte\nen ce moment;
+
+          endif
+
+        endif
+
+      endif
+
+    endif
+
+  endif
+
+endswitch
+
+stop
+
+@enduml

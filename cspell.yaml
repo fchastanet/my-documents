@@ -2,6 +2,8 @@
 $schema: https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json
 version: "0.2"
 language: en
+import:
+  - "@cspell/dict-fr-fr/cspell-ext.json"
 noConfigSearch: true
 caseSensitive: true
 useGitignore: true
@@ -70,6 +72,9 @@ dictionaryDefinitions:
   - name: marp
     path: .cspell/marp.txt
     addWords: true
+  - name: french
+    path: .cspell/french.txt
+    addWords: true
 
 languageSettings:
   - languageId: githubWorkflow
@@ -102,6 +107,15 @@ languageSettings:
       - markdown
       - mySoftwares
       - softwareTerms
+
+  - languageId: markdown
+    locale: 'fr'
+    dictionaries:
+      - fr-fr
+      - french
+      - generic
+      - mySoftwares
+      - forbidden
 
 # ----------
 overrides:
@@ -157,9 +171,22 @@ overrides:
   - filename:
     - "**/*.md"
     - content/**
+    - "!content/fr/**/*.md"
     dictionaries:
     - markdown
     - myBash
+
+  - filename:
+      - content/fr/**
+    language: fr
+    dictionaries:
+      - fr-fr
+      - french
+      - generic
+      - mySoftwares
+      - forbidden
+      - plantuml
+
   - filename:
       - marp/**/*.md
       - marp/**/*.mmd

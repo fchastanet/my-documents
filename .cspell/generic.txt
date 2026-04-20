@@ -18,6 +18,7 @@ hsts
 isset
 jenkinsfiles
 jsonify
+layout
 logrus
 markdownify
 monokai
@@ -26,6 +27,7 @@ noimageindex
 podman
 pygments
 readingtime
+recent
 sbom
 scopeconfig
 tabwidth
@@ -34,3 +36,4 @@ taxo
 UNINDEXED
 unindexed
 warnf
+weight

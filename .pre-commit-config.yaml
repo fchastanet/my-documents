@@ -157,7 +157,8 @@ repos:
         exclude: >
           (?x)(
             ^.cspell/codespellrc-.*.txt$|
-            ^package-lock\.json$
+            ^package-lock\.json$|
+            ^content/fr/
           )
 
   - repo: https://github.com/fchastanet/jumanjihouse-pre-commit-hooks

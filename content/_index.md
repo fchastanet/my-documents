@@ -3,8 +3,8 @@ title: François Chastanet's DevLab
 linkTitle: DevLab
 type: docs
 date: '2026-02-17T08:00:00+01:00'
-lastmod: '2026-04-11T18:33:49+02:00'
-version: '1.1'
+lastmod: '2026-04-20T21:10:57+02:00'
+version: '1.2'
 ---
 
 {{% pageinfo %}}
@@ -47,10 +47,12 @@ Here the links to my main open source projects:
 
 > Go tool allowing to aggregate bash files into one allowing bash script reusability
 
-## 2. My recent articles
+## 2. Browse Articles
+
+[Browse my english articles](/docs/)
+
+[Browse my french articles](/fr/)
+
+## 3. My recent articles
 
 {{< recent-articles >}}
-
-## 3. Browse Articles
-
-[Browse my articles](/docs/)

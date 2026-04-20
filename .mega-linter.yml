@@ -128,7 +128,9 @@ MARKDOWN_MARKDOWNLINT_FILTER_REGEX_EXCLUDE: |
     ^marp/
   )
 
-SPELL_CSPELL_CONFIG_FILE: cspell.json
+SPELL_CSPELL_CONFIG_FILE: cspell.yaml
+SPELL_CSPELL_PRE_COMMANDS:
+  - command: npm install @cspell/dict-fr-fr@^2.3.2
 SPELL_CSPELL_FILTER_REGEX_EXCLUDE: |
   (?x)(
     \.git/|
