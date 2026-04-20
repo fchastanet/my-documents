@@ -2,10 +2,12 @@
 # This config is shared across all documentation sites
 
 # Language settings
-contentDir: content/docs
+contentDir: content
 languageCode: en-us
 defaultContentLanguage: en
 defaultContentLanguageInSubdir: false
+disableDefaultLanguageRedirect: true
+
 enableRobotsTXT: false
 enableGitInfo: true
 

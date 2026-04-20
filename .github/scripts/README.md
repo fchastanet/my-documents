@@ -35,7 +35,7 @@ Install Hugo extended build.
 **Example:**
 
 ```bash
-.github/scripts/install-hugo.sh 0.155.3
+.github/scripts/install-hugo.sh 0.160.1
 ```
 
 ### `install-yq.sh`
@@ -142,7 +142,7 @@ All scripts use relative paths by default:
 | `BUILD_DIR` | `build`   | Build output directory                 |
 | `SITES_DIR` | `sites`   | Symlink directory for dependencies     |
 | `SITE`      | -         | Single site to build (required)        |
-| `VERSION`   | `0.155.3` | Hugo version to install                |
+| `VERSION`   | `0.160.1` | Hugo version to install                |
 | `REPOS`     | -         | List of repositories (space-separated) |
 
 ## Using with Makefile

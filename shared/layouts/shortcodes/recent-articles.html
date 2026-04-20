@@ -2,7 +2,7 @@
   Display the most recently published articles from across the entire site
   in a card/block style format.
 
-  Usage: {{< recent-articles limit="10" >}}
+  Usage: {{< recent-articles limit="10" dir="docs" >}}
 */}}
 
 {{ $limit := 10 }}
@@ -10,8 +10,21 @@
   {{ $limit = int (.Get "limit") }}
 {{ end }}
 
+{{ $dir := "docs" }}
+{{ if .Get "dir" }}
+  {{ $dir = .Get "dir" }}
+{{ end }}
+
 {{/* Get all regular pages from the site, excluding section pages */}}
-{{ $allPages := where .Site.RegularPages "Type" "docs" }}
+{{/* Filter by checking if the page path starts with the specified directory */}}
+{{ $allPages := slice }}
+{{ range .Site.RegularPages }}
+  {{ if .File }}
+    {{ if hasPrefix .File.Path (printf "%s/" $dir) }}
+      {{ $allPages = $allPages | append . }}
+    {{ end }}
+  {{ end }}
+{{ end }}
 
 {{/* Sort by lastmod date in descending order (most recent first) */}}
 {{ $sortedPages := sort $allPages "Params.lastmod" "desc" }}

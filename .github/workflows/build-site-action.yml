@@ -70,7 +70,7 @@ jobs:
       - name: Setup Hugo
         uses: denmette/actions-hugo@v1
         with:
-          hugo-version: '0.155.3'
+          hugo-version: '0.160.1'
           extended: true
 
       - name: Cache Hugo modules

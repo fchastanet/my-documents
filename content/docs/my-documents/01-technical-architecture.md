@@ -4,9 +4,9 @@ description: Complete technical architecture guide for the Hugo documentation sy
 weight: 01
 categories: [documentation, architecture]
 tags: [hugo, github-actions, docsy, architecture, ai-generated]
-version: '1.0'
 date: '2026-02-18T08:00:00+01:00'
-lastmod: '2026-02-22T08:00:00+01:00'
+lastmod: '2026-04-20T20:22:33+02:00'
+version: '1.1'
 ---
 
 ## 1. Overview
@@ -40,7 +40,7 @@ configurations, layouts, and assets while maintaining their independence.
 
 Install the required tools:
 
-- **Hugo Extended** v0.155.3 or higher (with Go support)
+- **Hugo Extended** v0.160.1 or higher (with Go support)
 - **Go** 1.24 or higher
 - **Git**
 
@@ -675,7 +675,7 @@ The reusable action may support additional parameters:
 
 ```yaml
 with:
-  hugo-version: 0.155.3           # Default: latest
+  hugo-version: 0.160.1           # Default: latest
   go-version: '1.24'              # Default: 1.24
   extended: true                  # Default: true (Hugo Extended)
   working-directory: .            # Default: repository root

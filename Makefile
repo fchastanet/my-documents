@@ -1,5 +1,5 @@
 # Variables
-HUGO_VERSION := 0.155.3
+HUGO_VERSION := 0.160.1
 SITES_DIR := sites
 BUILD_DIR := build
 REPOS := bash-compiler bash-tools bash-tools-framework bash-dev-env

@@ -5,8 +5,8 @@ weight: 10
 categories: [Brainstorming]
 tags: [hugo, docsy, multi-site, documentation, static-site-generator, github-actions, ai-generated]
 date: '2026-02-18T08:00:00+01:00'
-lastmod: '2026-04-12T18:57:13+02:00'
-version: '1.1'
+lastmod: '2026-04-20T20:22:33+02:00'
+version: '1.2'
 ---
 
 **Project:** Migration from Docsify to Hugo with Docsy theme for multiple documentation repositories
@@ -558,7 +558,7 @@ matrix:
 
 01. **Checkout Orchestrator:** Clone my-documents repository
 02. **Checkout Content:** Clone dependent repository content (if not self)
-03. **Setup Tools:** Install Hugo Extended 0.155.3, Go 1.24, yq
+03. **Setup Tools:** Install Hugo Extended 0.160.1, Go 1.24, yq
 04. **Prepare Build Directory:**
     - For my-documents: Use orchestrator directory
     - For dependent repos: Create `build-{site}` directory
@@ -782,7 +782,7 @@ for complete migration guide
 
 #### 4.3.3. Dependency Management
 
-- **Pin versions:** Hugo 0.155.3, Go 1.24 (reproducible builds)
+- **Pin versions:** Hugo 0.160.1, Go 1.24 (reproducible builds)
 - **Cache when possible:** Hugo modules could be cached (future optimization)
 - **Minimal dependencies:** yq only additional tool needed
 
