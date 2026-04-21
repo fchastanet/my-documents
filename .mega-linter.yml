@@ -157,7 +157,10 @@ SPELL_FILTER_REGEX_EXCLUDE: |
     ^bin/bash-tpl|
     \.svg
   )
-
+XML_XMLLINT_FILTER_REGEX_EXCLUDE: |
+  (?x)(
+    ^shared/layouts/sitemap\.xml$
+  )
 HTML_HTMLHINT_FILTER_REGEX_EXCLUDE: |
   (?x)(
     ^content/_index.html$|

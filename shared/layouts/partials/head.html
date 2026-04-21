@@ -61,29 +61,47 @@
 {{ range .AlternativeOutputFormats -}}
 <link rel="{{ .Rel }}" type="{{ .MediaType.Type }}" href="{{ .Permalink | safeURL }}" />
 {{ end -}}
-<link rel="canonical" href="{{ .Permalink | safeURL }}" />
+{{ $pageNumber := 0 }}
+{{ if in (slice "home" "section" "taxonomy" "term") .Kind }}
+  {{ $paginator := .Paginate .Site.RegularPages }}
+  {{ $pageNumber = $paginator.PageNumber }}
+{{ end -}}
+{{ if .IsHome }}
+  {{ if gt $pageNumber 1 }}
+    <link rel="canonical" href="{{ .Permalink | safeURL }}page/{{ $pageNumber }}/" />
+  {{ else }}
+    <link rel="canonical" href="{{ .Permalink | safeURL }}" />
+  {{ end }}
+{{ else }}
+  <link rel="canonical" href="{{ .Permalink | safeURL }}" />
+{{ end }}
 
 {{ $outputFormat := partial "outputformat.html" . -}}
 {{ $backup := .Params.backup -}}
+{{ $isTaxonomyPage := or (eq .Kind "taxonomy") (eq .Kind "term") -}}
 {{ if and
   hugo.IsProduction
   (ne $outputFormat "print")
   (ne .Site.Language.Lang "xx")
-  (not $backup) -}}
+  (not $backup)
+  (not $isTaxonomyPage) -}}
 <meta name="robots" content="index, follow" />
 {{ else -}}
 <meta name="robots" content="noindex, noarchive, nocache, nofollow, nosnippet, notranslate, noimageindex" />
 {{ end -}}
 
 {{ partialCached "favicons.html" . }}
-<title>
-  {{- if .IsHome -}}
-    {{ .Site.Title -}}
-  {{ else -}}
-    {{ with .Title }}{{ . }} | {{ end -}}
-    {{ .Site.Title -}}
-  {{ end -}}
-</title>
+{{ partial "seo_schema" . }}
+
+{{ $title := .Params.seoTitle | default .Title | default .Site.Title }}
+{{ if ne $title .Site.Title }}
+  {{ $title = printf "%s | %s" $title .Site.Title }}
+{{ end }}
+{{ if gt $pageNumber 1 }}
+  {{ $title = printf "%s | Page %d" $title $pageNumber }}
+{{ end }}
+<title>{{ $title }}</title>
+
 <meta name="description" content="{{ partial "page-description.html" . }}" />
 {{ partial "opengraph.html" . -}}
 {{ partial "schema.html" . -}}

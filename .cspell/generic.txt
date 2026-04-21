@@ -1,6 +1,7 @@
 actionlint
 canonify
 Catmull
+changefreq
 Chastanet
 cpes
 cyclonedx
@@ -14,10 +15,14 @@ François
 friday
 frontmatter
 goldmark
+hreflang
 hsts
+icon
 isset
 jenkinsfiles
 jsonify
+Lastmod
+lastmod
 layout
 logrus
 markdownify
@@ -30,10 +35,12 @@ readingtime
 recent
 sbom
 scopeconfig
+sidebar
 tabwidth
 tagname
 taxo
 UNINDEXED
 unindexed
+urlset
 warnf
 weight

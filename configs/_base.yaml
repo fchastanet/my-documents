@@ -3,11 +3,12 @@
 
 # Language settings
 contentDir: content
-languageCode: en-us
+locale: en
 defaultContentLanguage: en
 defaultContentLanguageInSubdir: false
 disableDefaultLanguageRedirect: true
 
+# SEO and performance settings
 enableRobotsTXT: false
 enableGitInfo: true
 
@@ -87,8 +88,8 @@ privacy:
 # Default params (overridden by site-specific configs)
 params:
   # SEO defaults
-  author: fchastanet
-  copyright: Francois Chastanet
+  author: François Chastanet
+  copyright: François Chastanet
   privacy_policy: https://github.com/fchastanet/my-documents/blob/master/LICENSE
 
   # Enable Lunr.js offline search
@@ -108,6 +109,7 @@ params:
     showLightDarkModeMenu: true
     sidebar_menu_compact: false
     sidebar_menu_foldable: true
+    sidebar_root_enabled: true
     breadcrumb_disable: false
     sidebar_search_disable: false
     navbar_logo: true

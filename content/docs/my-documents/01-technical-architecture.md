@@ -5,8 +5,8 @@ weight: 01
 categories: [documentation, architecture]
 tags: [hugo, github-actions, docsy, architecture, ai-generated]
 date: '2026-02-18T08:00:00+01:00'
-lastmod: '2026-04-20T20:22:33+02:00'
-version: '1.1'
+lastmod: '2026-04-21T17:55:47+02:00'
+version: '1.2'
 ---
 
 ## 1. Overview
@@ -233,7 +233,7 @@ imports:
 # Site-specific overrides
 baseURL: https://YOUR-USERNAME.github.io/YOUR-REPO
 title: Your Project Documentation
-languageCode: en-us
+locale: en-us
 
 # Module configuration
 module:
@@ -492,7 +492,7 @@ Override base settings for your site:
 ```yaml
 baseURL: https://bash-compiler.devlab.top
 title: Bash Compiler Documentation
-languageCode: en-us
+locale: en-us
 
 module:
   imports:

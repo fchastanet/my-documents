@@ -4,9 +4,11 @@ linkTitle: Documentation
 description: Comprehensive guides and best practices
 type: docs
 weight: 10
+icon: fa-brands fa-dev
+sidebar_root_for: self
 date: '2026-02-17T08:00:00+01:00'
-lastmod: '2026-03-31T23:56:51+02:00'
-version: '1.1'
+lastmod: '2026-04-21T17:55:47+02:00'
+version: '1.2'
 ---
 
 {{% pageinfo %}}
