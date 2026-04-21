@@ -52,8 +52,8 @@ install-yq:
 install: install-hugo install-yq
 	@echo "$(BLUE)Installing dependencies...$(NC)"
 	npm ci
-	go get -u ./...
-	go mod tidy
+	hugo mod get -u
+	hugo mod tidy
 	@echo "$(GREEN)✅ All dependencies installed$(NC)"
 
 # Create symlinks to other repositories for local testing
