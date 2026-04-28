@@ -90,6 +90,13 @@ if [[ -f "${ORCHESTRATOR_DIR}/go.sum" ]]; then
   cp "${ORCHESTRATOR_DIR}/go.sum" "${OUTPUT_DIR}/"
 fi
 
+# Copy favicons
+if [[ -d "${ORCHESTRATOR_DIR}/assets/favicons" ]]; then
+  echo "  Copying favicons..."
+  mkdir -p "${OUTPUT_DIR}/public/static/favicons"
+  cp -r "${ORCHESTRATOR_DIR}/assets/favicons"/* "${OUTPUT_DIR}/public/static/favicons/"
+fi
+
 # Merge configurations
 echo "  Merging configurations..."
 "${script_dir}/merge-configs.sh" \

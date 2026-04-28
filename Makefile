@@ -2,7 +2,7 @@
 HUGO_VERSION := 0.160.1
 SITES_DIR := sites
 BUILD_DIR := build
-REPOS := bash-compiler bash-tools bash-tools-framework bash-dev-env
+REPOS := bash-compiler bash-tools bash-tools-framework bash-dev-env my-documents
 SCRIPT_DIR := .github/scripts
 
 # Colors for output (sourced from colors.sh)

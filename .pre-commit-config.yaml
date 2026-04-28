@@ -11,6 +11,10 @@ repos:
       - id: image
         args: [--max-width, '1200', --max-height, '1200']
         files: \.(avif|heic|heif|jpeg|jpg|png|webp)$
+        exclude: |
+          (?x)(
+            ^assets/favicons/
+          )
 
   - repo: https://github.com/oxipng/oxipng
     rev: v10.1.0
@@ -123,6 +127,10 @@ repos:
       - id: check-added-large-files
         files: \.(avif|heic|heif|jpeg|jpg|png|webp)$
         args: [--maxkb=1024, --enforce-all]
+        exclude: |
+          (?x)(
+            ^assets/favicons/favicon\.png$
+          )
       - id: check-added-large-files
         # check for non image files larger than 100KB
         args: [--maxkb=128]
