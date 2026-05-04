@@ -1,12 +1,12 @@
 ---
-title: My Documents - Trigger Reusable Workflow Documentation
+title: Trigger Reusable Workflow Documentation
 description: Overview of the technical architecture and implementation details of the My Documents reusable workflow for triggering documentation builds
 categories: [Documentation]
 tags: [documentation, github-actions, reusable-workflow, github-app, authentication, secrets-management, ai-generated]
 weight: 11
 date: '2026-02-21T08:00:00+01:00'
-lastmod: '2026-04-12T18:57:13+02:00'
-version: '1.1'
+lastmod: '2026-05-04T22:23:53+02:00'
+version: '1.2'
 ---
 
 ## 1. Overview

@@ -93,8 +93,15 @@ fi
 # Copy favicons
 if [[ -d "${ORCHESTRATOR_DIR}/assets/favicons" ]]; then
   echo "  Copying favicons..."
-  mkdir -p "${OUTPUT_DIR}/public/static/favicons"
-  cp -r "${ORCHESTRATOR_DIR}/assets/favicons"/* "${OUTPUT_DIR}/public/static/favicons/"
+  mkdir -p "${OUTPUT_DIR}/static/favicons"
+  cp -r "${ORCHESTRATOR_DIR}/assets/favicons"/* "${OUTPUT_DIR}/static/favicons/"
+fi
+
+# Copy logo.svg (only if site doesn't already provide its own)
+if [[ ! -f "${OUTPUT_DIR}/assets/icons/logo.svg" && -f "${ORCHESTRATOR_DIR}/assets/icons/logo.svg" ]]; then
+  echo "  Copying logo.svg..."
+  mkdir -p "${OUTPUT_DIR}/assets/icons"
+  cp "${ORCHESTRATOR_DIR}/assets/icons/logo.svg" "${OUTPUT_DIR}/assets/icons/logo.svg"
 fi
 
 # Merge configurations
