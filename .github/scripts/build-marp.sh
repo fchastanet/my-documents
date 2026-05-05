@@ -12,6 +12,11 @@ OUTPUT_DIR="${2:-static/presentations}"
 script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 repo_root="$(dirname "$(dirname "${script_dir}")")"
 
+if [[ "${SKIP_MARP_BUILD:-}" == "true" ]]; then
+  echo -e "${YELLOW}⚠  SKIP_MARP_BUILD is set to true. Skipping Marp build.${NC}"
+  exit 0
+fi
+
 echo -e "${BLUE}Building Marp presentations...${NC}"
 
 # Verify marp directory exists

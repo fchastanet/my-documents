@@ -129,7 +129,8 @@ repos:
         args: [--maxkb=1024, --enforce-all]
         exclude: |
           (?x)(
-            ^assets/favicons/favicon\.png$
+            ^assets/favicons/favicon\.png$|
+            ^content/assets/my-documents-homepage\.png$
           )
       - id: check-added-large-files
         # check for non image files larger than 100KB

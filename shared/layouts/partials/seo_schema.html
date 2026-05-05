@@ -1,12 +1,12 @@
 <script type="application/ld+json">
 {
   "@context" : "http://schema.org",
-  "@type" : "BlogPosting",
+  "@type" : {{ if .IsHome }}"WebSite"{{ else }}"BlogPosting"{{ end }},
   "mainEntityOfPage": {
     "@type": "WebPage",
     "@id": "{{ .Site.BaseURL }}"
   },
-  "articleSection" : "{{ .Section }}",
+  {{if .Section -}}"articleSection" : "{{ .Section }}",{{ end }}
   "name" : "{{ .Title }}",
   "headline" : "{{ .Title }}",
   "description" : "{{ partial "page-description.html" . }}",
@@ -18,9 +18,24 @@
   "copyrightHolder" : "{{ .Site.Params.Author }}",
   "copyrightYear" : "{{ .Date.Format "2006" }}",
   "datePublished": "{{ .Date }}",
-  "dateModified" : "{{ .Date }}",
+  "dateModified" : "{{ .Lastmod }}",
   "url" : "{{ .Permalink }}",
   "wordCount" : "{{ .WordCount }}",
-  "keywords" : [ {{ if isset .Params "tags" }}{{ range .Params.tags }}"{{ . }}",{{ end }}{{ end }}"Blog" ]
+  "keywords" : [
+    {{ if isset .Params "tags" -}}
+      {{ range .Params.tags -}}
+        "{{ . }}",
+      {{ end -}}
+    {{ else -}}
+      {{ with .Site.Params.keywords -}}
+        {{ if reflect.IsSlice . -}}
+          {{ range . }}"{{ . }}",{{ end }}
+        {{ else -}}
+          {{ range (split . ",") }}"{{ . }}",{{ end -}}
+        {{ end -}}
+      {{ end -}}
+    {{ end -}}
+    "Blog"
+  ]
 }
 </script>

@@ -3,8 +3,8 @@ title: François Chastanet's DevLab
 linkTitle: DevLab
 type: docs
 date: '2026-02-17T08:00:00+01:00'
-lastmod: '2026-04-20T21:10:57+02:00'
-version: '1.2'
+lastmod: '2026-05-05T23:26:18+02:00'
+version: '1.3'
 ---
 
 {{% pageinfo %}}
@@ -18,9 +18,9 @@ and resources to help you explore and learn about different aspects of software 
 
 {{% /pageinfo %}}
 
-## 1. My main projects
+{{< img src="assets/my-documents-homepage.png" alt="My Documents illustration" >}}
 
-Version: cloudflare
+## 1. My main projects
 
 Here the links to my main open source projects:
 
