@@ -12,6 +12,18 @@ disableDefaultLanguageRedirect: true
 enableRobotsTXT: false
 enableGitInfo: true
 
+# Map non-standard frontmatter date fields used across sites
+frontmatter:
+  date:
+    - date
+    - creationDate
+    - :default
+  lastmod:
+    - lastmod
+    - lastUpdated
+    - :git
+    - :default
+
 # URL settings
 canonifyURLs: true
 

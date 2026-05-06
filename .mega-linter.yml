@@ -159,7 +159,8 @@ SPELL_FILTER_REGEX_EXCLUDE: |
   )
 XML_XMLLINT_FILTER_REGEX_EXCLUDE: |
   (?x)(
-    ^shared/layouts/sitemap\.xml$
+    ^shared/layouts/sitemap\.xml$|
+    ^shared/layouts/_default/rss\.xml$
   )
 HTML_HTMLHINT_FILTER_REGEX_EXCLUDE: |
   (?x)(

@@ -30,6 +30,7 @@ markdownify
 monokai
 noarchive
 noimageindex
+pctx
 podman
 pygments
 readingtime
