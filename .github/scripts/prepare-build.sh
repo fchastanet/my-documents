@@ -58,28 +58,18 @@ fi
 echo "${OUTPUT_DIR}"
 mkdir -p "${OUTPUT_DIR}/public"
 
-if [[ "${SITE_NAME}" = "my-documents" ]]; then
-  echo "  Create a .nojekyll file to make google search to recognize the sitemap.xml file"
-  touch "${OUTPUT_DIR}/public/.nojekyll"
+echo "  Create a .nojekyll file to make google search to recognize the sitemap.xml file"
+touch "${OUTPUT_DIR}/public/.nojekyll"
 
-  echo "  Create robots.txt to allow sitemap.xml crawling"
-  echo >"${OUTPUT_DIR}/public/robots.txt"
-  sites=(
-    ""
-    "bash-compiler/"
-    "bash-tools-framework/"
-    "bash-tools/"
-    "bash-dev-env/"
-  )
-
-  echo "User-agent: *">> "${OUTPUT_DIR}/public/robots.txt"
-  echo "Disallow:">> "${OUTPUT_DIR}/public/robots.txt"
-  for i in "${sites[@]}"; do
-    echo "  Adding sitemap for ${i:-DevLab}..."
-    echo "Sitemap: https://devlab.top/${i}sitemap.xml" \
-      >> "${OUTPUT_DIR}/public/robots.txt"
-  done
-fi
+echo "  Create robots.txt to allow sitemap.xml crawling"
+(
+  echo
+  echo "User-agent: *"
+  echo "Disallow:"
+  echo "Disallow: /tags/"
+  echo "Disallow: /categories/"
+  echo "Sitemap: /sitemap.xml"
+) >"${OUTPUT_DIR}/public/robots.txt"
 
 # Copy go.mod and go.sum if they exist
 if [[ -f "${ORCHESTRATOR_DIR}/go.mod" ]]; then
