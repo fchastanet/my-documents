@@ -85,6 +85,7 @@ if [[ -d "${ORCHESTRATOR_DIR}/assets/favicons" ]]; then
   echo "  Copying favicons..."
   mkdir -p "${OUTPUT_DIR}/static/favicons"
   cp -r "${ORCHESTRATOR_DIR}/assets/favicons"/* "${OUTPUT_DIR}/static/favicons/"
+  cp -r "${ORCHESTRATOR_DIR}/assets/favicons/favicon.ico" "${OUTPUT_DIR}/static/favicon.ico"
 fi
 
 # Copy logo.svg (only if site doesn't already provide its own)
