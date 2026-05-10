@@ -1,17 +1,22 @@
 ---
-title: 'Happier Developers, Faster Teams: Why Prek Beats Pre-commit'
+title: "Happier Developers, Faster Teams: Why Prek Beats Pre-commit"
 description: A Rust-powered alternative to pre-commit that scale from small repos to massive projects.
 weight: 20
-categories: [documentation]
-tags: [Prek, pre-commit, tooling]
+categories:
+  - documentation
+tags:
+  - Prek
+  - pre-commit
+  - tooling
 backup:
   author: Benito Martin
   authorUrl: https://substack.com/@benitomartin
   originalUrl: https://aiechoes.substack.com/p/happier-developers-faster-teams-why
   date: 2025-10-09
-version: '1.0'
+fmContentType: backup
 date: '2023-03-18T08:00:00+01:00'
-lastmod: '2026-02-27T08:00:00+01:00'
+lastmod: '2026-05-10T23:42:08+02:00'
+version: '1.1'
 ---
 
 ## 1. A Rust-powered alternative to pre-commit that scale from small repos to massive projects

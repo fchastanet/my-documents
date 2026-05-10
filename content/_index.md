@@ -2,9 +2,21 @@
 title: François Chastanet's DevLab
 linkTitle: DevLab
 type: docs
+description: "François Chastanet's DevLab: notes, guides & open-source tools for development, testing, documentation and Bash utilities."
+tags:
+  - bash
+  - development
+  - documentation
+  - testing
+  - tools
+categories:
+  - Bash
+  - Documentation
+  - testing
+  - Tooling
 date: '2026-02-17T08:00:00+01:00'
-lastmod: '2026-05-05T23:26:18+02:00'
-version: '1.3'
+lastmod: '2026-05-10T23:42:08+02:00'
+version: '1.4'
 ---
 
 {{% pageinfo %}}
@@ -18,7 +30,7 @@ and resources to help you explore and learn about different aspects of software 
 
 {{% /pageinfo %}}
 
-{{< img src="assets/my-documents-homepage.png" alt="My Documents illustration" >}}
+{{< img src="assets/my-documents-homepage.webp" alt="My Documents illustration" >}}
 
 ## 1. My main projects
 

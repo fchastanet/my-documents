@@ -7,8 +7,8 @@ weight: 10
 icon: fa-solid fa-brain
 sidebar_root_for: self
 date: '2026-04-20T08:00:00+01:00'
-lastmod: '2026-04-21T17:55:47+02:00'
-version: '1.1'
+lastmod: '2026-05-10T23:42:08+02:00'
+version: '1.2'
 ---
 
 {{% pageinfo %}} Bienvenue dans mes documents personnels en français ! Cette section regroupe une variété de documents

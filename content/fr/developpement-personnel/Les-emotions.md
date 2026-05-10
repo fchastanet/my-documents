@@ -3,11 +3,17 @@ title: Les émotions
 description: Outils d'aide à l'identification des émotions, pour mieux les comprendre et les gérer.
 type: docs
 weight: 10
-categories: [Développement personnel]
-tags: [émotions, intelligence émotionnelle, gestion du stress, bien-être]
+categories:
+  - Développement personnel
+tags:
+  - émotions
+  - intelligence émotionnelle
+  - gestion du stress
+  - bien-être
+linkTitle: Les émotions
 date: '2025-04-20T08:00:00+01:00'
-lastmod: '2026-04-20T08:00:00+01:00'
-version: '1.0'
+lastmod: '2026-05-10T23:42:08+02:00'
+version: '1.1'
 ---
 
 Dans cet article, nous allons explorer les émotions, comment les identifier et les gérer pour améliorer notre bien-être

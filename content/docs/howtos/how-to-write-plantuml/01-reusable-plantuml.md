@@ -4,9 +4,10 @@ linkTitle: Reusable PlantUML Components
 description: Learn how to create reusable PlantUML components for modular diagram architecture and shared styling across multiple diagrams.
 type: docs
 weight: 15
+slug: reusable-plantuml-components-modular-diagram-architecture-shared-styling
 date: '2026-03-31T19:00:00+01:00'
-lastmod: '2026-03-31T21:00:00+01:00'
-version: '1.0'
+lastmod: '2026-05-10T23:42:08+02:00'
+version: '1.1'
 ---
 
 Today, we will explore how to create reusable PlantUML components for modular diagram architecture and shared styling

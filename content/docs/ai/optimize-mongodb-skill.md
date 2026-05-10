@@ -1,11 +1,19 @@
 ---
 title: Crafting Effective AI Prompts for MongoDB Optimization
-description: Learn how to design AI prompts that enable comprehensive analysis and optimization of MongoDB databases across multiple repositories. This guide shares best practices, common pitfalls, and practical techniques for structuring prompts to achieve accurate, actionable insights without overwhelming the AI or causing timeouts.
-categories: [AI]
-tags: [AI, copilot, productivity, MongoDB, prompt-engineering, best-practices]
+description: 'Craft precise AI prompts to optimize MongoDB: phased analysis, index tuning, and actionable query recommendations.'
+categories:
+  - AI
+tags:
+  - AI
+  - copilot
+  - productivity
+  - MongoDB
+  - prompt-engineering
+  - best-practices
+linkTitle: Crafting Effective AI Prompts for MongoDB Optimization
 date: '2026-03-04T23:00:00+01:00'
-lastmod: '2026-04-04T12:52:30+02:00'
-version: '1.0'
+lastmod: '2026-05-10T23:42:08+02:00'
+version: '1.1'
 ---
 
 ## 1. Overview

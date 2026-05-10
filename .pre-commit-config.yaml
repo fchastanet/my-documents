@@ -13,7 +13,8 @@ repos:
             ^content/docs/bash-scripts/assets/bash-basic-best-practices\.webp$|
             ^content/docs/howtos/assets/dockerfile-best-practices\.webp$|
             ^content/docs/bash-scripts/assets/bats-best-practices\.webp$|
-            ^content/docs/bash-scripts/assets/linux-commands-best-practices\.webp$
+            ^content/docs/bash-scripts/assets/linux-commands-best-practices\.webp$|
+            ^content/assets/my-documents-homepage\.webp$
           )
 
   - repo: https://github.com/sudosubin/pre-commit-image
@@ -25,7 +26,8 @@ repos:
         files: \.(avif|heic|heif|jpeg|jpg|png|webp)$
         exclude: |
           (?x)(
-            ^assets/favicons/
+            ^assets/favicons/|
+            ^content/assets/my-documents-homepage\.webp$
           )
 
   - repo: https://github.com/oxipng/oxipng

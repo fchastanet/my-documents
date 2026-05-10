@@ -1,11 +1,16 @@
 ---
 title: Better AI Usage for Learning
 description: Comprehensive documentation on how to effectively use AI for learning and productivity
-version: '1.0'
-categories: [Brainstorming]
-tags: [AI, learning, productivity]
+categories:
+  - Brainstorming
+tags:
+  - AI
+  - learning
+  - productivity
+linkTitle: Better AI Usage for Learning
 date: '2026-02-22T08:00:00+01:00'
-lastmod: '2026-02-22T08:00:00+01:00'
+lastmod: '2026-05-10T23:42:08+02:00'
+version: '1.1'
 ---
 
 I watched the French YouTube video [La Fabrique à Idiots](https://www.youtube.com/watch?v=4xq6bVbS-Pw&t=1906s), which

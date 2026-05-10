@@ -2,11 +2,17 @@
 title: Backup Pages
 description: Archive of external reference material preserved for long-term access
 weight: 100
-categories: [documentation, backups]
-tags: [archive, reference, backup]
+categories:
+  - documentation
+  - backups
+tags:
+  - archive
+  - reference
+  - backup
+linkTitle: Backup Pages
 date: '2026-03-18T08:00:00+01:00'
-lastmod: '2026-03-18T08:00:00+01:00'
-version: '1.0'
+lastmod: '2026-05-10T23:42:08+02:00'
+version: '1.1'
 ---
 
 {{% pageinfo %}}
