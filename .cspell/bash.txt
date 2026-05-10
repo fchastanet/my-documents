@@ -12,6 +12,7 @@ favicons
 GITHUB
 github
 HEALTHCHECK
+healthcheck
 hugo
 ireduce
 Lastmod

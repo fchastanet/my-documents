@@ -2,15 +2,23 @@
 title: Linux Commands Best Practices
 description: Best practices for using Linux commands in Bash scripts
 weight: 20
-categories: [Bash]
-tags: [linux, bash, scripts, best-practices]
+categories:
+  - Bash
+tags:
+  - linux
+  - bash
+  - scripts
+  - best-practices
+linkTitle: Linux Commands Best Practices
 date: '2023-11-09T08:00:00+01:00'
-lastmod: '2026-02-17T08:00:00+01:00'
-version: '1.0'
+lastmod: '2026-05-10T23:20:33+02:00'
+version: '1.1'
 ---
 
-- [1. some commands default options to use](#1-some-commands-default-options-to-use)
-- [2. Bash and grep regular expressions](#2-bash-and-grep-regular-expressions)
+This document provides best practices for using Linux commands in Bash scripts. Following these practices will help you
+write more efficient, reliable, and maintainable Bash scripts.
+
+![Linux commands best practices illustration](assets/linux-commands-best-practices.webp)
 
 ## 1. some commands default options to use
 

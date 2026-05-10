@@ -33,6 +33,7 @@ mktemp
 MongoDB
 mongosh
 mypy
+mysqladmin
 nojekyll
 osint
 oxipng
@@ -44,6 +45,7 @@ plantuml
 Prek
 prek
 Pydantic
+rimage
 rudy
 secretlint
 shellcheck

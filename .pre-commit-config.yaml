@@ -4,6 +4,18 @@ default_stages: [pre-commit, manual]
 minimum_pre_commit_version: 3.5.0
 fail_fast: true
 repos:
+  - repo: https://github.com/fchastanet/bash-tools-framework
+    rev: 6.5.0
+    hooks:
+      - id: rimage
+        exclude: |
+          (?x)(
+            ^content/docs/bash-scripts/assets/bash-basic-best-practices\.webp$|
+            ^content/docs/howtos/assets/dockerfile-best-practices\.webp$|
+            ^content/docs/bash-scripts/assets/bats-best-practices\.webp$|
+            ^content/docs/bash-scripts/assets/linux-commands-best-practices\.webp$
+          )
+
   - repo: https://github.com/sudosubin/pre-commit-image
     rev: v0.1.2
     hooks:
@@ -17,7 +29,7 @@ repos:
           )
 
   - repo: https://github.com/oxipng/oxipng
-    rev: v10.1.0
+    rev: v10.1.1
     hooks:
       - id: oxipng
         args: ['-o', '4', '--strip', 'safe', '--alpha']
@@ -54,7 +66,7 @@ repos:
           )
 
   - repo: https://github.com/jsh9/markdown-heading-numbering
-    rev: 0.1.0
+    rev: 0.1.1
     hooks:
       - id: markdown-heading-numbering
         args:
@@ -129,8 +141,7 @@ repos:
         args: [--maxkb=1024, --enforce-all]
         exclude: |
           (?x)(
-            ^assets/favicons/favicon\.png$|
-            ^content/assets/my-documents-homepage\.png$
+            ^assets/favicons/favicon\.png$
           )
       - id: check-added-large-files
         # check for non image files larger than 100KB
@@ -179,7 +190,7 @@ repos:
       - id: git-check
 
   - repo: https://github.com/fchastanet/bash-tools-framework
-    rev: 6.4.0
+    rev: 6.5.0
     hooks:
       - id: cspellForbidden
       - id: fixShebangExecutionBit

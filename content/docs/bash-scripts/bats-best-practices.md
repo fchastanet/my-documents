@@ -2,12 +2,25 @@
 title: Bats Testing Framework
 description: Best practices for testing Bash scripts with Bats framework
 weight: 30
-categories: [testing]
-tags: [bash, bats, unit-test, scripts, best-practices]
+categories:
+  - testing
+tags:
+  - bash
+  - bats
+  - unit-test
+  - scripts
+  - best-practices
+fmContentType: content
+linkTitle: Bats Testing Framework
 date: '2023-11-09T08:00:00+01:00'
-lastmod: '2026-02-17T08:00:00+01:00'
-version: '1.0'
+lastmod: '2026-05-10T23:20:33+02:00'
+version: '1.1'
 ---
+
+This document provides best practices for testing Bash scripts using the Bats testing framework. Following these
+practices will help you write more effective and maintainable tests for your Bash scripts.
+
+![Bats testing framework best practices illustration](assets/bats-best-practices.webp)
 
 ## 1. use of default temp directory created by bats
 

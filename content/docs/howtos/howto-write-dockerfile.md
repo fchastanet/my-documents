@@ -5,9 +5,14 @@ weight: 20
 categories: [Docker]
 tags: [docker, dockerfile, best-practices]
 date: '2023-07-01T08:00:00+02:00'
-lastmod: '2026-02-17T08:00:00+01:00'
-version: '1.0'
+lastmod: '2026-05-10T23:20:33+02:00'
+version: '1.1'
 ---
+
+This document provides best practices for writing Dockerfiles. Following these practices will help you create efficient,
+secure, and maintainable Docker images.
+
+![Dockerfile best practices illustration](assets/dockerfile-best-practices.webp)
 
 ## 1. Dockerfile best practices
 

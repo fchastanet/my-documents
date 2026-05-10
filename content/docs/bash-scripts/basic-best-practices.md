@@ -2,12 +2,19 @@
 title: Basic Best Practices
 description: Foundational best practices for writing Bash scripts
 weight: 10
-categories: [Bash]
-tags: [bash, scripts, best-practices]
-date: "2023-11-09T08:00:00+01:00"
-lastmod: "2026-02-22T08:00:00+01:00"
-version: "1.0"
+categories:
+  - Bash
+tags:
+  - bash
+  - scripts
+  - best-practices
+linkTitle: Basic Best Practices
+date: '2023-11-09T08:00:00+01:00'
+lastmod: '2026-05-10T23:20:33+02:00'
+version: '1.1'
 ---
+
+![Bash scripts best practices illustration](assets/bash-basic-best-practices.webp)
 
 ## 1. External references
 
