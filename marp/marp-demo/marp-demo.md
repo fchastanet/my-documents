@@ -133,7 +133,7 @@ Markdown source code for a simple slide. On the right, you see the rendered resu
 
 ## Result
 
-<img src="assets/marp-slide-example.png" width="99%" alt="center">
+<img src="assets/marp-slide-example.webp" width="99%" alt="center">
 
 </div>
 </div>

@@ -5,8 +5,8 @@ weight: 20
 categories: [Docker]
 tags: [docker, dockerfile, best-practices]
 date: '2023-07-01T08:00:00+02:00'
-lastmod: '2026-05-10T23:20:33+02:00'
-version: '1.1'
+lastmod: '2026-05-11T00:18:44+02:00'
+version: '1.2'
 ---
 
 This document provides best practices for writing Dockerfiles. Following these practices will help you create efficient,
@@ -50,7 +50,7 @@ in a Dockerfile each RUN command will create an image layer.
 
 Here a bad practice that you shouldn't follow
 
-{{< img src="assets/dockerfileLayersBestPractices.png" alt="avoid layer cache issue" >}}
+{{< img src="assets/dockerfileLayersBestPractices.webp" alt="avoid layer cache issue" >}}
 
 #### 2.1.2. Best practice #1
 

@@ -5,8 +5,8 @@ weight: 100
 categories: [Jenkins]
 tags: [jenkins, jenkinsfile, ci-cd]
 date: '2023-07-01T08:00:00+02:00'
-lastmod: '2026-02-17T08:00:00+01:00'
-version: '1.0'
+lastmod: '2026-05-11T00:18:44+02:00'
+version: '1.1'
 ---
 
 ## 1. Jenkins snippet generator
@@ -14,17 +14,17 @@ version: '1.0'
 Use jenkins snippet generator by adding `/pipeline-syntax/` to your jenkins pipeline. to allow you to generate jenkins
 pipeline code easily with inline doc. It also list the available variables.
 
-{{< img src="assets/snippetGenerator.png" alt="jenkins snippet generator" >}}
+{{< img src="assets/snippetGenerator.webp" alt="jenkins snippet generator" >}}
 
 ## 2. Declarative pipeline allows you to restart a build from a given stage
 
-{{< img src="assets/restartFromStage.png" alt="restart from stage" >}}
+{{< img src="assets/restartFromStage.webp" alt="restart from stage" >}}
 
 ## 3. Replay a pipeline
 
 Replaying a pipeline allows you to update your jenkinsfile before replaying the pipeline, easier debugging !
 
-{{< img src="assets/replayPipeline.png" alt="replay a pipeline" >}}
+{{< img src="assets/replayPipeline.webp" alt="replay a pipeline" >}}
 
 ## 4. VS code Jenkinsfile validation
 
@@ -44,4 +44,4 @@ build 'OtherBuild'
 The [downstream-buildview plugin](https://plugins.jenkins.io/downstream-buildview/) allows to view the full chain of
 dependent builds.
 
-![Jenkins Downstream Build Pipeline Visualization](https://raw.githubusercontent.com/jenkins-infra/plugins-wiki-docs/master/downstream-buildview/docs/images/downstream-buildview_screen1.JPG)
+![Jenkins Downstream Build Pipeline Visualization](assets/downstreamBuildView.webp)

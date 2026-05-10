@@ -5,8 +5,8 @@ weight: 10
 categories: [Jenkins]
 tags: [jenkins, jenkinsfile, ci-cd]
 date: '2023-07-01T08:00:00+02:00'
-lastmod: '2026-02-17T08:00:00+01:00'
-version: '1.0'
+lastmod: '2026-05-11T00:18:44+02:00'
+version: '1.1'
 ---
 
 Source: [https://www.jenkins.io/doc/book/managing/nodes/](https://www.jenkins.io/doc/book/managing/nodes/)
@@ -15,7 +15,7 @@ Source glossary: [https://www.jenkins.io/doc/book/glossary/](https://www.jenkins
 
 ## 1. Jenkins Master Slave Architecture
 
-![Jenkins Master Slave Architecture](https://i0.wp.com/digitalvarys.com/wp-content/uploads/2019/05/image-4.png?resize=920%2C581)
+{{< img src="assets/JenkinsMasterSlaveAgents.webp" alt="Jenkins Master Slave Architecture" >}}
 
 The Jenkins **controller** is the **master node** which is able to launch **jobs** on different **nodes** (machines)
 directed by an **Agent**. The Agent can the use one or several **executors** to execute the job(s) depending on
@@ -91,4 +91,4 @@ requirements as well as the amount of I/O and network activity:
 
 Jenkins has static slave nodes and can trigger the generation of dynamic slave nodes
 
-{{< img src="assets/JenkinsMasterSlave.png" alt="Jenkins Master/slave architecture" >}}
+{{< img src="assets/JenkinsMasterSlave.webp" alt="Jenkins Master/slave architecture" >}}

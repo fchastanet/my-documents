@@ -5,8 +5,8 @@ categories: [Documentation]
 tags: [documentation, github-actions, reusable-workflow, github-app, authentication, secrets-management, ai-generated]
 weight: 20
 date: '2026-03-04T08:00:00+01:00'
-lastmod: '2026-04-11T21:01:42+02:00'
-version: '1.1'
+lastmod: '2026-05-11T00:18:45+02:00'
+version: '1.2'
 ---
 
 ## 1. Local Development
@@ -100,7 +100,7 @@ static/
 Reference in markdown:
 
 ```markdown
-![Alt text](/docs/docker/assets/Alpine-vs-Ubuntu.png)
+![Alt text](/docs/docker/assets/Alpine-vs-Ubuntu.webp)
 ```
 
 ## 5. Common Docsy Shortcodes

@@ -10,10 +10,10 @@ tags:
   - ubuntu
   - performance
   - optimization
-date: 2025-03-12T08:00:00+01:00
-lastmod: 2026-03-21T08:00:00+01:00
-version: '1.0'
 linkTitle: 'Alpine vs Ubuntu Image: Performance Comparison for Docker Builds'
+date: '2025-03-12T08:00:00+01:00'
+lastmod: '2026-05-11T00:18:44+02:00'
+version: '1.1'
 ---
 
 When I was working on a UI project I remarked that unit tests(Jest) were running really slowly on our CI pipeline
@@ -27,7 +27,7 @@ not too slow but still it takes ~7 minutes to run on Jenkins.
 
 ## 1. Alpine vs Ubuntu Docker Image
 
-{{< img src="assets/Alpine-vs-Ubuntu.png" width="400" alt="Alpine vs Ubuntu Docker Image" >}}
+{{< img src="assets/Alpine-vs-Ubuntu.webp" width="400" alt="Alpine vs Ubuntu Docker Image" >}}
 
 After checking several forums, I decided to migrate to an Ubuntu-based image. The slowness could be because Alpine uses
 musl instead of glibc (used by Ubuntu) as C standard library. Note that the musl library is not always slower than
@@ -70,7 +70,7 @@ Node 23 makes following warning disappear:
 
 Finally, here is the difference between the pipeline using Ubuntu or Alpine: OK, test and build are still running quite
 slowly on Jenkins, probably due to the machine used and maybe version of docker used. But it takes about 4 minutes less
-to test and build Storybook using the Ubuntu-based image. ![alt text](image.png)
+to test and build Storybook using the Ubuntu-based image.
 
 As a conclusion, ubuntu is not always the winner, and the choice between Alpine and Ubuntu should be part of our
 performance tests. Alpine is often considered more secure due to its smaller attack surface, but on the other hand,
