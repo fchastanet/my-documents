@@ -1,0 +1,80 @@
+{
+  "$schema": "https://frontmatter.codes/frontmatter.schema.json",
+  "frontMatter.config.dynamicFilePath": "./frontmatter.config.js",
+  "frontMatter.git.enabled": false,
+  "frontMatter.content.publicFolder":  {
+    "path": "[[workspace]]/content/assets",
+    "relative": false
+  },
+  "frontMatter.framework.startCommand": "SITE=my-documents SKIP_MARP_BUILD=true make start-site",
+  "frontMatter.media.contentTypes": [
+    {
+      "$schema": "https://frontmatter.codes/config/media.contenttypes.schema.json",
+      "name": "default",
+      "fileTypes": [
+        "png",
+        "jpg",
+        "jpeg",
+        "svg"
+      ],
+      "fields": [
+        {
+          "title": "Title",
+          "name": "title",
+          "type": "string"
+        },
+        {
+          "title": "Description",
+          "name": "Description",
+          "type": "string"
+        },
+        {
+          "title": "Alt Text",
+          "name": "alt",
+          "type": "string"
+        }
+      ]
+    }
+  ],
+  "frontMatter.media.supportedMimeTypes": [
+    "image/*",
+    "video/*",
+    "audio/*"
+  ],
+  "frontMatter.taxonomy.alignFilename": true,
+  "frontMatter.content.pageFolders": [
+    {
+      "title": "backup",
+      "path": "[[workspace]]/content/**/backups",
+      "contentTypes": [
+        "backup"
+      ],
+      "previewPath": "/docs/{{pathToken.relPath}}"
+    },
+    {
+      "title": "docs",
+      "path": "[[workspace]]/content/docs",
+      "previewPath": "/docs/{{pathToken.relPath}}"
+    }
+  ],
+  "frontMatter.content.fmHighlight": true,
+  "frontMatter.copilot.family": "gpt-5-mini",
+  "frontMatter.content.snippets": {
+    "PageInfo": {
+      "description": "Creates a page info section with the selected text as content.",
+      "body": [
+        "{{% pageinfo %}}",
+        "  [[selection]]",
+        "{{% /pageinfo %}}"
+      ],
+      "fields": [
+        {
+          "name": "selection",
+          "title": "Selection",
+          "type": "string",
+          "default": "FM_SELECTED_TEXT"
+        }
+      ]
+    }
+  }
+}

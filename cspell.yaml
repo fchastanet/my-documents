@@ -124,6 +124,7 @@ overrides:
       - '*.yml'
       - '*.yaml'
       - 'configs/site-config.yaml'
+      - 'frontmatter.json'
       - '*.toml'
       - 'package.json'
     languageId: config
@@ -175,6 +176,17 @@ overrides:
     dictionaries:
     - markdown
     - myBash
+
+  - filename:
+    - ".frontmatter/database/taxonomyDb.json"
+    dictionaries:
+      - fr-fr
+      - french
+      - generic
+      - mySoftwares
+      - forbidden
+      - markdown
+      - myBash
 
   - filename:
       - content/fr/**

@@ -1,3 +1,6 @@
 {
-  "recommendations": ["casualjim.gotemplate"]
+  "recommendations": [
+    "casualjim.gotemplate",
+    "eliostruyf.vscode-front-matter"
+  ]
 }

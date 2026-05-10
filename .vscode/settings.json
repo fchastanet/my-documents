@@ -25,5 +25,12 @@
     "editor.defaultFormatter": "golang.go"
   },
   "scm.autoReveal": true,
-  "explorer.autoReveal": "focusNoScroll"
+  "explorer.autoReveal": "focusNoScroll",
+  "frontMatter.framework.id": "hugo",
+  "frontMatter.content.publicFolder": "static",
+  "frontMatter.preview.host": "http://localhost:1313",
+  "[markdown]": {
+  },
+  "frontMatter.content.hideFm": false,
+  "frontMatter.config.dynamicFilePath": "frontmatter.config.js",
 }
