@@ -2,11 +2,16 @@
 title: Jenkins Recipes and Tips
 description: Useful recipes and tips for Jenkins and Jenkinsfiles
 weight: 100
-categories: [Jenkins]
-tags: [jenkins, jenkinsfile, ci-cd]
-date: '2023-07-01T08:00:00+02:00'
-lastmod: '2026-05-11T00:18:44+02:00'
+categories:
+  - Jenkins
+tags:
+  - jenkins
+  - jenkinsfile
+  - ci-cd
+date: 2023-07-01T08:00:00+02:00
+lastmod: 2026-05-11T00:18:44+02:00
 version: '1.1'
+slug: jenkins-recipes-tips
 ---
 
 ## 1. Jenkins snippet generator
@@ -44,4 +49,4 @@ build 'OtherBuild'
 The [downstream-buildview plugin](https://plugins.jenkins.io/downstream-buildview/) allows to view the full chain of
 dependent builds.
 
-![Jenkins Downstream Build Pipeline Visualization](assets/downstreamBuildView.webp)
+{{< img src="assets/downstreamBuildView.webp" alt="Jenkins Downstream Build Pipeline Visualization" >}}

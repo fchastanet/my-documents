@@ -14,23 +14,15 @@ categories:
   - Documentation
   - testing
   - Tooling
+previewImage: assets/my-documents-homepage.webp
+pageInfo: |-
+  Welcome
+
+  I'm François Chastanet, a software developer and technical writer with a passion for sharing knowledge and helping others learn. This website presents a personal collection of notes, guides, and resources on various topics related to development, testing, and documentation. This site is organized into several sections, each containing detailed content and resources to help you explore and learn about different aspects of software development and documentation.
 date: '2026-02-17T08:00:00+01:00'
-lastmod: '2026-05-10T23:42:08+02:00'
-version: '1.4'
+lastmod: '2026-05-11T23:28:39+02:00'
+version: '1.5'
 ---
-
-{{% pageinfo %}}
-
-Welcome
-
-I'm François Chastanet, a software developer and technical writer with a passion for sharing knowledge and helping
-others learn. This website presents a personal collection of notes, guides, and resources on various topics related to
-development, testing, and documentation. This site is organized into several sections, each containing detailed content
-and resources to help you explore and learn about different aspects of software development and documentation.
-
-{{% /pageinfo %}}
-
-{{< img src="assets/my-documents-homepage.webp" alt="My Documents illustration" >}}
 
 ## 1. My main projects
 

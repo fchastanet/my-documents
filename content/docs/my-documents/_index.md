@@ -2,18 +2,14 @@
 title: My Documents
 linkTitle: My Documents
 description: Articles about this repository, its structure, and how to use it effectively
+pageInfo: |-
+  Dedicated section for articles about this repository, its structure, and how to use it effectively.
 type: docs
 weight: 5
 date: '2026-02-23T08:00:00+01:00'
-lastmod: '2026-02-23T08:00:00+01:00'
-version: '1.0'
+lastmod: '2026-05-11T23:28:40+02:00'
+version: '1.1'
 ---
-
-{{% pageinfo %}}
-
-Dedicated section for articles about this repository, its structure, and how to use it effectively.
-
-{{% /pageinfo %}}
 
 ## 1. Available Guides
 

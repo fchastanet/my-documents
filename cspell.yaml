@@ -125,6 +125,7 @@ overrides:
       - '*.yaml'
       - 'configs/site-config.yaml'
       - 'frontmatter.json'
+      - 'frontmatter.config.js'
       - '*.toml'
       - 'package.json'
     languageId: config

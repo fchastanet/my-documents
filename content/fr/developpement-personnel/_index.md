@@ -6,15 +6,9 @@ type: docs
 layout: _default
 weight: 30
 date: '2024-04-20T08:00:00+01:00'
-lastmod: '2026-04-20T08:00:00+01:00'
-version: '1.0'
+lastmod: '2026-05-11T23:28:41+02:00'
+version: '1.1'
 ---
-
-{{% pageinfo %}}
-
-Articles et resources pour améliorer vos compétences personnelles et professionnelles.
-
-{{% /pageinfo %}}
 
 ## 1. Pour commencer
 

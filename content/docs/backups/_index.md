@@ -1,6 +1,10 @@
 ---
 title: Backup Pages
 description: Archive of external reference material preserved for long-term access
+pageInfo: |-
+  This section contains backup archives of external reference material. These pages are preserved to ensure continued access to valuable information if the original sources become unavailable.
+
+  **All backup pages are protected from search engine indexing** to respect original content creators' intellectual property rights.
 weight: 100
 categories:
   - documentation
@@ -11,19 +15,9 @@ tags:
   - backup
 linkTitle: Backup Pages
 date: '2026-03-18T08:00:00+01:00'
-lastmod: '2026-05-10T23:42:08+02:00'
-version: '1.1'
+lastmod: '2026-05-11T23:28:39+02:00'
+version: '1.2'
 ---
-
-{{% pageinfo %}}
-
-This section contains backup archives of external reference material. These pages are preserved to ensure continued
-access to valuable information if the original sources become unavailable.
-
-**All backup pages are protected from search engine indexing** to respect original content creators' intellectual
-property rights.
-
-{{% /pageinfo %}}
 
 ## 1. Backup Pages Currently Archived
 

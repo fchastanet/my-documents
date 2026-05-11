@@ -2,20 +2,14 @@
 title: How to Write PlantUML
 linkTitle: How to Write PlantUML
 description: Comprehensive guide to writing PlantUML diagrams, including syntax, best practices, and examples.
+pageInfo: |-
+  This section provides comprehensive guides for writing PlantUML diagrams and working with PlantUML syntax. This is a complete guide covering PlantUML syntax, diagram types, best practices, and annotated examples.
 type: docs
 weight: 15
 date: '2026-03-31T19:00:00+01:00'
-lastmod: '2026-03-31T19:00:00+01:00'
-version: '1.0'
+lastmod: '2026-05-11T23:28:40+02:00'
+version: '1.1'
 ---
-
-This section provides comprehensive guides for writing PlantUML diagrams and working with PlantUML syntax.
-
-{{% pageinfo %}}
-
-This is a complete guide covering PlantUML syntax, diagram types, best practices, and annotated examples.
-
-{{% /pageinfo %}}
 
 ## 1. What You'll Learn
 

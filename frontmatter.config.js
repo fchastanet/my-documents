@@ -37,6 +37,14 @@ const defaultFields = [
     type: "string",
     required: true
   },
+  {
+    title: "Page info",
+    name: "pageInfo",
+    description: "Description of the page that will be displayed using pageinfo shortcode.",
+    wysiwyg: 'markdown',
+    type: "string",
+    required: false
+  },
 
   // Categorization
   {

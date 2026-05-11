@@ -1,0 +1,38 @@
+<div class="td-content">
+  <h1>{{ .Title }}</h1>
+  <header class="article-meta">
+    <div class="article-meta-item article-meta-created">
+      <span class="article-meta-label">Summary:</span>
+      {{ with .Params.description }}
+        <div class="lead">{{ . | markdownify }}</div>
+      {{ end }}
+      {{ partial "taxonomy_terms_article_wrapper.html" . -}}
+      {{ if (and (not .Params.hide_readingtime) (.Site.Params.ui.readingtime.enable)) -}}
+        {{ partial "reading-time.html" . -}}
+      {{ end -}}
+    </div>
+  </header>
+  {{ $pageInfo := .Params.pageInfo | default .Params.description }}
+  {{ if $pageInfo -}}
+  <div class="pageinfo pageinfo-primary">
+    {{ $pageInfo | markdownify }}
+  </div>
+  {{ end }}
+  {{ if .Params.previewImage -}}
+    {{- $image := .Page.Resources.GetMatch (printf "%s" (.Params.previewImage | safeURL)) -}}
+
+    <img
+      src="{{ $image.Permalink }}" alt="Preview image for {{ .Title }}"
+      {{- with $image }} width="{{ .Width }}" height="{{ .Height }}"{{ end -}}
+    >
+  {{ end }}
+  {{ .Content }}
+  {{ partial "articles-list.html" . }}
+  {{ partial "feedback.html" . -}}
+  {{ if (.Site.Config.Services.Disqus.Shortname) -}}
+    <br />
+    {{- partial "disqus-comment.html" . -}}
+  {{ end -}}
+  {{ partial "giscus-comments.html" . -}}
+  {{ partial "page-meta-lastmod.html" . }}
+</div>

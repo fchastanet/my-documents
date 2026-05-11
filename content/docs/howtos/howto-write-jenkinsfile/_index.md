@@ -2,21 +2,14 @@
 title: How to Write Jenkinsfiles
 linkTitle: Jenkinsfiles
 description: Comprehensive guide to writing Jenkins pipelines and Jenkinsfiles
+pageInfo: |-
+  This section provides comprehensive guides for writing Jenkinsfiles and working with Jenkins pipelines. This is a complete guide covering Jenkins architecture, pipeline syntax, shared libraries, best practices, and annotated examples.
 type: docs
 weight: 10
 date: '2026-02-17T08:00:00+01:00'
-lastmod: '2026-02-23T08:00:00+01:00'
-version: '1.0'
+lastmod: '2026-05-11T23:28:40+02:00'
+version: '1.1'
 ---
-
-This section provides comprehensive guides for writing Jenkinsfiles and working with Jenkins pipelines.
-
-{{% pageinfo %}}
-
-This is a complete guide covering Jenkins architecture, pipeline syntax, shared libraries, best practices, and annotated
-examples.
-
-{{% /pageinfo %}}
 
 ## 1. What You'll Learn
 

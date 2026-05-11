@@ -9,12 +9,11 @@ tags:
   - scripts
   - best-practices
 linkTitle: Basic Best Practices
+previewImage: assets/bash-basic-best-practices.webp
 date: '2023-11-09T08:00:00+01:00'
-lastmod: '2026-05-10T23:20:33+02:00'
-version: '1.1'
+lastmod: '2026-05-11T23:28:39+02:00'
+version: '1.2'
 ---
-
-![Bash scripts best practices illustration](assets/bash-basic-best-practices.webp)
 
 ## 1. External references
 

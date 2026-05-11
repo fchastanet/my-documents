@@ -1,6 +1,15 @@
 ---
 title: 'Alpine vs Ubuntu Image: Performance Comparison for Docker Builds'
 description: A detailed comparison between Alpine and Ubuntu Docker images, focusing on performance differences in build times and test execution.
+pageInfo: |-
+  When I was working on a UI project I remarked that unit tests(Jest) were running really slowly on our CI pipeline
+  (Jenkins). On my local machine, the tests were running in about **1 minute**, but on Jenkins, it was taking around **10
+  minutes**.
+
+  I was wondering why ?
+
+  I tested several Jest configurations and ended up adding these parameters `--runInBand` and `--ci`. It made the build
+  not too slow but still it takes ~7 minutes to run on Jenkins.
 weight: 20
 categories:
   - Docker
@@ -11,23 +20,13 @@ tags:
   - performance
   - optimization
 linkTitle: 'Alpine vs Ubuntu Image: Performance Comparison for Docker Builds'
+previewImage: assets/Alpine-vs-Ubuntu.webp
 date: '2025-03-12T08:00:00+01:00'
 lastmod: '2026-05-11T00:18:44+02:00'
 version: '1.1'
 ---
 
-When I was working on a UI project I remarked that unit tests(Jest) were running really slowly on our CI pipeline
-(Jenkins). On my local machine, the tests were running in about **1 minute**, but on Jenkins, it was taking around **10
-minutes**.
-
-I was wondering why ?
-
-I tested several Jest configurations and ended up adding these parameters `--runInBand` and `--ci`. It made the build
-not too slow but still it takes ~7 minutes to run on Jenkins.
-
 ## 1. Alpine vs Ubuntu Docker Image
-
-{{< img src="assets/Alpine-vs-Ubuntu.webp" width="400" alt="Alpine vs Ubuntu Docker Image" >}}
 
 After checking several forums, I decided to migrate to an Ubuntu-based image. The slowness could be because Alpine uses
 musl instead of glibc (used by Ubuntu) as C standard library. Note that the musl library is not always slower than
