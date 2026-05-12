@@ -35,6 +35,7 @@ mongosh
 mypy
 mysqladmin
 nojekyll
+Obsidan
 osint
 oxipng
 PENDO

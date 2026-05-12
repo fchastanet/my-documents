@@ -96,11 +96,11 @@ start:
 	@yq eval-all '. as $$item ireduce ({}; . *+ $$item)' \
 	  configs/_base.yaml configs/site-config.yaml > hugo.yaml.tmp && \
 	  mv hugo.yaml.tmp hugo.yaml
-	hugo server -D
+	hugo server --buildDrafts
 
 start-site: build-site
 	@echo "$(BLUE)Starting Hugo dev server for $(SITE)...$(NC)"
-	cd build/$(SITE) && hugo server -D
+	cd build/$(SITE) && hugo server --buildDrafts
 
 # Clean build artifacts
 clean: clean-marp

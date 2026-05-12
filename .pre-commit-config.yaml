@@ -26,7 +26,11 @@ repos:
             ^content/docs/howtos/howto-write-jenkinsfile/assets/JenkinsMasterSlaveAgents\.webp$|
             ^content/docs/howtos/howto-write-jenkinsfile/assets/snippetGenerator\.webp$|
             ^content/docs/howtos/howto-write-jenkinsfile/assets/restartFromStage\.webp$|
-            ^content/docs/howtos/howto-write-jenkinsfile/assets/replayPipeline\.webp$
+            ^content/docs/howtos/howto-write-jenkinsfile/assets/replayPipeline\.webp$|
+            ^marp/marp-demo/assets/marp-markdown-presentation-ecosystem\.webp$|
+            ^content/fr/assets/20181031_HauntedMan\.webp$|
+            ^content/fr/developpement-personnel/assets/emotions\.webp$|
+            \.svg$
           )
 
   - repo: https://github.com/sudosubin/pre-commit-image
@@ -41,7 +45,10 @@ repos:
             ^assets/favicons/|
             ^content/assets/my-documents-homepage\.webp$|
             ^content/docs/docker/assets/Alpine-vs-Ubuntu\.webp$|
-            ^content/docs/howtos/howto-write-jenkinsfile/assets/downstreamBuildView\.webp$
+            ^content/docs/howtos/howto-write-jenkinsfile/assets/downstreamBuildView\.webp$|
+            ^content/fr/assets/20181031_HauntedMan\.webp$|
+            ^content/fr/developpement-personnel/assets/emotions\.webp$|
+
           )
 
   - repo: https://github.com/oxipng/oxipng

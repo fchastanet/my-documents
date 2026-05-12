@@ -71,6 +71,15 @@ const defaultFields = [
     type: "heading"
   },
   {
+    title: "draft",
+    name: "draft",
+    type: "boolean",
+    default: false,
+    description: "Whether this content is a draft. Drafts are not published and can be used for work in progress.",
+    single: true,
+    required: true
+  },
+  {
     title: "date",
     name: "date",
     type: "datetime",

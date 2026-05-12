@@ -1,1 +1,16 @@
-{"content":{"assets":{},"docs":{"docker":{"assets":{}},"howtos":{"assets":{}}}}}
+{
+  "content": {
+    "assets": {},
+    "docs": {
+      "docker": {
+        "assets": {}
+      },
+      "howtos": {
+        "assets": {}
+      }
+    },
+    "fr": {
+      "assets": {}
+    }
+  }
+}

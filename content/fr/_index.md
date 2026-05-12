@@ -2,17 +2,16 @@
 title: Mes documents en français
 linkTitle: Mes documents
 description: Une collection de documents personnels en français, couvrant divers sujets et intérêts.
-pageInfo: |-
-  Bienvenue dans mes documents personnels en français ! Cette section regroupe une variété de documents
-  couvrant différents sujets et intérêts. Vous y trouverez des articles, des guides, des réflexions personnelles et bien
-  plus encore, tous rédigés en français.
+pageInfo: |
+  Bienvenue dans mes documents personnels en français ! Cette section regroupe une variété de documents couvrant différents sujets et intérêts. Vous y trouverez des articles, des guides, des réflexions personnelles et bien plus encore, tous rédigés en français.
 type: docs
 weight: 10
 icon: fa-solid fa-brain
 sidebar_root_for: self
+previewImage: assets/20181031_HauntedMan.webp
 date: '2026-04-20T08:00:00+01:00'
-lastmod: '2026-05-11T23:28:41+02:00'
-version: '1.3'
+lastmod: '2026-05-12T23:28:40+02:00'
+version: '1.4'
 ---
 
 ## 1. Parcourir mes documents

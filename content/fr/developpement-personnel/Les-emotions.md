@@ -14,9 +14,10 @@ tags:
   - gestion du stress
   - bien-être
 linkTitle: Les émotions
+previewImage: assets/emotions.webp
 date: '2025-04-20T08:00:00+01:00'
-lastmod: '2026-05-11T23:28:41+02:00'
-version: '1.2'
+lastmod: '2026-05-12T23:28:40+02:00'
+version: '1.3'
 ---
 
 ## 1. Définitions
