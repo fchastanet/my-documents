@@ -1,16 +1,19 @@
 ---
 title: How to Write Dockerfiles
 description: Best practices for writing efficient and secure Dockerfiles
-pageInfo: |-
-  This document provides best practices for writing Dockerfiles. Following these practices will help you create efficient,
-  secure, and maintainable Docker images.
+pageInfo: |
+  This document provides best practices for writing Dockerfiles. Following these practices will help you create efficient, secure, and maintainable Docker images.
 weight: 20
-categories: [Docker]
-tags: [docker, dockerfile, best-practices]
+categories:
+  - Docker
+tags:
+  - docker
+  - dockerfile
+  - best-practices
 previewImage: assets/dockerfile-best-practices.webp
 date: '2023-07-01T08:00:00+02:00'
-lastmod: '2026-05-11T00:18:44+02:00'
-version: '1.2'
+lastmod: '2026-05-15T22:23:28+02:00'
+version: '1.3'
 ---
 
 ## 1. Dockerfile best practices

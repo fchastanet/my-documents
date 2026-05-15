@@ -116,7 +116,8 @@ const optionalFields = [
   {
     title: "Preview Image",
     name: "previewImage",
-    type: "image"
+    type: "image",
+    isPreviewImage: true,
   },
   {
     title: "Icon",

@@ -27,6 +27,13 @@ repos:
             ^content/docs/howtos/howto-write-jenkinsfile/assets/snippetGenerator\.webp$|
             ^content/docs/howtos/howto-write-jenkinsfile/assets/restartFromStage\.webp$|
             ^content/docs/howtos/howto-write-jenkinsfile/assets/replayPipeline\.webp$|
+            ^content/docs/docker/assets/dockerSection\.webp$|
+            ^content/docs/howtos/assets/debugHugo\.webp$|
+            ^content/docs/howtos/assets/howto-write-docker-compose\.webp$|
+            ^content/docs/howtos/assets/howToSection\.webp$|
+            ^content/docs/howtos/assets/saml2aws\.webp$|
+            ^content/fr/assets/french\.webp$|
+            ^content/fr/developpement-personnel/assets/devPerso\.webp$|
             ^marp/marp-demo/assets/marp-markdown-presentation-ecosystem\.webp$|
             ^content/fr/assets/20181031_HauntedMan\.webp$|
             ^content/fr/developpement-personnel/assets/emotions\.webp$|

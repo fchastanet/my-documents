@@ -1,3 +1,5 @@
+howto
 howtos
 pageinfo
+Perso
 wysiwyg

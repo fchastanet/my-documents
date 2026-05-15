@@ -1,9 +1,8 @@
 ---
 title: Les émotions
 description: Outils d'aide à l'identification des émotions, pour mieux les comprendre et les gérer.
-pageInfo: |-
-  Dans cet article, nous allons explorer les émotions, comment les identifier et les gérer pour améliorer
-  notre bien-être émotionnel.
+pageInfo: |
+  Dans cet article, nous allons explorer les émotions, comment les identifier et les gérer pour améliorer notre bien-être émotionnel.
 type: docs
 weight: 10
 categories:
@@ -15,8 +14,8 @@ tags:
   - bien-être
 linkTitle: Les émotions
 previewImage: assets/emotions.webp
-date: '2025-04-20T08:00:00+01:00'
-lastmod: '2026-05-12T23:28:40+02:00'
+date: 2025-04-20T08:00:00+01:00
+lastmod: 2026-05-12T23:28:40+02:00
 version: '1.3'
 ---
 

@@ -5,9 +5,10 @@ linkTitle: Développement personnel
 type: docs
 layout: _default
 weight: 30
-date: '2024-04-20T08:00:00+01:00'
-lastmod: '2026-05-11T23:28:41+02:00'
-version: '1.1'
+previewImage: assets/devPerso.webp
+date: 2024-04-20T08:00:00+01:00
+lastmod: 2026-05-15T22:23:29+02:00
+version: '1.2'
 ---
 
 ## 1. Pour commencer

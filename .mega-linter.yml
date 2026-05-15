@@ -49,8 +49,7 @@ SHOW_ELAPSED_TIME: true
 # Linters configurations
 BASH_SHELLCHECK_FILTER_REGEX_EXCLUDE: |
   (?x)(
-    ^vendor/.*|
-    /testsData/
+    ^vendor/.*
   )
 BASH_SHELLCHECK_ARGUMENTS: --source-path=/tmp/lint
 BASH_SHFMT_ARGUMENTS: -i 2 -ci
@@ -61,13 +60,7 @@ EDITORCONFIG_EDITORCONFIG_CHECKER_FILTER_REGEX_EXCLUDE: |
   (?x)(
     \.git/|
     Makefile|
-    /testsData/.*\.(txt|help)|
-    ^manualTests/data/|
-    ^src/Log/testsData|
-    ^Gemfile.lock$|
-    bin/bash-tpl|
-    ^doc/guides/Options/generate.*\.md$|
-    ^pages/Commands.md
+    ^shared/.*\.html$|
     ^.*-megalinter_file_names_cspell.txt
   )
 EDITORCONFIG_EDITORCONFIG_CHECKER_CONFIG_FILE: .editorconfig-checker.json

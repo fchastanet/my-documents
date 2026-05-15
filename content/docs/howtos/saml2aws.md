@@ -2,11 +2,24 @@
 title: Saml2Aws Setup
 description: Guide to setting up and using Saml2Aws for AWS access
 weight: 40
-categories: [AWS]
-tags: [aws, saml2aws, sso, authentication]
-date: "2024-09-15T08:00:00+02:00"
-lastmod: "2026-02-22T08:00:00+01:00"
-version: "1.0"
+pageInfo: |-
+  Step-by-step instructions for configuring Saml2Aws to access AWS resources using SAML authentication, including common issues and solutions.
+categories:
+  - AWS
+  - Bash
+  - Documentation
+  - Kubernetes
+  - Tooling
+tags:
+  - authentication
+  - aws
+  - bash
+  - saml2aws
+  - sso
+previewImage: assets/saml2aws.webp
+date: '2024-09-15T08:00:00+02:00'
+lastmod: '2026-05-15T22:23:29+02:00'
+version: '1.1'
 ---
 
 Configure saml2aws accounts

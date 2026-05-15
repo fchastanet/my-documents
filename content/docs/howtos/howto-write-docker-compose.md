@@ -1,12 +1,15 @@
 ---
 title: How to Write Docker Compose Files
 description: Guide to writing and organizing Docker Compose files
+pageInfo: |-
+  Best practices for writing Docker Compose files, including platform targeting and service health checks.
 weight: 30
 categories: [Docker]
 tags: [docker, docker-compose, best-practices]
+previewImage: assets/howto-write-docker-compose.webp
 date: '2023-07-01T08:00:00+02:00'
-lastmod: '2026-05-10T23:20:33+02:00'
-version: '1.1'
+lastmod: '2026-05-15T22:23:28+02:00'
+version: '1.2'
 ---
 
 ## 1. platform

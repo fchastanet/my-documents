@@ -1,11 +1,24 @@
 ---
 title: Debug Hugo
 linkTitle: Debug Hugo
+description: 'Debug Hugo: Quick guide to locate Hugo templates, use templateMetrics, override priorities, and fix common Docsy/Hugo template issues for faster debugging.'
 type: docs
-tags: [hugo, debugging, templates, ai-generated]
+tags:
+  - debugging
+  - docsy
+  - hugo
+  - static-site-generator
+  - templates
+categories:
+  - Bash
+  - Documentation
+  - testing
+  - Tooling
+  - web
+previewImage: assets/debugHugo.webp
 date: '2026-03-08T08:00:00+01:00'
-lastmod: '2026-03-08T08:00:00+01:00'
-version: '1.0'
+lastmod: '2026-05-15T22:23:28+02:00'
+version: '1.1'
 ---
 
 <!--TOC-->
