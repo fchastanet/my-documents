@@ -180,6 +180,7 @@ overrides:
 
   - filename:
     - ".frontmatter/database/taxonomyDb.json"
+    - ".frontmatter/database/mediaDb.json"
     dictionaries:
       - fr-fr
       - french

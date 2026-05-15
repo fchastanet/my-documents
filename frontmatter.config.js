@@ -76,8 +76,7 @@ const defaultFields = [
     type: "boolean",
     default: false,
     description: "Whether this content is a draft. Drafts are not published and can be used for work in progress.",
-    single: true,
-    required: true
+    single: true
   },
   {
     title: "date",

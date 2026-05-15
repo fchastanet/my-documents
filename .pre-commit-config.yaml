@@ -199,7 +199,8 @@ repos:
           - --write-changes
         exclude: >
           (?x)(
-            ^.cspell/codespellrc-.*.txt$|
+            ^.cspell/codespellrc-.*\.txt$|
+            ^.cspell/french\.txt$|
             ^package-lock\.json$|
             ^content/fr/
           )
