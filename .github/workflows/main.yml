@@ -37,7 +37,7 @@ jobs:
       # needed by guibranco/github-status-action-v2@v1.2.3
       statuses: write
     steps:
-      - uses: guibranco/github-status-action-v2@v1.2.3
+      - uses: guibranco/github-status-action-v2@f6952298057800f771cdce8e7918d5b88333eb89 # v1.2.3
         if: ${{ env.COND_PUSH_OR_PR }}
         with:
           authToken: ${{secrets.GITHUB_TOKEN}}
@@ -45,9 +45,11 @@ jobs:
           state: pending
 
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+        with:
+          persist-credentials: false
 
-      - uses: crazy-max/ghaction-import-gpg@v7
+      - uses: crazy-max/ghaction-import-gpg@2dc316deee8e90f13e1a351ab510b4d5bc0c82cd # v7
         if: ${{ success() }}
         with:
           gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
@@ -55,14 +57,16 @@ jobs:
           git_user_signingkey: true
           git_commit_gpgsign: true
 
-      - uses: actions/create-github-app-token@v3.1.1
+      - uses: actions/create-github-app-token@1b10c78c7865c340bc4f6099eb2f838309f1e8c3 # v3.1.1
         if: ${{ success() }}
         id: generate-token
         with:
           app-id: ${{ secrets.APP_ID }}
           private-key: ${{ secrets.APP_PRIVATE_KEY }}
+          permission-contents: write
+          permission-pull-requests: write
 
-      - uses: guibranco/github-status-action-v2@v1.2.3
+      - uses: guibranco/github-status-action-v2@f6952298057800f771cdce8e7918d5b88333eb89 # v1.2.3
         if: ${{ env.COND_PUSH_OR_PR }}
         with:
           authToken: ${{ secrets.GITHUB_TOKEN }}
@@ -78,20 +82,21 @@ jobs:
           ) >> "${GITHUB_ENV}"
 
       - name: Set up Python
-        uses: actions/setup-python@v6
+        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6
         with:
           python-version: 3.12
 
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6 # zizmor: ignore[cache-poisoning]
         with:
           node-version: 24
+          cache: ''
 
       - name: Transform pre-commit config for GitHub
         if: ${{ success() }}
         run: .github/preCommitGeneration.sh
 
       - name: Run pre-commit
-        uses: j178/prek-action@v2
+        uses: j178/prek-action@bdca6f102f98e2b4c7029491a53dfd366469e33d # v2
         id: preCommit
         with:
           extra-args: >-
@@ -102,7 +107,7 @@ jobs:
         if: ${{ !cancelled() }}
         # You can override MegaLinter flavor used to have faster performances
         # More info at https://megalinter.io/flavors/
-        uses: oxsecurity/megalinter/flavors/documentation@v9
+        uses: oxsecurity/megalinter/flavors/documentation@0e3ce9b9c8c10effb9b269509cc47ca17cae31c7 # v9
         # All available variables are described in documentation
         # https://megalinter.io/latest/config-file/
         env:
@@ -116,7 +121,7 @@ jobs:
 
       - name: Upload MegaLinter artifacts
         if: success() || failure()
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
           name: MegaLinter reports
           retention-days: 2
@@ -153,7 +158,7 @@ jobs:
           env.COND_UPDATED_SOURCES == 'true' &&
           env.COND_APPLY_FIXES_NEEDED == 'true' &&
           !contains(github.event.head_commit.message, 'skip fix')
-        uses: peter-evans/create-pull-request@v8
+        uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8
         with:
           token: ${{ steps.generate-token.outputs.token }}
           committer: fchastanet <237869+fchastanet@users.noreply.github.com>
@@ -172,10 +177,13 @@ jobs:
             steps.cpr.conclusion == 'success'
           }}
         run: |
-          echo "Pull Request Number - ${{ steps.cpr.outputs.pull-request-number }}"
-          echo "Pull Request URL - ${{ steps.cpr.outputs.pull-request-url }}"
+          echo "Pull Request Number - ${STEPS_CPR_OUTPUTS_PULL_REQUEST_NUMBER}"
+          echo "Pull Request URL - ${STEPS_CPR_OUTPUTS_PULL_REQUEST_URL}"
+        env:
+          STEPS_CPR_OUTPUTS_PULL_REQUEST_NUMBER: ${{ steps.cpr.outputs.pull-request-number }}
+          STEPS_CPR_OUTPUTS_PULL_REQUEST_URL: ${{ steps.cpr.outputs.pull-request-url }}
 
-      - uses: guibranco/github-status-action-v2@v1.2.3
+      - uses: guibranco/github-status-action-v2@f6952298057800f771cdce8e7918d5b88333eb89 # v1.2.3
         if: ${{ env.COND_PUSH_OR_PR }}
         with:
           authToken: ${{ secrets.GITHUB_TOKEN }}
@@ -197,10 +205,12 @@ jobs:
           github.event_name == 'workflow_dispatch'
         )
       }}
-    uses: fchastanet/my-documents/.github/workflows/build-site-action.yml@master
+    uses: ./.github/workflows/build-site-action.yml
     with:
       site-name: 'my-documents'
-    secrets: inherit
+    secrets:
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
     permissions:
       contents: read
       pages: write

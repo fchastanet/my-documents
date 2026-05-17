@@ -1,3 +1,4 @@
+cooldown
 howto
 howtos
 pageinfo

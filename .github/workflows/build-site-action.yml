@@ -25,6 +25,13 @@ on:
         required: false
         type: string
         default: 'master'
+    secrets:
+      CLOUDFLARE_ACCOUNT_ID:
+        description: 'Cloudflare Account ID for deployment'
+        required: true
+      CLOUDFLARE_API_TOKEN:
+        description: 'Cloudflare API Token for deployment'
+        required: true
 
 permissions:
   contents: read
@@ -38,43 +45,45 @@ jobs:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true # Forces Node 24 runtime
     steps:
       - name: Checkout orchestrator (my-documents)
-        uses: actions/checkout@v6
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
         with:
           repository: fchastanet/my-documents
+          persist-credentials: false
           fetch-depth: 0
 
       - name: Checkout content (${{ inputs.site-name }})
         if: inputs.checkout-repo != ''
-        uses: actions/checkout@v6
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
         with:
           repository: ${{ inputs.checkout-repo }}
+          persist-credentials: false
           path: _site-content
           ref: ${{ inputs.checkout-ref }}
           fetch-depth: 0
 
       # docker buildx might be needed for consumers of this action
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v4
+        uses: docker/setup-buildx-action@4d04d5d9486b7bd6fa91e7baf45bbb4f8b9deedd # v4
 
       - name: Setup Go
-        uses: actions/setup-go@v6
+        uses: actions/setup-go@4a3601121dd01d1626a1e23e37211e3254c1c06c # v6
         with:
           go-version: '1.24'
+          cache: false
 
       - name: Setup Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6 # zizmor: ignore[cache-poisoning]
         with:
           node-version: '24'
-          cache: 'npm'
 
       - name: Setup Hugo
-        uses: denmette/actions-hugo@v1
+        uses: denmette/actions-hugo@9205da1e88a99972de3d3912c5acd7271fe7d9c2 # v1
         with:
           hugo-version: '0.160.1'
           extended: true
 
       - name: Cache Hugo modules
-        uses: actions/cache@v5
+        uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5
         with:
           path: |
             ~/.cache/hugo_modules
@@ -83,6 +92,7 @@ jobs:
           key: ${{ runner.os }}-hugo-modules-${{ hashFiles('**/go.sum') }}
           restore-keys: |
             ${{ runner.os }}-hugo-modules-
+          lookup-only: true
 
       - name: Install Node.js dependencies
         run: npm ci
@@ -91,18 +101,21 @@ jobs:
         run: npm install -g sass
 
       - name: Setup yq
-        uses: vegardit/gha-setup-yq@v1
+        uses: vegardit/gha-setup-yq@ab621a91ac86c67e5b68b9f191e70acc09ebc61b # 1.1.0
         with:
           yq-version: v4.52.4
 
       - name: Build site for ${{ inputs.site-name }}
         run: |
           BUILD=1 .github/scripts/build-site.sh \
-            "${{ inputs.site-dir }}" \
-            "${{ inputs.site-name }}" \
+            "${INPUTS_SITE_DIR}" \
+            "${INPUTS_SITE_NAME}" \
             "build"
+        env:
+          INPUTS_SITE_DIR: ${{ inputs.site-dir }}
+          INPUTS_SITE_NAME: ${{ inputs.site-name }}
 
-      - uses: cloudflare/wrangler-action@v3
+      - uses: cloudflare/wrangler-action@9acf94ace14e7dc412b076f2c5c20b8ce93c79cd # v3
         id: deploy
         env:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
@@ -123,7 +136,7 @@ jobs:
           echo "short_sha=${HEAD_SHA:0:7}" >> "${GITHUB_OUTPUT}"
 
       - name: Comment on PR
-        uses: thollander/actions-comment-pull-request@v3
+        uses: thollander/actions-comment-pull-request@24bffb9b452ba05a4f3f77933840a6a841d1b32b # v3
         if: github.event_name == 'pull_request' && success()
         with:
           message: |
@@ -140,9 +153,14 @@ jobs:
         if: success()
         run: |
           (
-            echo "### ✅ ${{ inputs.site-name }} deployed successfully"
-            echo "Latest commit: '${{ steps.short-sha.outputs.short_sha }}'"
+            echo "### ✅ ${INPUTS_SITE_NAME} deployed successfully"
+            echo "Latest commit: '${STEPS_SHORT_SHA_OUTPUTS_SHORT_SHA}'"
             echo ""
-            echo "🔗 **URL:** ${{ steps.deploy.outputs.deployment-url }}"
-            echo "🔗 **Branch Preview URL:** ${{ steps.deploy.outputs.pages-deployment-alias-url }}"
+            echo "🔗 **URL:** ${STEPS_DEPLOY_OUTPUTS_DEPLOYMENT_URL}"
+            echo "🔗 **Branch Preview URL:** ${STEPS_DEPLOY_OUTPUTS_PAGES_DEPLOYMENT_ALIAS_URL}"
           ) >> "${GITHUB_STEP_SUMMARY}"
+        env:
+          INPUTS_SITE_NAME: ${{ inputs.site-name }}
+          STEPS_SHORT_SHA_OUTPUTS_SHORT_SHA: ${{ steps.short-sha.outputs.short_sha }}
+          STEPS_DEPLOY_OUTPUTS_DEPLOYMENT_URL: ${{ steps.deploy.outputs.deployment-url }}
+          STEPS_DEPLOY_OUTPUTS_PAGES_DEPLOYMENT_ALIAS_URL: ${{ steps.deploy.outputs.pages-deployment-alias-url }}
