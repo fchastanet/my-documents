@@ -1,0 +1,61 @@
+/'
+  AI History — From Turing to Transformers
+  PlantUML Gantt Chronology — 5 parts (each ≤ 18 years)
+
+  Part 1: Proto-AI Foundations             (1936–1954)
+  Part 2: Birth of AI + First Winter       (1955–1973)
+  Part 3: Expert Systems + Second Winter   (1974–1992)
+  Part 4: Statistical AI + Deep Learning   (1993–2011)
+  Part 5: Modern DL + Transformer Era      (2012–2025)
+'/
+
+' ══════════════════════════════════════════════════════════════
+' PART 1 — Proto-AI Foundations (1936–1954)
+' ══════════════════════════════════════════════════════════════
+@startgantt
+<style>
+ganttDiagram {
+  task { FontName Helvetica; FontColor white; FontSize 10; FontStyle bold; LineColor #00000030 }
+  milestone { FontColor #1A1A1A; FontSize 8; BackGroundColor #F1C40F; LineColor #C49B10 }
+  separator { BackGroundColor #2C3E50; FontColor white; FontSize 11; FontStyle bold; Padding 4 }
+  timeline { BackGroundColor #F0F4F8; FontColor #2C3E50; FontSize 10; FontStyle bold }
+}
+</style>
+title Part 1/5 — Proto-AI Foundations (1936–1954)
+header AI History: From Turing to Transformers
+projectscale yearly
+Project starts 1936-01-01
+
+-- Foundations of Computing (1936-1954) --
+[Foundations Era (1936-1954)] starts 1936-01-01 and ends 1954-12-31
+[Foundations Era (1936-1954)] is colored in #4A90D9/#2C6FAD
+
+[1936 Turing - Universal Turing Machine] happens 1936-07-01
+[1936 Turing - Universal Turing Machine] is colored in #1ABC9C/#0E8C75
+
+[1943 McCulloch-Pitts - Artificial Neuron] starts 1943-01-01 and ends 1943-12-31
+[1943 McCulloch-Pitts - Artificial Neuron] is colored in #F1C40F/#C49B10
+
+[1945 Von Neumann - Stored-program Architecture] happens 1945-06-01
+[1945 Von Neumann - Stored-program Architecture] is colored in #F1C40F/#C49B10
+
+[1948 Wiener - Cybernetics] happens 1948-01-01
+[1948 Wiener - Cybernetics] is colored in #F1C40F/#C49B10
+
+[1949 Hebb - Hebbian Learning Rule] happens 1949-01-01
+[1949 Hebb - Hebbian Learning Rule] is colored in #F1C40F/#C49B10
+
+[1950 Turing - Turing Test] happens 1950-07-01
+[1950 Turing - Turing Test] is colored in #1ABC9C/#0E8C75
+
+[1951 Minsky - SNARC first NN hardware] happens 1951-01-01
+[1951 Minsky - SNARC first NN hardware] is colored in #9B59B6/#6A2F82
+
+legend
+|= Color |= Key |
+|<#4A90D9>| Foundations Era |
+|<#1ABC9C>| Alan Turing |
+|<#9B59B6>| Marvin Minsky |
+|<#F1C40F>| General milestone |
+end legend
+@endgantt

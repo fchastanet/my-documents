@@ -69,11 +69,17 @@ dictionaryDefinitions:
   - name: generic
     path: .cspell/generic.txt
     addWords: true
+  - name: mermaid
+    path: .cspell/mermaid.txt
+    addWords: true
   - name: marp
     path: .cspell/marp.txt
     addWords: true
   - name: french
     path: .cspell/french.txt
+    addWords: true
+  - name: ai
+    path: .cspell/ai.txt
     addWords: true
 
 languageSettings:
@@ -130,6 +136,11 @@ overrides:
       - 'package.json'
     languageId: config
   - filename:
+      - 'content/docs/tooling/assets/ai-*'
+      - 'content/docs/ai/**'
+    dictionaries:
+      - ai
+  - filename:
       - .github/**/*.yml
       - .github/*.yml
       - templates-examples/**
@@ -146,6 +157,11 @@ overrides:
     - content/docs/howtos/how-to-write-plantuml/01-reusable-plantuml.md
     dictionaries:
       - plantuml
+  - filename:
+    - "**/*.mmd"
+    - "**/*.mermaid"
+    dictionaries:
+      - mermaid
 
   # Specific overrides for this repo
   - languageId: shellscript

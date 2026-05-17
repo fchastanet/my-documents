@@ -1,0 +1,151 @@
+---
+title: AI History — From Turing to Transformers
+config:
+  theme: default
+  gitGraph:
+    rotateCommitLabel: true
+    parallelCommits: false
+---
+gitGraph:
+  commit id: "Era: Foundations" tag: "1936"
+
+  branch "Foundations (1936-1955)"
+  commit id: "1936: Turing Machine"
+  commit id: "1943: McCulloch-Pitts Neuron"
+  commit id: "1945: Von Neumann Architecture"
+  commit id: "1948: Cybernetics — Wiener" type: HIGHLIGHT
+  commit id: "1949: Hebbian Learning Rule"
+  commit id: "1950: Turing Test" type: HIGHLIGHT
+  commit id: "1951: SNARC — first NN hardware"
+  commit id: "1955: AI term coined — McCarthy"
+
+  checkout main
+  commit id: "Era: Birth of AI" tag: "1956"
+
+  branch "Birth of AI (1956-1969)"
+  commit id: "1956: Dartmouth Conference — AI born" type: HIGHLIGHT
+  commit id: "1956: Logic Theorist — Newell & Simon"
+  commit id: "1957: Perceptron — Rosenblatt" type: HIGHLIGHT
+  commit id: "1958: LISP language — McCarthy"
+  commit id: "1959: GPS — General Problem Solver"
+  commit id: "1960: ADALINE — Widrow & Hoff"
+  commit id: "1965: DENDRAL — first expert system"
+  commit id: "1966: ELIZA chatbot — Weizenbaum" type: HIGHLIGHT
+  commit id: "1967: Nearest Neighbor algorithm"
+  commit id: "1969: Perceptrons book — XOR limit" type: REVERSE
+
+  checkout main
+  commit id: "Era: First AI Winter" tag: "1970"
+
+  branch "First AI Winter (1970-1979)"
+  commit id: "1970: Prolog language — Colmerauer"
+  commit id: "1973: Lighthill Report — UK funding cut" type: REVERSE
+  commit id: "1974: Back-propagation — Werbos PhD"
+  commit id: "1979: AI hype collapses — labs defunded" type: REVERSE
+
+  checkout main
+  commit id: "Era: Expert Systems" tag: "1980"
+
+  branch "Expert Systems (1980-1987)"
+  commit id: "1980: XCON expert system — DEC" type: HIGHLIGHT
+  commit id: "1980: Chinese Room — Searle"
+  commit id: "1980: Japan Fifth Generation Project"
+  commit id: "1982: Hopfield Networks" type: HIGHLIGHT
+  commit id: "1984: Cyc project — Lenat"
+  commit id: "1986: Back-prop — Rumelhart, Hinton, Williams" type: HIGHLIGHT
+  commit id: "1986: PDP books — Rumelhart & McClelland"
+  commit id: "1987: Lisp Machine market collapses" type: REVERSE
+
+  checkout main
+  commit id: "Era: Second AI Winter" tag: "1987"
+
+  branch "Second AI Winter (1987-1993)"
+  commit id: "1988: Bayesian Networks — Judea Pearl" type: HIGHLIGHT
+  commit id: "1989: LeNet CNN — Yann LeCun" type: HIGHLIGHT
+  commit id: "1990: RNNs & back-prop through time"
+  commit id: "1991: World Wide Web — Berners-Lee"
+  commit id: "1992: TD-Gammon RL — Tesauro, IBM"
+  commit id: "1993: DARPA cuts AI funding" type: REVERSE
+
+  checkout main
+  commit id: "Era: Statistical AI" tag: "1994"
+
+  branch "Statistical AI (1994-2005)"
+  commit id: "1995: Support Vector Machines — Vapnik" type: HIGHLIGHT
+  commit id: "1997: Deep Blue defeats Kasparov" type: HIGHLIGHT
+  commit id: "1997: LSTM — Hochreiter & Schmidhuber" type: HIGHLIGHT
+  commit id: "1998: LeNet-5 full CNN — LeCun"
+  commit id: "1999: NVIDIA GeForce 256 — first GPU"
+  commit id: "2001: Random Forests — Breiman"
+  commit id: "2002: Torch ML framework"
+  commit id: "2003: PageRank & Google at scale"
+  commit id: "2004: DARPA Grand Challenge — no finish"
+  commit id: "2005: DARPA Grand Challenge — Stanley wins" type: HIGHLIGHT
+
+  checkout main
+  commit id: "Era: Deep Learning Renaissance" tag: "2006"
+
+  checkout "Statistical AI (1994-2005)"
+  branch "Deep Learning (2006-2011)"
+  commit id: "2006: Deep Belief Networks — Hinton" type: HIGHLIGHT
+  commit id: "2007: NVIDIA CUDA — GPU for AI" type: HIGHLIGHT
+  commit id: "2007: ImageNet project begins — Fei-Fei Li"
+  commit id: "2008: Deep learning for speech — Hinton+Google"
+  commit id: "2009: ILSVRC challenge launched" type: HIGHLIGHT
+  commit id: "2010: Restricted Boltzmann Machines"
+  commit id: "2011: Apple Siri — AI in consumer devices" type: HIGHLIGHT
+  commit id: "2011: IBM Watson wins Jeopardy!" type: HIGHLIGHT
+
+  checkout main
+  commit id: "Era: Modern Deep Learning" tag: "2012"
+
+  checkout "Deep Learning (2006-2011)"
+
+  branch "Modern DL (2012-2016)"
+  commit id: "2012: AlexNet wins ImageNet" type: HIGHLIGHT
+  commit id: "2013: Word2Vec — Mikolov, Google" type: HIGHLIGHT
+  commit id: "2013: Dropout regularization — Hinton"
+  commit id: "2014: GANs — Ian Goodfellow" type: HIGHLIGHT
+  commit id: "2014: Attention mechanism — Bahdanau, Bengio" type: HIGHLIGHT
+  commit id: "2014: Google acquires DeepMind"
+  commit id: "2014: Seq2Seq — Google"
+  commit id: "2015: OpenAI founded" type: HIGHLIGHT
+  commit id: "2015: TensorFlow open-sourced — Google Brain" type: HIGHLIGHT
+  commit id: "2015: ResNet 152 layers — surpasses human vision"
+  commit id: "2016: AlphaGo defeats Lee Sedol 4-1" type: HIGHLIGHT
+
+  checkout main
+  commit id: "Era: Transformer Era" tag: "2017"
+
+  checkout "Modern DL (2012-2016)"
+
+  branch "Transformer Era (2017-2025)"
+  commit id: "2017: Attention Is All You Need — Google" type: HIGHLIGHT
+  commit id: "2018: GPT-1 — OpenAI 117M params"
+  commit id: "2018: BERT — Google bidirectional Transformer" type: HIGHLIGHT
+  commit id: "2019: GPT-2 — OpenAI 1.5B params" type: HIGHLIGHT
+  commit id: "2020: GPT-3 — OpenAI 175B params" type: HIGHLIGHT
+  commit id: "2020: AlphaFold2 — protein folding solved" type: HIGHLIGHT
+  commit id: "2021: DALL-E — text-to-image — OpenAI" type: HIGHLIGHT
+  commit id: "2021: CLIP — OpenAI contrastive learning"
+  commit id: "2021: GitHub Copilot — OpenAI Codex"
+  commit id: "2021: AlphaFold protein database — 200M proteins"
+  commit id: "2022: DALL-E 2 — photorealistic OpenAI"
+  commit id: "2022: Stable Diffusion — open source" type: HIGHLIGHT
+  commit id: "2022: Whisper — ASR OpenAI"
+  commit id: "2022: ChatGPT launched" type: HIGHLIGHT
+  commit id: "2023: LLaMA — Meta open-source LLM" type: HIGHLIGHT
+  commit id: "2023: GPT-4 — OpenAI multi-modal" type: HIGHLIGHT
+  commit id: "2023: Claude — Anthropic Constitutional AI" type: HIGHLIGHT
+  commit id: "2023: LLaMA 2 — Meta commercial"
+  commit id: "2023: Mistral 7B — France"
+  commit id: "2024: Gemini 1.5 Pro — 1M context Google"
+  commit id: "2024: Sora — text-to-video OpenAI" type: HIGHLIGHT
+  commit id: "2024: Nobel Prizes — AlphaFold + Hinton" type: HIGHLIGHT
+  commit id: "2024: OpenAI o1 — reasoning model" type: HIGHLIGHT
+  commit id: "2025: Agentic AI — autonomous agents" type: HIGHLIGHT
+  commit id: "2025: Reasoning + Multi-modality converge"
+  commit id: "2025: DeepSeek R1 — open-source reasoning" type: HIGHLIGHT
+
+  checkout main
+  commit id: "Timeline End" tag: "2025"

@@ -24,6 +24,7 @@ Jenkinsfiles
 lastmod
 Makefiles
 Micode
+mindmap
 Multifactor
 nocache
 nonprod

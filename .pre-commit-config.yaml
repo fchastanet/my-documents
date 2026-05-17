@@ -5,7 +5,7 @@ minimum_pre_commit_version: 3.5.0
 fail_fast: true
 repos:
   - repo: https://github.com/fchastanet/bash-tools-framework
-    rev: 6.5.0
+    rev: 6.5.3
     hooks:
       - id: rimage
         exclude: |
@@ -37,6 +37,9 @@ repos:
             ^marp/marp-demo/assets/marp-markdown-presentation-ecosystem\.webp$|
             ^content/fr/assets/20181031_HauntedMan\.webp$|
             ^content/fr/developpement-personnel/assets/emotions\.webp$|
+            ^content/docs/tooling/assets/timeline-generation-preview\.webp$|
+            -markwhen\.webp$|
+            ^assets/favicons/|
             \.svg$
           )
 
@@ -55,7 +58,15 @@ repos:
             ^content/docs/howtos/howto-write-jenkinsfile/assets/downstreamBuildView\.webp$|
             ^content/fr/assets/20181031_HauntedMan\.webp$|
             ^content/fr/developpement-personnel/assets/emotions\.webp$|
-
+            ^content/docs/howtos/assets/saml2aws\.webp$|
+            ^content/fr/assets/french\.webp$|
+            ^content/fr/developpement-personnel/assets/devPerso\.webp$|
+            ^content/docs/docker/assets/dockerSection\.webp$|
+            ^content/docs/howtos/assets/howto-write-docker-compose\.webp$|
+            ^content/docs/howtos/assets/howToSection\.webp$|
+            ^content/docs/tooling/assets/timeline-generation-preview\.webp$|
+            ^content/docs/howtos/assets/debugHugo\.webp$|
+            ^content/docs/tooling/assets/ai-history-chronology-markwhen\.webp$
           )
 
   - repo: https://github.com/oxipng/oxipng
@@ -63,6 +74,10 @@ repos:
     hooks:
       - id: oxipng
         args: ['-o', '4', '--strip', 'safe', '--alpha']
+        exclude: |
+          (?x)(
+            ^assets/favicons/|
+          )
 
   - repo: https://github.com/executablebooks/mdformat
     # Do this before other tools "fixing" the line endings
@@ -92,7 +107,8 @@ repos:
             ^content/docs/bash-scripts/basic-best-practices\.md$|
             ^content/docs/howtos/saml2aws.md|
             ^content/docs/howtos/howto-write-jenkinsfile/06-annotated-jenkinsfiles--p2\.md$|
-            ^content/docs/backups/happier-developers-faster-teams-why-prek-beats-pre-commit\.md$
+            ^content/docs/backups/happier-developers-faster-teams-why-prek-beats-pre-commit\.md$|
+            ^content/docs/tooling/timeline-generation\.md$
           )
 
   - repo: https://github.com/jsh9/markdown-heading-numbering
@@ -180,10 +196,6 @@ repos:
       - id: forbid-new-submodules
       - id: check-json
         exclude: ^.vscode/.*$
-      - id: file-contents-sorter
-        files: .cspell/.*\.txt
-        args: [--ignore-case]
-        stages: [pre-commit, pre-push, manual]
       - id: trailing-whitespace
 
   - repo: https://github.com/codespell-project/codespell
@@ -209,6 +221,9 @@ repos:
             ^.cspell/codespellrc-.*\.txt$|
             ^.cspell/french\.txt$|
             ^package-lock\.json$|
+            ^content/docs/bash-scripts/basic-best-practices\.md$|
+            ^content/docs/tooling/assets/ai-history-chronology-gantt\.mmd$|
+            \.svg$|
             ^content/fr/
           )
 
@@ -221,7 +236,7 @@ repos:
       - id: git-check
 
   - repo: https://github.com/fchastanet/bash-tools-framework
-    rev: 6.5.0
+    rev: 6.5.3
     hooks:
       - id: cspellForbidden
       - id: fixShebangExecutionBit
@@ -229,6 +244,10 @@ repos:
       - id: shellcheckLint
       - id: plantuml
         args: [--same-dir, -f, svg, --limit-size, '1200']
+        exclude: >
+          (?x)(
+            ^content/docs/tooling/assets/ai-history-chronology-gantt-part1\.puml$
+          )
       - id: mermaid
       - id: hugoUpdateLastmod
         stages: [pre-commit]

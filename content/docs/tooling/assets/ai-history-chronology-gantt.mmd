@@ -1,0 +1,175 @@
+---
+config:
+  gantt:
+    topAxis: true
+    useWidth: 1800
+  themeCSS: |
+    .grid .tick {
+      stroke: lightgrey;
+      opacity: 0.3;
+      shape-rendering: crispEdges;
+    }
+    .grid path {
+      stroke-width: 0;
+    }
+
+    #tag {
+      color: white;
+      background: #fa283d;
+      width: 150px;
+      position: absolute;
+      display: none;
+      padding: 3px 6px;
+      margin-left: -80px;
+      font-size: 11px;
+    }
+
+    #tag:before {
+      border: solid transparent;
+      content: ' ';
+      height: 0;
+      left: 50%;
+      margin-left: -5px;
+      position: absolute;
+      width: 0;
+      border-width: 10px;
+      border-bottom-color: #fa283d;
+      top: -20px;
+    }
+    .taskText {
+      fill: white;
+      text-anchor: middle;
+    }
+    .taskTextOutsideRight {
+      fill: black;
+      text-anchor: start;
+    }
+    .taskTextOutsideLeft {
+      fill: black;
+      text-anchor: end;
+    }
+---
+gantt
+    title AI History — From Turing to Transformers (1936–2025)
+    dateFormat YYYY-MM-DD
+    axisFormat %Y
+    tickInterval 1decade
+    todayMarker off
+
+    section Foundations of Computing (1936-1955)
+        Foundations Era (1936-1955)                       : done, era_f, 1936-01-01, 1955-12-31
+        1936 Turing — Universal Turing Machine            : crit, milestone, m36tur, 1936-07-01, 0d
+        1943 McCulloch-Pitts — Artificial Neuron          : milestone, m43mcp, 1943-01-01, 0d
+        1945 Von Neumann — Stored-Program Architecture    : milestone, m45von, 1945-06-01, 0d
+        1948 Wiener — Cybernetics                         : crit, milestone, m48wie, 1948-01-01, 0d
+        1949 Hebb — Hebbian Learning Rule                 : milestone, m49heb, 1949-01-01, 0d
+        1950 Turing — The Turing Test                     : crit, milestone, m50tur, 1950-07-01, 0d
+        1951 Minsky & Edmonds — SNARC First NN Hardware   : milestone, m51sna, 1951-01-01, 0d
+        1955 McCarthy — AI Term Coined (Dartmouth draft)  : milestone, m55aic, 1955-09-01, 0d
+
+    section Birth of AI (1956-1969)
+        Birth of AI Era (1956-1969)                       : done, era_b, 1956-01-01, 1969-12-31
+        1956 McCarthy — Dartmouth Summer Research Project : crit, milestone, m56dar, 1956-08-01, 0d
+        1956 Newell & Simon — Logic Theorist              : milestone, m56log, 1956-11-01, 0d
+        1957 Rosenblatt — Perceptron                      : crit, milestone, m57per, 1957-07-01, 0d
+        1958 McCarthy — LISP Programming Language         : milestone, m58lis, 1958-07-01, 0d
+        1959 Newell & Simon — General Problem Solver      : milestone, m59gps, 1959-01-01, 0d
+        1960 Widrow & Hoff — ADALINE                      : milestone, m60ada, 1960-01-01, 0d
+        1965 Buchanan — DENDRAL First Expert System       : milestone, m65den, 1965-01-01, 0d
+        1966 Weizenbaum — ELIZA Chatbot (MIT)             : crit, milestone, m66eli, 1966-01-01, 0d
+        1967 Cover & Hart — Nearest Neighbor Algorithm    : milestone, m67knn, 1967-01-01, 0d
+        1969 Minsky & Papert — Perceptrons Book (XOR)     : milestone, m69per, 1969-07-01, 0d
+
+    section First AI Winter (1970-1979)
+        First AI Winter Era (1970-1979)                   : crit, done, era_w1, 1970-01-01, 1979-12-31
+        1970 Colmerauer — Prolog Logic Language           : milestone, m70pro, 1970-07-01, 0d
+        1973 Lighthill Report — UK Slashes AI Funding     : crit, milestone, m73lig, 1973-07-01, 0d
+        1974 Werbos — Back-propagation PhD Thesis         : milestone, m74bak, 1974-06-01, 0d
+        1979 AI Hype Collapses — Research Labs Defunded   : milestone, m79col, 1979-01-01, 0d
+
+    section Expert Systems Era (1980-1987)
+        Expert Systems Era (1980-1987)                    : done, era_e, 1980-01-01, 1987-12-31
+        1980 DEC — XCON/R1 Expert System                  : milestone, m80xco, 1980-07-01, 0d
+        1980 Searle — Chinese Room Argument               : milestone, m80sea, 1980-10-01, 0d
+        1980 Japan — Fifth Generation Computer Project    : milestone, m80jap, 1980-04-01, 0d
+        1982 Hopfield — Hopfield Networks                 : crit, milestone, m82hop, 1982-07-01, 0d
+        1984 Lenat — Cyc Common-Sense KB Project          : milestone, m84cyc, 1984-01-01, 0d
+        1986 Rumelhart, Hinton, Williams — Back-prop Nature: crit, milestone, m86bak, 1986-10-01, 0d
+        1986 Rumelhart & McClelland — PDP Books           : milestone, m86pdp, 1986-11-01, 0d
+        1987 Lisp Machine Market Collapses                : crit, milestone, m87lis, 1987-06-01, 0d
+
+    section Second AI Winter (1987-1993)
+        Second AI Winter Era (1987-1993)                  : crit, done, era_w2, 1987-01-01, 1993-12-31
+        1988 Pearl — Probabilistic Reasoning Bayesian Nets: crit, milestone, m88bay, 1988-07-01, 0d
+        1989 LeCun — LeNet First Practical CNN            : crit, milestone, m89len, 1989-07-01, 0d
+        1990 Werbos, Williams — RNNs Back-prop Through Time: milestone, m90rnn, 1990-01-01, 0d
+        1991 Berners-Lee — World Wide Web                 : milestone, m91www, 1991-07-01, 0d
+        1992 Tesauro — TD-Gammon RL Neural Networks       : milestone, m92tdg, 1992-07-01, 0d
+        1993 DARPA — Cuts AI Funding, Winter Deepens      : crit, milestone, m93dar, 1993-06-01, 0d
+
+    section Statistical AI Rise (1994-2005)
+        Statistical AI Era (1994-2005)                    : done, era_s, 1994-01-01, 2005-12-31
+        1995 Cortes & Vapnik — Support Vector Machines    : crit, milestone, m95svm, 1995-07-01, 0d
+        1997 IBM Deep Blue — Defeats Kasparov             : crit, milestone, m97dbl, 1997-05-11, 0d
+        1997 Hochreiter & Schmidhuber — LSTM              : crit, milestone, m97lst, 1997-11-01, 0d
+        1998 LeCun — LeNet-5 Full CNN Pipeline            : milestone, m98len, 1998-01-01, 0d
+        1999 NVIDIA — GeForce 256 First GPU               : milestone, m99gpu, 1999-08-01, 0d
+        2001 Breiman — Random Forests                     : milestone, m01rfo, 2001-01-01, 0d
+        2002 Collobert — Torch ML Framework               : milestone, m02tor, 2002-01-01, 0d
+        2003 Google — PageRank ML at Production Scale     : milestone, m03goo, 2003-01-01, 0d
+        2004 DARPA Grand Challenge — No Vehicle Finishes  : milestone, m04dar, 2004-03-13, 0d
+        2005 Stanford Stanley — DARPA Grand Challenge Win : crit, milestone, m05sta, 2005-10-08, 0d
+
+    section Deep Learning Renaissance (2006-2011)
+        Deep Learning Renaissance Era (2006-2011)         : done, era_d, 2006-01-01, 2011-12-31
+        2006 Hinton — Deep Belief Networks Nature Paper   : crit, milestone, m06dbn, 2006-07-01, 0d
+        2007 NVIDIA — CUDA GPU Computing for Science      : crit, milestone, m07cud, 2007-06-01, 0d
+        2007 Fei-Fei Li — ImageNet Project Begins         : milestone, m07img, 2007-10-01, 0d
+        2008 Hinton & Google — DL Applied to Speech       : milestone, m08spe, 2008-06-01, 0d
+        2009 Fei-Fei Li — ILSVRC Challenge Launched       : crit, milestone, m09ils, 2009-09-01, 0d
+        2010 Hinton — Restricted Boltzmann Machines       : milestone, m10rbm, 2010-06-01, 0d
+        2011 IBM — Watson Wins Jeopardy!                  : crit, milestone, m11wat, 2011-02-16, 0d
+        2011 Apple — Siri First Mainstream AI Assistant   : crit, milestone, m11sir, 2011-10-04, 0d
+
+    section Modern Deep Learning (2012-2016)
+        Modern Deep Learning Era (2012-2016)              : done, era_m, 2012-01-01, 2016-12-31
+        2012 Krizhevsky & Hinton — AlexNet Wins ImageNet  : crit, milestone, m12ale, 2012-09-01, 0d
+        2013 Mikolov, Google — Word2Vec Embeddings        : crit, milestone, m13w2v, 2013-01-16, 0d
+        2013 Srivastava & Hinton — Dropout Regularization : milestone, m13dro, 2013-06-15, 0d
+        2014 Goodfellow — GANs Generative Adversarial Nets: crit, milestone, m14gan, 2014-06-10, 0d
+        2014 Bahdanau & Bengio — Attention Mechanism NLP  : crit, milestone, m14att, 2014-09-01, 0d
+        2014 Google — Acquires DeepMind for $500M         : milestone, m14dmi, 2014-01-26, 0d
+        2014 Google — Seq2Seq Sequence-to-Sequence        : milestone, m14seq, 2014-09-15, 0d
+        2015 Musk, Altman, Sutskever — OpenAI Founded     : crit, milestone, m15oai, 2015-12-11, 0d
+        2015 Google Brain — TensorFlow Open-Sourced       : crit, milestone, m15tf, 2015-11-09, 0d
+        2015 He et al. — ResNet 152 Layers Surpasses Human: milestone, m15res, 2015-12-10, 0d
+        2016 DeepMind — AlphaGo Defeats Lee Sedol 4-1     : crit, milestone, m16ago, 2016-03-09, 0d
+
+    section Transformer Era (2017-2025)
+        Transformer Era (2017-2025)                       : active, era_t, 2017-01-01, 2025-12-31
+        2017 Vaswani et al. — Attention Is All You Need   : crit, milestone, m17att, 2017-06-12, 0d
+        2018 OpenAI — GPT-1 117M Parameters               : milestone, m18gp1, 2018-06-11, 0d
+        2018 Devlin, Google — BERT Bidirectional Transformer: crit, milestone, m18ber, 2018-10-11, 0d
+        2019 OpenAI — GPT-2 1.5B Parameters               : crit, milestone, m19gp2, 2019-02-14, 0d
+        2020 OpenAI — GPT-3 175B In-Context Learning      : crit, milestone, m20gp3, 2020-06-11, 0d
+        2020 DeepMind — AlphaFold2 Protein Folding Solved : crit, milestone, m20alf, 2020-11-30, 0d
+        2021 OpenAI — DALL-E Text-to-Image Generation     : crit, milestone, m21dal, 2021-01-05, 0d
+        2021 OpenAI — CLIP Contrastive Language-Image     : milestone, m21cli, 2021-01-26, 0d
+        2021 OpenAI Codex — GitHub Copilot                : milestone, m21cop, 2021-06-29, 0d
+        2021 DeepMind — AlphaFold Database 200M Proteins  : milestone, m21adb, 2021-07-22, 0d
+        2022 OpenAI — DALL-E 2 Photorealistic             : milestone, m22da2, 2022-04-06, 0d
+        2022 Stability AI — Stable Diffusion Open Source  : crit, milestone, m22sdi, 2022-08-22, 0d
+        2022 OpenAI — Whisper Automatic Speech Recognition: milestone, m22whi, 2022-09-21, 0d
+        2022 OpenAI — ChatGPT InstructGPT RLHF            : crit, milestone, m22cha, 2022-11-30, 0d
+        2023 Meta — LLaMA Open-Source LLM 7B-65B          : crit, milestone, m23lla, 2023-02-24, 0d
+        2023 OpenAI — GPT-4 Multi-modal Expert-Level       : crit, milestone, m23gp4, 2023-03-14, 0d
+        2023 Anthropic — Claude Constitutional AI         : crit, milestone, m23cla, 2023-03-21, 0d
+        2023 Meta — LLaMA 2 Open for Commercial Use       : milestone, m23ll2, 2023-07-18, 0d
+        2023 Mistral AI — Mistral 7B (France)             : milestone, m23mis, 2023-09-27, 0d
+        2024 Google DeepMind — Gemini 1.5 Pro 1M Context  : milestone, m24gem, 2024-02-15, 0d
+        2024 OpenAI — Sora Text-to-Video World Model      : crit, milestone, m24sor, 2024-02-16, 0d
+        2024 OpenAI — o1 Chain-of-Thought Reasoning Model : crit, milestone, m24o1, 2024-09-12, 0d
+        2024 Nobel Prizes — AlphaFold Chemistry + Hinton  : crit, milestone, m24nob, 2024-10-08, 0d
+        2025 AI — Agentic Era Autonomous Multi-Step Agents: crit, milestone, m25age, 2025-01-01, 0d
+        2025 Reasoning — Multi-Modality Converge GPT-4o   : milestone, m25rea, 2025-02-01, 0d
+        2025 DeepSeek — R1 Open-Source Reasoning Model    : crit, milestone, m25dsr, 2025-04-01, 0d
