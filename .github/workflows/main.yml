@@ -34,10 +34,10 @@ jobs:
     env:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true # Forces Node 24 runtime
     permissions:
-      # needed by guibranco/github-status-action-v2@v1
+      # needed by guibranco/github-status-action-v2@v1.2.3
       statuses: write
     steps:
-      - uses: guibranco/github-status-action-v2@v1
+      - uses: guibranco/github-status-action-v2@v1.2.3
         if: ${{ env.COND_PUSH_OR_PR }}
         with:
           authToken: ${{secrets.GITHUB_TOKEN}}
@@ -62,7 +62,7 @@ jobs:
           app-id: ${{ secrets.APP_ID }}
           private-key: ${{ secrets.APP_PRIVATE_KEY }}
 
-      - uses: guibranco/github-status-action-v2@v1
+      - uses: guibranco/github-status-action-v2@v1.2.3
         if: ${{ env.COND_PUSH_OR_PR }}
         with:
           authToken: ${{ secrets.GITHUB_TOKEN }}
@@ -175,7 +175,7 @@ jobs:
           echo "Pull Request Number - ${{ steps.cpr.outputs.pull-request-number }}"
           echo "Pull Request URL - ${{ steps.cpr.outputs.pull-request-url }}"
 
-      - uses: guibranco/github-status-action-v2@v1
+      - uses: guibranco/github-status-action-v2@v1.2.3
         if: ${{ env.COND_PUSH_OR_PR }}
         with:
           authToken: ${{ secrets.GITHUB_TOKEN }}
