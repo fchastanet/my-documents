@@ -123,7 +123,7 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          wranglerVersion: "4.81.1"
+          wranglerVersion: "4.88.0"
           command: |
             pages project list
             pages deploy build/${{ inputs.site-name }}/public/ --project-name=${{ inputs.site-name }} --branch=master --commit-dirty=true
