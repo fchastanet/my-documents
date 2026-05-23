@@ -61,7 +61,7 @@ jobs:
         with:
           app-id: ${{ secrets.DOC_APP_ID }}
           private-key: ${{ secrets.DOC_APP_PRIVATE_KEY }}
-          owner: ${{ inputs.target_org }}
+          owner: ${{ inputs.target_org }} # zizmor: ignore[github-app]
           repositories: ${{ inputs.target_repo }}
           permission-contents: write
 

@@ -149,3 +149,8 @@ ignore:
   # Ignored by default; disputed and unwarranted CVE that causes Megalinter to fail
   # @link https://nvd.nist.gov/vuln/detail/CVE-2018-20225
   - vulnerability: CVE-2018-20225
+  # False positive: GHSA-pwf7-47c3-mfhx affects j178/prek-action <= 1.0.5 (patched in 1.0.6).
+  # We use hash bdca6f102f98e2b4c7029491a53dfd366469e33d which corresponds to v2.0.4.
+  # Grype cannot determine the version from the commit hash and conservatively reports it.
+  # @link https://github.com/advisories/GHSA-pwf7-47c3-mfhx
+  - vulnerability: GHSA-pwf7-47c3-mfhx
