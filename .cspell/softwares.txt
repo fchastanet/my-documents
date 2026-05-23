@@ -63,3 +63,4 @@ sshagent
 stackoverflow
 webp
 xdebug
+zizmor

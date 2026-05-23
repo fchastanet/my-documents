@@ -6,13 +6,13 @@
 source "$(dirname "$0")/common.sh"
 
 if command -v yq >/dev/null 2>&1; then
-  echo -e "${GREEN}yq is already installed: $(yq --version)${NC}"
+  echo -e "${COLOR_SUCCESS}yq is already installed: $(yq --version)${COLOR_RESET}"
   exit 0
 fi
 
-echo -e "${YELLOW}yq not found. Installing...${NC}"
+echo -e "${COLOR_WARNING}yq not found. Installing...${COLOR_RESET}"
 
 sudo wget -qO /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
 sudo chmod +x /usr/local/bin/yq
 
-echo -e "${GREEN}yq installed: $(yq --version)${NC}"
+echo -e "${COLOR_SUCCESS}yq installed: $(yq --version)${COLOR_RESET}"

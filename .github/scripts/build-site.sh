@@ -7,8 +7,8 @@
 source "$(dirname "$0")/common.sh"
 
 if (( $# < 2 )); then
-  echo -e "${YELLOW}Usage: $0 SITE SITE_NAME [BUILD_DIR]${NC}"
-  echo -e "${YELLOW}Example: $0 sites/bash-compiler bash-compiler build${NC}"
+  echo -e "${COLOR_WARNING}Usage: $0 SITE SITE_NAME [BUILD_DIR]${COLOR_RESET}"
+  echo -e "${COLOR_WARNING}Example: $0 sites/bash-compiler bash-compiler build${COLOR_RESET}"
   exit 1
 fi
 
@@ -19,17 +19,17 @@ BUILD_DIR="${3:-build}"
 script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 repo_root="$(dirname "$(dirname "${script_dir}")")"
 
-echo -e "${BLUE}Building ${SITE_NAME}...${NC}"
+echo -e "${COLOR_INFO}Building ${SITE_NAME}...${COLOR_RESET}"
 
 # Verify site directory exists
 if [[ ! -d "${SITE_DIR}" ]]; then
-  echo -e "${YELLOW}⚠  ${SITE_DIR} not found. Run 'make link-repos' first.${NC}"
+  echo -e "${COLOR_WARNING}⚠  ${SITE_DIR} not found. Run 'make link-repos' first.${COLOR_RESET}"
   exit 1
 fi
 
 # Verify content exists
 if [[ ! -d "${SITE_DIR}/content" ]]; then
-  echo -e "${YELLOW}⚠  Skipping ${SITE_NAME} as ${SITE_DIR}/content not found.${NC}"
+  echo -e "${COLOR_WARNING}⚠  Skipping ${SITE_NAME} as ${SITE_DIR}/content not found.${COLOR_RESET}"
   exit 0
 fi
 
@@ -38,7 +38,7 @@ rm -Rf "${output_dir}"
 mkdir -p "${output_dir}"
 
 if [[ -f "${SITE_DIR}/.github/scripts/pre-build.sh" ]]; then
-  echo -e "${BLUE}Running pre-build script for ${SITE_NAME}...${NC}"
+  echo -e "${COLOR_INFO}Running pre-build script for ${SITE_NAME}...${COLOR_RESET}"
   chmod +x "${SITE_DIR}/.github/scripts/pre-build.sh"
   (
     cd "${SITE_DIR}"
@@ -63,5 +63,5 @@ fi
   "${output_dir}" \
   "${SITE_DIR}"
 
-echo -e "${GREEN}✅ ${SITE_NAME} built successfully${NC}"
+echo -e "${COLOR_SUCCESS}✅ ${SITE_NAME} built successfully${COLOR_RESET}"
 echo -e "  Output: ${output_dir}/public/"

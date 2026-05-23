@@ -12,7 +12,7 @@ shift 2 || true
 REPOS=("$@")
 
 if [[ "${#REPOS[@]}" = "0" ]]; then
-  echo -e "${YELLOW}No repositories specified${NC}"
+  echo -e "${COLOR_WARNING}No repositories specified${COLOR_RESET}"
   exit 1
 fi
 
@@ -22,7 +22,7 @@ repo_root="$(dirname "$(dirname "${script_dir}")")"
 (
   cd "${repo_root}"
 
-  echo -e "${BLUE}Building all sites...${NC}"
+  echo -e "${COLOR_INFO}Building all sites...${COLOR_RESET}"
 
   # Build my-documents
   "${script_dir}/build-site.sh" "${repo_root}" "my-documents" "${BUILD_DIR}"
@@ -33,4 +33,4 @@ repo_root="$(dirname "$(dirname "${script_dir}")")"
   done
 )
 
-echo -e "${GREEN}✅ All sites built successfully${NC}"
+echo -e "${COLOR_SUCCESS}✅ All sites built successfully${COLOR_RESET}"

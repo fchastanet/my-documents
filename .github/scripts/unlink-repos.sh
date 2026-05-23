@@ -11,25 +11,25 @@ shift || true
 REPOS=("$@")
 
 if [[ "${#REPOS[@]}" = "0" ]]; then
-  echo -e "${YELLOW}No repositories specified${NC}"
+  echo -e "${COLOR_WARNING}No repositories specified${COLOR_RESET}"
   exit 1
 fi
 
-echo -e "${BLUE}Removing symlinks...${NC}"
+echo -e "${COLOR_INFO}Removing symlinks...${COLOR_RESET}"
 
 for repo in "${REPOS[@]}"; do
   link_path="${SITES_DIR}/${repo}"
 
   if [[ -L "${link_path}" ]]; then
     rm "${link_path}"
-    echo -e "  ${GREEN}✓${NC} Removed ${link_path}"
+    echo -e "  ${COLOR_SUCCESS}✓${COLOR_RESET} Removed ${link_path}"
   fi
 done
 
 # Remove sites directory if empty
 if [[ -d "${SITES_DIR}" ]]; then
   rmdir "${SITES_DIR}" 2>/dev/null || true
-  echo -e "${GREEN}✓${NC} Removed empty ${SITES_DIR}"
+  echo -e "${COLOR_SUCCESS}✓${COLOR_RESET} Removed empty ${SITES_DIR}"
 fi
 
-echo -e "${GREEN}✅ Symlinks removed${NC}"
+echo -e "${COLOR_SUCCESS}✅ Symlinks removed${COLOR_RESET}"

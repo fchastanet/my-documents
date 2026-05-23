@@ -12,10 +12,12 @@ concurrency:
 
 jobs:
   build-deploy:
-    uses: fchastanet/my-documents/.github/workflows/build-site-action.yml@master
+    uses: ./.github/workflows/build-site-action.yml
     with:
       site-name: 'my-documents'
-    secrets: inherit
+    secrets:
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
     permissions:
       contents: read
       pages: write

@@ -12,7 +12,7 @@ shift 2 || true
 REPOS=("$@")
 
 if [[ "${#REPOS[@]}" = "0" ]]; then
-  echo -e "${YELLOW}No repositories specified${NC}"
+  echo -e "${COLOR_WARNING}No repositories specified${COLOR_RESET}"
   exit 1
 fi
 
@@ -21,7 +21,7 @@ repo_root="$(dirname "$(dirname "${script_dir}")")"
 
 cd "${repo_root}"
 
-echo -e "${BLUE}Testing all sites with curl...${NC}"
+echo -e "${COLOR_INFO}Testing all sites with curl...${COLOR_RESET}"
 
 # Test my-documents
 (
@@ -32,9 +32,9 @@ echo -e "${BLUE}Testing all sites with curl...${NC}"
   sleep 2
 
   if curl -s -o /dev/null -w "%{http_code}" http://localhost:1313/my-documents/ | grep -q "200"; then
-    echo -e "    ${GREEN}✓${NC} my-documents: http://localhost:1313/my-documents/"
+    echo -e "    ${COLOR_SUCCESS}✓${COLOR_RESET} my-documents: http://localhost:1313/my-documents/"
   else
-    echo -e "    ${YELLOW}✗${NC} my-documents failed"
+    echo -e "    ${COLOR_WARNING}✗${COLOR_RESET} my-documents failed"
   fi
 )
 # Test other sites
@@ -49,12 +49,12 @@ for repo in "${REPOS[@]}"; do
       sleep 2
 
       if curl -s -o /dev/null -w "%{http_code}" "http://localhost:1314/${repo}/" | grep -q "200"; then
-        echo -e "    ${GREEN}✓${NC} ${repo}: http://localhost:1314/${repo}/"
+        echo -e "    ${COLOR_SUCCESS}✓${COLOR_RESET} ${repo}: http://localhost:1314/${repo}/"
       else
-        echo -e "    ${YELLOW}✗${NC} ${repo} failed"
+        echo -e "    ${COLOR_WARNING}✗${COLOR_RESET} ${repo} failed"
       fi
     )
   fi
 done
 
-echo -e "${GREEN}✅ All tests complete${NC}"
+echo -e "${COLOR_SUCCESS}✅ All tests complete${COLOR_RESET}"

@@ -12,7 +12,7 @@ Shared color definitions for consistent output across all scripts.
 
 ```bash
 source "$(dirname "$0")/colors.sh"
-echo -e "${GREEN}Success${NC}"
+echo -e "${COLOR_SUCCESS}Success${COLOR_RESET}"
 ```
 
 **Available colors:**
@@ -226,10 +226,10 @@ When adding new scripts:
 5. **Use color output**:
 
    ```bash
-   echo -e "${BLUE}Starting...${NC}"
-   echo -e "${GREEN}Success!${NC}"
-   echo -e "${YELLOW}Warning${NC}"
-   echo -e "${RED}Error${NC}"
+   echo -e "${COLOR_INFO}Starting...${COLOR_RESET}"
+   echo -e "${COLOR_SUCCESS}Success!${COLOR_RESET}"
+   echo -e "${COLOR_WARNING}Warning${COLOR_RESET}"
+   echo -e "${COLOR_ERROR}Error${COLOR_RESET}"
    ```
 
 ## Testing Scripts

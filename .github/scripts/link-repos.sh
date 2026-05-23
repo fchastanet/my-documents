@@ -12,11 +12,11 @@ shift || true
 REPOS=("$@")
 
 if [[ "${#REPOS[@]}" = "0" ]]; then
-  echo -e "${YELLOW}No repositories specified${NC}"
+  echo -e "${COLOR_WARNING}No repositories specified${COLOR_RESET}"
   exit 1
 fi
 
-echo -e "${BLUE}Creating symlinks to other repositories...${NC}"
+echo -e "${COLOR_INFO}Creating symlinks to other repositories...${COLOR_RESET}"
 
 mkdir -p "${SITES_DIR}"
 
@@ -27,14 +27,14 @@ for repo in "${REPOS[@]}"; do
 
   if [[ -d "${repo_path}" ]]; then
     if [[ -L "${link_path}" ]]; then
-      echo -e "  ${YELLOW}✓${NC} ${link_path} already linked"
+      echo -e "  ${COLOR_WARNING}✓${COLOR_RESET} ${link_path} already linked"
     else
       ln -sf "${repo_path}" "${link_path}"
-      echo -e "  ${GREEN}✓${NC} Linked ${link_path} → ${repo_path}"
+      echo -e "  ${COLOR_SUCCESS}✓${COLOR_RESET} Linked ${link_path} → ${repo_path}"
     fi
   else
-    echo -e "  ${YELLOW}⚠${NC}  ${repo_path} not found (clone it to enable)"
+    echo -e "  ${COLOR_WARNING}⚠${COLOR_RESET}  ${repo_path} not found (clone it to enable)"
   fi
 done
 
-echo -e "${GREEN}✅ Symlinks created${NC}"
+echo -e "${COLOR_SUCCESS}✅ Symlinks created${COLOR_RESET}"

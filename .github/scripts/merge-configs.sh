@@ -12,16 +12,16 @@ OUTPUT_FILE="${3:?Error: OUTPUT_FILE argument required}"
 BASE_URL="${4:-}"
 
 if [[ ! -f "${BASE_CONFIG}" ]]; then
-  echo -e "${RED}❌ Base config not found: ${BASE_CONFIG}${NC}"
+  echo -e "${COLOR_ERROR}❌ Base config not found: ${BASE_CONFIG}${COLOR_RESET}"
   exit 1
 fi
 
 if [[ ! -f "${SITE_CONFIG}" ]]; then
-  echo -e "${RED}❌ Site config not found: ${SITE_CONFIG}${NC}"
+  echo -e "${COLOR_ERROR}❌ Site config not found: ${SITE_CONFIG}${COLOR_RESET}"
   exit 1
 fi
 
-echo -e "${BLUE}Merging configs...${NC}"
+echo -e "${COLOR_INFO}Merging configs...${COLOR_RESET}"
 echo -e "  Base: ${BASE_CONFIG}"
 echo -e "  Site: ${SITE_CONFIG}"
 echo -e "  Output: ${OUTPUT_FILE}"
@@ -37,4 +37,4 @@ if [[ -n "${BASE_URL}" ]]; then
   yq eval -i ".baseURL = \"${BASE_URL}\"" "${OUTPUT_FILE}"
 fi
 
-echo -e "${GREEN}✅ Configs merged${NC}"
+echo -e "${COLOR_SUCCESS}✅ Configs merged${COLOR_RESET}"

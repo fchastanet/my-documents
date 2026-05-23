@@ -12,11 +12,21 @@ SITE_NAME="${1:?Error: SITE_NAME argument required}"
 ORCHESTRATOR_DIR="${2:?Error: ORCHESTRATOR_DIR argument required}"
 SOURCE_DIR="${3:?Error: SOURCE_DIR argument required}"
 OUTPUT_DIR="${4:?Error: OUTPUT_DIR argument required}"
-BASE_URL="${5:-}"
 
 script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-echo -e "${BLUE}Preparing build for ${SITE_NAME}...${NC}"
+# If BASE_URL not provided, extract from site-config.yaml
+if ! command -v yq &>/dev/null; then
+  echo -e "${COLOR_ERROR}Error: yq is required to extract baseURL from site-config.yaml. Please install yq or provide BASE_URL as an argument.${COLOR_RESET}"
+  exit 1
+else
+  site_config="${SOURCE_DIR}/configs/site-config.yaml"
+  if [[ -f "${site_config}" ]]; then
+    BASE_URL="$(yq '.baseURL // ""' "${site_config}" | sed 's|/$||')"
+  fi
+fi
+
+echo -e "${COLOR_INFO}Preparing build for ${SITE_NAME}...${COLOR_RESET}"
 
 # For dependent sites
 echo "  Setting up dependent site..."
@@ -47,7 +57,7 @@ echo "  Copying content..."
 if [[ -d "${SOURCE_DIR}/content" ]]; then
   cp -r "${SOURCE_DIR}/content" "${OUTPUT_DIR}/"
 else
-  echo -e "${YELLOW}⚠ No content directory found in ${SOURCE_DIR}${NC}"
+  echo -e "${COLOR_WARNING}⚠ No content directory found in ${SOURCE_DIR}${COLOR_RESET}"
 fi
 
 echo "  Copying static files..."
@@ -68,7 +78,11 @@ echo "  Create robots.txt to allow sitemap.xml crawling"
   echo "Disallow:"
   echo "Disallow: /tags/"
   echo "Disallow: /categories/"
-  echo "Sitemap: /sitemap.xml"
+  if [[ -n "${BASE_URL}" ]]; then
+    echo "Sitemap: ${BASE_URL}/sitemap.xml"
+  else
+    echo "Sitemap: /sitemap.xml"
+  fi
 ) >"${OUTPUT_DIR}/public/robots.txt"
 
 # Copy go.mod and go.sum if they exist
@@ -113,4 +127,4 @@ if [[ -f "${ORCHESTRATOR_DIR}/go.sum" && ! -f "${OUTPUT_DIR}/go.sum" ]]; then
   cp "${ORCHESTRATOR_DIR}/go.sum" "${OUTPUT_DIR}/"
 fi
 
-echo -e "${GREEN}✅ Build directory prepared for ${SITE_NAME}${NC}"
+echo -e "${COLOR_SUCCESS}✅ Build directory prepared for ${SITE_NAME}${COLOR_RESET}"

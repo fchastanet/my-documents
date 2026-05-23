@@ -13,19 +13,19 @@ EXTERNAL_REPO="${3:-}"
 GITHUB_TOKEN="${4:-${GITHUB_TOKEN:-}}"
 
 if [[ ! -d "${PUBLIC_DIR}" ]]; then
-  echo -e "${RED}✗ Public directory not found: ${PUBLIC_DIR}${NC}"
+  echo -e "${COLOR_ERROR}✗ Public directory not found: ${PUBLIC_DIR}${COLOR_RESET}"
   exit 1
 fi
 
 if [[ -z "${EXTERNAL_REPO}" ]] && [[ -z "${GITHUB_TOKEN}" ]]; then
   # For self (my-documents), GITHUB_TOKEN should be set by GitHub Actions
   if [[ -z "${GITHUB_TOKEN:-}" ]]; then
-    echo -e "${RED}✗ GITHUB_TOKEN not provided and not set in environment${NC}"
+    echo -e "${COLOR_ERROR}✗ GITHUB_TOKEN not provided and not set in environment${COLOR_RESET}"
     exit 1
   fi
 fi
 
-echo -e "${BLUE}Deploying ${SITE_NAME} to GitHub Pages...${NC}"
+echo -e "${COLOR_INFO}Deploying ${SITE_NAME} to GitHub Pages...${COLOR_RESET}"
 echo "  Site: ${SITE_NAME}"
 echo "  Public Dir: ${PUBLIC_DIR}"
 if [[ -n "${EXTERNAL_REPO}" ]]; then
@@ -40,5 +40,5 @@ git config --global user.email "github-actions[bot]@users.noreply.github.com"
 echo "  📊 Directory size: $(du -sh "${PUBLIC_DIR}" | cut -f1)"
 echo "  📄 HTML files: $(find "${PUBLIC_DIR}" -name '*.html' | wc -l)"
 
-echo -e "${GREEN}✅ Deployment configuration ready${NC}"
+echo -e "${COLOR_SUCCESS}✅ Deployment configuration ready${COLOR_RESET}"
 echo "(Note: Actual deployment handled by peaceiris/actions-gh-pages@v4 action)"

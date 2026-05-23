@@ -13,22 +13,22 @@ script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 repo_root="$(dirname "$(dirname "${script_dir}")")"
 
 if [[ "${SKIP_MARP_BUILD:-}" == "true" ]]; then
-  echo -e "${YELLOW}⚠  SKIP_MARP_BUILD is set to true. Skipping Marp build.${NC}"
+  echo -e "${COLOR_WARNING}⚠  SKIP_MARP_BUILD is set to true. Skipping Marp build.${COLOR_RESET}"
   exit 0
 fi
 
-echo -e "${BLUE}Building Marp presentations...${NC}"
+echo -e "${COLOR_INFO}Building Marp presentations...${COLOR_RESET}"
 
 # Verify marp directory exists
 if [[ ! -d "${repo_root}/${MARP_DIR}" ]]; then
-  echo -e "${YELLOW}⚠  ${MARP_DIR} directory not found. Skipping Marp build.${NC}"
+  echo -e "${COLOR_WARNING}⚠  ${MARP_DIR} directory not found. Skipping Marp build.${COLOR_RESET}"
   exit 0
 fi
 
 # Verify marp-cli is installed
 if ! command -v marp &> /dev/null; then
   if [[ ! -f "${repo_root}/node_modules/.bin/marp" ]]; then
-    echo -e "${YELLOW}⚠  Marp CLI not found. Run 'npm ci' first.${NC}"
+    echo -e "${COLOR_WARNING}⚠  Marp CLI not found. Run 'npm ci' first.${COLOR_RESET}"
     exit 1
   fi
   MARP_CMD="${repo_root}/node_modules/.bin/marp"
@@ -46,18 +46,18 @@ cd "${repo_root}" || exit 1
 presentation_count=$(find "${MARP_DIR}" -name "*.md" -type f | wc -l)
 
 if [[ "${presentation_count}" -eq 0 ]]; then
-  echo -e "${YELLOW}  No Marp presentations found in ${MARP_DIR}${NC}"
+  echo -e "${COLOR_WARNING}  No Marp presentations found in ${MARP_DIR}${COLOR_RESET}"
   exit 0
 fi
 
-echo -e "${GREEN}Converting ${presentation_count} presentation(s)...${NC}"
+echo -e "${COLOR_SUCCESS}Converting ${presentation_count} presentation(s)...${COLOR_RESET}"
 
 # Generate HTML files (parallel processing via marp's -P flag)
-echo -e "${BLUE}  Generating HTML files...${NC}"
+echo -e "${COLOR_INFO}  Generating HTML files...${COLOR_RESET}"
 "${MARP_CMD}" -I "${MARP_DIR}" -o "${OUTPUT_DIR}/" --html --allow-local-files 2>&1
 
 # Generate PPTX files (parallel processing via marp's -P flag)
-echo -e "${BLUE}  Generating PPTX files...${NC}"
+echo -e "${COLOR_INFO}  Generating PPTX files...${COLOR_RESET}"
 "${MARP_CMD}" -I "${MARP_DIR}" -o "${OUTPUT_DIR}/" --pptx --allow-local-files 2>&1
 
 # Verify outputs were created by checking each source file has corresponding outputs
@@ -71,19 +71,19 @@ while IFS= read -r -d '' marp_file; do
   pptx_file="${OUTPUT_DIR}/${dir_name}/${base_name}.pptx"
 
   if [[ ! -f "${html_file}" ]]; then
-    echo -e "${RED}  ❌ Missing HTML: ${html_file}${NC}"
+    echo -e "${COLOR_ERROR}  ❌ Missing HTML: ${html_file}${COLOR_RESET}"
     missing_files=$((missing_files + 1))
   fi
 
   if [[ ! -f "${pptx_file}" ]]; then
-    echo -e "${RED}  ❌ Missing PPTX: ${pptx_file}${NC}"
+    echo -e "${COLOR_ERROR}  ❌ Missing PPTX: ${pptx_file}${COLOR_RESET}"
     missing_files=$((missing_files + 1))
   fi
 done < <(find "${MARP_DIR}" -name "*.md" -type f -print0)
 
 if [[ "${missing_files}" -eq 0 ]]; then
-  echo -e "${GREEN}✅ Successfully built ${presentation_count} presentation(s) (HTML + PPTX)${NC}"
+  echo -e "${COLOR_SUCCESS}✅ Successfully built ${presentation_count} presentation(s) (HTML + PPTX)${COLOR_RESET}"
 else
-  echo -e "${RED}❌ Build incomplete: ${missing_files} file(s) missing${NC}"
+  echo -e "${COLOR_ERROR}❌ Build incomplete: ${missing_files} file(s) missing${COLOR_RESET}"
   exit 1
 fi

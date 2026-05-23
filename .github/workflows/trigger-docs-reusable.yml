@@ -57,12 +57,13 @@ jobs:
     steps:
       - name: Generate GitHub App token
         id: app-token
-        uses: actions/create-github-app-token@v1
+        uses: actions/create-github-app-token@1b10c78c7865c340bc4f6099eb2f838309f1e8c3 # v3.1.1
         with:
           app-id: ${{ secrets.DOC_APP_ID }}
           private-key: ${{ secrets.DOC_APP_PRIVATE_KEY }}
-          owner: ${{ inputs.target_org }}
+          owner: ${{ inputs.target_org }} # zizmor: ignore[github-app]
           repositories: ${{ inputs.target_repo }}
+          permission-contents: write
 
       - name: Trigger documentation build
         env:
@@ -84,9 +85,9 @@ jobs:
               \"event_type\": \"${EVENT_TYPE}\",
               \"client_payload\": {
                 \"repo\": \"${SOURCE_REPO}\",
-                \"ref\": \"${{ github.ref }}\",
+                \"ref\": \"${GITHUB_REF}\",
                 \"sha\": \"${{ github.sha }}\",
-                \"triggered_by\": \"${{ github.actor }}\"
+                \"triggered_by\": \"${GITHUB_ACTOR}\"
               }
             }")
 
@@ -103,7 +104,7 @@ jobs:
               echo "**Source Repository:** \`${SOURCE_REPO}\`"
               echo "**Target Repository:** \`${TARGET_ORG}/${TARGET_REPO}\`"
               echo "**Commit:** \`${{ github.sha }}\`"
-              echo "**Triggered by:** \`${{ github.actor }}\`"
+              echo "**Triggered by:** \`${GITHUB_ACTOR}\`"
               echo ""
               echo "🔗 [View build status](https://github.com/${TARGET_ORG}/${TARGET_REPO}/actions/workflows/${WORKFLOW_FILE})"
               echo "📖 [View documentation](${DOCS_URL_BASE}/${REPO_NAME}/)"
@@ -117,4 +118,7 @@ jobs:
       - name: Note about deployment delay
         run: |
           echo "ℹ️  Note: Documentation deployment may take 2-5 minutes"
-          echo "   Check the build status at: https://github.com/${{ inputs.target_org }}/${{ inputs.target_repo }}/actions"
+          echo "   Check the build status at: https://github.com/${INPUTS_TARGET_ORG}/${INPUTS_TARGET_REPO}/actions"
+        env:
+          INPUTS_TARGET_ORG: ${{ inputs.target_org }}
+          INPUTS_TARGET_REPO: ${{ inputs.target_repo }}

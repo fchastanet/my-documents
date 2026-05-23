@@ -11,11 +11,11 @@ SITE_NAME="${2:-site}"
 BASE_URL="${3:-}"
 
 if [[ ! -d "${BUILD_DIR}" ]]; then
-  echo -e "${RED}✗ Build directory not found: ${BUILD_DIR}${NC}"
+  echo -e "${COLOR_ERROR}✗ Build directory not found: ${BUILD_DIR}${COLOR_RESET}"
   exit 1
 fi
 
-echo -e "${BLUE}Building ${SITE_NAME} with Hugo...${NC}"
+echo -e "${COLOR_INFO}Building ${SITE_NAME} with Hugo...${COLOR_RESET}"
 
 (
   cd "${BUILD_DIR}" || exit 1
@@ -46,7 +46,7 @@ echo -e "${BLUE}Building ${SITE_NAME} with Hugo...${NC}"
   fi
   hugo "${args[@]}"
 
-  echo -e "${GREEN}✅ Build complete for ${SITE_NAME}${NC}"
+  echo -e "${COLOR_SUCCESS}✅ Build complete for ${SITE_NAME}${COLOR_RESET}"
   echo "  📊 Public directory size:"
   du -sh public/
 )

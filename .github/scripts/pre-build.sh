@@ -3,14 +3,9 @@
 # Generates Marp presentations before Hugo build
 
 # shellcheck source=.github/scripts/common.sh
-source "$(dirname "$0")/common.sh" 2>/dev/null || {
-  # Define basic colors if common.sh is not available
-  BLUE='\033[0;34m'
-  GREEN='\033[0;32m'
-  NC='\033[0m' # No Color
-}
+source "$(dirname "$0")/common.sh" 2>/dev/null
 
-echo -e "${BLUE}Running pre-build for my-documents...${NC}"
+echo -e "${COLOR_INFO}Running pre-build for my-documents...${COLOR_RESET}"
 
 # Determine the repository root
 script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -19,9 +14,9 @@ repo_root="$(dirname "$(dirname "${script_dir}")")"
 # Build Marp presentations
 if [[ -d "${repo_root}/marp" ]]; then
   "${script_dir}/build-marp.sh" "marp" "${repo_root}/static/presentations"
-  echo -e "${GREEN}✅ Marp presentations built${NC}"
+  echo -e "${COLOR_SUCCESS}✅ Marp presentations built${COLOR_RESET}"
 else
-  echo -e "${BLUE}No marp directory found, skipping Marp build${NC}"
+  echo -e "${COLOR_INFO}No marp directory found, skipping Marp build${COLOR_RESET}"
 fi
 
-echo -e "${GREEN}✅ Pre-build complete${NC}"
+echo -e "${COLOR_SUCCESS}✅ Pre-build complete${COLOR_RESET}"
