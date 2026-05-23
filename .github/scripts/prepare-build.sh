@@ -68,7 +68,11 @@ echo "  Create robots.txt to allow sitemap.xml crawling"
   echo "Disallow:"
   echo "Disallow: /tags/"
   echo "Disallow: /categories/"
-  echo "Sitemap: /sitemap.xml"
+  if [[ -n "${BASE_URL}" ]]; then
+    echo "Sitemap: ${BASE_URL}/sitemap.xml"
+  else
+    echo "Sitemap: /sitemap.xml"
+  fi
 ) >"${OUTPUT_DIR}/public/robots.txt"
 
 # Copy go.mod and go.sum if they exist
