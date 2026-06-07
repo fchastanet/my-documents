@@ -30,6 +30,7 @@ ignorePaths:
   - .shellcheckrc
   - vendor/**
   - '**/backup/**'
+  - .pre-commit-config.yaml
   - commit-msg.md
   - .mega-linter*.yml
   - TODO.md
@@ -209,6 +210,10 @@ overrides:
   - filename:
       - content/fr/**
     language: fr
+    ignoreRegExpList:
+      - "Forgetting Spaced Repetition System"
+      - "Spaced Repetition"
+      - "Embeddings"
     dictionaries:
       - fr-fr
       - french

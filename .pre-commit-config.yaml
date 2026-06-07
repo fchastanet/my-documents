@@ -38,6 +38,7 @@ repos:
             ^content/fr/assets/20181031_HauntedMan\.webp$|
             ^content/fr/developpement-personnel/assets/emotions\.webp$|
             ^content/docs/tooling/assets/timeline-generation-preview\.webp$|
+            ^content/fr/developpement-personnel/assets/apprendre-efficacement\.webp$|
             -markwhen\.webp$|
             ^assets/favicons/|
             \.svg$

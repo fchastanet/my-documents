@@ -22,3 +22,7 @@ hugo.yaml
 **/*.pptx
 
 .cspell/forbidden.txt
+
+marp/understanding-ai/merged.md
+
+*:Zone.Identifier
