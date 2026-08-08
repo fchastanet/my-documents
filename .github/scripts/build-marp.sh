@@ -26,15 +26,11 @@ if [[ ! -d "${repo_root}/${MARP_DIR}" ]]; then
 fi
 
 # Verify marp-cli is installed
-if ! command -v marp &> /dev/null; then
-  if [[ ! -f "${repo_root}/node_modules/.bin/marp" ]]; then
-    echo -e "${COLOR_WARNING}⚠  Marp CLI not found. Run 'npm ci' first.${COLOR_RESET}"
-    exit 1
-  fi
-  MARP_CMD="${repo_root}/node_modules/.bin/marp"
-else
-  MARP_CMD="marp"
+if [[ ! -f "${repo_root}/node_modules/.bin/marp" ]]; then
+  echo -e "${COLOR_WARNING}⚠  Marp CLI not found. Run 'npm ci' first.${COLOR_RESET}"
+  exit 1
 fi
+MARP_CMD="${repo_root}/node_modules/.bin/marp"
 
 # Create output directory
 mkdir -p "${repo_root}/${OUTPUT_DIR}"
