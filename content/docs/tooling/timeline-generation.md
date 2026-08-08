@@ -1,5 +1,5 @@
 ---
-title: '{{title}}'
+title: 'Timeline Generation'
 pageInfo: |
   In this article, I will show you multiple ways to generate a timeline visualization from markdown files using plantuml, mermaid, and markwhen tools.
 description: 'Timeline generation: compare visualization types and choose the best one for your data.'
@@ -11,8 +11,8 @@ tags:
 previewImage: assets/timeline-generation-preview.webp
 draft: true
 date: '2026-05-12T23:28:40+02:00'
-lastmod: '2026-05-18T01:12:36+02:00'
-version: '1.1'
+lastmod: '2026-08-08T13:53:28+02:00'
+version: '1.2'
 ---
 
 ## 1. Using MarkWhen
