@@ -182,6 +182,10 @@ repos:
       - id: check-executables-have-shebangs
       - id: check-shebang-scripts-are-executable
       - id: check-xml
+        exclude: |
+          (?x)(
+            ^shared/layouts/sitemap.xml$
+          )
       - id: check-yaml
       - id: check-added-large-files
         files: \.(avif|heic|heif|jpeg|jpg|png|webp)$
