@@ -69,9 +69,9 @@
             <img src="{{ $thumbnail }}" class="card-img-top" alt="{{ .Title }}" style="height: 200px; object-fit: cover;">
           {{ end }}
           <div class="card-body">
-            <h5 class="card-title">
+            <h1 class="card-title">
               <a href="{{ .RelPermalink }}" class="text-decoration-none">{{ .Title }}</a>
-            </h5>
+            </h1>
             {{ with .Params.description }}
               <p class="card-text text-muted">{{ . }}</p>
             {{ else }}
