@@ -15,7 +15,6 @@
     </div>
   </header>
   {{ .Content }}
-  {{ partial "articles-list.html" . }}
   {{ partial "feedback.html" . -}}
   {{ if (.Site.Config.Services.Disqus.Shortname) -}}
     <br />

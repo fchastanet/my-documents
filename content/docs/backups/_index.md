@@ -15,15 +15,13 @@ tags:
   - backup
 linkTitle: Backup Pages
 date: '2026-03-18T08:00:00+01:00'
-lastmod: '2026-05-11T23:28:39+02:00'
-version: '1.2'
+lastmod: '2026-08-08T13:56:14+02:00'
+version: '1.3'
 ---
 
 ## 1. Backup Pages Currently Archived
 
-The following pages have been archived:
-
-{{< articles-list >}}
+Check sidebar for a list of pages that have been archived.
 
 ## 2. About Backup Pages
 

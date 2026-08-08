@@ -7,8 +7,8 @@ pageInfo: |-
 type: docs
 weight: 5
 date: '2026-02-23T08:00:00+01:00'
-lastmod: '2026-05-11T23:28:40+02:00'
-version: '1.1'
+lastmod: '2026-08-08T13:56:15+02:00'
+version: '1.2'
 ---
 
 ## 1. Available Guides
@@ -19,9 +19,3 @@ version: '1.1'
 - **My Documents Technical Architecture** - Overview of the technical architecture of this documentation site, including
   the use of Hugo, GitHub Pages, and CI/CD pipelines
 - **My Documents Trigger Workflow** - Guide on how to trigger the documentation build workflow using GitHub Actions
-
-## 2. Getting Started
-
-Select a documentation topic from the sidebar to begin.
-
-{{< articles-list >}}

@@ -5,8 +5,8 @@ description: Related documentation sites
 type: docs
 weight: 40
 date: '2026-02-17T08:00:00+01:00'
-lastmod: '2026-02-23T08:00:00+01:00'
-version: '1.0'
+lastmod: '2026-08-08T13:56:15+02:00'
+version: '1.1'
 ---
 
 Links to related documentation and projects in this documentation suite.
@@ -15,5 +15,3 @@ Links to related documentation and projects in this documentation suite.
 - [Bash Tools](https://bash-tools.devlab.top/)
 - [Bash Dev Env](https://bash-dev-env.devlab.top/)
 - [Bash Compiler](https://bash-compiler.devlab.top/)
-
-{{< articles-list >}}

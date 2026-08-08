@@ -46,7 +46,6 @@ date: [Current date format YYYY-MM-DD]
 lastmod: [Current date format YYYY-MM-DD]
 ---
 
-{{< articles-list >}}
 ```
 
 `_index.md` files serve as landing pages for sections, with frontmatter defining metadata and content structure. They will not contain actual documentation content but will provide an overview and navigation for the section.

@@ -7,8 +7,8 @@ pageInfo: |-
 type: docs
 weight: 15
 date: '2026-03-31T19:00:00+01:00'
-lastmod: '2026-05-11T23:28:40+02:00'
-version: '1.1'
+lastmod: '2026-08-08T13:56:15+02:00'
+version: '1.2'
 ---
 
 ## 1. What You'll Learn
@@ -18,9 +18,3 @@ version: '1.1'
   to automatically generate svg or png diagrams when committing .puml files see
   [PlantUML pre-commit hook](https://devlab.top/docs/tooling/plantuml-pre-commit-hook/)
 - Examples of PlantUML usage including database ERD diagrams
-
-## 2. Getting Started
-
-Select a guide from the sidebar to begin.
-
-{{< articles-list >}}

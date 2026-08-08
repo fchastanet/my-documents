@@ -7,8 +7,8 @@ pageInfo: |-
 type: docs
 weight: 10
 date: '2026-02-17T08:00:00+01:00'
-lastmod: '2026-05-11T23:28:40+02:00'
-version: '1.1'
+lastmod: '2026-08-08T13:56:15+02:00'
+version: '1.2'
 ---
 
 ## 1. What You'll Learn
@@ -19,5 +19,3 @@ version: '1.1'
 - Jenkins best practices and configuration
 - Real-world Jenkinsfile examples with detailed annotations
 - Common recipes and troubleshooting tips
-
-{{< articles-list >}}

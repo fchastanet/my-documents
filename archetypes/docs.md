@@ -17,10 +17,6 @@ This is a placeholder for a documentation page.
 
 Add overview content here...
 
-## 2. Getting Started
-
-Add getting started content here...
-
-## 3. See Also
+## 2. See Also
 
 - Related pages
