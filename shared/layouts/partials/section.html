@@ -12,7 +12,7 @@
       {{ end -}}
     </div>
   </header>
-  {{ $pageInfo := .Params.pageInfo | default .Params.description }}
+  {{ $pageInfo := .Params.pageInfo | default "" -}}
   {{ if $pageInfo -}}
   <div class="pageinfo pageinfo-primary">
     {{ $pageInfo | markdownify }}
