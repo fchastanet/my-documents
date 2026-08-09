@@ -184,7 +184,8 @@ repos:
       - id: check-xml
         exclude: |
           (?x)(
-            ^shared/layouts/sitemap.xml$
+            ^shared/layouts/sitemap.xml$|
+            ^shared/layouts/_default/rss.xml$
           )
       - id: check-yaml
       - id: check-added-large-files

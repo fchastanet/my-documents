@@ -1,6 +1,8 @@
 {
   "threshold": 0,
   "reporters": ["html", "markdown"],
+  "minLines": 15,
+  "minTokens": 70,
   "ignore": [
     "**/.git/**",
     "**/.rbenv/**",
@@ -17,6 +19,10 @@
     "**/.idea/**",
     "**/report/**",
     "**/*.svg",
+    "content/docs/howtos/howto-write-dockerfile.md",
+    "content/docs/howtos/howto-write-jenkinsfile/06-annotated-jenkinsfiles--p2.md",
+    "content/docs/my-documents/01-technical-architecture.md",
+    "content/docs/my-documents/10-multi-site-generation-using-hugo.md",
     ".pre-commit-config-github.yaml"
   ]
 }

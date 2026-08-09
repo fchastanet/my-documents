@@ -17,6 +17,7 @@ build/
 public/
 sites/
 resources/
+report/
 .hugo_build.lock
 hugo.yaml
 **/*.pptx
