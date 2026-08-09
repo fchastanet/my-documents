@@ -11,6 +11,9 @@ echo -e "${COLOR_INFO}Running pre-build for my-documents...${COLOR_RESET}"
 script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 repo_root="$(dirname "$(dirname "${script_dir}")")"
 
+# ensure hugo and node dependencies are installed
+"$(dirname "$0")/install-hugo.sh"
+
 # Build Marp presentations
 if [[ -d "${repo_root}/marp" ]]; then
   "${script_dir}/build-marp.sh" "marp" "${repo_root}/static/presentations"

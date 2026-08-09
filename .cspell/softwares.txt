@@ -51,6 +51,7 @@ pendo
 phpstorm
 phpunit
 plantuml
+postcss
 Prek
 prek
 Pydantic

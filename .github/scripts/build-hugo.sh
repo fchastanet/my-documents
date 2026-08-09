@@ -5,6 +5,7 @@
 
 # shellcheck source=.github/scripts/common.sh
 source "$(dirname "$0")/common.sh"
+ROOT_DIR="$(cd "$(dirname "$0")/../.." && pwd -P)"
 
 BUILD_DIR="${1:?Error: BUILD_DIR argument required}"
 SITE_NAME="${2:-site}"
@@ -15,6 +16,9 @@ if [[ ! -d "${BUILD_DIR}" ]]; then
   exit 1
 fi
 
+# ensure hugo is installed
+"$(dirname "$0")/install-hugo.sh"
+
 echo -e "${COLOR_INFO}Building ${SITE_NAME} with Hugo...${COLOR_RESET}"
 
 (
@@ -23,6 +27,7 @@ echo -e "${COLOR_INFO}Building ${SITE_NAME} with Hugo...${COLOR_RESET}"
   # Set environment variables for Hugo build
   export HUGO_CACHEDIR="${HUGO_CACHEDIR:-$(cd ".." && pwd -P)/.hugo_cache}"
   export HUGO_ENVIRONMENT="${HUGO_ENVIRONMENT:-production}"
+  export PATH="${PATH}:${ROOT_DIR}/node_modules/.bin"
 
   # Build with all diagnostic flags
   echo "  Running: hugo --minify with base URL: ${BASE_URL:-(from config)}"
