@@ -6,7 +6,7 @@
   {{ if (gt (len $taxonomy) 0) -}}
     <div class="taxonomy taxonomy-terms-cloud taxo-{{ urlize $taxo }}">
       {{ with $title -}}
-        <h1 class="taxonomy-title">{{ . }}</h1>
+        <h2 class="taxonomy-title">{{ . }}</h2>
       {{ end -}}
       <ul class="taxonomy-terms">
         {{ range $taxonomy -}}
