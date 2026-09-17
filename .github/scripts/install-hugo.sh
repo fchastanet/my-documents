@@ -6,7 +6,7 @@
 source "$(dirname "$0")/common.sh"
 ROOT_DIR="$(cd "$(dirname "$0")/../.." && pwd -P)"
 
-HUGO_VERSION="${1:-0.160.1}"
+HUGO_VERSION="${1:-v0.166.0}"
 
 if [[ -f "${ROOT_DIR}/node_modules/.bin/postcss" ]]; then
   echo -e "${COLOR_INFO}Node dependencies are already installed.${COLOR_RESET}"

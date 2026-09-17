@@ -60,6 +60,21 @@ else
   echo -e "${COLOR_WARNING}⚠ No content directory found in ${SOURCE_DIR}${COLOR_RESET}"
 fi
 
+# Docsy >= 0.17 mounts Bootstrap and Font Awesome from node_modules instead of
+# pulling them in as Hugo modules, and those mounts resolve against the Hugo
+# project root -- which here is the build directory, not the repo root. Hard-link
+# the tree in: it is near-instant and costs no real disk space. A symlinked
+# node_modules happens to work today, but Hugo has been progressively dropping
+# symlinked mount paths (v0.163.1, v0.165.0, v0.166.0), so avoid relying on it.
+if [[ -d "${ORCHESTRATOR_DIR}/node_modules" ]]; then
+  echo "  Linking node_modules (theme npm dependencies)..."
+  rm -rf "${OUTPUT_DIR}/node_modules"
+  cp -al "${ORCHESTRATOR_DIR}/node_modules" "${OUTPUT_DIR}/node_modules" 2>/dev/null ||
+    cp -a "${ORCHESTRATOR_DIR}/node_modules" "${OUTPUT_DIR}/node_modules"
+else
+  echo -e "${COLOR_WARNING}⚠ node_modules not found in ${ORCHESTRATOR_DIR}; run 'npm ci' first${COLOR_RESET}"
+fi
+
 echo "  Copying static files..."
 if [[ -d "${SOURCE_DIR}/static" ]]; then
   cp -r "${SOURCE_DIR}/static" "${OUTPUT_DIR}/"

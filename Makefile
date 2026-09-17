@@ -1,9 +1,14 @@
 # Variables
-HUGO_VERSION := 0.160.1
+HUGO_VERSION := v0.166.0
 SITES_DIR := sites
 BUILD_DIR := build
 REPOS := bash-compiler bash-tools bash-tools-framework bash-dev-env my-documents
 SCRIPT_DIR := .github/scripts
+
+# Docsy >= 0.17 requires Dart Sass (via the sass-embedded devDependency) and
+# PostCSS. Expose node_modules/.bin plus the dart-sass shim, which pins the
+# Embedded-Sass-capable binary -- see .github/scripts/bin/dart-sass.
+export PATH := $(CURDIR)/.github/scripts/bin:$(CURDIR)/node_modules/.bin:$(PATH)
 
 # Colors for output (sourced from colors.sh)
 BLUE := \033[0;34m
@@ -11,7 +16,7 @@ GREEN := \033[0;32m
 YELLOW := \033[0;33m
 NC := \033[0m # No Color
 
-.PHONY: help install install-hugo install-yq clean link-repos unlink-repos build-all build-site start build test-all build-marp clean-marp
+.PHONY: help install install-hugo install-yq upgrade-modules clean link-repos unlink-repos build-all build-site start build test-all build-marp clean-marp
 
 # Default target
 help:
@@ -21,6 +26,7 @@ help:
 	@echo "  make install       - Install all dependencies (Hugo, yq, npm, Go modules)"
 	@echo "  make install-hugo  - Install Hugo extended"
 	@echo "  make install-yq    - Install yq (YAML processor)"
+	@echo "  make upgrade-modules - Upgrade Hugo modules (theme) to latest"
 	@echo ""
 	@echo "$(GREEN)Local Multi-Site Testing:$(NC)"
 	@echo "  make link-repos    - Create symlinks to other repos for local testing"
@@ -49,12 +55,20 @@ install-yq:
 	@$(SCRIPT_DIR)/install-yq.sh
 
 # Install all dependencies
-install: install-hugo install-yq
+install: install-hugo install-yq upgrade-modules
 	@echo "$(BLUE)Installing dependencies...$(NC)"
 	npm ci
-	hugo mod get -u
+	hugo mod get
 	hugo mod tidy
 	@echo "$(GREEN)✅ All dependencies installed$(NC)"
+
+# Deliberately upgrade Hugo modules (theme included). Run the build afterwards:
+# a Docsy major bump can require config/npm changes.
+upgrade-modules:
+	@echo "$(BLUE)Upgrading Hugo modules...$(NC)"
+	hugo mod get -u
+	hugo mod tidy
+	@echo "$(YELLOW)⚠  Review go.mod and rebuild before committing$(NC)"
 
 # Create symlinks to other repositories for local testing
 link-repos:

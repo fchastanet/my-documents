@@ -1,0 +1,20 @@
+#!/bin/bash
+# Dart Sass entry point for Hugo (Docsy >= 0.17 transpiles with dartsass).
+#
+# Why this wrapper exists: both `sass` (pure JS) and `sass-embedded` declare a
+# bin named `sass`, so whichever npm links last wins node_modules/.bin/sass.
+# Only sass-embedded speaks the Embedded Sass protocol that Hugo's dartsass
+# transpiler requires; the pure-JS package fails with "unexpected EOF".
+# Hugo looks for `dart-sass` before `sass`, so exposing this name pins the
+# choice regardless of how npm resolved the collision.
+set -euo pipefail
+
+ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../.." && pwd -P)"
+SASS_JS="${ROOT_DIR}/node_modules/sass-embedded/dist/bin/sass.js"
+
+if [[ ! -f "${SASS_JS}" ]]; then
+  echo "dart-sass: sass-embedded not installed at ${SASS_JS}; run 'npm ci'" >&2
+  exit 1
+fi
+
+exec node "${SASS_JS}" "$@"

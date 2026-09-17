@@ -37,9 +37,12 @@ reimagines
 reimplementation
 Shopt
 Slurper
+stylesheet
 subdirs
 tabpane
 theming
+TOCSS
+transpiles
 triaging
 unmarshal
 upskill

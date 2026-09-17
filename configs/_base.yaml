@@ -36,8 +36,15 @@ pygmentsStyle: monokai
 # Image processing configuration
 imaging:
   resampleFilter: CatmullRom
-  quality: 75
   anchor: Smart
+  # Per-format quality: the global imaging.quality was deprecated in Hugo v0.163.0.
+  # Only jpeg/webp/avif take a quality setting (png/gif are lossless).
+  jpeg:
+    quality: 75
+  webp:
+    quality: 75
+  avif:
+    quality: 60 # Hugo's default: AVIF@60 is comparable to JPEG/WebP@75
 
 sitemap:
   changeFreq: 'monthly'
@@ -47,8 +54,7 @@ sitemap:
 # Hugo modules - Docsy theme
 module:
   imports:
-    - path: github.com/google/docsy
-    - path: github.com/google/docsy/dependencies
+    - path: github.com/google/docsy/theme
   mounts:
     - {source: content, target: content}
     - {source: static, target: static}

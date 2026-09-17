@@ -4,6 +4,7 @@ braelyn
 buildx
 cloudflare
 codespell
+dartsass
 Disqus
 disqus
 django

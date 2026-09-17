@@ -4,6 +4,7 @@ appuser
 autoremove
 CACHEDIR
 CREDS
+CURDIR
 doesn
 elif
 errexit

@@ -79,7 +79,7 @@ jobs:
       - name: Setup Hugo
         uses: denmette/actions-hugo@9205da1e88a99972de3d3912c5acd7271fe7d9c2 # v1
         with:
-          hugo-version: '0.160.1'
+          hugo-version: 'v0.166.0'
           extended: true
 
       - name: Cache Hugo modules
@@ -97,8 +97,13 @@ jobs:
       - name: Install Node.js dependencies
         run: npm ci
 
-      - name: Install Dart Sass
-        run: npm install -g sass
+      # Dart Sass is required by Docsy >= 0.17. Hugo's `dartsass` transpiler
+      # speaks the Embedded Sass protocol, which the pure-JS `sass` CLI does
+      # not implement -- it must be `sass-embedded` (or a standalone
+      # dart-sass binary). It is a devDependency, so `npm ci` above installs
+      # it and build-hugo.sh puts node_modules/.bin on PATH.
+      - name: Verify Dart Sass is available
+        run: ./.github/scripts/bin/dart-sass --version
 
       - name: Setup yq
         uses: vegardit/gha-setup-yq@ab621a91ac86c67e5b68b9f191e70acc09ebc61b # 1.1.0

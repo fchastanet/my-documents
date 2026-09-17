@@ -82,7 +82,7 @@ module:
 Push to dependent repo → calls `.github/workflows/build-site-action.yml` → builds with Hugo → deploys to gh-pages branch
 
 **Action Parameters:**
-- `hugo-version`: 0.160.1 (default)
+- `hugo-version`: 0.166.0 (default)
 - `node-version`: 24 (default)
 - `working-directory`: . (default)
 

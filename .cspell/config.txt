@@ -5,4 +5,6 @@ howtos
 mfhx
 pageinfo
 Perso
+venv
+virtualenv
 wysiwyg

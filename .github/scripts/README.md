@@ -35,7 +35,7 @@ Install Hugo extended build.
 **Example:**
 
 ```bash
-.github/scripts/install-hugo.sh 0.160.1
+.github/scripts/install-hugo.sh v0.166.0
 ```
 
 ### `install-yq.sh`
@@ -137,13 +137,13 @@ Test all built sites with curl to verify they work.
 
 All scripts use relative paths by default:
 
-| Parameter   | Default   | Purpose                                |
-| ----------- | --------- | -------------------------------------- |
-| `BUILD_DIR` | `build`   | Build output directory                 |
-| `SITES_DIR` | `sites`   | Symlink directory for dependencies     |
-| `SITE`      | -         | Single site to build (required)        |
-| `VERSION`   | `0.160.1` | Hugo version to install                |
-| `REPOS`     | -         | List of repositories (space-separated) |
+| Parameter   | Default    | Purpose                                |
+| ----------- | ---------- | -------------------------------------- |
+| `BUILD_DIR` | `build`    | Build output directory                 |
+| `SITES_DIR` | `sites`    | Symlink directory for dependencies     |
+| `SITE`      | -          | Single site to build (required)        |
+| `VERSION`   | `v0.166.0` | Hugo version to install                |
+| `REPOS`     | -          | List of repositories (space-separated) |
 
 ## Using with Makefile
 
@@ -294,6 +294,53 @@ source: line 1: /path/to/colors.sh: No such file or directory
 ```bash
 chmod +x .github/scripts/*.sh
 ```
+
+### Dart Sass not found / unexpected EOF
+
+```text
+TOCSS-DART: failed to transform "/scss/main.scss". You need to install Dart Sass
+TOCSS-DART: failed to transform "/scss/main.scss": got unexpected EOF when executing "sass"
+```
+
+**Solution:** Docsy v0.17+ transpiles with Dart Sass. Run `npm ci` — the
+`sass-embedded` devDependency provides it, and `build-hugo.sh` adds
+`node_modules/.bin` to `PATH`.
+
+The second error means the wrong binary was used: the pure-JS `sass` package
+cannot be driven by Hugo. Its `dartsass` transpiler communicates over the
+Embedded Sass protocol, which only `sass-embedded` (or a standalone dart-sass
+binary) implements.
+
+Both packages declare a bin named `sass`, so whichever npm links last wins
+`node_modules/.bin/sass`. Do not add `sass` to `package.json` — `sass-embedded`
+already pulls it in as a fallback for unsupported platforms. To keep the choice
+deterministic, `bin/dart-sass` wraps sass-embedded's entry point and is placed
+first on `PATH` by `build-hugo.sh` and the Makefile; Hugo looks for `dart-sass`
+before `sass`, so the collision no longer matters.
+
+### Can't find stylesheet to import
+
+```text
+assets/scss/td/_main.scss:3:8: Can't find stylesheet to import.
+```
+
+**Solution:** Docsy v0.17+ mounts Bootstrap and Font Awesome from
+`node_modules`, resolved against the Hugo project root — which is the build
+directory, not the repo root. `prepare-build.sh` hard-links `node_modules` in;
+make sure `npm ci` ran in the orchestrator checkout first.
+
+### Node.js permission error on a symlink
+
+```text
+POSTCSS: symlink "<project>/.venv/bin/python" resolves to "..." outside the
+paths Node.js is allowed to access
+```
+
+**Solution:** Since Hugo v0.166.0, Node tools refuse to run if a symlink inside
+the project resolves outside the allowed roots. This affects production builds
+run directly from the repo root (`make build` is unaffected, as it builds in
+`build/<site>/`). Either move the offending directory out of the repository or
+add its target to `security.node.permissions.allowRead`.
 
 ## Maintenance Notes
 

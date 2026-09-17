@@ -27,7 +27,9 @@ echo -e "${COLOR_INFO}Building ${SITE_NAME} with Hugo...${COLOR_RESET}"
   # Set environment variables for Hugo build
   export HUGO_CACHEDIR="${HUGO_CACHEDIR:-$(cd ".." && pwd -P)/.hugo_cache}"
   export HUGO_ENVIRONMENT="${HUGO_ENVIRONMENT:-production}"
-  export PATH="${PATH}:${ROOT_DIR}/node_modules/.bin"
+  # dart-sass shim first: it pins the Embedded-Sass-capable binary that
+  # Hugo's dartsass transpiler needs (see .github/scripts/bin/dart-sass).
+  export PATH="${ROOT_DIR}/.github/scripts/bin:${ROOT_DIR}/node_modules/.bin:${PATH}"
 
   # Build with all diagnostic flags
   echo "  Running: hugo --minify with base URL: ${BASE_URL:-(from config)}"

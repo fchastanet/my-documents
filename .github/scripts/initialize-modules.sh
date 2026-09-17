@@ -19,7 +19,10 @@ echo -e "${COLOR_INFO}Initializing Go modules for ${SITE_NAME}...${COLOR_RESET}"
   cd "${BUILD_DIR}"
 
   echo "  Downloading Hugo modules..."
-  go get -u ./...
+  # Download the versions pinned in go.mod. `go get -u ./...` was used here
+  # before, but it silently upgrades the theme, so a CI build could ship a
+  # different Docsy than the one committed. Use `make upgrade-modules` to bump.
+  go mod download
 
   echo -e "${COLOR_SUCCESS}✅ Go modules ready${COLOR_RESET}"
 )

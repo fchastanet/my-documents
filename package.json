@@ -1,11 +1,17 @@
 {
   "devDependencies": {
     "@cspell/dict-fr-fr": "^2.3.2",
-    "@marp-team/marp-cli": "^4.5.0",
+    "@fortawesome/fontawesome-free": "7.3.1",
+    "@marp-team/marp-cli": "^4.5.1",
     "autoprefixer": "^10.5.4",
+    "bootstrap": "5.3.8",
     "postcss": "^8.5.26",
     "postcss-cli": "^11.0.1",
+    "sass-embedded": "^1.104.1",
     "stylelint": "^17.14.1",
     "stylelint-config-standard-scss": "^17.0.0"
+  },
+  "allowScripts": {
+    "@parcel/watcher@2.6.0": true
   }
 }

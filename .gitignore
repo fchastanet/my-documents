@@ -27,3 +27,6 @@ hugo.yaml
 marp/understanding-ai/merged.md
 
 *:Zone.Identifier
+
+# python virtualenv (local dev only)
+.venv/

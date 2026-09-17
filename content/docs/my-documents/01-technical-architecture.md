@@ -5,8 +5,8 @@ weight: 01
 categories: [documentation, architecture]
 tags: [hugo, github-actions, docsy, architecture, ai-generated]
 date: '2026-02-18T08:00:00+01:00'
-lastmod: '2026-04-21T17:55:47+02:00'
-version: '1.2'
+lastmod: '2026-09-18T00:50:01+02:00'
+version: '1.3'
 ---
 
 ## 1. Overview
@@ -40,8 +40,12 @@ configurations, layouts, and assets while maintaining their independence.
 
 Install the required tools:
 
-- **Hugo Extended** v0.160.1 or higher (with Go support)
+- **Hugo Extended** v0.166.0 or higher (with Go support)
 - **Go** 1.24 or higher
+- **Node.js** 22 or higher (Hugo runs PostCSS under Node's `--permission` sandbox)
+- **Dart Sass** — required by Docsy v0.17+. Provided by the `sass-embedded` npm devDependency, so `npm ci` is enough.
+  Note that the pure-JS `sass` package does *not* work: Hugo's `dartsass` transpiler speaks the Embedded Sass protocol,
+  which that package does not implement.
 - **Git**
 
 ### 2.2. Quick Start
@@ -213,8 +217,7 @@ module github.com/YOUR-USERNAME/YOUR-REPO
 go 1.24
 
 require (
- github.com/google/docsy v0.11.0 // indirect
- github.com/google/docsy/dependencies v0.7.2 // indirect
+ github.com/google/docsy/theme v0.17.0 // indirect
  github.com/fchastanet/my-documents master // indirect
 )
 ```
@@ -250,8 +253,7 @@ module:
         # Mount shared archetypes
         - source: shared/archetypes
           target: archetypes
-    - path: github.com/google/docsy
-    - path: github.com/google/docsy/dependencies
+    - path: github.com/google/docsy/theme
 
 # Site-specific parameters
 params:
@@ -438,8 +440,7 @@ module github.com/fchastanet/bash-compiler
 go 1.24
 
 require (
- github.com/google/docsy v0.11.0 // indirect
- github.com/google/docsy/dependencies v0.7.2 // indirect
+ github.com/google/docsy/theme v0.17.0 // indirect
  github.com/fchastanet/my-documents master // indirect
 )
 ```
@@ -448,8 +449,9 @@ require (
 
 - **Module name**: Must match your repository path
 - **Go version**: 1.24 or higher recommended
-- **Docsy theme**: Version 0.11.0 (update as needed)
-- **Docsy dependencies**: Bootstrap, Font Awesome, etc.
+- **Docsy theme**: Version 0.17.0 (update as needed)
+- **Bootstrap / Font Awesome**: no longer Hugo modules. Docsy v0.17+ mounts them from `node_modules`, so they are pinned
+  in `package.json` instead
 - **my-documents**: Provides shared layouts and assets
 
 **Updating Modules:**
@@ -459,7 +461,7 @@ require (
 hugo mod get -u
 
 # Update specific module
-hugo mod get -u github.com/google/docsy
+hugo mod get -u github.com/google/docsy/theme
 
 # Tidy module dependencies
 hugo mod tidy
@@ -504,8 +506,7 @@ module:
           target: assets
         - source: shared/archetypes
           target: archetypes
-    - path: github.com/google/docsy
-    - path: github.com/google/docsy/dependencies
+    - path: github.com/google/docsy/theme
 
 params:
   description: Documentation for Bash Compiler
@@ -675,7 +676,7 @@ The reusable action may support additional parameters:
 
 ```yaml
 with:
-  hugo-version: 0.160.1           # Default: latest
+  hugo-version: v0.166.0          # Default: latest
   go-version: '1.24'              # Default: 1.24
   extended: true                  # Default: true (Hugo Extended)
   working-directory: .            # Default: repository root
@@ -912,12 +913,8 @@ module:
         - source: shared/archetypes
           target: archetypes
 
-    # Mount Docsy theme
-    - path: github.com/google/docsy
-      disable: false
-
-    # Mount Docsy dependencies (Bootstrap, etc.)
-    - path: github.com/google/docsy/dependencies
+    # Mount Docsy theme (the theme lives in the /theme submodule since v0.16.0)
+    - path: github.com/google/docsy/theme
       disable: false
 ```
 
