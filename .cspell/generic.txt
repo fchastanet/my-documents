@@ -30,6 +30,7 @@ markdownify
 monokai
 noarchive
 noimageindex
+noindex
 pctx
 podman
 pygments

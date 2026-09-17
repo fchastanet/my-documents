@@ -86,11 +86,23 @@
 {{ $outputFormat := partial "outputformat.html" . -}}
 {{ $backup := .Params.backup -}}
 {{ $isTaxonomyPage := or (eq .Kind "taxonomy") (eq .Kind "term") -}}
+{{/* Section landing pages (every `_index.md` except the site home) are listing
+     pages whose text is duplicated from the articles they link to, so they are
+     kept out of the search engines -- consistent with sitemap.xml, which
+     already omits them. The home page stays indexable. */ -}}
+{{ $isSectionPage := eq .Kind "section" -}}
+{{/* Any individual page can also opt out with `noindex: true` in front matter;
+     use `cascade` to cover a whole subtree. Deliberately a meta tag and not a
+     robots.txt rule: a disallowed URL is never fetched, so crawlers would
+     never see the directive and could still list the page. */ -}}
+{{ $noindex := .Params.noindex -}}
 {{ if and
   hugo.IsProduction
   (ne $outputFormat "print")
   (ne .Site.Language.Lang "xx")
   (not $backup)
+  (not $noindex)
+  (not $isSectionPage)
   (not $isTaxonomyPage) -}}
 <meta name="robots" content="index, follow" />
 {{ else -}}

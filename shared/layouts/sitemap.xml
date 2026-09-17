@@ -2,7 +2,10 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   {{ range .Data.Pages -}}
-    {{- if and (ne .Kind "taxonomy") (ne .Kind "term") (ne .Kind "section") -}}
+    {{- /* Keep the sitemap in step with the robots meta tag in
+           partials/head.html: never advertise a page we ask engines not to
+           index (sections, taxonomies, backups, explicit noindex). */ -}}
+    {{- if and (ne .Kind "taxonomy") (ne .Kind "term") (ne .Kind "section") (not .Params.noindex) (not .Params.backup) -}}
     <url>
       <loc>{{ .Permalink }}</loc>{{ if not .Lastmod.IsZero }}
       <lastmod>{{ safeHTML ( .Lastmod.Format "2006-01-02T15:04:05-07:00" ) }}</lastmod>{{ end }}{{ with .Sitemap.ChangeFreq }}
