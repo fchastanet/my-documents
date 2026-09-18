@@ -676,7 +676,7 @@ The reusable action may support additional parameters:
 
 ```yaml
 with:
-  hugo-version: v0.166.0          # Default: latest
+  hugo-version: 0.166.0          # Default: latest
   go-version: '1.24'              # Default: 1.24
   extended: true                  # Default: true (Hugo Extended)
   working-directory: .            # Default: repository root
