@@ -13,5 +13,8 @@
   },
   "allowScripts": {
     "@parcel/watcher@2.6.0": true
+  },
+  "overrides": {
+    "basic-ftp": "^6.2.6"
   }
 }
