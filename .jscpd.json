@@ -23,6 +23,7 @@
     "content/docs/howtos/howto-write-jenkinsfile/06-annotated-jenkinsfiles--p2.md",
     "content/docs/my-documents/01-technical-architecture.md",
     "content/docs/my-documents/10-multi-site-generation-using-hugo.md",
+    "content/docs/tooling/assets/ai-history-chronology-ishikawa-final.mmd",
     ".pre-commit-config-github.yaml"
   ]
 }

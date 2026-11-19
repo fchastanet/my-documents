@@ -13,7 +13,6 @@ DISABLE_LINTERS:
   - RUBY_RUBOCOP
   - REPOSITORY_CHECKOV
   - REPOSITORY_TRIVY
-  - REPOSITORY_KICS
   - REPOSITORY_OSV_SCANNER
   - CSS_STYLELINT
   - SPELL_VALE
@@ -99,16 +98,6 @@ JSON_JSONLINT_FILTER_REGEX_EXCLUDE: |
     ^\.vscode/settings\.json$|
     ^conf/\.vscode/settings\.json$|
     ^\.vscode/launch\.json$
-  )
-MARKDOWN_MARKDOWN_LINK_CHECK_FILTER_REGEX_EXCLUDE: |
-  (?x)(
-    ^pages/Commands.md$|
-    ^pages/FrameworkFullDoc.md$|
-    ^pages/README.md$|
-    ^pages/doc|
-    ^pages/bashDoc|
-    ^pages/tests|
-    ^pages/_sidebar.md$
   )
 MARKDOWN_MARKDOWNLINT_FILTER_REGEX_EXCLUDE: |
   (?x)(

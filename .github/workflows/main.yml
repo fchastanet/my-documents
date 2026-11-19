@@ -19,6 +19,10 @@ concurrency:
   cancel-in-progress: true
 
 env:
+  # Events for which lint fixes are proposed (all, push, pull_request, none)
+  APPLY_FIXES_EVENT: all
+  # How lint fixes are proposed (pull_request, commit)
+  APPLY_FIXES_MODE: pull_request
   COND_PUSH_OR_PR: |-
     ${{
       github.event_name == 'pull_request' ||
@@ -91,6 +95,20 @@ jobs:
           node-version: 24
           cache: ''
 
+      # mdformat-shfmt falls back to the mvdan/shfmt docker image when shfmt is
+      # not installed; that image does not see .editorconfig and indents with
+      # tabs, which markdownlint then converts to 1 space.
+      - name: Install shfmt
+        env:
+          SHFMT_VERSION: v3.14.1
+          SHFMT_SHA256: 76e77641faa025814b77f153b29796b8e6fa2fca03e0c76a691608b86c7ea7bf
+        run: |
+          curl -sSfL -o /tmp/shfmt \
+            "https://github.com/mvdan/sh/releases/download/${SHFMT_VERSION}/shfmt_${SHFMT_VERSION}_linux_amd64"
+          echo "${SHFMT_SHA256}  /tmp/shfmt" | sha256sum -c -
+          sudo install -m 755 /tmp/shfmt /usr/local/bin/shfmt
+          shfmt --version
+
       - name: Transform pre-commit config for GitHub
         if: ${{ success() }}
         run: .github/preCommitGeneration.sh
@@ -107,7 +125,7 @@ jobs:
         if: ${{ !cancelled() }}
         # You can override MegaLinter flavor used to have faster performances
         # More info at https://megalinter.io/flavors/
-        uses: oxsecurity/megalinter/flavors/documentation@v9
+        uses: oxsecurity/megalinter/flavors/documentation@f2fe8c1cba37091848df3e524066c8c23ef353ed # v10.2.0
         # All available variables are described in documentation
         # https://megalinter.io/latest/config-file/
         env:
@@ -130,19 +148,23 @@ jobs:
             megalinter-reports
             mega-linter.log
 
+      # !cancelled() is needed: without a status function, `if` implies
+      # success() and these steps are skipped as soon as pre-commit fails
       - name: MegaLinter/Precommit has updated sources
         if: >
-          steps.preCommit.outcome == 'failure' || (
-            steps.ml.outputs.has_updated_sources == 1 && (
-              env.APPLY_FIXES_EVENT == 'all' ||
-              env.APPLY_FIXES_EVENT == github.event_name
-            )
+          !cancelled() && (
+            env.APPLY_FIXES_EVENT == 'all' ||
+            env.APPLY_FIXES_EVENT == github.event_name
+          ) && (
+            steps.preCommit.outcome == 'failure' ||
+            steps.ml.outputs.has_updated_sources == 1
           )
         run: |
           echo "COND_UPDATED_SOURCES=true" >> "${GITHUB_ENV}"
 
       - name: is apply fixes needed ?
         if: >
+          !cancelled() &&
           env.APPLY_FIXES_MODE == 'pull_request' && (
             github.event_name == 'push' ||
             github.event.pull_request.head.repo.full_name ==
@@ -155,6 +177,7 @@ jobs:
         id: cpr
         # prettier-ignore
         if: >
+          !cancelled() &&
           env.COND_UPDATED_SOURCES == 'true' &&
           env.COND_APPLY_FIXES_NEEDED == 'true' &&
           !contains(github.event.head_commit.message, 'skip fix')
@@ -173,6 +196,7 @@ jobs:
       - name: Print Pull request created
         if: |-
           ${{
+            !cancelled() &&
             steps.cpr.outputs.pull-request-number &&
             steps.cpr.conclusion == 'success'
           }}
@@ -183,8 +207,9 @@ jobs:
           STEPS_CPR_OUTPUTS_PULL_REQUEST_NUMBER: ${{ steps.cpr.outputs.pull-request-number }}
           STEPS_CPR_OUTPUTS_PULL_REQUEST_URL: ${{ steps.cpr.outputs.pull-request-url }}
 
+      # always(): also report failure, otherwise the status stays pending
       - uses: guibranco/github-status-action-v2@f6952298057800f771cdce8e7918d5b88333eb89 # v1.2.3
-        if: ${{ env.COND_PUSH_OR_PR }}
+        if: ${{ always() && env.COND_PUSH_OR_PR }}
         with:
           authToken: ${{ secrets.GITHUB_TOKEN }}
           context: pre-commit-megalinter
