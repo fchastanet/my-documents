@@ -8,7 +8,7 @@ type: docs
 weight: 20
 previewImage: assets/howToSection.webp
 date: '2026-02-17T08:00:00+01:00'
-lastmod: '2026-08-08T13:56:14+02:00'
+lastmod: '2026-11-19T08:00:00+01:00'
 version: '1.3'
 ---
 
@@ -18,3 +18,5 @@ version: '1.3'
 - **How to Write Docker Compose Files** - Organizing multi-container applications
 - **How to Write Jenkinsfiles** - Complete Jenkins pipeline guide (10 articles)
 - **Saml2Aws Setup** - AWS access with SAML authentication
+- **Two Claude Code Accounts with Two WSL Users** - Personal and pro Claude Code configurations, switched with
+  `switchToPersoUser` / `switchToWslUser`
