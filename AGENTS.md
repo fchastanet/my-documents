@@ -2,41 +2,46 @@
 
 ## Repository Type
 
-Reusable GitHub Action provider for Hugo/Docsy documentation sites.
-Provides shared resources via Hugo modules to dependent repos (bash-compiler,
-bash-tools, bash-tools-framework, bash-dev-env).
+Reusable GitHub Action provider for Hugo/Docsy documentation sites. Provides shared resources via Hugo modules to
+dependent repos (bash-compiler, bash-tools, bash-tools-framework, bash-dev-env).
 
 ## Critical Non-Standard Conventions
 
 ### Git
+
 - **Default branch:** `master` (NOT main)
 - **Commit messages:** Markdown format (see `.github/commit-message.instructions.md`)
 - **Chat responses:** Only provide relevant changes, not entire file contents
 
 ### File Naming & Formatting
+
 - Markdown files: kebab-case (`HowTo-Write-Bash-Scripts.md`)
 - Line length: 120 characters (enforced by MegaLinter, mdformat)
 - Line endings: LF only
 
 ### Configuration
+
 - **NEVER edit `hugo.yaml`** - it's generated at build time
 - Edit `configs/_base.yaml` (affects all sites) or `configs/site-config.yaml` (this site only)
 - Config merging: yq deep-merge, arrays are replaced not merged
 
 ### Frontmatter Rules
+
 ```yaml
 title: Page Title              # Required
 description: Brief description # Optional, for SEO
 weight: 10                      # Optional, controls order (lower = higher)
 categories: [documentation]     # Optional
 tags: [example]                 # Optional
-date: "2026-02-18T08:00:00+01:00"     # Required for new pages
-lastmod: "2026-02-22T08:00:00+01:00"      # Update on every edit
-version: "1.0"                  # Semantic versioning
+date: '2026-02-18T08:00:00+01:00'     # Required for new pages
+lastmod: '2026-02-22T08:00:00+01:00'      # Update on every edit
+version: '1.0'                  # Semantic versioning
 ```
+
 **AI must update `lastmod` on edits, set `date` on new pages.**
 
 ### Spell Checking
+
 - Custom dictionaries in `.cspell/`
 - Add technical terms to `.cspell/bash.txt`
 - Dictionaries must be sorted alphabetically (enforced by pre-commit)
@@ -58,11 +63,12 @@ hugo.yaml            # GENERATED - never edit directly
 ## Reusable Action Architecture
 
 **Impact of Changes:**
+
 - `shared/layouts/`, `shared/assets/`, `configs/_base.yaml` → affects ALL dependent sites
 - `configs/site-config.yaml` → affects only this site
 
-**Hugo Modules Sharing:**
-Dependent repos import shared resources via Hugo modules:
+**Hugo Modules Sharing:** Dependent repos import shared resources via Hugo modules:
+
 ```yaml
 module:
   imports:
@@ -78,10 +84,11 @@ module:
           target: archetypes
 ```
 
-**Build Flow:**
-Push to dependent repo → calls `.github/workflows/build-site-action.yml` → builds with Hugo → deploys to gh-pages branch
+**Build Flow:** Push to dependent repo → calls `.github/workflows/build-site-action.yml` → builds with Hugo → deploys to
+gh-pages branch
 
 **Action Parameters:**
+
 - `hugo-version`: 0.166.0 (default)
 - `node-version`: 24 (default)
 - `working-directory`: . (default)
@@ -89,38 +96,41 @@ Push to dependent repo → calls `.github/workflows/build-site-action.yml` → b
 ## Local Development
 
 **Testing:**
+
 ```bash
 make start                         # Test my-documents site at http://localhost:1313/my-documents/
 SITE=bash-compiler make start-site # Test dependent site
 ```
 
 **Adding New Site Requirements:**
-1. In dependent repo: `content/docs/`, `content/_index.md`, `configs/site-config.yaml`,
-   `go.mod`, `.github/workflows/build-site.yml`
+
+1. In dependent repo: `content/docs/`, `content/_index.md`, `configs/site-config.yaml`, `go.mod`,
+   `.github/workflows/build-site.yml`
 2. GitHub Pages: Settings → Pages → Source: "GitHub Actions"
 3. No changes needed in my-documents (resources shared via Hugo modules)
 
 ## Workflows
 
-**main.yml:** Pre-commit hooks + MegaLinter, creates auto-fix PRs (skip with "skip fix" in commit) + Builds Hugo site and deploys to GitHub Pages if master branch
-**build-site.yml:** Builds Hugo site, deploys to GitHub Pages (gh-pages branch)
+**main.yml:** Pre-commit hooks + MegaLinter, creates auto-fix PRs (skip with "skip fix" in commit) + Builds Hugo site
+and deploys to GitHub Pages if master branch **build-site.yml:** Builds Hugo site, deploys to GitHub Pages (gh-pages
+branch)
 
 ## Common Commands
 
 ```bash
-hugo new docs/section/page-name.md     # Create new page
-hugo server -D                         # Local preview
-pre-commit run -a                      # Run all linters
-hugo mod clean && hugo mod get -u      # Fix module issues
-npx cspell --quiet .                   # Check spelling
-npx cspell --debug --quiet .           # Check spelling with debug
+hugo new docs/section/page-name.md # Create new page
+hugo server -D                     # Local preview
+pre-commit run -a                  # Run all linters
+hugo mod clean && hugo mod get -u  # Fix module issues
+npx cspell --quiet .               # Check spelling
+npx cspell --debug --quiet .       # Check spelling with debug
 ```
 
 **Add word to spell dictionary:**
 
 ```bash
-echo "newWord" >> .cspell/bash.txt
-pre-commit run file-contents-sorter   # Sort dictionary
+echo "newWord" >>.cspell/bash.txt
+pre-commit run file-contents-sorter # Sort dictionary
 ```
 
 ## Editor Agent Guidelines
