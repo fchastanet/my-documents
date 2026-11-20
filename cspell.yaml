@@ -1,9 +1,9 @@
 ---
 $schema: https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json
-version: "0.2"
+version: '0.2'
 language: en
 import:
-  - "@cspell/dict-fr-fr/cspell-ext.json"
+  - '@cspell/dict-fr-fr/cspell-ext.json'
 noConfigSearch: true
 caseSensitive: true
 useGitignore: true
@@ -153,14 +153,14 @@ overrides:
     dictionaries:
       - lintersConfig
   - filename:
-    - "**/*.puml"
-    - "**/*.plantuml"
-    - content/docs/howtos/how-to-write-plantuml/01-reusable-plantuml.md
+      - '**/*.puml'
+      - '**/*.plantuml'
+      - content/docs/howtos/how-to-write-plantuml/01-reusable-plantuml.md
     dictionaries:
       - plantuml
   - filename:
-    - "**/*.mmd"
-    - "**/*.mermaid"
+      - '**/*.mmd'
+      - '**/*.mermaid'
     dictionaries:
       - mermaid
 
@@ -177,9 +177,9 @@ overrides:
       - config
   - languageId: shellscript
     filename:
-      - "**/*.sh"
+      - '**/*.sh'
       - Makefile
-      - ".pre-commit-config.yaml"
+      - '.pre-commit-config.yaml'
     dictionaries:
       - myBash
 
@@ -188,16 +188,16 @@ overrides:
       - LICENSE
 
   - filename:
-    - "**/*.md"
-    - content/**
-    - "!content/fr/**/*.md"
+      - '**/*.md'
+      - content/**
+      - '!content/fr/**/*.md'
     dictionaries:
-    - markdown
-    - myBash
+      - markdown
+      - myBash
 
   - filename:
-    - ".frontmatter/database/taxonomyDb.json"
-    - ".frontmatter/database/mediaDb.json"
+      - '.frontmatter/database/taxonomyDb.json'
+      - '.frontmatter/database/mediaDb.json'
     dictionaries:
       - fr-fr
       - french
@@ -211,9 +211,9 @@ overrides:
       - content/fr/**
     language: fr
     ignoreRegExpList:
-      - "Forgetting Spaced Repetition System"
-      - "Spaced Repetition"
-      - "Embeddings"
+      - 'Forgetting Spaced Repetition System'
+      - 'Spaced Repetition'
+      - 'Embeddings'
     dictionaries:
       - fr-fr
       - french
@@ -226,7 +226,7 @@ overrides:
       - marp/**/*.md
       - marp/**/*.mmd
     dictionaries:
-    - marp
+      - marp
 
 patterns:
   - name: urls

@@ -5,7 +5,7 @@ minimum_pre_commit_version: 3.5.0
 fail_fast: true
 repos:
   - repo: https://github.com/fchastanet/bash-tools-framework
-    rev: 6.5.3
+    rev: 6.5.4
     hooks:
       - id: rimage
         exclude: |
@@ -242,7 +242,7 @@ repos:
       - id: git-check
 
   - repo: https://github.com/fchastanet/bash-tools-framework
-    rev: 6.5.3
+    rev: 6.5.4
     hooks:
       - id: cspellForbidden
       - id: fixShebangExecutionBit

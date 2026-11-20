@@ -26,7 +26,7 @@ echo -e "${COLOR_INFO}Testing all sites with curl...${COLOR_RESET}"
 # Test my-documents
 (
   echo "  Testing my-documents..."
-  hugo server -D --port 1313 > /dev/null 2>&1 &
+  hugo server -D --port 1313 >/dev/null 2>&1 &
   SERVER_PID=$!
   trap '(kill $SERVER_PID 2>/dev/null; sleep 1) || true' EXIT
   sleep 2
@@ -44,7 +44,7 @@ for repo in "${REPOS[@]}"; do
     (
       echo "  Testing ${repo}..."
       trap '(kill $SITE_SERVER_PID 2>/dev/null; sleep 1) || true' EXIT
-      hugo server -D --source "${SITES_DIR}/${repo}" --port 1314 > /dev/null 2>&1 &
+      hugo server -D --source "${SITES_DIR}/${repo}" --port 1314 >/dev/null 2>&1 &
       SITE_SERVER_PID=$!
       sleep 2
 

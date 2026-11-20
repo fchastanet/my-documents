@@ -2,7 +2,7 @@
   "files.exclude": {
     "**/.git": true,
     "public": true,
-    ".venv": true,
+    ".venv": true
   },
   "search.exclude": {
     "**/node_modules": true,
@@ -10,7 +10,7 @@
     "**/*.code-search": true,
     "build/**": true,
     "sites/**": true,
-    ".venv/**": true,
+    ".venv/**": true
   },
   "workbench.editorAssociations": {
     "*.md": "default",
@@ -31,8 +31,7 @@
   "frontMatter.framework.id": "hugo",
   "frontMatter.content.publicFolder": "static",
   "frontMatter.preview.host": "http://localhost:1313",
-  "[markdown]": {
-  },
+  "[markdown]": {},
   "frontMatter.content.hideFm": false,
-  "frontMatter.config.dynamicFilePath": "frontmatter.config.js",
+  "frontMatter.config.dynamicFilePath": "frontmatter.config.js"
 }

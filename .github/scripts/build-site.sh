@@ -6,7 +6,7 @@
 # shellcheck source=.github/scripts/common.sh
 source "$(dirname "$0")/common.sh"
 
-if (( $# < 2 )); then
+if (($# < 2)); then
   echo -e "${COLOR_WARNING}Usage: $0 SITE SITE_NAME [BUILD_DIR]${COLOR_RESET}"
   echo -e "${COLOR_WARNING}Example: $0 sites/bash-compiler bash-compiler build${COLOR_RESET}"
   exit 1

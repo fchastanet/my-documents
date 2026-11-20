@@ -29,7 +29,7 @@ echo -e "  Output: ${OUTPUT_FILE}"
 # Merge configs using yq (proper YAML deep merge)
 # shellcheck disable=SC2016
 yq eval-all '. as $item ireduce ({}; . *+ $item)' \
-  "${BASE_CONFIG}" "${SITE_CONFIG}" > "${OUTPUT_FILE}"
+  "${BASE_CONFIG}" "${SITE_CONFIG}" >"${OUTPUT_FILE}"
 
 # Override baseURL if provided
 if [[ -n "${BASE_URL}" ]]; then
